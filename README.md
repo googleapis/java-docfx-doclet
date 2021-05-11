@@ -1,4 +1,4 @@
-##JavaDoc Doclet for DocFX for Google
+## JavaDoc Doclet for DocFX for Google
 
 Designed to generate YAML files from Javadoc output for DocFX consumption. While the doclet helps output docfx yml, there are some differences in the way Google needs this outputed to align with the other languages and look appropriate on devsite. 
 
