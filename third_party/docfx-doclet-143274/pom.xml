@@ -151,9 +151,9 @@
 
   <repositories>
     <repository>
-      <id>sprin-libs-repo</id>
-      <name>Spring Lib Release repository</name>
-      <url>https://repo.spring.io/libs-release</url>
+      <id>jcenter</id>
+      <name>jcenter repository</name>
+      <url>http://jcenter.bintray.com/</url>
     </repository>
   </repositories>
 </project>
