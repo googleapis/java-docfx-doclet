@@ -20,6 +20,7 @@ public class OptionsFileUtilTest {
             "-sourcepath", "./src/test/java",
             "-outputpath", "./target/test-out",
             "-encoding", "UTF-8",
+            "-projectname", "google-cloud-project-parent",
             "-excludepackages",
             "com\\.microsoft\\.samples\\.someexcludedpack.*:com\\.microsoft\\.samples\\.someunexistingpackage",
             "-excludeclasses",

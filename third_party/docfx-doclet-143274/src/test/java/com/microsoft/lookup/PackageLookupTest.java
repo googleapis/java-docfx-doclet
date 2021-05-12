@@ -17,25 +17,24 @@ import org.mockito.junit.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class PackageLookupTest {
 
-    @Rule
-    public CompilationRule rule = new CompilationRule();
-    private Elements elements;
-    private PackageLookup packageLookup;
-    private DocletEnvironment environment;
+  @Rule public CompilationRule rule = new CompilationRule();
+  private Elements elements;
+  private PackageLookup packageLookup;
+  private DocletEnvironment environment;
 
-    @Before
-    public void setup() {
-        elements = rule.getElements();
-        environment = Mockito.mock(DocletEnvironment.class);
-        packageLookup = new PackageLookup(environment);
-    }
+  @Before
+  public void setup() {
+    elements = rule.getElements();
+    environment = Mockito.mock(DocletEnvironment.class);
+    packageLookup = new PackageLookup(environment);
+  }
 
-    @Test
-    public void extractPackageContent() {
-        PackageElement element = elements.getPackageElement("com.microsoft.samples");
+  @Test
+  public void extractPackageContent() {
+    PackageElement element = elements.getPackageElement("com.microsoft.samples");
 
-        String result = packageLookup.determinePackageContent(element);
+    String result = packageLookup.determinePackageContent(element);
 
-        assertThat("Wrong result", result, is("package com.microsoft.samples"));
-    }
+    assertThat("Wrong result", result, is("package com.microsoft.samples"));
+  }
 }

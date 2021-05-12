@@ -1,21 +1,23 @@
-
 ## JavaDoc Doclet for DocFX
 
 [![Build status](https://apidrop.visualstudio.com/Toolshed/_apis/build/status/Toolshed-Maven-CI)](https://apidrop.visualstudio.com/Toolshed/_build/latest?definitionId=1633)
 
-This doclet is designed to produce a YAML representation of the Javadoc-generated documentation, that can be integrated into [DocFX](https://dotnet.github.io/docfx/).
+This doclet is designed to produce a YAML representation of the Javadoc-generated documentation, that can be integrated
+into [DocFX](https://dotnet.github.io/docfx/).
 
 ## Getting started
 
-The easiest way is to just get the JAR files directly from our [releases](https://github.com/dendeli-msft/docfx-doclet/releases).
+The easiest way is to just get the JAR files directly from
+our [releases](https://github.com/dendeli-msft/docfx-doclet/releases).
 
-Alternatively, you can clone the repository and build it with the help of Maven. You can do so by calling: 
+Alternatively, you can clone the repository and build it with the help of Maven. You can do so by calling:
 
 ```bash
 mvn compile
 ```
 
-Once the compilation is complete, you will need to generate a JAR file, that can be used alongside `javadoc`. You can do so by calling:
+Once the compilation is complete, you will need to generate a JAR file, that can be used alongside `javadoc`. You can do
+so by calling:
 
 ```bash
 mvn package
@@ -23,38 +25,39 @@ mvn package
 
 This will produce two JAR files that you can use - one with dependencies, and another one without.
 
-## Usage 
+## Usage
 
 ### With `maven-javadoc-plugin`
 
-When there is an existing java project where Maven is used as a build tool, one could add `maven-javadoc-plugin` to the root `pom.xml`:
+When there is an existing java project where Maven is used as a build tool, one could add `maven-javadoc-plugin` to the
+root `pom.xml`:
 
 ```java
 <plugin>
-  <groupId>org.apache.maven.plugins</groupId>
-  <artifactId>maven-javadoc-plugin</artifactId>
-  <version>3.0.1</version>
-  <configuration>
-    <doclet>com.microsoft.doclet.DocFxDoclet</doclet>
-    <docletArtifact>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>${project.artifactId}</artifactId>
-      <version>${project.version}</version>
-    </docletArtifact>
-    <useStandardDocletOptions>false</useStandardDocletOptions>
-    <additionalOptions>-outputpath ./generated-files</additionalOptions>
-    <!-- Add additional options here when needed -->
-  </configuration>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-javadoc-plugin</artifactId>
+<version>3.0.1</version>
+<configuration>
+<doclet>com.microsoft.doclet.DocFxDoclet</doclet>
+<docletArtifact>
+<groupId>${project.groupId}</groupId>
+<artifactId>${project.artifactId}</artifactId>
+<version>${project.version}</version>
+</docletArtifact>
+<useStandardDocletOptions>false</useStandardDocletOptions>
+<additionalOptions>-outputpath./generated-files</additionalOptions>
+<!--Add additional options here when needed-->
+</configuration>
 </plugin>
 ```
 
-The doclet can then be ran with the following command: 
+The doclet can then be ran with the following command:
 
 ```bash
 mvn javadoc:javadoc
 ```
 
-The generated files will be placed in the `./target/site/apidocs/generated-files` folder  
+The generated files will be placed in the `./target/site/apidocs/generated-files` folder
 
 ### Usage of doclet with Gradle javadoc task
 
@@ -71,7 +74,7 @@ For Gradle project put jar with doclet to `libs` folder and add next task to `bu
     }
 
 And run doclet using next command: `gradle generateApiDocs`  
-In result generated files will be placed into `./build/generated-files` folder  
+In result generated files will be placed into `./build/generated-files` folder
 
 ### Standalone
 
@@ -102,8 +105,10 @@ javadoc \
 | `excludeclasses` | List of excluded classes, separated by a colon (`:`) (_optional_). |
 | `subpackages` | Subpackages to recursively load, separated by a colon (`:`). |
 
-
-For example, if we would want to generate documentation for [JUnit-4.12 source code](https://mvnrepository.com/artifact/junit/junit/4.12), we would need to account for the fact that the library depends on `hamcrest-core-1.3`, therefore we would download this library, unpack the sources JAR and run the following command:
+For example, if we would want to generate documentation
+for [JUnit-4.12 source code](https://mvnrepository.com/artifact/junit/junit/4.12), we would need to account for the fact
+that the library depends on `hamcrest-core-1.3`, therefore we would download this library, unpack the sources JAR and
+run the following command:
 
 ```bash
 javadoc \
@@ -116,20 +121,22 @@ javadoc \
 -subpackages org:junit                                # Subpackages to recursively load separated by ':'
 ```
 
-You can take a look at an [example documentation generation script](https://github.com/dendeli-msft/docfx-doclet/blob/master/sandbox/generate-yml-files.bat) outlining the process above.
-
+You can take a look at
+an [example documentation generation script](https://github.com/dendeli-msft/docfx-doclet/blob/master/sandbox/generate-yml-files.bat)
+outlining the process above.
 
 ## Development
 
-When making changes, it is important to ensure that you are using `DocletRunner` class - it is responsible for makeing the `javadoc` call and takes params from an external configuration file.
+When making changes, it is important to ensure that you are using `DocletRunner` class - it is responsible for makeing
+the `javadoc` call and takes params from an external configuration file.
 
-To use it:  
+To use it:
 
 - Create Run/Debug IDE configuration with the main class set as `com.microsoft.doclet.DocletRunner`
 - Add `src\test\resources\test-doclet-params.txt` as program arguments of configuration
 
-Now we could run/debug doclet against source code classes located in the `com.microsoft.samples` package, as specified in the `test-doclet-params.txt` config file.
-
+Now we could run/debug doclet against source code classes located in the `com.microsoft.samples` package, as specified
+in the `test-doclet-params.txt` config file.
 
 ### Serving DocFx documentation
 

@@ -4,7 +4,7 @@
       {
         "files": [
           "generated-yml-files/**.yml",
-		  "toc.yml"
+          "toc.yml"
         ]
       }
     ],

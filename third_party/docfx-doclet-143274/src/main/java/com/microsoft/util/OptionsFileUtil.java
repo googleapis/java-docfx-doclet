@@ -9,30 +9,30 @@ import java.util.StringTokenizer;
 
 public class OptionsFileUtil {
 
-    public static String[] processOptionsFile(String filename) {
-        List<String> jargs = new ArrayList<>();
+  public static String[] processOptionsFile(String filename) {
+    List<String> jargs = new ArrayList<>();
 
-        String options = readOptionsFromFile(filename);
-        StringTokenizer tokens = new StringTokenizer(options);
-        while (tokens.hasMoreTokens()) {
-            jargs.add(tokens.nextToken());
-        }
-
-        return jargs.toArray(new String[0]);
+    String options = readOptionsFromFile(filename);
+    StringTokenizer tokens = new StringTokenizer(options);
+    while (tokens.hasMoreTokens()) {
+      jargs.add(tokens.nextToken());
     }
 
-    private static String readOptionsFromFile(String filename) {
-        StringBuffer buffer = new StringBuffer();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                buffer.append(line).append("\n");
-            }
-        } catch (IOException ioe) {
-            buffer.setLength(0);
-            throw new RuntimeException("Error during reading options from file", ioe);
-        }
+    return jargs.toArray(new String[0]);
+  }
 
-        return buffer.toString();
+  private static String readOptionsFromFile(String filename) {
+    StringBuffer buffer = new StringBuffer();
+    try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
+      String line;
+      while ((line = bufferedReader.readLine()) != null) {
+        buffer.append(line).append("\n");
+      }
+    } catch (IOException ioe) {
+      buffer.setLength(0);
+      throw new RuntimeException("Error during reading options from file", ioe);
     }
+
+    return buffer.toString();
+  }
 }

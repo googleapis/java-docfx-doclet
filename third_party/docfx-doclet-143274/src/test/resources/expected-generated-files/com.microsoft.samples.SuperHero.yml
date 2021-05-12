@@ -163,7 +163,7 @@ items:
     content: "public String getLastName()"
     return:
       type: "java.lang.String"
-      description: "lastName in uppercase. But it's not the end,\n because of multiline comment"
+      description: "lastName in uppercase. But it's not the end, because of multiline comment"
 - uid: "com.microsoft.samples.SuperHero.getUniquePower()"
   id: "getUniquePower()"
   parent: "com.microsoft.samples.SuperHero"

@@ -7,57 +7,41 @@
 package com.microsoft.samples;
 
 /**
- * Holds common partner component properties and behavior. All components should inherit from this class. The context
- * object type.
+ * Holds common partner component properties and behavior. All components should inherit from this
+ * class. The context object type.
  */
-public abstract class BasePartnerComponent<TContext>
-  
-{
-    /**
-     * Initializes a new instance of the BasePartnerComponent class.
-     * 
-     * @param rootPartnerOperations The root partner operations that created this component.
-     * @param componentContext A component context object to work with.
-     */
-    protected BasePartnerComponent( IPartner rootPartnerOperations, TContext componentContext )
-    {
-        if ( rootPartnerOperations == null )
-        {
-            throw new NullPointerException( "rootPartnerOperations null" );
-        }
+public abstract class BasePartnerComponent<TContext> {
 
-        this.setPartner( rootPartnerOperations );
-        this.setContext( componentContext );
+  /**
+   * Initializes a new instance of the BasePartnerComponent class.
+   *
+   * @param rootPartnerOperations The root partner operations that created this component.
+   * @param componentContext A component context object to work with.
+   */
+  protected BasePartnerComponent(IPartner rootPartnerOperations, TContext componentContext) {
+    if (rootPartnerOperations == null) {
+      throw new NullPointerException("rootPartnerOperations null");
     }
 
-    /**
-     * Gets a reference to the partner operations instance that generated this component.
-     */
-    private IPartner partner;
+    this.setPartner(rootPartnerOperations);
+    this.setContext(componentContext);
+  }
 
+  /** Gets a reference to the partner operations instance that generated this component. */
+  private IPartner partner;
 
-   
+  private void setPartner(IPartner value) {
+    partner = value;
+  }
 
-    private void setPartner( IPartner value )
-    {
-        partner = value;
-    }
+  /** Gets the component context object. */
+  private TContext context;
 
-    /**
-     * Gets the component context object.
-     */
-    private TContext context;
+  private void setContext(TContext value) {
+    context = value;
+  }
 
- 
+  protected void testBase() {}
 
-    private void setContext( TContext value )
-    {
-        context = value;
-    }
-
-    protected void testBase()
-    {}
-
-    protected void testInherited()
-    {}
+  protected void testInherited() {}
 }
