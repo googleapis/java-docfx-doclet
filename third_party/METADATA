@@ -1,0 +1,12 @@
+name: "java-docfx-doclet"
+description:
+    "This doclet is designed to produce a YAML representation of "
+    "Javadoc-generated documentation, that can be integrated into DocFX."
+third_party {
+  url {
+    type: GIT
+    value: "https://github.com/docascode/docfx-doclet"
+  }
+  version: "143274"
+  last_upgrade_date { year: 2021 month: 5 day: 7 }
+}
