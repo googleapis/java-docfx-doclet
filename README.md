@@ -9,9 +9,10 @@ This doclet is using release [143274](https://github.com/docascode/docfx-doclet/
 \
 Changes
 - Sort toc by uid
-- Include product level hierarchy in toc by passing in `projectName` argument
-- Include index.md as Overview in toc  
-- Update summary generation  
+- Included `projectName` argument 
+  - adds product level hierarchy to toc
+  - adds guides: Overview, Version history to toc 
+- Updated summary generation
 
 \
 \
