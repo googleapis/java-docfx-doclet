@@ -14,9 +14,10 @@ it is still compatible with DocFX V2.
 Changes
 
 - Sort toc by uid
-- Include product level hierarchy in toc by passing in `projectName` argument
-- Include guides in toc - Overview, Version History
-- Update summary generation
+- Included `projectName` argument 
+  - adds product level hierarchy to toc
+  - adds guides: Overview, Version history to toc 
+- Updated summary generation
 
 \
 \
