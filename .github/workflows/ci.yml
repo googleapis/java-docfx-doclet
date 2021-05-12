@@ -27,8 +27,9 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: 11
-      - run: cd third_party/docfx-doclet-143274
-      - run: mvn clean install -DskipTests
+      - name: build project
+        working-directory: ./third_party/docfx-doclet-143274
+        run: mvn clean install -DskipTests
   test:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -40,5 +41,6 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: 11
-      - run: cd third_party/docfx-doclet-143274
-      - run: mvn clean test
+      - name: pass tests
+        working-directory: ./third_party/docfx-doclet-143274
+        run: mvn clean test
