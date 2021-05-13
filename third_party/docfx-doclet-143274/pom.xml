@@ -125,6 +125,13 @@
       <groupId>com.overzealous</groupId>
       <artifactId>remark</artifactId>
       <version>${remark.version}</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/libs/remark-1.1.0.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>org.jsoup</groupId>
+      <artifactId>jsoup</artifactId>
+      <version>1.13.1</version>
     </dependency>
 
 
@@ -148,11 +155,4 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
-  <repositories>
-    <repository>
-      <id>spring-repo</id>
-      <url>https://repo.spring.io/plugins-release/</url>
-    </repository>
-  </repositories>
 </project>
