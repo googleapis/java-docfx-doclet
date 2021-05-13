@@ -3,6 +3,8 @@ package com.microsoft.model;
 import com.microsoft.util.YamlUtil;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class TocFile extends ArrayList<TocItem> implements YmlFile {
 
@@ -18,8 +20,11 @@ public class TocFile extends ArrayList<TocItem> implements YmlFile {
         add(packageTocItem);
     }
 
+    protected void sortByUid() { Collections.sort(this, Comparator.comparing(TocItem::getUid)); }
+
     @Override
     public String getFileContent() {
+        sortByUid();
         return TOC_FILE_HEADER + YamlUtil.objectToYamlString(this);
     }
 
