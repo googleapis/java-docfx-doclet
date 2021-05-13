@@ -29,8 +29,9 @@ public class DocFxDoclet implements Doclet {
         reporter.print(Kind.NOTE, "Output path: " + outputPath);
         reporter.print(Kind.NOTE, "Excluded packages: " + Arrays.toString(excludePackages));
         reporter.print(Kind.NOTE, "Excluded classes: " + Arrays.toString(excludeClasses));
+        reporter.print(Kind.NOTE, "Project Name: " + projectName);
 
-        return (new YmlFilesBuilder(environment, outputPath, excludePackages, excludeClasses)).build();
+        return (new YmlFilesBuilder(environment, outputPath, excludePackages, excludeClasses, projectName)).build();
     }
 
     @Override
@@ -41,6 +42,7 @@ public class DocFxDoclet implements Doclet {
     private String outputPath;
     private String[] excludePackages = {};
     private String[] excludeClasses = {};
+    private String projectName;
 
     @Override
     public Set<? extends Option> getSupportedOptions() {
@@ -65,6 +67,15 @@ public class DocFxDoclet implements Doclet {
                 @Override
                 public boolean process(String option, List<String> arguments) {
                     excludeClasses = StringUtils.split(arguments.get(0), ":");
+                    return true;
+                }
+            },
+            new CustomOption(
+                    "Project name", Arrays.asList("-projectname", "--project-name", "-pn"), "name") {
+                @Override
+                public boolean process(String option, List<String> arguments) {
+                    //  using artifact id as projectName - remove "-parent" since generation runs in parent pom
+                    projectName = arguments.get(0).replaceAll("-parent", "");
                     return true;
                 }
             },
