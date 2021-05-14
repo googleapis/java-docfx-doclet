@@ -36,22 +36,24 @@ public class YmlFilesBuilder {
     private PackageLookup packageLookup;
     private ClassItemsLookup classItemsLookup;
     private ClassLookup classLookup;
+    private String projectName;
 
     public YmlFilesBuilder(DocletEnvironment environment, String outputPath,
-                           String[] excludePackages, String[] excludeClasses) {
+                           String[] excludePackages, String[] excludeClasses, String projectName) {
         this.environment = environment;
         this.outputPath = outputPath;
         this.elementUtil = new ElementUtil(excludePackages, excludeClasses);
         this.packageLookup = new PackageLookup(environment);
         this.classItemsLookup = new ClassItemsLookup(environment);
         this.classLookup = new ClassLookup(environment);
+        this.projectName = projectName;
     }
 
     public boolean build() {
         List<MetadataFile> packageMetadataFiles = new ArrayList<>();
         List<MetadataFile> classMetadataFiles = new ArrayList<>();
 
-        TocFile tocFile = new TocFile(outputPath);
+        TocFile tocFile = new TocFile(outputPath, projectName);
         for (PackageElement packageElement : elementUtil.extractPackageElements(environment.getIncludedElements())) {
             String uid = packageLookup.extractUid(packageElement);
             packageMetadataFiles.add(buildPackageMetadataFile(packageElement));

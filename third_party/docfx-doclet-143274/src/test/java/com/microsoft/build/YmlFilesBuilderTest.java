@@ -48,7 +48,7 @@ public class YmlFilesBuilderTest {
         elements = rule.getElements();
         environment = Mockito.mock(DocletEnvironment.class);
         docTrees = Mockito.mock(DocTrees.class);
-        ymlFilesBuilder = new YmlFilesBuilder(environment, "./target", new String[]{}, new String[]{});
+        ymlFilesBuilder = new YmlFilesBuilder(environment, "./target", new String[]{}, new String[]{}, "google-cloud-product");
     }
 
     @Test
