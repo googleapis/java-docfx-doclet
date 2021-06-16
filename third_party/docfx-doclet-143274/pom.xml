@@ -13,7 +13,7 @@
     <java.version>11</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
-    <jackson.version>2.9.8</jackson.version>
+    <jackson.version>2.12.3</jackson.version>
     <apache.commons-lang.version>3.8.1</apache.commons-lang.version>
     <apache.commons-collections.version>4.4</apache.commons-collections.version>
     <apache.commons-io.version>2.10.0</apache.commons-io.version>
@@ -58,7 +58,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.0.1</version>
+        <version>3.3.0</version>
         <configuration>
           <doclet>com.microsoft.doclet.DocFxDoclet</doclet>
           <docletArtifact>
