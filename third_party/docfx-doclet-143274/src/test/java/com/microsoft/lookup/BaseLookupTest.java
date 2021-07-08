@@ -1,32 +1,11 @@
 package com.microsoft.lookup;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import com.google.testing.compile.CompilationRule;
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
-import com.microsoft.model.ExceptionItem;
-import com.microsoft.model.MetadataFileItem;
-import com.microsoft.model.MethodParameter;
-import com.microsoft.model.Return;
-import com.microsoft.model.TypeParameter;
-import com.sun.source.doctree.DocCommentTree;
+import com.microsoft.model.*;
+import com.sun.source.doctree.*;
 import com.sun.source.doctree.DocTree.Kind;
-import com.sun.source.doctree.LinkTree;
-import com.sun.source.doctree.LiteralTree;
-import com.sun.source.doctree.ReferenceTree;
-import com.sun.source.doctree.TextTree;
 import com.sun.source.util.DocTrees;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Set;
-import javax.lang.model.element.Element;
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.util.Elements;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.junit.Before;
 import org.junit.Rule;
@@ -34,6 +13,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import javax.lang.model.element.Element;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.util.Elements;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Set;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BaseLookupTest {
@@ -92,24 +82,23 @@ public class BaseLookupTest {
         verify(linkTree).getKind();
         verify(linkTree).getReference();
         verify(linkTree).getLabel();
-        assertThat("Wrong result", result,
-            is("Some text 1<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\">Some#signature</xref>"));
+        assertEquals("Wrong result", result, "Some text 1<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\">Some#signature</xref>");
     }
 
     @Test
     public void makeTypeShort() {
-        assertThat("Wrong result for primitive type", baseLookup.makeTypeShort("int"), is("int"));
-        assertThat("Wrong result", baseLookup.makeTypeShort("java.lang.String"), is("String"));
-        assertThat("Wrong result for inner class",
-            baseLookup.makeTypeShort("org.apache.commons.lang3.arch.Processor.Arch"), is("Processor.Arch"));
-        assertThat("Wrong result for class with generic",
-            baseLookup.makeTypeShort("java.util.List<java.lang.String>"), is("List<String>"));
-        assertThat("Wrong result for inner class with generic",
-            baseLookup.makeTypeShort("java.util.List.Custom<java.lang.Some.String>"), is("List.Custom<Some.String>"));
-        assertThat("Wrong result for inner class with complex generic",
-            baseLookup.makeTypeShort("a.b.c.D.E.G<m.n.A.B<c.d.D.G<a.F.Z>>>"), is("D.E.G<A.B<D.G<F.Z>>>"));
-        assertThat("Wrong result for inner class with generic & inheritance",
-            baseLookup.makeTypeShort("a.b.G<? extends a.b.List>"), is("G<? extends List>"));
+        assertEquals("Wrong result for primitive type", baseLookup.makeTypeShort("int"), "int");
+        assertEquals("Wrong result", baseLookup.makeTypeShort("java.lang.String"), "String");
+        assertEquals("Wrong result for inner class", 
+                baseLookup.makeTypeShort("org.apache.commons.lang3.arch.Processor.Arch"),"Processor.Arch");
+        assertEquals("Wrong result for class with generic", 
+                baseLookup.makeTypeShort("java.util.List<java.lang.String>"),"List<String>");
+        assertEquals("Wrong result for inner class with generic", 
+                baseLookup.makeTypeShort("java.util.List.Custom<java.lang.Some.String>"),"List.Custom<Some.String>");
+        assertEquals("Wrong result for inner class with complex generic", 
+                baseLookup.makeTypeShort("a.b.c.D.E.G<m.n.A.B<c.d.D.G<a.F.Z>>>"), "D.E.G<A.B<D.G<F.Z>>>");
+        assertEquals("Wrong result for inner class with generic & inheritance", 
+                baseLookup.makeTypeShort("a.b.G<? extends a.b.List>"),"G<? extends List>");
     }
 
     @Test
@@ -120,8 +109,8 @@ public class BaseLookupTest {
 
         String result = baseLookup.buildXrefTag(linkTree);
 
-        assertThat("Wrong result", result,
-            is("<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\">Some#signature</xref>"));
+        assertEquals("Wrong result", result, 
+            "<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\">Some#signature</xref>");
     }
 
     @Test
@@ -134,8 +123,8 @@ public class BaseLookupTest {
 
         String result = baseLookup.buildXrefTag(linkTree);
 
-        assertThat("Wrong result", result,
-            is("<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\">" + labelValue + "</xref>"));
+        assertEquals("Wrong result", result,
+            "<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\">" + labelValue + "</xref>");
     }
 
     @Test
@@ -146,7 +135,7 @@ public class BaseLookupTest {
 
         String result = baseLookup.buildCodeTag(literalTree);
 
-        assertThat("Wrong result", result, is("<code>" + tagContent + "</code>"));
+        assertEquals("Wrong result", result, "<code>" + tagContent + "</code>");
     }
 
     @Test
@@ -157,7 +146,7 @@ public class BaseLookupTest {
 
         String result = baseLookup.expandLiteralBody(literalTree);
 
-        assertThat("Wrong result", result, is(tagContent));
+        assertEquals("Wrong result", result, tagContent);
     }
 
     @Test
@@ -174,8 +163,8 @@ public class BaseLookupTest {
 
         String result = baseLookup.replaceLinksAndCodes(Arrays.asList(linkTree, literalTree, textTree));
 
-        assertThat("Wrong result", result, is("<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\">"
-            + "Some#signature</xref><code>Some text content</code>" + textTreeContent));
+        assertEquals("Wrong result", result, "<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\">"
+            + "Some#signature</xref><code>Some text content</code>" + textTreeContent);
     }
 
     @Test
@@ -187,45 +176,45 @@ public class BaseLookupTest {
         ExtendedMetadataFileItem resultForKey2 = baseLookup.resolve(element2);
         ExtendedMetadataFileItem consequenceCallResultForKey1 = baseLookup.resolve(element1);
 
-        assertThat("Consequence call should return same instance", resultForKey1, is(consequenceCallResultForKey1));
-        assertThat("Resolve for another key should return another instance", resultForKey2, not((resultForKey1)));
+        assertEquals("Consequence call should return same instance", resultForKey1, consequenceCallResultForKey1);
+        assertNotEquals("Resolve for another key should return another instance", resultForKey2, resultForKey1);
     }
 
     @Test
     public void testExtractMethods() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person");
 
-        assertThat("Wrong packageName", baseLookup.extractPackageName(element), is(lastBuiltItem.getPackageName()));
-        assertThat("Wrong fullName", baseLookup.extractFullName(element), is(lastBuiltItem.getFullName()));
-        assertThat("Wrong name", baseLookup.extractName(element), is(lastBuiltItem.getName()));
-        assertThat("Wrong href", baseLookup.extractHref(element), is(lastBuiltItem.getHref()));
-        assertThat("Wrong parent", baseLookup.extractParent(element), is(lastBuiltItem.getParent()));
-        assertThat("Wrong id", baseLookup.extractId(element), is(lastBuiltItem.getId()));
-        assertThat("Wrong uid", baseLookup.extractUid(element), is(lastBuiltItem.getUid()));
-        assertThat("Wrong nameWithType", baseLookup.extractNameWithType(element), is(lastBuiltItem.getNameWithType()));
-        assertThat("Wrong methodContent", baseLookup.extractMethodContent(element),
-            is(lastBuiltItem.getMethodContent()));
-        assertThat("Wrong fieldContent", baseLookup.extractFieldContent(element), is(lastBuiltItem.getFieldContent()));
-        assertThat("Wrong constructorContent", baseLookup.extractConstructorContent(element),
-            is(lastBuiltItem.getConstructorContent()));
-        assertThat("Wrong overload", baseLookup.extractOverload(element), is(lastBuiltItem.getOverload()));
-        assertThat("Wrong parameters", baseLookup.extractParameters(element), is(lastBuiltItem.getParameters()));
-        assertThat("Wrong exceptions", baseLookup.extractExceptions(element), is(lastBuiltItem.getExceptions()));
+        assertEquals("Wrong packageName", baseLookup.extractPackageName(element), lastBuiltItem.getPackageName());
+        assertEquals("Wrong fullName", baseLookup.extractFullName(element), lastBuiltItem.getFullName());
+        assertEquals("Wrong name", baseLookup.extractName(element), lastBuiltItem.getName());
+        assertEquals("Wrong href", baseLookup.extractHref(element), lastBuiltItem.getHref());
+        assertEquals("Wrong parent", baseLookup.extractParent(element), lastBuiltItem.getParent());
+        assertEquals("Wrong id", baseLookup.extractId(element), lastBuiltItem.getId());
+        assertEquals("Wrong uid", baseLookup.extractUid(element), lastBuiltItem.getUid());
+        assertEquals("Wrong nameWithType", baseLookup.extractNameWithType(element), lastBuiltItem.getNameWithType());
+        assertEquals("Wrong methodContent", baseLookup.extractMethodContent(element),
+            lastBuiltItem.getMethodContent());
+        assertEquals("Wrong fieldContent", baseLookup.extractFieldContent(element), lastBuiltItem.getFieldContent());
+        assertEquals("Wrong constructorContent", baseLookup.extractConstructorContent(element),
+            lastBuiltItem.getConstructorContent());
+        assertEquals("Wrong overload", baseLookup.extractOverload(element), lastBuiltItem.getOverload());
+        assertEquals("Wrong parameters", baseLookup.extractParameters(element), lastBuiltItem.getParameters());
+        assertEquals("Wrong exceptions", baseLookup.extractExceptions(element), lastBuiltItem.getExceptions());
 
-        assertThat("Wrong return", baseLookup.extractReturn(element).getReturnType(),
-            is(lastBuiltItem.getReturn().getReturnType()));
-        assertThat("Wrong return", baseLookup.extractReturn(element).getReturnDescription(),
-            is(lastBuiltItem.getReturn().getReturnDescription()));
+        assertEquals("Wrong return", baseLookup.extractReturn(element).getReturnType(),
+            lastBuiltItem.getReturn().getReturnType());
+        assertEquals("Wrong return", baseLookup.extractReturn(element).getReturnDescription(),
+            lastBuiltItem.getReturn().getReturnDescription());
 
-        assertThat("Wrong summary", baseLookup.extractSummary(element), is(lastBuiltItem.getSummary()));
-        assertThat("Wrong type", baseLookup.extractType(element), is(lastBuiltItem.getType()));
-        assertThat("Wrong content", baseLookup.extractContent(element), is(lastBuiltItem.getContent()));
-        assertThat("Wrong typeParameters", baseLookup.extractTypeParameters(element),
-            is(lastBuiltItem.getTypeParameters()));
-        assertThat("Wrong superclass", baseLookup.extractSuperclass(element), is(lastBuiltItem.getSuperclass()));
-        assertThat("Wrong interfaces", baseLookup.extractInterfaces(element), is(lastBuiltItem.getInterfaces()));
-        assertThat("Wrong tocName", baseLookup.extractTocName(element), is(lastBuiltItem.getTocName()));
-        assertThat("Wrong references", baseLookup.extractReferences(element), is(lastBuiltItem.getReferences()));
+        assertEquals("Wrong summary", baseLookup.extractSummary(element), lastBuiltItem.getSummary());
+        assertEquals("Wrong type", baseLookup.extractType(element), lastBuiltItem.getType());
+        assertEquals("Wrong content", baseLookup.extractContent(element), lastBuiltItem.getContent());
+        assertEquals("Wrong typeParameters", baseLookup.extractTypeParameters(element),
+            lastBuiltItem.getTypeParameters());
+        assertEquals("Wrong superclass", baseLookup.extractSuperclass(element), lastBuiltItem.getSuperclass());
+        assertEquals("Wrong interfaces", baseLookup.extractInterfaces(element), lastBuiltItem.getInterfaces());
+        assertEquals("Wrong tocName", baseLookup.extractTocName(element), lastBuiltItem.getTocName());
+        assertEquals("Wrong references", baseLookup.extractReferences(element), lastBuiltItem.getReferences());
     }
 
     private ExtendedMetadataFileItem buildExtendedMetadataFileItem(Element element) {

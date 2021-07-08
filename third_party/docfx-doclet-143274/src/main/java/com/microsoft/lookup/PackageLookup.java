@@ -1,9 +1,9 @@
 package com.microsoft.lookup;
 
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
-import com.microsoft.util.ElementUtil;
-import javax.lang.model.element.PackageElement;
 import jdk.javadoc.doclet.DocletEnvironment;
+
+import javax.lang.model.element.PackageElement;
 
 public class PackageLookup extends BaseLookup<PackageElement> {
 

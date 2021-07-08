@@ -1,7 +1,8 @@
 package com.microsoft.util;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,9 +10,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class FileUtilTest {
 
@@ -34,8 +35,8 @@ public class FileUtilTest {
 
         FileUtil.dumpToFile(content, FILE_NAME);
 
-        assertThat("New file should appear", Files.exists(Paths.get(FILE_NAME)), is(true));
-        assertThat("Invalid file content", Files.readString(Paths.get(FILE_NAME)), is(content));
+        assertTrue("New file should appear", Files.exists(Paths.get(FILE_NAME)));
+        assertEquals("Invalid file content", Files.readString(Paths.get(FILE_NAME)), content);
     }
 
     @Test
@@ -45,9 +46,9 @@ public class FileUtilTest {
 
         FileUtil.dumpToFile(content, FILE_NAME);
 
-        assertThat("Existing file should not be deleted", Files.exists(Path.of(ROOT_DIR + "/dir2/tmp1.txt")), is(true));
-        assertThat("New file should appear", Files.exists(Paths.get(FILE_NAME)), is(true));
-        assertThat("Invalid file content", Files.readString(Paths.get(FILE_NAME)), is(content));
+        assertTrue("Existing file should not be deleted", Files.exists(Path.of(ROOT_DIR + "/dir2/tmp1.txt")));
+        assertTrue("New file should appear", Files.exists(Paths.get(FILE_NAME)));
+        assertEquals("Invalid file content", Files.readString(Paths.get(FILE_NAME)), content);
     }
 
     public static void deleteDirectory(String pathString) throws IOException {

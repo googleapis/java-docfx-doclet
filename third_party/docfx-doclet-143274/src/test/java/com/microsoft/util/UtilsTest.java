@@ -1,23 +1,20 @@
 package com.microsoft.util;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import com.google.testing.compile.CompilationRule;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.util.Elements;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import org.junit.*;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import org.mockito.junit.MockitoJUnitRunner;
-
-import com.google.testing.compile.CompilationRule;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UtilsTest {
@@ -38,57 +35,57 @@ public class UtilsTest {
     @Test
     public void isPackagePrivate_True_PackagePrivateMethod() {
         Element method = getElementByKindAndName(allElements, ElementKind.METHOD, "getHobby()");
-        assertThat(Utils.isPackagePrivate(method), is(true));
+        assertTrue(Utils.isPackagePrivate(method));
     }
 
     @Test
     public void isPackagePrivate_True_PackagePrivateField() {
         Element field = getElementByKindAndName(allElements, ElementKind.FIELD, "hobby");
-        assertThat(Utils.isPackagePrivate(field), is(true));
+        assertTrue(Utils.isPackagePrivate(field));
     }
 
     // Test isPrivate() method
     @Test
     public void isPrivate_True_PrivateMethod() {
         Element method = getElementByKindAndName(allElements, ElementKind.METHOD, "setHobby(java.lang.String)");
-        assertThat(Utils.isPrivate(method), is(true));
+        assertTrue(Utils.isPrivate(method));
     }
 
     @Test
     public void isPrivate_True_PrivateField() {
         Element field = getElementByKindAndName(allElements, ElementKind.FIELD, "uniquePower");
-        assertThat(Utils.isPrivate(field), is(true));
+        assertTrue(Utils.isPrivate(field));
     }
 
     // Test isPrivateOrPackagePrivate() method
     @Test
     public void isPrivateOrPackagePrivate_True_PackagePrivateMethod() {
         Element method = getElementByKindAndName(allElements, ElementKind.METHOD, "getHobby()");
-        assertThat(Utils.isPrivateOrPackagePrivate(method), is(true));
+        assertTrue(Utils.isPrivateOrPackagePrivate(method));
     }
 
     @Test
     public void isPrivateOrPackagePrivate_True_PrivateFiled() {
         Element field = getElementByKindAndName(allElements, ElementKind.FIELD, "uniquePower");
-        assertThat(Utils.isPrivateOrPackagePrivate(field), is(true));
+        assertTrue(Utils.isPrivateOrPackagePrivate(field));
     }
 
     @Test
     public void isPrivateOrPackagePrivate_False_PublicMethod() {
         Element method = getElementByKindAndName(allElements, ElementKind.METHOD, "getUniquePower()");
-        assertThat(Utils.isPrivateOrPackagePrivate(method), is(false));
+        assertFalse(Utils.isPrivateOrPackagePrivate(method));
     }
 
     @Test
     public void isPrivateOrPackagePrivate_False_PublicField() {
         Element field = getElementByKindAndName(allElements, ElementKind.FIELD, "SOME_PUBLIC_STRING");
-        assertThat(Utils.isPrivateOrPackagePrivate(field), is(false));
+        assertFalse(Utils.isPrivateOrPackagePrivate(field));
     }
 
     @Test
     public void isPrivateOrPackagePrivate_False_ProtectedMethod() {
         Element method = getElementByKindAndName(allElements, ElementKind.METHOD, "getHealth()");
-        assertThat(Utils.isPrivateOrPackagePrivate(method), is(false));
+        assertFalse(Utils.isPrivateOrPackagePrivate(method));
     }
 
     private Element getElementByKindAndName(List<? extends Element> elements, ElementKind elementKind, String name) {
