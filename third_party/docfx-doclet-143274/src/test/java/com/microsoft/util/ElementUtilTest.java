@@ -30,8 +30,8 @@ public class ElementUtilTest {
     public void setup() {
         elements = rule.getElements();
         elementUtil = new ElementUtil(
-            new String[]{"samples\\.someexcludedpackage"},
-            new String[]{"com\\.microsoft\\..*SomeExcludedClass"});
+                new String[]{"samples\\.someexcludedpackage"},
+                new String[]{"com\\.microsoft\\..*SomeExcludedClass"});
     }
 
     @Test
@@ -43,7 +43,7 @@ public class ElementUtilTest {
         }};
 
         List<String> result = elementUtil.extractPackageElements(elementsSet)
-            .stream().map(String::valueOf).collect(Collectors.toList());
+                .stream().map(String::valueOf).collect(Collectors.toList());
 
         assertEquals("Wrong result list size", result.size(), 2);
         assertEquals("Unexpected first item", result.get(0), "com.microsoft.samples");
@@ -58,13 +58,13 @@ public class ElementUtilTest {
                 .stream().map(String::valueOf).collect(Collectors.toList());
 
         // Ensure items to exclude exist.
-        assertEquals("Wrong enclosed elements number", allElements.size(),6);
+        assertEquals("Wrong enclosed elements number", allElements.size(), 6);
         assertTrue("Unexpected package private class", allElements.contains("com.microsoft.samples.subpackage.InternalException"));
         assertTrue("Unexpected to-exclude class", allElements.contains("com.microsoft.samples.subpackage.SomeExcludedClass"));
 
 
         List<String> extractedElements = elementUtil.extractSortedElements(element)
-            .stream().map(String::valueOf).collect(Collectors.toList());
+                .stream().map(String::valueOf).collect(Collectors.toList());
 
         // Verify filtered and sorted result
         assertEquals("Wrong result list size", extractedElements.size(), 4);
@@ -76,7 +76,7 @@ public class ElementUtilTest {
     @Test
     public void matchAnyPattern() {
         HashSet<Pattern> patterns = new HashSet<>(
-            Arrays.asList(Pattern.compile("com\\.ms\\.Some.*"), Pattern.compile(".*UsualClass")));
+                Arrays.asList(Pattern.compile("com\\.ms\\.Some.*"), Pattern.compile(".*UsualClass")));
         assertTrue(elementUtil.matchAnyPattern(patterns, "com.ms.SomeStrangeClass"));
         assertTrue(elementUtil.matchAnyPattern(patterns, "UsualClass"));
         assertFalse(elementUtil.matchAnyPattern(patterns, "EngineFive"));

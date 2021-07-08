@@ -36,6 +36,6 @@ public class PackageLookupTest {
 
         String result = packageLookup.determinePackageContent(element);
 
-        assertEquals( "Wrong result", result, "package com.microsoft.samples");
+        assertEquals("Wrong result", result, "package com.microsoft.samples");
     }
 }

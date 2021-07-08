@@ -6,21 +6,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * The AgreementMetaData provides metadata about the agreement type
  * that partner can provide confirmation of customer acceptance.
  */
-public class AgreementMetaData
-{
+public class AgreementMetaData {
     /**
      * Gets or sets the unique identifier of an agreement template.
      */
-    @JsonProperty( "templateId" )
+    @JsonProperty("templateId")
     private String templateId;
 
-    public String getTemplateId()
-    {
+    public String getTemplateId() {
         return templateId;
     }
 
-    public void setTemplateId( String value )
-    {
+    public void setTemplateId(String value) {
         templateId = value;
     }
 
@@ -32,32 +29,28 @@ public class AgreementMetaData
     /**
      * Gets or sets URL to the agreement template.
      */
-    @JsonProperty( "agreementLink" )
+    @JsonProperty("agreementLink")
     private String agreementLink;
 
-    public String getAgreementLink()
-    {
+    public String getAgreementLink() {
         return agreementLink;
     }
 
-    public void setAgreementLink( String value )
-    {
+    public void setAgreementLink(String value) {
         agreementLink = value;
     }
 
     /**
      * Gets or sets the version rank of an agreement template.
      */
-    @JsonProperty( "versionRank" )
+    @JsonProperty("versionRank")
     private int versionRank;
 
-    public int getVersionRank()
-    {
+    public int getVersionRank() {
         return versionRank;
     }
 
-    public void setVersionRank( int value )
-    {
+    public void setVersionRank(int value) {
         versionRank = value;
     }
 }

@@ -55,9 +55,9 @@ public class FileUtilTest {
         Path path = Paths.get(pathString);
         if (Files.exists(path)) {
             Files.walk(path)
-                .sorted(Comparator.reverseOrder())
-                .map(Path::toFile)
-                .forEach(File::delete);
+                    .sorted(Comparator.reverseOrder())
+                    .map(Path::toFile)
+                    .forEach(File::delete);
         }
     }
 

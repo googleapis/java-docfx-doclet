@@ -1,13 +1,9 @@
 package com.microsoft.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Collections;
-
-import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
 
 @JsonPropertyOrder({"uid", "name", "fullName", "isExternal"})
 

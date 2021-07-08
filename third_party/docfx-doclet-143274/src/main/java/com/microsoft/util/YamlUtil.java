@@ -28,11 +28,11 @@ public class YamlUtil {
     };
 
     private static final ObjectMapper mapper = new ObjectMapper(new YAMLFactory()
-        .disable(Feature.WRITE_DOC_START_MARKER)
-        .disable(Feature.SPLIT_LINES)
+            .disable(Feature.WRITE_DOC_START_MARKER)
+            .disable(Feature.SPLIT_LINES)
     )
-        .setSerializationInclusion(Include.NON_NULL)
-        .setSerializationInclusion(Include.NON_EMPTY);
+            .setSerializationInclusion(Include.NON_NULL)
+            .setSerializationInclusion(Include.NON_EMPTY);
 
     public static String objectToYamlString(Object object) {
         try {
@@ -47,7 +47,7 @@ public class YamlUtil {
             return text;
         }
         return remark.get().convertFragment(text)
-            .replaceAll("\r\n", "\n")
-            .replaceAll("\n\n```\n", "\n\n```java\n");
+                .replaceAll("\r\n", "\n")
+                .replaceAll("\n\n```\n", "\n\n```java\n");
     }
 }

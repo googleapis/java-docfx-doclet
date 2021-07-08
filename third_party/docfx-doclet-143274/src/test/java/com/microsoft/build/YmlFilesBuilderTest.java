@@ -53,7 +53,7 @@ public class YmlFilesBuilderTest {
         ymlFilesBuilder.addConstructorsInfo(element, container);
 
         assertEquals("Wrong file name", container.getFileNameWithPath(), "output" + File.separator + "name");
-        assertEquals("Container should contain constructor item", container.getItems().size(),1);
+        assertEquals("Container should contain constructor item", container.getItems().size(), 1);
     }
 
     @Test
@@ -143,15 +143,15 @@ public class YmlFilesBuilderTest {
 
         LookupContext lookupContext = new LookupContext(lookup, lookup);
         assertEquals("Wrong result for class", ymlFilesBuilder.
-                resolveUidByLookup("SomeClass", lookupContext),"a.b.c.SomeClass");
+                resolveUidByLookup("SomeClass", lookupContext), "a.b.c.SomeClass");
         assertEquals("Wrong result for method", ymlFilesBuilder.
-                resolveUidFromLinkContent("SomeClass#someMethod()", lookupContext),"a.b.c.SomeClass.someMethod()");
+                resolveUidFromLinkContent("SomeClass#someMethod()", lookupContext), "a.b.c.SomeClass.someMethod()");
         assertEquals("Wrong result for method with param", ymlFilesBuilder.
                         resolveUidFromLinkContent("SomeClass#someMethod(String param)", lookupContext),
-                  "a.b.c.SomeClass.someMethod(String param)");
+                "a.b.c.SomeClass.someMethod(String param)");
 
         assertEquals("Wrong result for unknown class", ymlFilesBuilder.
-                  resolveUidByLookup("UnknownClass", lookupContext),"");
+                resolveUidByLookup("UnknownClass", lookupContext), "");
         assertEquals("Wrong result for null", ymlFilesBuilder.resolveUidByLookup(null, lookupContext), "");
         assertEquals("Wrong result for whitespace", ymlFilesBuilder.resolveUidByLookup(" ", lookupContext), "");
     }
@@ -175,7 +175,7 @@ public class YmlFilesBuilderTest {
 
         ymlFilesBuilder.expandComplexGenericsInReferences(classMetadataFile);
 
-        assertEquals("Wrong references amount", references.size(),4);
+        assertEquals("Wrong references amount", references.size(), 4);
 
         List<String> content = references.stream().map(MetadataFileItem::getUid).collect(Collectors.toList());
         assertTrue("Wrong references content", content.contains("a.b.c.List"));

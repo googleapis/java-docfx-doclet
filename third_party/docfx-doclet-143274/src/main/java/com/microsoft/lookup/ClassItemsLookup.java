@@ -1,28 +1,23 @@
 package com.microsoft.lookup;
 
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
-
 import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
-
 import com.microsoft.util.CommentHelper;
 import com.microsoft.util.Utils;
-
 import com.sun.source.doctree.DocTree;
 import com.sun.source.doctree.DocTree.Kind;
 import com.sun.source.doctree.ParamTree;
 import com.sun.source.doctree.ReturnTree;
 import com.sun.source.doctree.ThrowsTree;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import jdk.javadoc.doclet.DocletEnvironment;
 
 import javax.lang.model.element.*;
 import javax.lang.model.type.TypeKind;
-
-import jdk.javadoc.doclet.DocletEnvironment;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ClassItemsLookup extends BaseLookup<Element> {
     private Utils utils;
@@ -168,7 +163,7 @@ public class ClassItemsLookup extends BaseLookup<Element> {
 
     CommentHelper getInheritedInlineTags(CommentHelper input) {
         CommentHelper output = input.copy();
-        if (!output.hasInheritDocTag()&& !output.isSimpleOverride()) {
+        if (!output.hasInheritDocTag() && !output.isSimpleOverride()) {
             return output;
         }
 

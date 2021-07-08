@@ -1,28 +1,20 @@
 package com.microsoft.lookup;
 
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
-import com.microsoft.model.ExceptionItem;
-import com.microsoft.model.MetadataFileItem;
-import com.microsoft.model.MethodParameter;
-import com.microsoft.model.Return;
-import com.microsoft.model.TypeParameter;
-
+import com.microsoft.model.*;
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree;
 import com.sun.source.doctree.LinkTree;
 import com.sun.source.doctree.LiteralTree;
-
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import jdk.javadoc.doclet.DocletEnvironment;
+import org.apache.commons.lang3.RegExUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
-
-import jdk.javadoc.doclet.DocletEnvironment;
-
-import org.apache.commons.lang3.RegExUtils;
-import org.apache.commons.lang3.StringUtils;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public abstract class BaseLookup<T extends Element> {
 

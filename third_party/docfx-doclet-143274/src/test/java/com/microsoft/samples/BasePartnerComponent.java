@@ -10,24 +10,20 @@ package com.microsoft.samples;
  * Holds common partner component properties and behavior. All components should inherit from this class. The context
  * object type.
  */
-public abstract class BasePartnerComponent<TContext>
-  
-{
+public abstract class BasePartnerComponent<TContext> {
     /**
      * Initializes a new instance of the BasePartnerComponent class.
-     * 
+     *
      * @param rootPartnerOperations The root partner operations that created this component.
-     * @param componentContext A component context object to work with.
+     * @param componentContext      A component context object to work with.
      */
-    protected BasePartnerComponent( IPartner rootPartnerOperations, TContext componentContext )
-    {
-        if ( rootPartnerOperations == null )
-        {
-            throw new NullPointerException( "rootPartnerOperations null" );
+    protected BasePartnerComponent(IPartner rootPartnerOperations, TContext componentContext) {
+        if (rootPartnerOperations == null) {
+            throw new NullPointerException("rootPartnerOperations null");
         }
 
-        this.setPartner( rootPartnerOperations );
-        this.setContext( componentContext );
+        this.setPartner(rootPartnerOperations);
+        this.setContext(componentContext);
     }
 
     /**
@@ -36,10 +32,7 @@ public abstract class BasePartnerComponent<TContext>
     private IPartner partner;
 
 
-   
-
-    private void setPartner( IPartner value )
-    {
+    private void setPartner(IPartner value) {
         partner = value;
     }
 
@@ -48,16 +41,14 @@ public abstract class BasePartnerComponent<TContext>
      */
     private TContext context;
 
- 
 
-    private void setContext( TContext value )
-    {
+    private void setContext(TContext value) {
         context = value;
     }
 
-    protected void testBase()
-    {}
+    protected void testBase() {
+    }
 
-    protected void testInherited()
-    {}
+    protected void testInherited() {
+    }
 }
