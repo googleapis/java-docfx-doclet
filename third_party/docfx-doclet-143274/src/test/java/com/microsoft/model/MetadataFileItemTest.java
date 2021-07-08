@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.hasItem;
 import static org.junit.Assert.*;
 
 public class MetadataFileItemTest {
@@ -135,7 +134,7 @@ public class MetadataFileItemTest {
         object.setInheritance(Arrays.asList("Some value"));
 
         assertEquals("Wrong inheritance size", object.getInheritance().size(),1);
-        assertThat("Wrong inheritance content", object.getInheritance(), hasItem("Some value"));
+        assertTrue("Wrong inheritance content", object.getInheritance().contains("Some value"));
     }
 
     @Test
