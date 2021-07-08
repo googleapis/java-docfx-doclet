@@ -16,9 +16,9 @@
 
 package com.microsoft.model;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class TocFileTest {
 
@@ -33,14 +33,14 @@ public class TocFileTest {
         tocFile.addTocItem(tocItemA);
         tocFile.addTocItem(tocItemB);
 
-        assertThat("Should be out of uid order", tocFile.get(0), is(tocItemC));
-        assertThat("Should be out of uid order", tocFile.get(1), is(tocItemA));
-        assertThat("Should be out of uid order", tocFile.get(2), is(tocItemB));
+        assertEquals("Should be out of uid order", tocFile.get(0), tocItemC);
+        assertEquals("Should be out of uid order", tocFile.get(1), tocItemA);
+        assertEquals("Should be out of uid order", tocFile.get(2), tocItemB);
 
         tocFile.sortByUid();
 
-        assertThat("Should sort toc by uid", tocFile.get(0), is(tocItemA));
-        assertThat("Should sort toc by uid", tocFile.get(1), is(tocItemB));
-        assertThat("Should sort toc by uid", tocFile.get(2), is(tocItemC));
+        assertEquals("Should sort toc by uid", tocFile.get(0), tocItemA);
+        assertEquals("Should sort toc by uid", tocFile.get(1), tocItemB);
+        assertEquals("Should sort toc by uid", tocFile.get(2), tocItemC);
     }
 }

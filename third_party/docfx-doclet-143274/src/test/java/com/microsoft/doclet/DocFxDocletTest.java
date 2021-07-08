@@ -1,16 +1,16 @@
 package com.microsoft.doclet;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
 import com.microsoft.doclet.DocFxDoclet.CustomOption;
 import com.microsoft.doclet.DocFxDoclet.FakeOptionForCompatibilityWithStandardDoclet;
-import java.util.Arrays;
-import java.util.List;
-import javax.lang.model.SourceVersion;
 import jdk.javadoc.doclet.Doclet.Option.Kind;
 import org.junit.Before;
 import org.junit.Test;
+
+import javax.lang.model.SourceVersion;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class DocFxDocletTest {
 
@@ -23,12 +23,12 @@ public class DocFxDocletTest {
 
     @Test
     public void getSupportedSourceVersion() {
-        assertThat("Wrong version used", doclet.getSupportedSourceVersion(), is(SourceVersion.latest()));
+        assertEquals("Wrong version used", doclet.getSupportedSourceVersion(), SourceVersion.latest());
     }
 
     @Test
     public void getDocletName() {
-        assertThat("Wrong doclet name", doclet.getName(), is("DocFxDoclet"));
+        assertEquals("Wrong doclet name", doclet.getName(), "DocFxDoclet");
     }
 
     @Test
@@ -44,11 +44,11 @@ public class DocFxDocletTest {
             }
         };
 
-        assertThat("Wrong args count", option.getArgumentCount(), is(1));
-        assertThat("Wrong description", option.getDescription(), is(description));
-        assertThat("Wrong kind", option.getKind(), is(Kind.STANDARD));
-        assertThat("Wrong names", option.getNames(), is(names));
-        assertThat("Wrong params", option.getParameters(), is(params));
+        assertEquals("Wrong args count", option.getArgumentCount(),1);
+        assertEquals("Wrong description", option.getDescription(), description);
+        assertEquals("Wrong kind", option.getKind(), Kind.STANDARD);
+        assertEquals("Wrong names", option.getNames(), names);
+        assertEquals("Wrong params", option.getParameters(), params);
     }
 
     @Test
@@ -56,10 +56,10 @@ public class DocFxDocletTest {
         FakeOptionForCompatibilityWithStandardDoclet option =
             new FakeOptionForCompatibilityWithStandardDoclet("Some description", "title");
 
-        assertThat("Wrong args count", option.getArgumentCount(), is(1));
-        assertThat("Wrong description", option.getDescription(), is("Some description"));
-        assertThat("Wrong kind", option.getKind(), is(Kind.STANDARD));
-        assertThat("Wrong names", option.getNames(), is(Arrays.asList("title")));
-        assertThat("Wrong params", option.getParameters(), is("none"));
+        assertEquals("Wrong args count", option.getArgumentCount(), 1);
+        assertEquals("Wrong description", option.getDescription(), "Some description");
+        assertEquals("Wrong kind", option.getKind(), Kind.STANDARD);
+        assertEquals("Wrong names", option.getNames(), Arrays.asList("title"));
+        assertEquals("Wrong params", option.getParameters(),"none");
     }
 }

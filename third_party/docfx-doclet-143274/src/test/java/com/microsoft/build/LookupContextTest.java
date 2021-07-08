@@ -1,14 +1,13 @@
 package com.microsoft.build;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertThat;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import org.junit.Before;
-import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class LookupContextTest {
 
@@ -32,22 +31,22 @@ public class LookupContextTest {
 
     @Test
     public void resolve() {
-        assertThat("Wrong value for global key", lookupContext.resolve(globalKey), is(globalValue));
-        assertThat("Wrong value for local key 1", lookupContext.resolve(localKeys[0]), is(localValues[0]));
-        assertThat("Wrong value for local key 2", lookupContext.resolve(localKeys[1]), is(localValues[1]));
-        assertThat("Wrong value for unknown key", lookupContext.resolve(unknownKey), is(nullValue()));
+        assertEquals("Wrong value for global key", lookupContext.resolve(globalKey), globalValue);
+        assertEquals("Wrong value for local key 1", lookupContext.resolve(localKeys[0]), localValues[0]);
+        assertEquals("Wrong value for local key 2", lookupContext.resolve(localKeys[1]), localValues[1]);
+        assertNull("Wrong value for unknown key", lookupContext.resolve(unknownKey));
     }
 
     @Test
     public void getOwnerUid() {
-        assertThat("Wrong ownerUid", lookupContext.getOwnerUid(), is(localKeys[0]));
+        assertEquals("Wrong ownerUid", lookupContext.getOwnerUid(), localKeys[0]);
     }
 
     @Test
     public void containsKey() {
-        assertThat("Wrong value for global key", lookupContext.containsKey(globalKey), is(true));
-        assertThat("Wrong value for local key 1", lookupContext.containsKey(localKeys[0]), is(true));
-        assertThat("Wrong value for local key 2", lookupContext.containsKey(localKeys[1]), is(true));
-        assertThat("Wrong value for unknown key", lookupContext.containsKey(unknownKey), is(false));
+        assertTrue("Wrong value for global key", lookupContext.containsKey(globalKey));
+        assertTrue("Wrong value for local key 1", lookupContext.containsKey(localKeys[0]));
+        assertTrue("Wrong value for local key 2", lookupContext.containsKey(localKeys[1]));
+        assertFalse("Wrong value for unknown key", lookupContext.containsKey(unknownKey));
     }
 }

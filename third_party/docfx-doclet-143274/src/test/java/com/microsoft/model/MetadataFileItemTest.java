@@ -1,15 +1,12 @@
 package com.microsoft.model;
 
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertThat;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class MetadataFileItemTest {
 
@@ -19,11 +16,11 @@ public class MetadataFileItemTest {
         MetadataFileItem object2 = new MetadataFileItem("1234");
         MetadataFileItem object3 = new MetadataFileItem("123");
 
-        assertThat("Should be equal to self", object1.equals(object1), is(true));
-        assertThat("Should not be equal to null", object1.equals(null), is(false));
-        assertThat("Should not be equal to object of another type", object1.equals(123), is(false));
-        assertThat("Should not be equal to object with another uid", object1.equals(object2), is(false));
-        assertThat("Should be equal to object with same uid", object1.equals(object3), is(true));
+        assertTrue("Should be equal to self", object1.equals(object1));
+        assertFalse("Should not be equal to null", object1.equals(null));
+        assertFalse("Should not be equal to object of another type", object1.equals(123));
+        assertFalse("Should not be equal to object with another uid", object1.equals(object2));
+        assertTrue("Should be equal to object with same uid", object1.equals(object3));
     }
 
     @Test
@@ -31,7 +28,7 @@ public class MetadataFileItemTest {
         String uid = "123";
         MetadataFileItem object = new MetadataFileItem(uid);
 
-        assertThat("Wrong result", object.hashCode(), is(uid.hashCode()));
+        assertEquals("Wrong result", uid.hashCode(), object.hashCode());
     }
 
     @Test
@@ -41,8 +38,8 @@ public class MetadataFileItemTest {
 
         object.setTypeParameters(typeParams);
 
-        assertThat("Syntax should not be null", object.getSyntax(), is(notNullValue()));
-        assertThat("Wrong typeParameters value", object.getSyntax().getTypeParameters(), is(typeParams));
+        assertNotNull("Syntax should not be null", object.getSyntax());
+        assertEquals("Wrong typeParameters value", object.getSyntax().getTypeParameters(), typeParams);
     }
 
     @Test
@@ -54,8 +51,8 @@ public class MetadataFileItemTest {
 
         object.setTypeParameters(typeParams);
 
-        assertThat("Syntax object should remain the same", object.getSyntax(), is(existingSyntax));
-        assertThat("Wrong typeParameters value", object.getSyntax().getTypeParameters(), is(typeParams));
+        assertEquals("Syntax object should remain the same", object.getSyntax(), existingSyntax);
+        assertEquals("Wrong typeParameters value", object.getSyntax().getTypeParameters(), typeParams);
     }
 
     @Test
@@ -65,8 +62,8 @@ public class MetadataFileItemTest {
 
         object.setParameters(params);
 
-        assertThat("Syntax should not be null", object.getSyntax(), is(notNullValue()));
-        assertThat("Wrong parameters value", object.getSyntax().getParameters(), is(params));
+        assertNotNull("Syntax should not be null", object.getSyntax());
+        assertEquals("Wrong parameters value", object.getSyntax().getParameters(), params);
     }
 
     @Test
@@ -78,8 +75,8 @@ public class MetadataFileItemTest {
 
         object.setParameters(params);
 
-        assertThat("Syntax object should remain the same", object.getSyntax(), is(existingSyntax));
-        assertThat("Wrong parameters value", object.getSyntax().getParameters(), is(params));
+        assertEquals("Syntax object should remain the same", object.getSyntax(), existingSyntax);
+        assertEquals("Wrong parameters value", object.getSyntax().getParameters(), params);
     }
 
     @Test
@@ -89,8 +86,8 @@ public class MetadataFileItemTest {
 
         object.setReturn(returnValue);
 
-        assertThat("Syntax should not be null", object.getSyntax(), is(notNullValue()));
-        assertThat("Wrong return value", object.getSyntax().getReturnValue(), is(returnValue));
+        assertNotNull("Syntax should not be null", object.getSyntax());
+        assertEquals("Wrong return value", object.getSyntax().getReturnValue(), returnValue);
     }
 
     @Test
@@ -102,8 +99,8 @@ public class MetadataFileItemTest {
 
         object.setReturn(returnValue);
 
-        assertThat("Syntax object should remain the same", object.getSyntax(), is(existingSyntax));
-        assertThat("Wrong return value", object.getSyntax().getReturnValue(), is(returnValue));
+        assertEquals("Syntax object should remain the same", object.getSyntax(), existingSyntax);
+        assertEquals("Wrong return value", object.getSyntax().getReturnValue(), returnValue);
     }
 
     @Test
@@ -113,8 +110,8 @@ public class MetadataFileItemTest {
 
         object.setContent(content);
 
-        assertThat("Syntax should not be null", object.getSyntax(), is(notNullValue()));
-        assertThat("Wrong content value", object.getSyntax().getContent(), is(content));
+        assertNotNull("Syntax should not be null", object.getSyntax());
+        assertEquals("Wrong content value", object.getSyntax().getContent(), content);
     }
 
     @Test
@@ -126,8 +123,8 @@ public class MetadataFileItemTest {
 
         object.setContent(content);
 
-        assertThat("Syntax object should remain the same", object.getSyntax(), is(existingSyntax));
-        assertThat("Wrong content value", object.getSyntax().getContent(), is(content));
+        assertEquals("Syntax object should remain the same", object.getSyntax(), existingSyntax);
+        assertEquals("Wrong content value", object.getSyntax().getContent(), content);
     }
 
     @Test
@@ -136,8 +133,8 @@ public class MetadataFileItemTest {
 
         object.setInheritance(Arrays.asList("Some value"));
 
-        assertThat("Wrong inheritance size", object.getInheritance().size(), is(1));
-        assertThat("Wrong inheritance content", object.getInheritance(), hasItem("Some value"));
+        assertEquals("Wrong inheritance size", object.getInheritance().size(),1);
+        assertTrue("Wrong inheritance content", object.getInheritance().contains("Some value"));
     }
 
     @Test
@@ -146,14 +143,13 @@ public class MetadataFileItemTest {
 
         object.setInheritance(null);
 
-        assertThat("Wrong inheritance", object.getInheritance(), is(nullValue()));
+        assertNull("Wrong inheritance", object.getInheritance());
     }
 
     @Test
     public void getIsExternal() {
-        assertThat("Wrong isExternal when null", (new MetadataFileItem("123")).getIsExternal(), is(nullValue()));
-        assertThat("Wrong isExternal when true", (new MetadataFileItem("123", "name", true)).getIsExternal(), is(true));
-        assertThat("Wrong isExternal when false", (new MetadataFileItem("123", "name", false)).getIsExternal(),
-            is(nullValue()));
+        assertNull("Wrong isExternal when null", (new MetadataFileItem("123")).getIsExternal());
+        assertTrue("Wrong isExternal when true", (new MetadataFileItem("123", "name", true)).getIsExternal());
+        assertNull("Wrong isExternal when false", (new MetadataFileItem("123", "name", false)).getIsExternal());
     }
 }

@@ -1,7 +1,7 @@
 package com.microsoft.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class Syntax {

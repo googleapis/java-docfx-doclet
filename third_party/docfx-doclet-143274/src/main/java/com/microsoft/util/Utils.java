@@ -2,18 +2,18 @@ package com.microsoft.util;
 
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree;
+import jdk.javadoc.doclet.DocletEnvironment;
 
 import javax.lang.model.element.*;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
-import javax.lang.model.util.SimpleElementVisitor9;
 import javax.lang.model.util.Types;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
-
-import jdk.javadoc.doclet.DocletEnvironment;
 
 import static com.sun.source.doctree.DocTree.Kind.ERRONEOUS;
 import static javax.lang.model.type.TypeKind.DECLARED;

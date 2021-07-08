@@ -1,29 +1,11 @@
 package com.microsoft.build;
 
-import static org.hamcrest.CoreMatchers.hasItems;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.when;
-
 import com.google.testing.compile.CompilationRule;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Syntax;
 import com.sun.source.util.DocTrees;
-
-import java.io.File;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.util.Elements;
-
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.lang3.RegExUtils;
 import org.junit.Before;
@@ -32,6 +14,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.util.Elements;
+import java.io.File;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class YmlFilesBuilderTest {
@@ -60,8 +52,8 @@ public class YmlFilesBuilderTest {
 
         ymlFilesBuilder.addConstructorsInfo(element, container);
 
-        assertThat("Wrong file name", container.getFileNameWithPath(), is("output" + File.separator + "name"));
-        assertThat("Container should contain constructor item", container.getItems().size(), is(1));
+        assertEquals("Wrong file name", container.getFileNameWithPath(), "output" + File.separator + "name");
+        assertEquals("Container should contain constructor item", container.getItems().size(),1);
     }
 
     @Test
@@ -73,9 +65,9 @@ public class YmlFilesBuilderTest {
 
         ymlFilesBuilder.addConstructorsInfo(element, container);
 
-        assertThat("Wrong file name", container.getFileNameWithPath(), is("output" + File.separator + "name"));
+        assertEquals("Wrong file name", container.getFileNameWithPath(), "output" + File.separator + "name");
         Collection<MetadataFileItem> constructorItems = container.getItems();
-        assertThat("Container should contain 2 constructor items", constructorItems.size(), is(2));
+        assertEquals("Container should contain 2 constructor items", constructorItems.size(), 2);
     }
 
     //todo add test case to cover reference item with in package
@@ -88,10 +80,10 @@ public class YmlFilesBuilderTest {
     private void buildRefItemAndCheckAssertions(String initialValue, String expectedUid, String expectedName) {
         MetadataFileItem result = ymlFilesBuilder.buildRefItem(initialValue);
 
-        assertThat("Wrong uid", result.getUid(), is(expectedUid));
-        assertThat("Wrong name", result.getSpecForJava().iterator().next().getUid(), is(RegExUtils.removeAll(expectedUid, "\\[\\]$")));
-        assertThat("Wrong name", result.getSpecForJava().iterator().next().getName(), is(expectedName));
-        assertThat("Wrong fullName", result.getSpecForJava().iterator().next().getFullName(), is(RegExUtils.removeAll(expectedUid, "\\[\\]$")));
+        assertEquals("Wrong uid", result.getUid(), expectedUid);
+        assertEquals("Wrong name", result.getSpecForJava().iterator().next().getUid(), RegExUtils.removeAll(expectedUid, "\\[\\]$"));
+        assertEquals("Wrong name", result.getSpecForJava().iterator().next().getName(), expectedName);
+        assertEquals("Wrong fullName", result.getSpecForJava().iterator().next().getFullName(), RegExUtils.removeAll(expectedUid, "\\[\\]$"));
     }
 
     @Test
@@ -114,14 +106,14 @@ public class YmlFilesBuilderTest {
 
         ymlFilesBuilder.populateUidValues(Collections.emptyList(), Arrays.asList(classMetadataFile));
 
-        assertThat("Wrong summary for unknown class", item1.getSummary(),
-                is("Bla bla <xref uid=\"\" data-throw-if-not-resolved=\"false\">UnknownClass</xref> bla"));
-        assertThat("Wrong syntax description", item1.getSyntax().getParameters().get(0).getDescription(),
-                is("One two <xref uid=\"a.b.SomeClass.someMethod(String param)\" data-throw-if-not-resolved=\"false\">SomeClass#someMethod(String param)</xref> three"));
-        assertThat("Wrong summary for known class", item2.getSummary(),
-                is("Bla bla <xref uid=\"a.b.SomeClass.someMethod(String param)\" data-throw-if-not-resolved=\"false\">SomeClass#someMethod(String param)</xref> bla"));
-        assertThat("Wrong summary for method", item3.getSummary(),
-                is("Bla bla <xref uid=\"a.b.OwnerClass.someMethod2(String p1, String p2)\" data-throw-if-not-resolved=\"false\">#someMethod2(String p1, String p2)</xref> bla"));
+        assertEquals("Wrong summary for unknown class", item1.getSummary(),
+                "Bla bla <xref uid=\"\" data-throw-if-not-resolved=\"false\">UnknownClass</xref> bla");
+        assertEquals("Wrong syntax description", item1.getSyntax().getParameters().get(0).getDescription(),
+                "One two <xref uid=\"a.b.SomeClass.someMethod(String param)\" data-throw-if-not-resolved=\"false\">SomeClass#someMethod(String param)</xref> three");
+        assertEquals("Wrong summary for known class", item2.getSummary(),
+                "Bla bla <xref uid=\"a.b.SomeClass.someMethod(String param)\" data-throw-if-not-resolved=\"false\">SomeClass#someMethod(String param)</xref> bla");
+        assertEquals("Wrong summary for method", item3.getSummary(),
+                "Bla bla <xref uid=\"a.b.OwnerClass.someMethod2(String p1, String p2)\" data-throw-if-not-resolved=\"false\">#someMethod2(String p1, String p2)</xref> bla");
 
     }
 
@@ -150,26 +142,28 @@ public class YmlFilesBuilderTest {
         }};
 
         LookupContext lookupContext = new LookupContext(lookup, lookup);
-        assertThat("Wrong result for class", ymlFilesBuilder.
-                resolveUidByLookup("SomeClass", lookupContext), is("a.b.c.SomeClass"));
-        assertThat("Wrong result for method", ymlFilesBuilder.
-                resolveUidFromLinkContent("SomeClass#someMethod()", lookupContext), is("a.b.c.SomeClass.someMethod()"));
-        assertThat("Wrong result for method with param", ymlFilesBuilder.
+        assertEquals("Wrong result for class", ymlFilesBuilder.
+                resolveUidByLookup("SomeClass", lookupContext),"a.b.c.SomeClass");
+        assertEquals("Wrong result for method", ymlFilesBuilder.
+                resolveUidFromLinkContent("SomeClass#someMethod()", lookupContext),"a.b.c.SomeClass.someMethod()");
+        assertEquals("Wrong result for method with param", ymlFilesBuilder.
                         resolveUidFromLinkContent("SomeClass#someMethod(String param)", lookupContext),
-                is("a.b.c.SomeClass.someMethod(String param)"));
+                  "a.b.c.SomeClass.someMethod(String param)");
 
-        assertThat("Wrong result for unknown class", ymlFilesBuilder.
-                resolveUidByLookup("UnknownClass", lookupContext), is(""));
-        assertThat("Wrong result for null", ymlFilesBuilder.resolveUidByLookup(null, lookupContext), is(""));
-        assertThat("Wrong result for whitespace", ymlFilesBuilder.resolveUidByLookup(" ", lookupContext), is(""));
+        assertEquals("Wrong result for unknown class", ymlFilesBuilder.
+                  resolveUidByLookup("UnknownClass", lookupContext),"");
+        assertEquals("Wrong result for null", ymlFilesBuilder.resolveUidByLookup(null, lookupContext), "");
+        assertEquals("Wrong result for whitespace", ymlFilesBuilder.resolveUidByLookup(" ", lookupContext), "");
     }
 
     @Test
     public void splitUidWithGenericsIntoClassNames() {
         List<String> result = ymlFilesBuilder.splitUidWithGenericsIntoClassNames("a.b.c.List<df.mn.ClassOne<tr.T>>");
 
-        assertThat("Wrong result list size", result.size(), is(3));
-        assertThat("Wrong result list content", result, hasItems("a.b.c.List", "df.mn.ClassOne", "tr.T"));
+        assertEquals("Wrong result list size", result.size(), 3);
+        assertTrue("Wrong result list content", result.contains("a.b.c.List"));
+        assertTrue("Wrong result list content", result.contains("df.mn.ClassOne"));
+        assertTrue("Wrong result list content", result.contains("tr.T"));
     }
 
     @Test
@@ -181,9 +175,12 @@ public class YmlFilesBuilderTest {
 
         ymlFilesBuilder.expandComplexGenericsInReferences(classMetadataFile);
 
-        assertThat("Wrong references amount", references.size(), is(4));
-        assertThat("Wrong references content",
-                references.stream().map(MetadataFileItem::getUid).collect(Collectors.toList()),
-                hasItems("a.b.c.List", "df.mn.ClassOne", "tr.T", "a.b.c.List<df.mn.ClassOne<tr.T>>"));
+        assertEquals("Wrong references amount", references.size(),4);
+
+        List<String> content = references.stream().map(MetadataFileItem::getUid).collect(Collectors.toList());
+        assertTrue("Wrong references content", content.contains("a.b.c.List"));
+        assertTrue("Wrong references content", content.contains("df.mn.ClassOne"));
+        assertTrue("Wrong references content", content.contains("tr.T"));
+        assertTrue("Wrong references content", content.contains("a.b.c.List<df.mn.ClassOne<tr.T>>"));
     }
 }
