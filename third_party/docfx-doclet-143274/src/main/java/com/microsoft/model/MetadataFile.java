@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.microsoft.util.YamlUtil;
 
 import java.io.File;
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class MetadataFile implements YmlFile {
 

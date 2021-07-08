@@ -131,9 +131,9 @@ public class ClassItemsLookupTest {
         verify(docTrees).getDocCommentTree(method);
         verify(docCommentTree).getBlockTags();
         verify(throwsTree).getKind();
-        assertEquals("Wrong exceptions count", result.size(),1);
-        assertEquals("Wrong type", result.get(0).getType(),"java.lang.IllegalArgumentException");
-        assertEquals("Wrong description", result.get(0).getDescription(),"some text");
+        assertEquals("Wrong exceptions count", result.size(), 1);
+        assertEquals("Wrong type", result.get(0).getType(), "java.lang.IllegalArgumentException");
+        assertEquals("Wrong description", result.get(0).getDescription(), "some text");
     }
 
     @Test
@@ -155,7 +155,7 @@ public class ClassItemsLookupTest {
         verify(docTrees).getDocCommentTree(method);
         verify(docCommentTree).getBlockTags();
         verify(throwsTree).getKind();
-        assertEquals("Wrong description", result,"some weird text");
+        assertEquals("Wrong description", result, "some weird text");
     }
 
     @Test
@@ -187,7 +187,7 @@ public class ClassItemsLookupTest {
     }
 
     private void checkReturnForExecutableElement(ExecutableElement executableElement, String expectedType,
-        String expectedDescription) {
+                                                 String expectedDescription) {
         Return result = classItemsLookup.extractReturn(executableElement);
 
         assertEquals(result.getReturnType(), expectedType);
@@ -242,22 +242,22 @@ public class ClassItemsLookupTest {
     @Test
     public void convertFullNameToOverload() {
         assertEquals("Wrong result", classItemsLookup.convertFullNameToOverload(
-            "com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)"),
-            "com.microsoft.samples.SuperHero.successfullyAttacked*");
+                "com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)"),
+                "com.microsoft.samples.SuperHero.successfullyAttacked*");
 
         assertEquals("Wrong result for case with generics", classItemsLookup.convertFullNameToOverload(
-            "com.microsoft.samples.subpackage.Display<T,R>.show()"),
-            "com.microsoft.samples.subpackage.Display<T,R>.show*");
+                "com.microsoft.samples.subpackage.Display<T,R>.show()"),
+                "com.microsoft.samples.subpackage.Display<T,R>.show*");
 
         assertEquals("Wrong result for constructor case", classItemsLookup.convertFullNameToOverload(
-            "com.microsoft.samples.SuperHero.SuperHero()"),
-            "com.microsoft.samples.SuperHero.SuperHero*");
+                "com.microsoft.samples.SuperHero.SuperHero()"),
+                "com.microsoft.samples.SuperHero.SuperHero*");
     }
 
     @Test
     public void determineTypeForEnumConstant() {
         TypeElement element = elements
-            .getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
+                .getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
 
         assertEquals(classItemsLookup.determineType(element.getEnclosedElements().get(0)), "Field");
         assertEquals(classItemsLookup.determineType(element.getEnclosedElements().get(1)), "Field");

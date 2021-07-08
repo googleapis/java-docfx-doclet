@@ -32,6 +32,11 @@ public class Guide {
         this.href = href;
     }
 
-    public String getName() { return name; }
-    public String getHref() { return href; }
+    public String getName() {
+        return name;
+    }
+
+    public String getHref() {
+        return href;
+    }
 }

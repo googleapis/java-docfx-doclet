@@ -44,7 +44,7 @@ public class DocFxDocletTest {
             }
         };
 
-        assertEquals("Wrong args count", option.getArgumentCount(),1);
+        assertEquals("Wrong args count", option.getArgumentCount(), 1);
         assertEquals("Wrong description", option.getDescription(), description);
         assertEquals("Wrong kind", option.getKind(), Kind.STANDARD);
         assertEquals("Wrong names", option.getNames(), names);
@@ -54,12 +54,12 @@ public class DocFxDocletTest {
     @Test
     public void testFakeOptionCreation() {
         FakeOptionForCompatibilityWithStandardDoclet option =
-            new FakeOptionForCompatibilityWithStandardDoclet("Some description", "title");
+                new FakeOptionForCompatibilityWithStandardDoclet("Some description", "title");
 
         assertEquals("Wrong args count", option.getArgumentCount(), 1);
         assertEquals("Wrong description", option.getDescription(), "Some description");
         assertEquals("Wrong kind", option.getKind(), Kind.STANDARD);
         assertEquals("Wrong names", option.getNames(), Arrays.asList("title"));
-        assertEquals("Wrong params", option.getParameters(),"none");
+        assertEquals("Wrong params", option.getParameters(), "none");
     }
 }

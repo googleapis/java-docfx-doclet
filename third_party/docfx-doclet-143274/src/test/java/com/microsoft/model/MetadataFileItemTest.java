@@ -133,7 +133,7 @@ public class MetadataFileItemTest {
 
         object.setInheritance(Arrays.asList("Some value"));
 
-        assertEquals("Wrong inheritance size", object.getInheritance().size(),1);
+        assertEquals("Wrong inheritance size", object.getInheritance().size(), 1);
         assertTrue("Wrong inheritance content", object.getInheritance().contains("Some value"));
     }
 

@@ -39,27 +39,27 @@ public class LookupTest {
         LookupContext context = lookup.buildContext(classFiles.get(0));
 
         String[] localKeys = {
-            // Uid as is
-            "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String,boolean)",
-            // Uid as is with spaces between params
-            "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String, boolean)",
-            // Uid with param types without package
-            "com.microsoft.samples.subpackage.Person.setFirstName(String,boolean)",
-            // Uid with param types without package with spaces between params
-            "com.microsoft.samples.subpackage.Person.setFirstName(String, boolean)",
-            // Uid without package
-            "Person.setFirstName(java.lang.String,boolean)",
-            // Uid without package with spaces between params
-            "Person.setFirstName(java.lang.String, boolean)",
+                // Uid as is
+                "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String,boolean)",
+                // Uid as is with spaces between params
+                "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String, boolean)",
+                // Uid with param types without package
+                "com.microsoft.samples.subpackage.Person.setFirstName(String,boolean)",
+                // Uid with param types without package with spaces between params
+                "com.microsoft.samples.subpackage.Person.setFirstName(String, boolean)",
+                // Uid without package
+                "Person.setFirstName(java.lang.String,boolean)",
+                // Uid without package with spaces between params
+                "Person.setFirstName(java.lang.String, boolean)",
 
-            // Name with type as is
-            "Person<T>.setFirstName(String, boolean)",
-            // Name with type without generics
-            "Person.setFirstName(String firstName, boolean flag)",
-            // Name with type without generics and param names
-            "Person.setFirstName(String, boolean)",
-            // Name with type without generics and param names without spaces between params
-            "Person.setFirstName(String,boolean)"
+                // Name with type as is
+                "Person<T>.setFirstName(String, boolean)",
+                // Name with type without generics
+                "Person.setFirstName(String firstName, boolean flag)",
+                // Name with type without generics and param names
+                "Person.setFirstName(String, boolean)",
+                // Name with type without generics and param names without spaces between params
+                "Person.setFirstName(String,boolean)"
         };
         assertEquals("Wrong owner uid", context.getOwnerUid(), "Person.setFirstName(String firstName, boolean flag)");
 

@@ -33,7 +33,7 @@ public class TocContentsTest {
     private String projectName = "google-cloud-project";
 
     @Before
-    public void setup(){
+    public void setup() {
         tocItemA = new TocItem("A.uid.package.class", "nameA");
         tocItemB = new TocItem("B.uid.package.class", "nameB");
         tocItemC = new TocItem("C.uid.package.class", "nameC");
@@ -53,7 +53,7 @@ public class TocContentsTest {
         assertEquals("Should include ProjectContents", tocContents.get(0).getClass(), ProjectContents.class);
 
         ProjectContents contents = (ProjectContents) tocContents.get(0);
-        assertEquals(contents.getName(),"google-cloud-project");
+        assertEquals(contents.getName(), "google-cloud-project");
 
         List<Object> items = contents.getItems();
         assertEquals("Should be 5 items", items.size(), 5);

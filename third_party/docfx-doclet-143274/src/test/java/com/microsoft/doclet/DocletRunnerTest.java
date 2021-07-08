@@ -45,7 +45,7 @@ public class DocletRunnerTest {
         DocletRunner.main(new String[]{});
 
         assertEquals("Wrong System.err content",
-            errContent.toString().trim(), "Usage: java DocletRunner <doclet-params-filename>");
+                errContent.toString().trim(), "Usage: java DocletRunner <doclet-params-filename>");
     }
 
     @Test
@@ -53,7 +53,7 @@ public class DocletRunnerTest {
         DocletRunner.main(new String[]{"some-name.txt"});
 
         assertEquals("Wrong System.err content",
-            errContent.toString().trim(),"File 'some-name.txt' does not exist");
+                errContent.toString().trim(), "File 'some-name.txt' does not exist");
     }
 
     @Test
@@ -74,11 +74,11 @@ public class DocletRunnerTest {
             String[] expectedFileLines = expectedFileContent.split("\n");
 
             assertEquals("Unexpected amount of lines in file " + generatedFilePath, generatedFileLines.length,
-                expectedFileLines.length);
+                    expectedFileLines.length);
 
             for (int i = 0; i < generatedFileLines.length; i++) {
                 assertEquals("Wrong file content for file " + generatedFilePath,
-                    generatedFileLines[i], expectedFileLines[i]);
+                        generatedFileLines[i], expectedFileLines[i]);
             }
         }
     }
