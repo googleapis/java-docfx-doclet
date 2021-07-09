@@ -2,12 +2,11 @@ package com.microsoft.util;
 
 import com.sun.source.doctree.DocTree;
 
+import javax.lang.model.element.Element;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import javax.lang.model.element.Element;
 
 public class CommentHelper {
     public Element element;
@@ -39,7 +38,7 @@ public class CommentHelper {
                 (inlineTags.size() == 1 && hasInheritDocTag);
     }
 
-    public boolean hasInheritDocTag(){
+    public boolean hasInheritDocTag() {
         return this.hasInheritDocTag;
     }
 

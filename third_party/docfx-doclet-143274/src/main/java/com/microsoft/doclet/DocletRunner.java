@@ -1,12 +1,13 @@
 package com.microsoft.doclet;
 
 import com.microsoft.util.OptionsFileUtil;
+
 import javax.tools.ToolProvider;
 
 /**
  * To use runner just pass as commandline param to main method:
  * - name of file with doclet name amd params
- *
+ * <p>
  * For example: java DocletRunner src\test\resources\test-doclet-params.txt
  */
 public class DocletRunner {

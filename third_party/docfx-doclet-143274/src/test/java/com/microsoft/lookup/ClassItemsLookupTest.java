@@ -1,32 +1,12 @@
 package com.microsoft.lookup;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import com.google.testing.compile.CompilationRule;
 import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
-import com.sun.source.doctree.DocCommentTree;
+import com.sun.source.doctree.*;
 import com.sun.source.doctree.DocTree.Kind;
-import com.sun.source.doctree.IdentifierTree;
-import com.sun.source.doctree.ParamTree;
-import com.sun.source.doctree.ReturnTree;
-import com.sun.source.doctree.TextTree;
-import com.sun.source.doctree.ThrowsTree;
 import com.sun.source.util.DocTrees;
-import java.util.Arrays;
-import java.util.List;
-import javax.lang.model.element.ExecutableElement;
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.element.VariableElement;
-import javax.lang.model.util.ElementFilter;
-import javax.lang.model.util.Elements;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.junit.Before;
 import org.junit.Rule;
@@ -34,6 +14,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.VariableElement;
+import javax.lang.model.util.ElementFilter;
+import javax.lang.model.util.Elements;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ClassItemsLookupTest {
@@ -85,15 +77,15 @@ public class ClassItemsLookupTest {
         verify(environment, times(2)).getDocTrees();
         verify(docTrees, times(2)).getDocCommentTree(method);
         verify(docCommentTree, times(2)).getBlockTags();
-        assertThat("Wrong parameters count", result.size(), is(2));
+        assertEquals("Wrong parameters count", result.size(), 2);
 
-        assertThat("Wrong first param id", result.get(0).getId(), is("incomingDamage"));
-        assertThat("Wrong first param type", result.get(0).getType(), is("int"));
-        assertThat("Wrong first param description", result.get(0).getDescription(), is("some text bla"));
+        assertEquals("Wrong first param id", result.get(0).getId(), "incomingDamage");
+        assertEquals("Wrong first param type", result.get(0).getType(), "int");
+        assertEquals("Wrong first param description", result.get(0).getDescription(), "some text bla");
 
-        assertThat("Wrong second param id", result.get(1).getId(), is("damageType"));
-        assertThat("Wrong second param type", result.get(1).getType(), is("java.lang.String"));
-        assertThat("Wrong second param description", result.get(1).getDescription(), is("some text bla-bla"));
+        assertEquals("Wrong second param id", result.get(1).getId(), "damageType");
+        assertEquals("Wrong second param type", result.get(1).getType(), "java.lang.String");
+        assertEquals("Wrong second param description", result.get(1).getDescription(), "some text bla-bla");
     }
 
     @Test
@@ -117,7 +109,7 @@ public class ClassItemsLookupTest {
         verify(environment).getDocTrees();
         verify(docTrees).getDocCommentTree(method);
         verify(docCommentTree).getBlockTags();
-        assertThat("Wrong param description", result, is("some weird text"));
+        assertEquals("Wrong param description", result, "some weird text");
     }
 
     @Test
@@ -139,9 +131,9 @@ public class ClassItemsLookupTest {
         verify(docTrees).getDocCommentTree(method);
         verify(docCommentTree).getBlockTags();
         verify(throwsTree).getKind();
-        assertThat("Wrong exceptions count", result.size(), is(1));
-        assertThat("Wrong type", result.get(0).getType(), is("java.lang.IllegalArgumentException"));
-        assertThat("Wrong description", result.get(0).getDescription(), is("some text"));
+        assertEquals("Wrong exceptions count", result.size(), 1);
+        assertEquals("Wrong type", result.get(0).getType(), "java.lang.IllegalArgumentException");
+        assertEquals("Wrong description", result.get(0).getDescription(), "some text");
     }
 
     @Test
@@ -163,7 +155,7 @@ public class ClassItemsLookupTest {
         verify(docTrees).getDocCommentTree(method);
         verify(docCommentTree).getBlockTags();
         verify(throwsTree).getKind();
-        assertThat("Wrong description", result, is("some weird text"));
+        assertEquals("Wrong description", result, "some weird text");
     }
 
     @Test
@@ -195,15 +187,15 @@ public class ClassItemsLookupTest {
     }
 
     private void checkReturnForExecutableElement(ExecutableElement executableElement, String expectedType,
-        String expectedDescription) {
+                                                 String expectedDescription) {
         Return result = classItemsLookup.extractReturn(executableElement);
 
-        assertThat(result.getReturnType(), is(expectedType));
-        assertThat(result.getReturnDescription(), is(expectedDescription));
+        assertEquals(result.getReturnType(), expectedType);
+        assertEquals(result.getReturnDescription(), expectedDescription);
     }
 
     private void checkVoidReturnForExecutableElement(ExecutableElement executableElement) {
-        assertThat(classItemsLookup.extractReturn(executableElement), is(nullValue()));
+        assertNull(classItemsLookup.extractReturn(executableElement));
     }
 
     @Test
@@ -225,7 +217,7 @@ public class ClassItemsLookupTest {
         verify(docTrees).getDocCommentTree(method0);
         verify(docCommentTree).getBlockTags();
         verify(returnTree).getKind();
-        assertThat("Wrong description", result, is("bla-bla description"));
+        assertEquals("Wrong description", result, "bla-bla description");
     }
 
     @Test
@@ -244,30 +236,30 @@ public class ClassItemsLookupTest {
 
         Return result = classItemsLookup.extractReturn(variableElement);
 
-        assertThat(result.getReturnType(), is(expectedType));
+        assertEquals(result.getReturnType(), expectedType);
     }
 
     @Test
     public void convertFullNameToOverload() {
-        assertThat("Wrong result", classItemsLookup.convertFullNameToOverload(
-            "com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)"), is(
-            "com.microsoft.samples.SuperHero.successfullyAttacked*"));
+        assertEquals("Wrong result", classItemsLookup.convertFullNameToOverload(
+                "com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)"),
+                "com.microsoft.samples.SuperHero.successfullyAttacked*");
 
-        assertThat("Wrong result for case with generics", classItemsLookup.convertFullNameToOverload(
-            "com.microsoft.samples.subpackage.Display<T,R>.show()"), is(
-            "com.microsoft.samples.subpackage.Display<T,R>.show*"));
+        assertEquals("Wrong result for case with generics", classItemsLookup.convertFullNameToOverload(
+                "com.microsoft.samples.subpackage.Display<T,R>.show()"),
+                "com.microsoft.samples.subpackage.Display<T,R>.show*");
 
-        assertThat("Wrong result for constructor case", classItemsLookup.convertFullNameToOverload(
-            "com.microsoft.samples.SuperHero.SuperHero()"), is(
-            "com.microsoft.samples.SuperHero.SuperHero*"));
+        assertEquals("Wrong result for constructor case", classItemsLookup.convertFullNameToOverload(
+                "com.microsoft.samples.SuperHero.SuperHero()"),
+                "com.microsoft.samples.SuperHero.SuperHero*");
     }
 
     @Test
     public void determineTypeForEnumConstant() {
         TypeElement element = elements
-            .getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
+                .getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
 
-        assertThat(classItemsLookup.determineType(element.getEnclosedElements().get(0)), is("Field"));
-        assertThat(classItemsLookup.determineType(element.getEnclosedElements().get(1)), is("Field"));
+        assertEquals(classItemsLookup.determineType(element.getEnclosedElements().get(0)), "Field");
+        assertEquals(classItemsLookup.determineType(element.getEnclosedElements().get(1)), "Field");
     }
 }

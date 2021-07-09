@@ -1,14 +1,14 @@
 package com.microsoft.build;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class LookupTest {
 
@@ -39,41 +39,41 @@ public class LookupTest {
         LookupContext context = lookup.buildContext(classFiles.get(0));
 
         String[] localKeys = {
-            // Uid as is
-            "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String,boolean)",
-            // Uid as is with spaces between params
-            "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String, boolean)",
-            // Uid with param types without package
-            "com.microsoft.samples.subpackage.Person.setFirstName(String,boolean)",
-            // Uid with param types without package with spaces between params
-            "com.microsoft.samples.subpackage.Person.setFirstName(String, boolean)",
-            // Uid without package
-            "Person.setFirstName(java.lang.String,boolean)",
-            // Uid without package with spaces between params
-            "Person.setFirstName(java.lang.String, boolean)",
+                // Uid as is
+                "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String,boolean)",
+                // Uid as is with spaces between params
+                "com.microsoft.samples.subpackage.Person.setFirstName(java.lang.String, boolean)",
+                // Uid with param types without package
+                "com.microsoft.samples.subpackage.Person.setFirstName(String,boolean)",
+                // Uid with param types without package with spaces between params
+                "com.microsoft.samples.subpackage.Person.setFirstName(String, boolean)",
+                // Uid without package
+                "Person.setFirstName(java.lang.String,boolean)",
+                // Uid without package with spaces between params
+                "Person.setFirstName(java.lang.String, boolean)",
 
-            // Name with type as is
-            "Person<T>.setFirstName(String, boolean)",
-            // Name with type without generics
-            "Person.setFirstName(String firstName, boolean flag)",
-            // Name with type without generics and param names
-            "Person.setFirstName(String, boolean)",
-            // Name with type without generics and param names without spaces between params
-            "Person.setFirstName(String,boolean)"
+                // Name with type as is
+                "Person<T>.setFirstName(String, boolean)",
+                // Name with type without generics
+                "Person.setFirstName(String firstName, boolean flag)",
+                // Name with type without generics and param names
+                "Person.setFirstName(String, boolean)",
+                // Name with type without generics and param names without spaces between params
+                "Person.setFirstName(String,boolean)"
         };
-        assertThat("Wrong owner uid", context.getOwnerUid(), is("Person.setFirstName(String firstName, boolean flag)"));
+        assertEquals("Wrong owner uid", context.getOwnerUid(), "Person.setFirstName(String firstName, boolean flag)");
 
         for (String localKey : localKeys) {
-            assertThat("Context should contain local key=" + localKey, context.containsKey(localKey), is(true));
-            assertThat("Wrong value for local key=" + localKey, context.resolve(localKey), is(classUid));
+            assertTrue("Context should contain local key=" + localKey, context.containsKey(localKey));
+            assertEquals("Wrong value for local key=" + localKey, context.resolve(localKey), classUid);
         }
 
-        assertThat("Context should contain global key", context.containsKey(packageNameWithType), is(true));
-        assertThat("Context should contain global value as a key", context.containsKey(packageUid), is(true));
-        assertThat("Wrong value for global key", context.resolve(packageNameWithType), is(packageUid));
-        assertThat("Wrong value for local value as a key", context.resolve(packageUid), is(packageUid));
+        assertTrue("Context should contain global key", context.containsKey(packageNameWithType));
+        assertTrue("Context should contain global value as a key", context.containsKey(packageUid));
+        assertEquals("Wrong value for global key", context.resolve(packageNameWithType), packageUid);
+        assertEquals("Wrong value for local value as a key", context.resolve(packageUid), packageUid);
 
-        assertThat("Context shouldn't contain unknown key", context.containsKey("unknown key"), is(false));
+        assertFalse("Context shouldn't contain unknown key", context.containsKey("unknown key"));
     }
 
     private MetadataFileItem buildMetadataFileItem(String uid, String nameWithType) {

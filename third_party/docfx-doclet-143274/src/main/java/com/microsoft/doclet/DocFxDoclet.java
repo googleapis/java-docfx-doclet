@@ -1,18 +1,14 @@
 package com.microsoft.doclet;
 
 import com.microsoft.build.YmlFilesBuilder;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-import javax.lang.model.SourceVersion;
-import javax.tools.Diagnostic.Kind;
 import jdk.javadoc.doclet.Doclet;
 import jdk.javadoc.doclet.DocletEnvironment;
 import jdk.javadoc.doclet.Reporter;
 import org.apache.commons.lang3.StringUtils;
+
+import javax.lang.model.SourceVersion;
+import javax.tools.Diagnostic.Kind;
+import java.util.*;
 
 public class DocFxDoclet implements Doclet {
 
@@ -47,44 +43,44 @@ public class DocFxDoclet implements Doclet {
     @Override
     public Set<? extends Option> getSupportedOptions() {
         Option[] options = {
-            new CustomOption("Output path", Arrays.asList("-outputpath", "--output-path", "-d"), "path") {
-                @Override
-                public boolean process(String option, List<String> arguments) {
-                    outputPath = arguments.get(0);
-                    return true;
-                }
-            },
-            new CustomOption("Exclude packages", Arrays.asList("-excludepackages", "--exclude-packages", "-ep"),
-                "packages") {
-                @Override
-                public boolean process(String option, List<String> arguments) {
-                    excludePackages = StringUtils.split(arguments.get(0), ":");
-                    return true;
-                }
-            },
-            new CustomOption("Exclude classes", Arrays.asList("-excludeclasses", "--exclude-classes", "-ec"),
-                "classes") {
-                @Override
-                public boolean process(String option, List<String> arguments) {
-                    excludeClasses = StringUtils.split(arguments.get(0), ":");
-                    return true;
-                }
-            },
-            new CustomOption(
-                    "Project name", Arrays.asList("-projectname", "--project-name", "-pn"), "name") {
-                @Override
-                public boolean process(String option, List<String> arguments) {
-                    //  using artifact id as projectName - remove "-parent" since generation runs in parent pom
-                    projectName = arguments.get(0).replaceAll("-parent", "");
-                    return true;
-                }
-            },
-            // Support next properties for compatibility with Gradle javadoc task.
-            // According to javadoc spec - these properties used by StandardDoclet and used only when
-            // 'doclet' parameter not populated. But Gradle javadoc not align with this rule and
-            // passes them in spite of 'doclet' parameter existence
-            new FakeOptionForCompatibilityWithStandardDoclet("Fake support of doctitle property", "-doctitle"),
-            new FakeOptionForCompatibilityWithStandardDoclet("Fake support of windowtitle property", "-windowtitle")
+                new CustomOption("Output path", Arrays.asList("-outputpath", "--output-path", "-d"), "path") {
+                    @Override
+                    public boolean process(String option, List<String> arguments) {
+                        outputPath = arguments.get(0);
+                        return true;
+                    }
+                },
+                new CustomOption("Exclude packages", Arrays.asList("-excludepackages", "--exclude-packages", "-ep"),
+                        "packages") {
+                    @Override
+                    public boolean process(String option, List<String> arguments) {
+                        excludePackages = StringUtils.split(arguments.get(0), ":");
+                        return true;
+                    }
+                },
+                new CustomOption("Exclude classes", Arrays.asList("-excludeclasses", "--exclude-classes", "-ec"),
+                        "classes") {
+                    @Override
+                    public boolean process(String option, List<String> arguments) {
+                        excludeClasses = StringUtils.split(arguments.get(0), ":");
+                        return true;
+                    }
+                },
+                new CustomOption(
+                        "Project name", Arrays.asList("-projectname", "--project-name", "-pn"), "name") {
+                    @Override
+                    public boolean process(String option, List<String> arguments) {
+                        //  using artifact id as projectName - remove "-parent" since generation runs in parent pom
+                        projectName = arguments.get(0).replaceAll("-parent", "");
+                        return true;
+                    }
+                },
+                // Support next properties for compatibility with Gradle javadoc task.
+                // According to javadoc spec - these properties used by StandardDoclet and used only when
+                // 'doclet' parameter not populated. But Gradle javadoc not align with this rule and
+                // passes them in spite of 'doclet' parameter existence
+                new FakeOptionForCompatibilityWithStandardDoclet("Fake support of doctitle property", "-doctitle"),
+                new FakeOptionForCompatibilityWithStandardDoclet("Fake support of windowtitle property", "-windowtitle")
         };
         return new HashSet<>(Arrays.asList(options));
     }

@@ -1,6 +1,7 @@
 package com.microsoft.model;
 
 import com.microsoft.util.YamlUtil;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,7 +24,9 @@ public class TocFile extends ArrayList<TocItem> implements YmlFile {
         add(packageTocItem);
     }
 
-    protected void sortByUid() { Collections.sort(this, Comparator.comparing(TocItem::getUid)); }
+    protected void sortByUid() {
+        Collections.sort(this, Comparator.comparing(TocItem::getUid));
+    }
 
     @Override
     public String getFileContent() {

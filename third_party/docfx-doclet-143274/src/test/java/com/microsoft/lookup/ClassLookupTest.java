@@ -1,15 +1,8 @@
 package com.microsoft.lookup;
 
-import static org.hamcrest.CoreMatchers.hasItems;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
 import com.google.testing.compile.CompilationRule;
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.TypeParameter;
-import java.util.List;
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.util.Elements;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.junit.Before;
 import org.junit.Rule;
@@ -17,6 +10,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.util.Elements;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ClassLookupTest {
@@ -40,8 +40,8 @@ public class ClassLookupTest {
 
         List<TypeParameter> result = classLookup.determineTypeParameters(element);
 
-        assertThat("Wrong type params size", result.size(), is(1));
-        assertThat("Wrong type parameter id", result.get(0).getId(), is("T"));
+        assertEquals("Wrong type params size", result.size(), 1);
+        assertEquals("Wrong type parameter id", result.get(0).getId(), "T");
     }
 
     @Test
@@ -50,7 +50,7 @@ public class ClassLookupTest {
 
         String result = classLookup.determineSuperclass(element);
 
-        assertThat("Wrong result", result, is("java.lang.Object"));
+        assertEquals("Wrong result", result, "java.lang.Object");
     }
 
     @Test
@@ -59,18 +59,18 @@ public class ClassLookupTest {
 
         String result = classLookup.determineSuperclass(element);
 
-        assertThat("Wrong result", result, is("com.microsoft.samples.subpackage.Person"));
+        assertEquals("Wrong result", result, "com.microsoft.samples.subpackage.Person");
     }
 
     @Test
     public void determineSuperclassForEnum() {
         TypeElement element = elements
-            .getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
+                .getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
 
         String result = classLookup.determineSuperclass(element);
 
-        assertThat("Wrong result", result,
-            is("java.lang.Enum<com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender>"));
+        assertEquals("Wrong result", result,
+                "java.lang.Enum<com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender>");
     }
 
     @Test
@@ -80,10 +80,12 @@ public class ClassLookupTest {
 
         classLookup.populateContent(element, "SuperHero", container);
 
-        assertThat("Wrong content", container.getContent(),
-            is("public class SuperHero extends Person implements Serializable, Cloneable"));
-        assertThat("Wrong set of interfaces", container.getInterfaces(),
-            hasItems("java.io.Serializable", "java.lang.Cloneable"));
+        assertEquals("Wrong content", container.getContent(),
+                "public class SuperHero extends Person implements Serializable, Cloneable");
+
+
+        assertTrue("Wrong set of interfaces", container.getInterfaces().contains("java.io.Serializable"));
+        assertTrue("Wrong set of interfaces", container.getInterfaces().contains("java.lang.Cloneable"));
     }
 
     @Test
@@ -93,22 +95,24 @@ public class ClassLookupTest {
 
         classLookup.populateContent(element, "Display<T,R>", container);
 
-        assertThat("Wrong content", container.getContent(),
-            is("public interface Display<T,R> extends Serializable, List<Person<T>>"));
-        assertThat("Wrong set of interfaces", container.getInterfaces(),
-            hasItems("java.io.Serializable", "java.util.List<com.microsoft.samples.subpackage.Person<T>>"));
+        assertEquals("Wrong content", container.getContent(),
+                "public interface Display<T,R> extends Serializable, List<Person<T>>");
+
+
+        assertTrue("Wrong set of interfaces", container.getInterfaces().contains("java.io.Serializable"));
+        assertTrue("Wrong set of interfaces", container.getInterfaces().contains("java.util.List<com.microsoft.samples.subpackage.Person<T>>"));
     }
 
     @Test
     public void determineClassContentForEnum() {
         TypeElement element = elements
-            .getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
+                .getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
         ExtendedMetadataFileItem container = new ExtendedMetadataFileItem("UID");
 
         classLookup.populateContent(element, "Person.IdentificationInfo.Gender", container);
 
-        assertThat("Wrong content", container.getContent(),
-            is("public enum Person.IdentificationInfo.Gender extends Enum<Person.IdentificationInfo.Gender>"));
+        assertEquals("Wrong content", container.getContent(),
+                "public enum Person.IdentificationInfo.Gender extends Enum<Person.IdentificationInfo.Gender>");
     }
 
     @Test
@@ -118,28 +122,28 @@ public class ClassLookupTest {
 
         classLookup.populateContent(element, "Person.IdentificationInfo", container);
 
-        assertThat("Wrong content", container.getContent(), is("public static class Person.IdentificationInfo"));
+        assertEquals("Wrong content", container.getContent(), "public static class Person.IdentificationInfo");
     }
 
     @Test
     public void determineTypeForInterface() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Display");
 
-        assertThat(classLookup.determineType(element), is("Interface"));
+        assertEquals(classLookup.determineType(element), "Interface");
     }
 
     @Test
     public void determineTypeForEnum() {
         TypeElement element = elements
-            .getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
+                .getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender");
 
-        assertThat(classLookup.determineType(element), is("Enum"));
+        assertEquals(classLookup.determineType(element), "Enum");
     }
 
     @Test
     public void determineTypeForClass() {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo");
 
-        assertThat(classLookup.determineType(element), is("Class"));
+        assertEquals(classLookup.determineType(element), "Class");
     }
 }

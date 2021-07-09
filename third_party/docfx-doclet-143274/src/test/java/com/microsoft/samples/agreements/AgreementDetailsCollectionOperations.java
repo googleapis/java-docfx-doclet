@@ -9,17 +9,14 @@ import com.microsoft.samples.IPartner;
  */
 public class AgreementDetailsCollectionOperations
         extends BasePartnerComponentString
-        implements IAgreementDetailsCollection
-
-{
+        implements IAgreementDetailsCollection {
     /**
      * Initializes a new instance of the AgreementDetailsCollectionOperations class.
      *
      * @param rootPartnerOperations The root partner operations instance.
      */
-    public AgreementDetailsCollectionOperations( IPartner rootPartnerOperations )
-    {
-        super( rootPartnerOperations );
+    public AgreementDetailsCollectionOperations(IPartner rootPartnerOperations) {
+        super(rootPartnerOperations);
     }
 
     /**
@@ -27,8 +24,7 @@ public class AgreementDetailsCollectionOperations
      *
      * @return A list of agreement details.
      */
-    public ResourceCollection<AgreementMetaData> get()
-    {
+    public ResourceCollection<AgreementMetaData> get() {
         return null;
     }
 }

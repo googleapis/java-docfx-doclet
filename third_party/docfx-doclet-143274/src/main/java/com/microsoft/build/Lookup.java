@@ -1,14 +1,14 @@
 package com.microsoft.build;
 
-import static org.apache.commons.lang3.RegExUtils.removeAll;
-import static org.apache.commons.lang3.RegExUtils.replaceAll;
-
 import com.microsoft.model.MetadataFile;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.apache.commons.lang3.RegExUtils.removeAll;
+import static org.apache.commons.lang3.RegExUtils.replaceAll;
 
 public class Lookup {
 

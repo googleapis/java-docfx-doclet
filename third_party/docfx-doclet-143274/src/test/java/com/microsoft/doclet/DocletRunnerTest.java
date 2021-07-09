@@ -1,9 +1,10 @@
 package com.microsoft.doclet;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
 import com.microsoft.util.FileUtilTest;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -11,9 +12,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class DocletRunnerTest {
 
@@ -44,16 +44,16 @@ public class DocletRunnerTest {
     public void testFilesGenerationWhenNoParams() {
         DocletRunner.main(new String[]{});
 
-        assertThat("Wrong System.err content",
-            errContent.toString().trim(), is("Usage: java DocletRunner <doclet-params-filename>"));
+        assertEquals("Wrong System.err content",
+                errContent.toString().trim(), "Usage: java DocletRunner <doclet-params-filename>");
     }
 
     @Test
     public void testFilesGenerationWhenTargetFileDoesNotExist() {
         DocletRunner.main(new String[]{"some-name.txt"});
 
-        assertThat("Wrong System.err content",
-            errContent.toString().trim(), is("File 'some-name.txt' does not exist"));
+        assertEquals("Wrong System.err content",
+                errContent.toString().trim(), "File 'some-name.txt' does not exist");
     }
 
     @Test
@@ -62,7 +62,7 @@ public class DocletRunnerTest {
 
         List<Path> expectedFilePaths = Files.list(Path.of(EXPECTED_GENERATED_FILES_DIR)).collect(Collectors.toList());
         List<Path> generatedFilePaths = Files.list(Path.of(OUTPUT_DIR)).collect(Collectors.toList());
-        assertThat("Wrong files count", generatedFilePaths.size(), is(expectedFilePaths.size()));
+        assertEquals("Wrong files count", generatedFilePaths.size(), expectedFilePaths.size());
 
         for (Path expectedFilePath : expectedFilePaths) {
             Path generatedFilePath = Path.of(OUTPUT_DIR, expectedFilePath.getFileName().toString());
@@ -73,12 +73,12 @@ public class DocletRunnerTest {
             String[] generatedFileLines = generatedFileContent.split("\n");
             String[] expectedFileLines = expectedFileContent.split("\n");
 
-            assertThat("Unexpected amount of lines in file " + generatedFilePath, generatedFileLines.length,
-                is(expectedFileLines.length));
+            assertEquals("Unexpected amount of lines in file " + generatedFilePath, generatedFileLines.length,
+                    expectedFileLines.length);
 
             for (int i = 0; i < generatedFileLines.length; i++) {
-                assertThat("Wrong file content for file " + generatedFilePath,
-                    generatedFileLines[i], is(expectedFileLines[i]));
+                assertEquals("Wrong file content for file " + generatedFilePath,
+                        generatedFileLines[i], expectedFileLines[i]);
             }
         }
     }

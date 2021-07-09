@@ -20,9 +20,9 @@ public class ElementUtil {
 
     public ElementUtil(String[] excludePackages, String[] excludeClasses) {
         this.excludePackages.addAll(Stream.of(excludePackages)
-            .map(o -> Pattern.compile(o)).collect(Collectors.toSet()));
+                .map(o -> Pattern.compile(o)).collect(Collectors.toSet()));
         this.excludeClasses.addAll(Stream.of(excludeClasses)
-            .map(o -> Pattern.compile(o)).collect(Collectors.toSet()));
+                .map(o -> Pattern.compile(o)).collect(Collectors.toSet()));
     }
 
     public List<TypeElement> extractSortedElements(Element element) {
@@ -30,19 +30,19 @@ public class ElementUtil {
         // By default, exclude private and package-private items
         // todo allow pass parameter for filter items by access modifiers
         return ElementFilter.typesIn(element.getEnclosedElements()).stream()
-            .filter(o -> !Utils.isPrivateOrPackagePrivate(o))
-            .filter(o -> !matchAnyPattern(excludeClasses, String.valueOf(o.getQualifiedName())))
-            .sorted((o1, o2) ->
-                StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))
-            ).collect(Collectors.toList());
+                .filter(o -> !Utils.isPrivateOrPackagePrivate(o))
+                .filter(o -> !matchAnyPattern(excludeClasses, String.valueOf(o.getQualifiedName())))
+                .sorted((o1, o2) ->
+                        StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))
+                ).collect(Collectors.toList());
     }
 
     public List<PackageElement> extractPackageElements(Set<? extends Element> elements) {
         return ElementFilter.packagesIn(elements).stream()
-            .filter(o -> !matchAnyPattern(excludePackages, String.valueOf(o)))
-            .sorted((o1, o2) ->
-                StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))
-            ).collect(Collectors.toList());
+                .filter(o -> !matchAnyPattern(excludePackages, String.valueOf(o)))
+                .sorted((o1, o2) ->
+                        StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))
+                ).collect(Collectors.toList());
     }
 
     boolean matchAnyPattern(Set<Pattern> patterns, String stringToCheck) {

@@ -1,12 +1,10 @@
 package com.microsoft.samples.agreements;
 
 
-
 /**
  * Encapsulates the operations on the agreement metadata collection.
  */
-public interface IAgreementDetailsCollection
-{
+public interface IAgreementDetailsCollection {
     /**
      * Retrieves all current agreement metadata.
      *

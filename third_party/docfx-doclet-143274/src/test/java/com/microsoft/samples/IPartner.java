@@ -12,19 +12,18 @@ package com.microsoft.samples;
  * attached to partners. Use this interface to get to the partner's customers, profiles, and customer orders, profiles
  * and subscriptions and more.
  */
-public interface IPartner
-{
+public interface IPartner {
     /**
      * Gets the partner credentials.
-     * 
+     *
      * @return The partner credentials.
      */
-   String getCredentials();
+    String getCredentials();
 
     /**
      * Gets the request context.
      *
      * @return The request context.
      */
-  
+
 }

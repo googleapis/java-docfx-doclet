@@ -2,8 +2,6 @@ package com.microsoft.samples;
 
 import java.util.Collection;
 
-import com.microsoft.samples.KeyValuePair;
-
 public class Link {
 
     public Link() {

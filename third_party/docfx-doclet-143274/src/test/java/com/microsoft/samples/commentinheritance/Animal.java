@@ -3,7 +3,7 @@ package com.microsoft.samples.commentinheritance;
 /**
  * Animal.
  */
-public abstract class Animal implements Organism{
+public abstract class Animal implements Organism {
     /**
      * Breathe.
      */

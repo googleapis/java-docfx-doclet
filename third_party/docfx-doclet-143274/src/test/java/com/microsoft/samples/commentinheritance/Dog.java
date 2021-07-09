@@ -1,6 +1,6 @@
 package com.microsoft.samples.commentinheritance;
 
-import java.awt.Color;
+import java.awt.*;
 
 import static java.lang.System.out;
 
