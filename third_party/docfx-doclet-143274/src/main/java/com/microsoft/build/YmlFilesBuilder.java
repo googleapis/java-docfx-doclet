@@ -258,7 +258,6 @@ public class YmlFilesBuilder {
         if (uid == null || uid.equals("")) {
             return baseURL;
         }
-
         //  example1 uid: "java.lang.Object.equals(java.lang.Object)"
         //  example2 uid: "java.lang.Object"
         String endURL = uid;
@@ -275,24 +274,23 @@ public class YmlFilesBuilder {
             // className: "java/lang/Object"
             // methodName: "#equals"
             // argumentsName: "#java.lang.Object-"
-            String className = String.join("/", nameSplit.subList(0, nameSplit.size()-1));
+            String className = String.join("/", nameSplit.subList(0, nameSplit.size() - 1));
             String methodName = "#" + nameSplit.get(nameSplit.size() - 1);
             String argumentsName = argumentSplit.get(1).replaceAll("[,)]", "-");
 
             // endURL: "java/lang/Object.html#equals-java.lang.Object-"
-            endURL = className + ".html" +  methodName + "-" + argumentsName;
+            endURL = className + ".html" + methodName + "-" + argumentsName;
         } else {
             // example2
             // endURL = java/lang/Object.html
             endURL = endURL.replaceAll("\\.", "/");
             endURL = endURL + ".html";
         }
-
         return baseURL + endURL;
     }
 
     List<MetadataFileItem> addExternalReferences(List<MetadataFileItem> references) {
-        for (MetadataFileItem ref: references) {
+        for (MetadataFileItem ref : references) {
             //  add java javadoc links
             String uid = ref.getUid();
             Pattern javaPattern = Pattern.compile("^java.*");
@@ -301,12 +299,7 @@ public class YmlFilesBuilder {
                 String href = getJavaReferenceHref(ref.getUid());
                 ref.setHref(href);
             }
-
-            if (ref.getUid().contains(".protobuf")) {
-
-            }
         }
-
         return references;
     }
 
@@ -346,10 +339,10 @@ public class YmlFilesBuilder {
 
     void addTypeParameterReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
         List<MetadataFileItem> refs = methodItem.getSyntax().getTypeParameters().stream()
-                        .map(typeParameter -> {
-                            String id = typeParameter.getId();
-                            return new MetadataFileItem(id, id, false);
-                        }).collect(Collectors.toList());
+                .map(typeParameter -> {
+                    String id = typeParameter.getId();
+                    return new MetadataFileItem(id, id, false);
+                }).collect(Collectors.toList());
 
         refs = addExternalReferences(refs);
 
@@ -366,8 +359,8 @@ public class YmlFilesBuilder {
 
     void addInnerClassesReferences(TypeElement classElement, MetadataFile classMetadataFile) {
         List<MetadataFileItem> refs = ElementFilter.typesIn(elementUtil.extractSortedElements(classElement)).stream()
-                        .map(this::buildClassReference)
-                        .collect(Collectors.toList());
+                .map(this::buildClassReference)
+                .collect(Collectors.toList());
 
         refs = addExternalReferences(refs);
 

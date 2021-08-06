@@ -186,7 +186,7 @@ public class YmlFilesBuilderTest {
 
 
     @Test
-    public void addJavaHrefs(){
+    public void getJavaReferenceHref(){
         String result1 = ymlFilesBuilder.getJavaReferenceHref("java.lang.Object");
         String result2 = ymlFilesBuilder.getJavaReferenceHref("java.lang.Object.equals(java.lang.Object)");
         String result3 = ymlFilesBuilder.getJavaReferenceHref("java.lang.Object.notify()");
