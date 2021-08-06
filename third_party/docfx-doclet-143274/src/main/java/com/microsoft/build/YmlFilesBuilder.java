@@ -291,10 +291,10 @@ public class YmlFilesBuilder {
 
     private List<MetadataFileItem> addExternalReferences(List<MetadataFileItem> references) {
         for (MetadataFileItem ref : references) {
-            //  add java javadoc links
             String uid = ref.getUid();
             Pattern javaPattern = Pattern.compile("^java.*");
 
+            //  add java javadoc links
             if (javaPattern.matcher(uid).find()) {
                 String href = getJavaReferenceHref(ref.getUid());
                 ref.setHref(href);

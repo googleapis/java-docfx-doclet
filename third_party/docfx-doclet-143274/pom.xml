@@ -175,6 +175,12 @@
       <version>1.103.7</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.google.cloud</groupId>
+      <artifactId>google-cloud-speech</artifactId>
+      <version>1.29.5</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <repositories>
