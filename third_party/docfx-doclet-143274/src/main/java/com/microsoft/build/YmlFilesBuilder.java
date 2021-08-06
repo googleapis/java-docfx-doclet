@@ -266,24 +266,24 @@ public class YmlFilesBuilder {
         Pattern methodPattern = Pattern.compile("[()]");
         if (methodPattern.matcher(endURL).find()) {
             // example1
-            // split: ["java.lang.Object.equals", "java.lang.Object)"]
+            // argumentSplit: ["java.lang.Object.equals", "java.lang.Object)"]
             List<String> argumentSplit = Arrays.asList(endURL.split("\\("));
 
             // splitURL: ["java", "lang", "Object", "equals"]
             List<String> nameSplit = Arrays.asList(argumentSplit.get(0).split("\\."));
 
-            // front: "java/lang/Object"
-            // end: "#equals"
-            // ending: "#java.lang.Object-"
+            // className: "java/lang/Object"
+            // methodName: "#equals"
+            // argumentsName: "#java.lang.Object-"
             String className = String.join("/", nameSplit.subList(0, nameSplit.size()-1));
             String methodName = "#" + nameSplit.get(nameSplit.size() - 1);
             String argumentsName = argumentSplit.get(1).replaceAll("[,)]", "-");
 
-            //  "java/lang/Object.html#equals-java.lang.Object-"
+            // endURL: "java/lang/Object.html#equals-java.lang.Object-"
             endURL = className + ".html" +  methodName + "-" + argumentsName;
         } else {
             // example2
-            // endURL = java/lang/Object
+            // endURL = java/lang/Object.html
             endURL = endURL.replaceAll("\\.", "/");
             endURL = endURL + ".html";
         }
