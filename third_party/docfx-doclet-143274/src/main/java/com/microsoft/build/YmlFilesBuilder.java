@@ -289,7 +289,7 @@ public class YmlFilesBuilder {
         return baseURL + endURL;
     }
 
-    List<MetadataFileItem> addExternalReferences(List<MetadataFileItem> references) {
+    private List<MetadataFileItem> addExternalReferences(List<MetadataFileItem> references) {
         for (MetadataFileItem ref : references) {
             //  add java javadoc links
             String uid = ref.getUid();
