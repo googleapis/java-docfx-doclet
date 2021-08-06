@@ -1,0 +1,24 @@
+### YamlMime:ManagedReference
+items:
+- uid: "com.microsoft.samples.google"
+  id: "google"
+  children:
+  - "com.microsoft.samples.google.ProductSearchSettings"
+  - "com.microsoft.samples.google.ProductSearchSettings.Builder"
+  langs:
+  - "java"
+  name: "com.microsoft.samples.google"
+  nameWithType: "com.microsoft.samples.google"
+  fullName: "com.microsoft.samples.google"
+  type: "Namespace"
+  syntax:
+    content: "package com.microsoft.samples.google"
+references:
+- uid: "com.microsoft.samples.google.ProductSearchSettings"
+  name: "ProductSearchSettings"
+  nameWithType: "ProductSearchSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.Builder"
+  name: "ProductSearchSettings.Builder"
+  nameWithType: "ProductSearchSettings.Builder"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.Builder"

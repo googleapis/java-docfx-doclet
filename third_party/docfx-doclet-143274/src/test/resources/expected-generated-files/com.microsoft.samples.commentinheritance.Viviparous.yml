@@ -60,6 +60,7 @@ references:
   fullName: "com.microsoft.samples.commentinheritance.Viviparous.giveBirth"
   package: "com.microsoft.samples.commentinheritance"
 - uid: "java.lang.String"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
   spec.java:
   - uid: "java.lang.String"
     name: "String"

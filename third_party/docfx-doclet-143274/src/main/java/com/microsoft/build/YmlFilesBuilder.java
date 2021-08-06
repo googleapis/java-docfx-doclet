@@ -253,49 +253,125 @@ public class YmlFilesBuilder {
         }};
     }
 
+    protected String getJavaReferenceHref(String uid) {
+        String baseURL = "https://docs.oracle.com/javase/8/docs/api/";
+        if (uid == null || uid.equals("")) {
+            return baseURL;
+        }
+
+        //  example1 uid: "java.lang.Object.equals(java.lang.Object)"
+        //  example2 uid: "java.lang.Object"
+        String endURL = uid;
+
+        Pattern methodPattern = Pattern.compile("[()]");
+        if (methodPattern.matcher(endURL).find()) {
+            // example1
+            // split: ["java.lang.Object.equals", "java.lang.Object)"]
+            List<String> argumentSplit = Arrays.asList(endURL.split("\\("));
+
+            // splitURL: ["java", "lang", "Object", "equals"]
+            List<String> nameSplit = Arrays.asList(argumentSplit.get(0).split("\\."));
+
+            // front: "java/lang/Object"
+            // end: "#equals"
+            // ending: "#java.lang.Object-"
+            String className = String.join("/", nameSplit.subList(0, nameSplit.size()-1));
+            String methodName = "#" + nameSplit.get(nameSplit.size() - 1);
+            String argumentsName = argumentSplit.get(1).replaceAll("[,)]", "-");
+
+            //  "java/lang/Object.html#equals-java.lang.Object-"
+            endURL = className + ".html" +  methodName + "-" + argumentsName;
+        } else {
+            // example2
+            // endURL = java/lang/Object
+            endURL = endURL.replaceAll("\\.", "/");
+            endURL = endURL + ".html";
+        }
+
+        return baseURL + endURL;
+    }
+
+    List<MetadataFileItem> addExternalReferences(List<MetadataFileItem> references) {
+        for (MetadataFileItem ref: references) {
+            //  add java javadoc links
+            String uid = ref.getUid();
+            Pattern javaPattern = Pattern.compile("^java.*");
+
+            if (javaPattern.matcher(uid).find()) {
+                String href = getJavaReferenceHref(ref.getUid());
+                ref.setHref(href);
+            }
+
+            if (ref.getUid().contains(".protobuf")) {
+
+            }
+        }
+
+        return references;
+    }
+
     void addParameterReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
-        classMetadataFile.getReferences().addAll(
-                methodItem.getSyntax().getParameters().stream()
-                        .map(parameter -> buildRefItem(parameter.getType()))
-                        .filter(o -> !classMetadataFile.getItems().contains(o))
-                        .collect(Collectors.toList()));
+        List<MetadataFileItem> refs = methodItem.getSyntax().getParameters().stream()
+                .map(parameter -> buildRefItem(parameter.getType()))
+                .filter(o -> !classMetadataFile.getItems().contains(o))
+                .collect(Collectors.toList());
+
+        refs = addExternalReferences(refs);
+
+        classMetadataFile.getReferences().addAll(refs);
     }
 
     void addReturnReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
-        classMetadataFile.getReferences().addAll(
-                Stream.of(methodItem.getSyntax().getReturnValue())
-                        .filter(Objects::nonNull)
-                        .map(returnValue -> buildRefItem(returnValue.getReturnType()))
-                        .filter(o -> !classMetadataFile.getItems().contains(o))
-                        .collect(Collectors.toList()));
+        List<MetadataFileItem> refs = Stream.of(methodItem.getSyntax().getReturnValue())
+                .filter(Objects::nonNull)
+                .map(returnValue -> buildRefItem(returnValue.getReturnType()))
+                .filter(o -> !classMetadataFile.getItems().contains(o))
+                .collect(Collectors.toList());
+
+        refs = addExternalReferences(refs);
+
+        classMetadataFile.getReferences().addAll(refs);
     }
 
     void addExceptionReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
-        classMetadataFile.getReferences().addAll(
-                methodItem.getExceptions().stream()
-                        .map(exceptionItem -> buildRefItem(exceptionItem.getType()))
-                        .filter(o -> !classMetadataFile.getItems().contains(o))
-                        .collect(Collectors.toList()));
+        List<MetadataFileItem> refs = methodItem.getExceptions().stream()
+                .map(exceptionItem -> buildRefItem(exceptionItem.getType()))
+                .filter(o -> !classMetadataFile.getItems().contains(o))
+                .collect(Collectors.toList());
+
+        refs = addExternalReferences(refs);
+
+        classMetadataFile.getReferences().addAll(refs);
     }
 
     void addTypeParameterReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
-        classMetadataFile.getReferences().addAll(
-                methodItem.getSyntax().getTypeParameters().stream()
+        List<MetadataFileItem> refs = methodItem.getSyntax().getTypeParameters().stream()
                         .map(typeParameter -> {
                             String id = typeParameter.getId();
                             return new MetadataFileItem(id, id, false);
-                        }).collect(Collectors.toList()));
+                        }).collect(Collectors.toList());
+
+        refs = addExternalReferences(refs);
+
+        classMetadataFile.getReferences().addAll(refs);
     }
 
     void addSuperclassAndInterfacesReferences(TypeElement classElement, MetadataFile classMetadataFile) {
-        classMetadataFile.getReferences().addAll(classLookup.extractReferences(classElement));
+        List<MetadataFileItem> refs = List.copyOf(classLookup.extractReferences(classElement));
+
+        refs = addExternalReferences(refs);
+
+        classMetadataFile.getReferences().addAll(refs);
     }
 
     void addInnerClassesReferences(TypeElement classElement, MetadataFile classMetadataFile) {
-        classMetadataFile.getReferences().addAll(
-                ElementFilter.typesIn(elementUtil.extractSortedElements(classElement)).stream()
+        List<MetadataFileItem> refs = ElementFilter.typesIn(elementUtil.extractSortedElements(classElement)).stream()
                         .map(this::buildClassReference)
-                        .collect(Collectors.toList()));
+                        .collect(Collectors.toList());
+
+        refs = addExternalReferences(refs);
+
+        classMetadataFile.getReferences().addAll(refs);
     }
 
     void addOverloadReferences(MetadataFileItem item, MetadataFile classMetadataFile) {

@@ -54,6 +54,13 @@
       name: "Organism"
     - uid: "com.microsoft.samples.commentinheritance.Viviparous"
       name: "Viviparous"
+  - uid: "com.microsoft.samples.google"
+    name: "com.microsoft.samples.google"
+    items:
+    - uid: "com.microsoft.samples.google.ProductSearchSettings"
+      name: "ProductSearchSettings"
+    - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder"
+      name: "ProductSearchSettings.Builder"
   - uid: "com.microsoft.samples.offers"
     name: "com.microsoft.samples.offers"
     items:
