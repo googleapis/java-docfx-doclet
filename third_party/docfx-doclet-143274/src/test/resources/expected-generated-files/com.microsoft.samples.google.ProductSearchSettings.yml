@@ -53,6 +53,7 @@ items:
   - "com.google.api.gax.rpc.ClientSettings"
   inheritedMembers:
   - "com.google.api.gax.rpc.ClientSettings.<B>toBuilder()"
+  - "com.google.api.gax.rpc.ClientSettings.getBackgroundExecutorProvider()"
   - "com.google.api.gax.rpc.ClientSettings.getClock()"
   - "com.google.api.gax.rpc.ClientSettings.getCredentialsProvider()"
   - "com.google.api.gax.rpc.ClientSettings.getEndpoint()"
@@ -1295,6 +1296,10 @@ references:
   name: "ClientSettings.getTransportChannelProvider()"
   nameWithType: "ClientSettings.getTransportChannelProvider()"
   fullName: "com.google.api.gax.rpc.ClientSettings.getTransportChannelProvider()"
+- uid: "com.google.api.gax.rpc.ClientSettings.getBackgroundExecutorProvider()"
+  name: "ClientSettings.getBackgroundExecutorProvider()"
+  nameWithType: "ClientSettings.getBackgroundExecutorProvider()"
+  fullName: "com.google.api.gax.rpc.ClientSettings.getBackgroundExecutorProvider()"
 - uid: "com.google.api.gax.rpc.ClientSettings.getEndpoint()"
   name: "ClientSettings.getEndpoint()"
   nameWithType: "ClientSettings.getEndpoint()"
