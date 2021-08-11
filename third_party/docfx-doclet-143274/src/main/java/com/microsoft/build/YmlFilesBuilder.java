@@ -342,15 +342,15 @@ public class YmlFilesBuilder {
     }
 
     private boolean isExternalReference(String uid) {
-        return (PROTOBUF_PATTERN.matcher(uid).find() || GAX_PATTERN.matcher(uid).find() || APICOMMON_PATTERN.matcher(uid).find() || GAX_PATTERN.matcher(uid).find() || LONGRUNNING_PATTERN.matcher(uid).find())
+        return (PROTOBUF_PATTERN.matcher(uid).find() || GAX_PATTERN.matcher(uid).find() || APICOMMON_PATTERN.matcher(uid).find() || GAX_PATTERN.matcher(uid).find() || LONGRUNNING_PATTERN.matcher(uid).find());
     }
 
      private boolean isJavaPrimitive(String uid) {
-        return (uid.equals("boolean") || uid.equals("int") || uid.equals("byte") || uid.equals("long") || uid.equals("float") || uid.equals("double") || uid.equals("char") || uid.equals("short")) {
+        return (uid.equals("boolean") || uid.equals("int") || uid.equals("byte") || uid.equals("long") || uid.equals("float") || uid.equals("double") || uid.equals("char") || uid.equals("short"));
     }
 
     private boolean isJavaLibrary(String uid) {
-        return JAVA_PATTERN.matcher(uid).find())
+        return JAVA_PATTERN.matcher(uid).find();
     }
 
     void addParameterReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
