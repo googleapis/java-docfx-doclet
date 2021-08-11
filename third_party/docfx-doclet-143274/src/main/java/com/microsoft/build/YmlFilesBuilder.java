@@ -284,7 +284,6 @@ public class YmlFilesBuilder {
             // argumentsName: "#java.lang.Object-"
             String className = String.join("/", nameSplit.subList(0, nameSplit.size() - 1));
             String methodName = "#" + nameSplit.get(nameSplit.size() - 1);
-
             String argumentsName = argumentSplit.get(1).replaceAll("[,)]", "-");
 
             // endURL: "java/lang/Object.html#equals-java.lang.Object-"
