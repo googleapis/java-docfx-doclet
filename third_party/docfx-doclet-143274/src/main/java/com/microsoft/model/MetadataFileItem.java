@@ -270,7 +270,7 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
         return RegExUtils.removeAll(value, "<\\w+(,\\s*\\w+)*>");
     }
 
-    public void setExternal(boolean external) {
+    public void setIsExternal(boolean external) {
         isExternal = external;
     }
 }

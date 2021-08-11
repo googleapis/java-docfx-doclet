@@ -285,12 +285,7 @@ public class YmlFilesBuilder {
             String className = String.join("/", nameSplit.subList(0, nameSplit.size() - 1));
             String methodName = "#" + nameSplit.get(nameSplit.size() - 1);
 
-            String argumentsName = "";
-            try {
-                argumentsName = argumentSplit.get(1).replaceAll("[,)]", "-");
-            } catch (Exception e) {
-                System.out.println("here");
-            }
+            String argumentsName = argumentSplit.get(1).replaceAll("[,)]", "-");
 
             // endURL: "java/lang/Object.html#equals-java.lang.Object-"
             endURL = className + ".html" + methodName + "-" + argumentsName;
@@ -320,7 +315,7 @@ public class YmlFilesBuilder {
             reference.setHref(getJavaReferenceHref(uid));
         }
         if (isExternalReference(uid)) {
-            reference.setExternal(true);
+            reference.setIsExternal(true);
         }
         if (reference.getSpecForJava().size() > 0) {
             for (SpecViewModel spec : reference.getSpecForJava()) {
@@ -369,33 +364,37 @@ public class YmlFilesBuilder {
     }
 
     void addParameterReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
-        classMetadataFile.getReferences().addAll(methodItem.getSyntax().getParameters().stream()
-                .map(parameter -> buildRefItem(parameter.getType()))
-                .filter(o -> !classMetadataFile.getItems().contains(o))
-                .collect(Collectors.toList()));
+        classMetadataFile.getReferences().addAll(
+                methodItem.getSyntax().getParameters().stream()
+                        .map(parameter -> buildRefItem(parameter.getType()))
+                        .filter(o -> !classMetadataFile.getItems().contains(o))
+                        .collect(Collectors.toList()));
     }
 
     void addReturnReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
-        classMetadataFile.getReferences().addAll(Stream.of(methodItem.getSyntax().getReturnValue())
-                .filter(Objects::nonNull)
-                .map(returnValue -> buildRefItem(returnValue.getReturnType()))
-                .filter(o -> !classMetadataFile.getItems().contains(o))
-                .collect(Collectors.toList()));
+        classMetadataFile.getReferences().addAll(
+                Stream.of(methodItem.getSyntax().getReturnValue())
+                        .filter(Objects::nonNull)
+                        .map(returnValue -> buildRefItem(returnValue.getReturnType()))
+                        .filter(o -> !classMetadataFile.getItems().contains(o))
+                        .collect(Collectors.toList()));
     }
 
     void addExceptionReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
-        classMetadataFile.getReferences().addAll(methodItem.getExceptions().stream()
-                .map(exceptionItem -> buildRefItem(exceptionItem.getType()))
-                .filter(o -> !classMetadataFile.getItems().contains(o))
-                .collect(Collectors.toList()));
+        classMetadataFile.getReferences().addAll(
+                methodItem.getExceptions().stream()
+                        .map(exceptionItem -> buildRefItem(exceptionItem.getType()))
+                        .filter(o -> !classMetadataFile.getItems().contains(o))
+                        .collect(Collectors.toList()));
     }
 
     void addTypeParameterReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
-        classMetadataFile.getReferences().addAll(methodItem.getSyntax().getTypeParameters().stream()
-                .map(typeParameter -> {
-                    String id = typeParameter.getId();
-                    return new MetadataFileItem(id, id, false);
-                }).collect(Collectors.toList()));
+        classMetadataFile.getReferences().addAll(
+                methodItem.getSyntax().getTypeParameters().stream()
+                        .map(typeParameter -> {
+                            String id = typeParameter.getId();
+                            return new MetadataFileItem(id, id, false);
+                        }).collect(Collectors.toList()));
     }
 
     void addSuperclassAndInterfacesReferences(TypeElement classElement, MetadataFile classMetadataFile) {
@@ -403,9 +402,10 @@ public class YmlFilesBuilder {
     }
 
     void addInnerClassesReferences(TypeElement classElement, MetadataFile classMetadataFile) {
-        classMetadataFile.getReferences().addAll(ElementFilter.typesIn(elementUtil.extractSortedElements(classElement)).stream()
-                .map(this::buildClassReference)
-                .collect(Collectors.toList()));
+        classMetadataFile.getReferences().addAll(
+                ElementFilter.typesIn(elementUtil.extractSortedElements(classElement)).stream()
+                        .map(this::buildClassReference)
+                        .collect(Collectors.toList()));
     }
 
     void addOverloadReferences(MetadataFileItem item, MetadataFile classMetadataFile) {
