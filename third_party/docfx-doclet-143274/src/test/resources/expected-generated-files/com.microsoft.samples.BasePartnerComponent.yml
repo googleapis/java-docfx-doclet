@@ -90,6 +90,7 @@ references:
   - uid: "TContext"
     name: "TContext"
     fullName: "TContext"
+    isExternal: false
 - uid: "com.microsoft.samples.BasePartnerComponent.BasePartnerComponent*"
   name: "BasePartnerComponent"
   nameWithType: "BasePartnerComponent<TContext>.BasePartnerComponent"

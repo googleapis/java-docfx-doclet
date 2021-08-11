@@ -41,6 +41,15 @@ public class YmlFilesBuilder {
     private ClassLookup classLookup;
     private String projectName;
 
+    private final Pattern JAVA_PATTERN = Pattern.compile("^java.*");
+    private final Pattern PROTOBUF_PATTERN = Pattern.compile("^com.google.protobuf.*");
+    private final Pattern GAX_PATTERN = Pattern.compile("^com.google.api.gax.*");
+    private final Pattern APICOMMON_PATTERN = Pattern.compile("^com.google.api.core.*");
+    private final Pattern LONGRUNNING_PATTERN = Pattern.compile("^com.google.longrunning.*");
+    private final Pattern ENDING_PATTERN = Pattern.compile(".*<\\?>$");
+    private final String PRIMITIVE_URL = "https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html";
+    private final String JAVA_BASE_URL = "https://docs.oracle.com/javase/8/docs/api/";
+
     public YmlFilesBuilder(DocletEnvironment environment, String outputPath,
                            String[] excludePackages, String[] excludeClasses, String projectName) {
         this.environment = environment;
@@ -79,6 +88,7 @@ public class YmlFilesBuilder {
         }
 
         populateUidValues(packageMetadataFiles, classMetadataFiles);
+        updateExternalReferences(classMetadataFiles);
 
         packageMetadataFiles.forEach(FileUtil::dumpToFile);
         classMetadataFiles.forEach(FileUtil::dumpToFile);
@@ -254,21 +264,19 @@ public class YmlFilesBuilder {
     }
 
     protected String getJavaReferenceHref(String uid) {
-        String baseURL = "https://docs.oracle.com/javase/8/docs/api/";
         if (uid == null || uid.equals("")) {
-            return baseURL;
+            return JAVA_BASE_URL;
         }
         //  example1 uid: "java.lang.Object.equals(java.lang.Object)"
         //  example2 uid: "java.lang.Object"
         String endURL = uid;
 
-        Pattern methodPattern = Pattern.compile("[()]");
-        if (methodPattern.matcher(endURL).find()) {
+        Pattern argPattern = Pattern.compile(".*\\(.*\\).*");
+        if (argPattern.matcher(endURL).find()) {
             // example1
             // argumentSplit: ["java.lang.Object.equals", "java.lang.Object)"]
+            // nameSplit: ["java", "lang", "Object", "equals"]
             List<String> argumentSplit = Arrays.asList(endURL.split("\\("));
-
-            // splitURL: ["java", "lang", "Object", "equals"]
             List<String> nameSplit = Arrays.asList(argumentSplit.get(0).split("\\."));
 
             // className: "java/lang/Object"
@@ -276,7 +284,13 @@ public class YmlFilesBuilder {
             // argumentsName: "#java.lang.Object-"
             String className = String.join("/", nameSplit.subList(0, nameSplit.size() - 1));
             String methodName = "#" + nameSplit.get(nameSplit.size() - 1);
-            String argumentsName = argumentSplit.get(1).replaceAll("[,)]", "-");
+
+            String argumentsName = "";
+            try {
+                argumentsName = argumentSplit.get(1).replaceAll("[,)]", "-");
+            } catch (Exception e) {
+                System.out.println("here");
+            }
 
             // endURL: "java/lang/Object.html#equals-java.lang.Object-"
             endURL = className + ".html" + methodName + "-" + argumentsName;
@@ -286,95 +300,121 @@ public class YmlFilesBuilder {
             endURL = endURL.replaceAll("\\.", "/");
             endURL = endURL + ".html";
         }
-        return baseURL + endURL;
+        return JAVA_BASE_URL + endURL;
     }
 
-    private List<MetadataFileItem> addExternalReferences(List<MetadataFileItem> references) {
-        for (MetadataFileItem ref : references) {
-            String uid = ref.getUid();
-            Pattern javaPattern = Pattern.compile("^java.*");
+    private void updateExternalReferences(List<MetadataFile> classMetadataFiles) {
+        classMetadataFiles.forEach(file -> file.getReferences()
+                .forEach(ref -> updateExternalReference(ref)));
+    }
 
-            //  add java javadoc links
-            if (javaPattern.matcher(uid).find()) {
-                String href = getJavaReferenceHref(ref.getUid());
-                ref.setHref(href);
+    private void updateExternalReference(MetadataFileItem reference) {
+        String uid = reference.getUid();
+        uid = updateReferenceUid(uid);
+
+        if (isJavaPrimitive(uid)) {
+            reference.setHref(PRIMITIVE_URL);
+            return;
+        }
+        if (isJavaLibrary(uid)) {
+            reference.setHref(getJavaReferenceHref(uid));
+        }
+        if (isExternalReference(uid)) {
+            reference.setExternal(true);
+        }
+        if (reference.getSpecForJava().size() > 0) {
+            for (SpecViewModel spec : reference.getSpecForJava()) {
+                String specUid = spec.getUid();
+                if (specUid != null) {
+                    if (isJavaPrimitive(specUid)) {
+                        spec.setHref(PRIMITIVE_URL);
+                    }
+                    if (isJavaLibrary(specUid)) {
+                        spec.setHref(getJavaReferenceHref(specUid));
+                    }
+                    if (isExternalReference(specUid)) {
+                        spec.setIsExternal(true);
+                    }
+                }
             }
         }
-        return references;
+    }
+
+    private String updateReferenceUid(String uid){
+        if (ENDING_PATTERN.matcher(uid).find()) {
+            uid = uid.replace("<?>","");
+        }
+        return uid;
+    }
+
+    private boolean isExternalReference(String uid) {
+        if (PROTOBUF_PATTERN.matcher(uid).find() || GAX_PATTERN.matcher(uid).find() || APICOMMON_PATTERN.matcher(uid).find() || GAX_PATTERN.matcher(uid).find() || LONGRUNNING_PATTERN.matcher(uid).find()) {
+            return true;
+        }
+        return false;
+    }
+
+     private boolean isJavaPrimitive(String uid) {
+        if (uid.equals("boolean") || uid.equals("int") || uid.equals("byte") || uid.equals("long") || uid.equals("float") || uid.equals("double") || uid.equals("char") || uid.equals("short")) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isJavaLibrary(String uid) {
+        if (JAVA_PATTERN.matcher(uid).find()) {
+            return true;
+        }
+        return false;
     }
 
     void addParameterReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
-        List<MetadataFileItem> refs = methodItem.getSyntax().getParameters().stream()
+        classMetadataFile.getReferences().addAll(methodItem.getSyntax().getParameters().stream()
                 .map(parameter -> buildRefItem(parameter.getType()))
                 .filter(o -> !classMetadataFile.getItems().contains(o))
-                .collect(Collectors.toList());
-
-        refs = addExternalReferences(refs);
-
-        classMetadataFile.getReferences().addAll(refs);
+                .collect(Collectors.toList()));
     }
 
     void addReturnReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
-        List<MetadataFileItem> refs = Stream.of(methodItem.getSyntax().getReturnValue())
+        classMetadataFile.getReferences().addAll(Stream.of(methodItem.getSyntax().getReturnValue())
                 .filter(Objects::nonNull)
                 .map(returnValue -> buildRefItem(returnValue.getReturnType()))
                 .filter(o -> !classMetadataFile.getItems().contains(o))
-                .collect(Collectors.toList());
-
-        refs = addExternalReferences(refs);
-
-        classMetadataFile.getReferences().addAll(refs);
+                .collect(Collectors.toList()));
     }
 
     void addExceptionReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
-        List<MetadataFileItem> refs = methodItem.getExceptions().stream()
+        classMetadataFile.getReferences().addAll(methodItem.getExceptions().stream()
                 .map(exceptionItem -> buildRefItem(exceptionItem.getType()))
                 .filter(o -> !classMetadataFile.getItems().contains(o))
-                .collect(Collectors.toList());
-
-        refs = addExternalReferences(refs);
-
-        classMetadataFile.getReferences().addAll(refs);
+                .collect(Collectors.toList()));
     }
 
     void addTypeParameterReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
-        List<MetadataFileItem> refs = methodItem.getSyntax().getTypeParameters().stream()
+        classMetadataFile.getReferences().addAll(methodItem.getSyntax().getTypeParameters().stream()
                 .map(typeParameter -> {
                     String id = typeParameter.getId();
                     return new MetadataFileItem(id, id, false);
-                }).collect(Collectors.toList());
-
-        refs = addExternalReferences(refs);
-
-        classMetadataFile.getReferences().addAll(refs);
+                }).collect(Collectors.toList()));
     }
 
     void addSuperclassAndInterfacesReferences(TypeElement classElement, MetadataFile classMetadataFile) {
-        List<MetadataFileItem> refs = List.copyOf(classLookup.extractReferences(classElement));
-
-        refs = addExternalReferences(refs);
-
-        classMetadataFile.getReferences().addAll(refs);
+        classMetadataFile.getReferences().addAll(classLookup.extractReferences(classElement));
     }
 
     void addInnerClassesReferences(TypeElement classElement, MetadataFile classMetadataFile) {
-        List<MetadataFileItem> refs = ElementFilter.typesIn(elementUtil.extractSortedElements(classElement)).stream()
+        classMetadataFile.getReferences().addAll(ElementFilter.typesIn(elementUtil.extractSortedElements(classElement)).stream()
                 .map(this::buildClassReference)
-                .collect(Collectors.toList());
-
-        refs = addExternalReferences(refs);
-
-        classMetadataFile.getReferences().addAll(refs);
+                .collect(Collectors.toList()));
     }
 
     void addOverloadReferences(MetadataFileItem item, MetadataFile classMetadataFile) {
-        MetadataFileItem overloadRefItem = new MetadataFileItem(item.getOverload()) {{
+        classMetadataFile.getReferences().add(new MetadataFileItem(item.getOverload()) {{
             setName(RegExUtils.removeAll(item.getName(), "\\(.*\\)$"));
             setNameWithType(RegExUtils.removeAll(item.getNameWithType(), "\\(.*\\)$"));
             setFullName(RegExUtils.removeAll(item.getFullName(), "\\(.*\\)$"));
             setPackageName(item.getPackageName());
-        }};
-        classMetadataFile.getReferences().add(overloadRefItem);
+        }});
     }
 
     void applyPostProcessing(MetadataFile classMetadataFile) {

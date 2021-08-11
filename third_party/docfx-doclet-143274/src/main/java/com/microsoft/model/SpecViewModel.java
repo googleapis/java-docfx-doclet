@@ -5,14 +5,14 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
-@JsonPropertyOrder({"uid", "name", "fullName", "isExternal"})
-
+@JsonPropertyOrder({"uid", "name", "fullName", "isExternal", "href"})
 public class SpecViewModel {
 
     private String uid;
     private String name;
     private String fullName;
     private boolean isExternal;
+    private String href;
 
     public SpecViewModel(String uid, String fullName) {
         this.uid = uid;
@@ -44,5 +44,21 @@ public class SpecViewModel {
                 }
         );
         return singleValue.toString();
+    }
+
+    public void setIsExternal(boolean isExternal) {
+        this.isExternal = isExternal;
+    }
+
+    public boolean getIsExternal() {
+        return isExternal;
+    }
+
+    public void setHref(String href) {
+        this.href = href;
+    }
+
+    public String getHref() {
+        return href;
     }
 }

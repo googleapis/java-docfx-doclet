@@ -269,4 +269,8 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
     public String handleGenericForOverLoad(String value) {
         return RegExUtils.removeAll(value, "<\\w+(,\\s*\\w+)*>");
     }
+
+    public void setExternal(boolean external) {
+        isExternal = external;
+    }
 }

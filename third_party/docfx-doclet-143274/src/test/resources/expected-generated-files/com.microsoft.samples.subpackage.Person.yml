@@ -188,6 +188,8 @@ references:
   - uid: "java.lang.String"
     name: "String"
     fullName: "java.lang.String"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
 - uid: "com.microsoft.samples.subpackage.Person.getFirstName*"
   name: "getFirstName"
   nameWithType: "Person<T>.getFirstName"
@@ -214,13 +216,19 @@ references:
   - uid: "java.util.Set"
     name: "Set"
     fullName: "java.util.Set"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/util/Set.html"
   - name: "<"
     fullName: "<"
+    isExternal: false
   - uid: "java.lang.String"
     name: "String"
     fullName: "java.lang.String"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
   - name: ">"
     fullName: ">"
+    isExternal: false
 - uid: "com.microsoft.samples.subpackage.Person.getSomeSet*"
   name: "getSomeSet"
   nameWithType: "Person<T>.getSomeSet"
@@ -232,10 +240,12 @@ references:
   fullName: "com.microsoft.samples.subpackage.Person<T>.buildPerson"
   package: "com.microsoft.samples.subpackage"
 - uid: "int"
+  href: "https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html"
   spec.java:
   - uid: "int"
     name: "int"
     fullName: "int"
+    isExternal: false
 - uid: "T"
   name: "T"
   nameWithType: "T"
@@ -300,6 +310,7 @@ references:
   nameWithType: "Person.IdentificationInfo"
   fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo"
 - uid: "java.util.Set"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/util/Set.html"
   name: "Set"
   nameWithType: "Set"
   fullName: "java.util.Set"

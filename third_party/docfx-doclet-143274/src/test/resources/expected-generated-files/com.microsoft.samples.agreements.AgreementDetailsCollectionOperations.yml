@@ -86,13 +86,17 @@ references:
   - uid: "com.microsoft.samples.agreements.ResourceCollection"
     name: "ResourceCollection"
     fullName: "com.microsoft.samples.agreements.ResourceCollection"
+    isExternal: false
   - name: "<"
     fullName: "<"
+    isExternal: false
   - uid: "com.microsoft.samples.agreements.AgreementMetaData"
     name: "AgreementMetaData"
     fullName: "com.microsoft.samples.agreements.AgreementMetaData"
+    isExternal: false
   - name: ">"
     fullName: ">"
+    isExternal: false
 - uid: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.get*"
   name: "get"
   nameWithType: "AgreementDetailsCollectionOperations.get"

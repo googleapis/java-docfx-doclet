@@ -123,8 +123,10 @@ references:
   - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
     name: "Gender"
     fullName: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+    isExternal: false
   - name: "[]"
     fullName: "[]"
+    isExternal: false
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values*"
   name: "values"
   nameWithType: "Person.IdentificationInfo.Gender.values"
@@ -136,6 +138,8 @@ references:
   - uid: "java.lang.String"
     name: "String"
     fullName: "java.lang.String"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf*"
   name: "valueOf"
   nameWithType: "Person.IdentificationInfo.Gender.valueOf"
@@ -227,10 +231,12 @@ references:
   nameWithType: "Enum.equals(Object)"
   fullName: "java.lang.Enum.equals(java.lang.Object)"
 - uid: "java.lang.Enum"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/Enum.html"
   name: "Enum"
   nameWithType: "Enum"
   fullName: "java.lang.Enum"
 - uid: "java.lang.Enum."
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/Enum/.html"
   name: "Enum."
   nameWithType: "Enum."
   fullName: "java.lang.Enum."

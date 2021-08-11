@@ -121,11 +121,13 @@ references:
   - uid: "T1"
     name: "T1"
     fullName: "T1"
+    isExternal: false
 - uid: "T2"
   spec.java:
   - uid: "T2"
     name: "T2"
     fullName: "T2"
+    isExternal: false
 - uid: "com.microsoft.samples.subpackage.Tuple.Tuple*"
   name: "Tuple"
   nameWithType: "Tuple<T1,T2>.Tuple"

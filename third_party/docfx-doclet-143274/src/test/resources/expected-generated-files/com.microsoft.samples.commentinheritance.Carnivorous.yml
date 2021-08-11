@@ -66,6 +66,8 @@ references:
   - uid: "java.lang.String"
     name: "String"
     fullName: "java.lang.String"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
 - uid: "com.microsoft.samples.commentinheritance.Carnivorous.getKind*"
   name: "getKind"
   nameWithType: "Carnivorous.getKind"

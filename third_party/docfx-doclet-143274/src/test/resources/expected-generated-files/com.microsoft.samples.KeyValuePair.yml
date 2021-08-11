@@ -106,11 +106,13 @@ references:
   - uid: "K"
     name: "K"
     fullName: "K"
+    isExternal: false
 - uid: "V"
   spec.java:
   - uid: "V"
     name: "V"
     fullName: "V"
+    isExternal: false
 - uid: "com.microsoft.samples.KeyValuePair.getKey*"
   name: "getKey"
   nameWithType: "KeyValuePair<K,V>.getKey"

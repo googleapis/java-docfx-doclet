@@ -445,12 +445,15 @@ references:
   - uid: "com.google.cloud.speech.v1p1beta1.stub.SpeechStub"
     name: "SpeechStub"
     fullName: "com.google.cloud.speech.v1p1beta1.stub.SpeechStub"
+    isExternal: false
 - uid: "java.io.IOException"
   href: "https://docs.oracle.com/javase/8/docs/api/java/io/IOException.html"
   spec.java:
   - uid: "java.io.IOException"
     name: "IOException"
     fullName: "java.io.IOException"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/io/IOException.html"
 - uid: "com.microsoft.samples.google.SpeechClient.create*"
   name: "create"
   nameWithType: "SpeechClient.create"
@@ -467,10 +470,12 @@ references:
   fullName: "com.microsoft.samples.google.SpeechClient.getStub"
   package: "com.microsoft.samples.google"
 - uid: "com.google.longrunning.OperationsClient"
+  isExternal: true
   spec.java:
   - uid: "com.google.longrunning.OperationsClient"
     name: "OperationsClient"
     fullName: "com.google.longrunning.OperationsClient"
+    isExternal: true
 - uid: "com.microsoft.samples.google.SpeechClient.getOperationsClient*"
   name: "getOperationsClient"
   nameWithType: "SpeechClient.getOperationsClient"
@@ -481,16 +486,19 @@ references:
   - uid: "com.google.cloud.speech.v1p1beta1.RecognitionConfig"
     name: "RecognitionConfig"
     fullName: "com.google.cloud.speech.v1p1beta1.RecognitionConfig"
+    isExternal: false
 - uid: "com.google.cloud.speech.v1p1beta1.RecognitionAudio"
   spec.java:
   - uid: "com.google.cloud.speech.v1p1beta1.RecognitionAudio"
     name: "RecognitionAudio"
     fullName: "com.google.cloud.speech.v1p1beta1.RecognitionAudio"
+    isExternal: false
 - uid: "com.google.cloud.speech.v1p1beta1.RecognizeResponse"
   spec.java:
   - uid: "com.google.cloud.speech.v1p1beta1.RecognizeResponse"
     name: "RecognizeResponse"
     fullName: "com.google.cloud.speech.v1p1beta1.RecognizeResponse"
+    isExternal: false
 - uid: "com.microsoft.samples.google.SpeechClient.recognize*"
   name: "recognize"
   nameWithType: "SpeechClient.recognize"
@@ -501,45 +509,60 @@ references:
   - uid: "com.google.cloud.speech.v1p1beta1.RecognizeRequest"
     name: "RecognizeRequest"
     fullName: "com.google.cloud.speech.v1p1beta1.RecognizeRequest"
+    isExternal: false
 - uid: "com.google.api.gax.rpc.UnaryCallable<com.google.cloud.speech.v1p1beta1.RecognizeRequest,com.google.cloud.speech.v1p1beta1.RecognizeResponse>"
+  isExternal: true
   spec.java:
   - uid: "com.google.api.gax.rpc.UnaryCallable"
     name: "UnaryCallable"
     fullName: "com.google.api.gax.rpc.UnaryCallable"
+    isExternal: true
   - name: "<"
     fullName: "<"
+    isExternal: false
   - uid: "com.google.cloud.speech.v1p1beta1.RecognizeRequest"
     name: "RecognizeRequest"
     fullName: "com.google.cloud.speech.v1p1beta1.RecognizeRequest"
+    isExternal: false
   - name: ","
     fullName: ","
+    isExternal: false
   - uid: "com.google.cloud.speech.v1p1beta1.RecognizeResponse"
     name: "RecognizeResponse"
     fullName: "com.google.cloud.speech.v1p1beta1.RecognizeResponse"
+    isExternal: false
   - name: ">"
     fullName: ">"
+    isExternal: false
 - uid: "com.microsoft.samples.google.SpeechClient.recognizeCallable*"
   name: "recognizeCallable"
   nameWithType: "SpeechClient.recognizeCallable"
   fullName: "com.microsoft.samples.google.SpeechClient.recognizeCallable"
   package: "com.microsoft.samples.google"
 - uid: "com.google.api.gax.longrunning.OperationFuture<com.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse,com.google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata>"
+  isExternal: true
   spec.java:
   - uid: "com.google.api.gax.longrunning.OperationFuture"
     name: "OperationFuture"
     fullName: "com.google.api.gax.longrunning.OperationFuture"
+    isExternal: true
   - name: "<"
     fullName: "<"
+    isExternal: false
   - uid: "com.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse"
     name: "LongRunningRecognizeResponse"
     fullName: "com.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse"
+    isExternal: false
   - name: ","
     fullName: ","
+    isExternal: false
   - uid: "com.google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata"
     name: "LongRunningRecognizeMetadata"
     fullName: "com.google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata"
+    isExternal: false
   - name: ">"
     fullName: ">"
+    isExternal: false
 - uid: "com.microsoft.samples.google.SpeechClient.longRunningRecognizeAsync*"
   name: "longRunningRecognizeAsync"
   nameWithType: "SpeechClient.longRunningRecognizeAsync"
@@ -550,72 +573,96 @@ references:
   - uid: "com.google.cloud.speech.v1p1beta1.LongRunningRecognizeRequest"
     name: "LongRunningRecognizeRequest"
     fullName: "com.google.cloud.speech.v1p1beta1.LongRunningRecognizeRequest"
+    isExternal: false
 - uid: "com.google.api.gax.rpc.OperationCallable<com.google.cloud.speech.v1p1beta1.LongRunningRecognizeRequest,com.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse,com.google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata>"
+  isExternal: true
   spec.java:
   - uid: "com.google.api.gax.rpc.OperationCallable"
     name: "OperationCallable"
     fullName: "com.google.api.gax.rpc.OperationCallable"
+    isExternal: true
   - name: "<"
     fullName: "<"
+    isExternal: false
   - uid: "com.google.cloud.speech.v1p1beta1.LongRunningRecognizeRequest"
     name: "LongRunningRecognizeRequest"
     fullName: "com.google.cloud.speech.v1p1beta1.LongRunningRecognizeRequest"
+    isExternal: false
   - name: ","
     fullName: ","
+    isExternal: false
   - uid: "com.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse"
     name: "LongRunningRecognizeResponse"
     fullName: "com.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse"
+    isExternal: false
   - name: ","
     fullName: ","
+    isExternal: false
   - uid: "com.google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata"
     name: "LongRunningRecognizeMetadata"
     fullName: "com.google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata"
+    isExternal: false
   - name: ">"
     fullName: ">"
+    isExternal: false
 - uid: "com.microsoft.samples.google.SpeechClient.longRunningRecognizeOperationCallable*"
   name: "longRunningRecognizeOperationCallable"
   nameWithType: "SpeechClient.longRunningRecognizeOperationCallable"
   fullName: "com.microsoft.samples.google.SpeechClient.longRunningRecognizeOperationCallable"
   package: "com.microsoft.samples.google"
 - uid: "com.google.api.gax.rpc.UnaryCallable<com.google.cloud.speech.v1p1beta1.LongRunningRecognizeRequest,com.google.longrunning.Operation>"
+  isExternal: true
   spec.java:
   - uid: "com.google.api.gax.rpc.UnaryCallable"
     name: "UnaryCallable"
     fullName: "com.google.api.gax.rpc.UnaryCallable"
+    isExternal: true
   - name: "<"
     fullName: "<"
+    isExternal: false
   - uid: "com.google.cloud.speech.v1p1beta1.LongRunningRecognizeRequest"
     name: "LongRunningRecognizeRequest"
     fullName: "com.google.cloud.speech.v1p1beta1.LongRunningRecognizeRequest"
+    isExternal: false
   - name: ","
     fullName: ","
+    isExternal: false
   - uid: "com.google.longrunning.Operation"
     name: "Operation"
     fullName: "com.google.longrunning.Operation"
+    isExternal: true
   - name: ">"
     fullName: ">"
+    isExternal: false
 - uid: "com.microsoft.samples.google.SpeechClient.longRunningRecognizeCallable*"
   name: "longRunningRecognizeCallable"
   nameWithType: "SpeechClient.longRunningRecognizeCallable"
   fullName: "com.microsoft.samples.google.SpeechClient.longRunningRecognizeCallable"
   package: "com.microsoft.samples.google"
 - uid: "com.google.api.gax.rpc.BidiStreamingCallable<com.google.cloud.speech.v1p1beta1.StreamingRecognizeRequest,com.google.cloud.speech.v1p1beta1.StreamingRecognizeResponse>"
+  isExternal: true
   spec.java:
   - uid: "com.google.api.gax.rpc.BidiStreamingCallable"
     name: "BidiStreamingCallable"
     fullName: "com.google.api.gax.rpc.BidiStreamingCallable"
+    isExternal: true
   - name: "<"
     fullName: "<"
+    isExternal: false
   - uid: "com.google.cloud.speech.v1p1beta1.StreamingRecognizeRequest"
     name: "StreamingRecognizeRequest"
     fullName: "com.google.cloud.speech.v1p1beta1.StreamingRecognizeRequest"
+    isExternal: false
   - name: ","
     fullName: ","
+    isExternal: false
   - uid: "com.google.cloud.speech.v1p1beta1.StreamingRecognizeResponse"
     name: "StreamingRecognizeResponse"
     fullName: "com.google.cloud.speech.v1p1beta1.StreamingRecognizeResponse"
+    isExternal: false
   - name: ">"
     fullName: ">"
+    isExternal: false
 - uid: "com.microsoft.samples.google.SpeechClient.streamingRecognizeCallable*"
   name: "streamingRecognizeCallable"
   nameWithType: "SpeechClient.streamingRecognizeCallable"
@@ -632,10 +679,12 @@ references:
   fullName: "com.microsoft.samples.google.SpeechClient.shutdown"
   package: "com.microsoft.samples.google"
 - uid: "boolean"
+  href: "https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html"
   spec.java:
   - uid: "boolean"
     name: "boolean"
     fullName: "boolean"
+    isExternal: false
 - uid: "com.microsoft.samples.google.SpeechClient.isShutdown*"
   name: "isShutdown"
   nameWithType: "SpeechClient.isShutdown"
@@ -657,23 +706,30 @@ references:
   - uid: "java.lang.InterruptedException"
     name: "InterruptedException"
     fullName: "java.lang.InterruptedException"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/lang/InterruptedException.html"
 - uid: "long"
+  href: "https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html"
   spec.java:
   - uid: "long"
     name: "long"
     fullName: "long"
+    isExternal: false
 - uid: "java.util.concurrent.TimeUnit"
   href: "https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/TimeUnit.html"
   spec.java:
   - uid: "java.util.concurrent.TimeUnit"
     name: "TimeUnit"
     fullName: "java.util.concurrent.TimeUnit"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/TimeUnit.html"
 - uid: "com.microsoft.samples.google.SpeechClient.awaitTermination*"
   name: "awaitTermination"
   nameWithType: "SpeechClient.awaitTermination"
   fullName: "com.microsoft.samples.google.SpeechClient.awaitTermination"
   package: "com.microsoft.samples.google"
 - uid: "com.google.api.gax.core.BackgroundResource"
+  isExternal: true
   name: "BackgroundResource"
   nameWithType: "BackgroundResource"
   fullName: "com.google.api.gax.core.BackgroundResource"
@@ -733,6 +789,7 @@ references:
   nameWithType: "Object.toString()"
   fullName: "java.lang.Object.toString()"
 - uid: "com.google.api.gax.rpc.UnaryCallable"
+  isExternal: true
   name: "UnaryCallable"
   nameWithType: "UnaryCallable"
   fullName: "com.google.api.gax.rpc.UnaryCallable"
@@ -741,6 +798,7 @@ references:
   nameWithType: "RecognizeRequest,RecognizeResponse"
   fullName: "com.google.cloud.speech.v1p1beta1.RecognizeRequest,com.google.cloud.speech.v1p1beta1.RecognizeResponse"
 - uid: "com.google.api.gax.longrunning.OperationFuture"
+  isExternal: true
   name: "OperationFuture"
   nameWithType: "OperationFuture"
   fullName: "com.google.api.gax.longrunning.OperationFuture"
@@ -749,6 +807,7 @@ references:
   nameWithType: "LongRunningRecognizeResponse,LongRunningRecognizeMetadata"
   fullName: "com.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse,com.google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata"
 - uid: "com.google.api.gax.rpc.OperationCallable"
+  isExternal: true
   name: "OperationCallable"
   nameWithType: "OperationCallable"
   fullName: "com.google.api.gax.rpc.OperationCallable"
@@ -761,6 +820,7 @@ references:
   nameWithType: "LongRunningRecognizeRequest,Operation"
   fullName: "com.google.cloud.speech.v1p1beta1.LongRunningRecognizeRequest,com.google.longrunning.Operation"
 - uid: "com.google.api.gax.rpc.BidiStreamingCallable"
+  isExternal: true
   name: "BidiStreamingCallable"
   nameWithType: "BidiStreamingCallable"
   fullName: "com.google.api.gax.rpc.BidiStreamingCallable"

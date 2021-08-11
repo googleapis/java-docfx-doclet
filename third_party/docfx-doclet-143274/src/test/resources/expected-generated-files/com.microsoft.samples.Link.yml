@@ -119,6 +119,8 @@ references:
   - uid: "java.lang.String"
     name: "String"
     fullName: "java.lang.String"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
 - uid: "com.microsoft.samples.Link.getMethod*"
   name: "getMethod"
   nameWithType: "Link.getMethod"
@@ -135,25 +137,37 @@ references:
   - uid: "java.util.Collection"
     name: "Collection"
     fullName: "java.util.Collection"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html"
   - name: "<"
     fullName: "<"
+    isExternal: false
   - uid: "com.microsoft.samples.KeyValuePair"
     name: "KeyValuePair"
     fullName: "com.microsoft.samples.KeyValuePair"
+    isExternal: false
   - name: "<"
     fullName: "<"
+    isExternal: false
   - uid: "java.lang.String"
     name: "String"
     fullName: "java.lang.String"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
   - name: ","
     fullName: ","
+    isExternal: false
   - uid: "java.lang.String"
     name: "String"
     fullName: "java.lang.String"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
   - name: ">"
     fullName: ">"
+    isExternal: false
   - name: ">"
     fullName: ">"
+    isExternal: false
 - uid: "com.microsoft.samples.Link.getHeaders*"
   name: "getHeaders"
   nameWithType: "Link.getHeaders"
@@ -224,10 +238,12 @@ references:
   nameWithType: "KeyValuePair"
   fullName: "com.microsoft.samples.KeyValuePair"
 - uid: "java.util.Collection"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html"
   name: "Collection"
   nameWithType: "Collection"
   fullName: "java.util.Collection"
 - uid: "java.lang.String,java.lang.String"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String,java/lang/String.html"
   name: "String,String"
   nameWithType: "String,String"
   fullName: "java.lang.String,java.lang.String"

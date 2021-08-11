@@ -282,17 +282,23 @@ references:
   - uid: "java.lang.String"
     name: "String"
     fullName: "java.lang.String"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
 - uid: "int"
+  href: "https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html"
   spec.java:
   - uid: "int"
     name: "int"
     fullName: "int"
+    isExternal: false
 - uid: "java.lang.IllegalArgumentException"
   href: "https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalArgumentException.html"
   spec.java:
   - uid: "java.lang.IllegalArgumentException"
     name: "IllegalArgumentException"
     fullName: "java.lang.IllegalArgumentException"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalArgumentException.html"
 - uid: "com.microsoft.samples.SuperHero.successfullyAttacked*"
   name: "successfullyAttacked"
   nameWithType: "SuperHero.successfullyAttacked"

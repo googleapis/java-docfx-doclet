@@ -78,6 +78,7 @@ references:
   nameWithType: "Serializable"
   fullName: "java.io.Serializable"
 - uid: "java.util.List"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/util/List.html"
   name: "List"
   nameWithType: "List"
   fullName: "java.util.List"

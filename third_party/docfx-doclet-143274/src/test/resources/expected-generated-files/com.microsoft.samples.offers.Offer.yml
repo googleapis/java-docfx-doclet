@@ -121,8 +121,11 @@ references:
   - uid: "java.lang.String"
     name: "String"
     fullName: "java.lang.String"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
   - name: "[]"
     fullName: "[]"
+    isExternal: false
 - uid: "com.microsoft.samples.offers.Offer.getResellerQualifications*"
   name: "getResellerQualifications"
   nameWithType: "Offer.getResellerQualifications"
