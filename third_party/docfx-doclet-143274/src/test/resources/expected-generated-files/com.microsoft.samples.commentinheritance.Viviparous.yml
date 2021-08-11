@@ -50,20 +50,25 @@ items:
       type: "int"
 references:
 - uid: "int"
+  href: "https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html"
   spec.java:
   - uid: "int"
     name: "int"
     fullName: "int"
+    isExternal: false
 - uid: "com.microsoft.samples.commentinheritance.Viviparous.giveBirth*"
   name: "giveBirth"
   nameWithType: "Viviparous.giveBirth"
   fullName: "com.microsoft.samples.commentinheritance.Viviparous.giveBirth"
   package: "com.microsoft.samples.commentinheritance"
 - uid: "java.lang.String"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
   spec.java:
   - uid: "java.lang.String"
     name: "String"
     fullName: "java.lang.String"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
 - uid: "com.microsoft.samples.commentinheritance.Viviparous.getKind*"
   name: "getKind"
   nameWithType: "Viviparous.getKind"

@@ -41,6 +41,15 @@ public class YmlFilesBuilder {
     private ClassLookup classLookup;
     private String projectName;
 
+    private final Pattern JAVA_PATTERN = Pattern.compile("^java.*");
+    private final Pattern PROTOBUF_PATTERN = Pattern.compile("^com.google.protobuf.*");
+    private final Pattern GAX_PATTERN = Pattern.compile("^com.google.api.gax.*");
+    private final Pattern APICOMMON_PATTERN = Pattern.compile("^com.google.api.core.*");
+    private final Pattern LONGRUNNING_PATTERN = Pattern.compile("^com.google.longrunning.*");
+    private final Pattern ENDING_PATTERN = Pattern.compile(".*<\\?>$");
+    private final String PRIMITIVE_URL = "https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html";
+    private final String JAVA_BASE_URL = "https://docs.oracle.com/javase/8/docs/api/";
+
     public YmlFilesBuilder(DocletEnvironment environment, String outputPath,
                            String[] excludePackages, String[] excludeClasses, String projectName) {
         this.environment = environment;
@@ -79,6 +88,7 @@ public class YmlFilesBuilder {
         }
 
         populateUidValues(packageMetadataFiles, classMetadataFiles);
+        updateExternalReferences(classMetadataFiles);
 
         packageMetadataFiles.forEach(FileUtil::dumpToFile);
         classMetadataFiles.forEach(FileUtil::dumpToFile);
@@ -253,6 +263,96 @@ public class YmlFilesBuilder {
         }};
     }
 
+    protected String getJavaReferenceHref(String uid) {
+        if (uid == null || uid.equals("")) {
+            return JAVA_BASE_URL;
+        }
+        //  example1 uid: "java.lang.Object.equals(java.lang.Object)"
+        //  example2 uid: "java.lang.Object"
+        String endURL = uid;
+
+        Pattern argPattern = Pattern.compile(".*\\(.*\\).*");
+        if (argPattern.matcher(endURL).find()) {
+            // example1
+            // argumentSplit: ["java.lang.Object.equals", "java.lang.Object)"]
+            // nameSplit: ["java", "lang", "Object", "equals"]
+            List<String> argumentSplit = Arrays.asList(endURL.split("\\("));
+            List<String> nameSplit = Arrays.asList(argumentSplit.get(0).split("\\."));
+
+            // className: "java/lang/Object"
+            // methodName: "#equals"
+            // argumentsName: "#java.lang.Object-"
+            String className = String.join("/", nameSplit.subList(0, nameSplit.size() - 1));
+            String methodName = "#" + nameSplit.get(nameSplit.size() - 1);
+            String argumentsName = argumentSplit.get(1).replaceAll("[,)]", "-");
+
+            // endURL: "java/lang/Object.html#equals-java.lang.Object-"
+            endURL = className + ".html" + methodName + "-" + argumentsName;
+        } else {
+            // example2
+            // endURL = java/lang/Object.html
+            endURL = endURL.replaceAll("\\.", "/");
+            endURL = endURL + ".html";
+        }
+        return JAVA_BASE_URL + endURL;
+    }
+
+    private void updateExternalReferences(List<MetadataFile> classMetadataFiles) {
+        classMetadataFiles.forEach(file -> file.getReferences()
+                .forEach(ref -> updateExternalReference(ref)));
+    }
+
+    private void updateExternalReference(MetadataFileItem reference) {
+        String uid = reference.getUid();
+        uid = updateReferenceUid(uid);
+
+        if (isJavaPrimitive(uid)) {
+            reference.setHref(PRIMITIVE_URL);
+            return;
+        }
+        if (isJavaLibrary(uid)) {
+            reference.setHref(getJavaReferenceHref(uid));
+        }
+        if (isExternalReference(uid)) {
+            reference.setIsExternal(true);
+        }
+        if (reference.getSpecForJava().size() > 0) {
+            for (SpecViewModel spec : reference.getSpecForJava()) {
+                String specUid = spec.getUid();
+                if (specUid != null) {
+                    if (isJavaPrimitive(specUid)) {
+                        spec.setHref(PRIMITIVE_URL);
+                    }
+                    if (isJavaLibrary(specUid)) {
+                        spec.setHref(getJavaReferenceHref(specUid));
+                    }
+                    if (isExternalReference(specUid)) {
+                        spec.setIsExternal(true);
+                    }
+                }
+            }
+        }
+    }
+
+    private String updateReferenceUid(String uid){
+        if (ENDING_PATTERN.matcher(uid).find()) {
+            uid = uid.replace("<?>","");
+        }
+        return uid;
+    }
+
+    private boolean isExternalReference(String uid) {
+        return (PROTOBUF_PATTERN.matcher(uid).find() || GAX_PATTERN.matcher(uid).find() || APICOMMON_PATTERN.matcher(uid).find() || GAX_PATTERN.matcher(uid).find() || LONGRUNNING_PATTERN.matcher(uid).find());
+    }
+
+     private boolean isJavaPrimitive(String uid) {
+        return (uid.equals("boolean") || uid.equals("int") || uid.equals("byte") || uid.equals("long") || uid.equals("float") || uid.equals("double") || uid.equals("char") || uid.equals("short"));
+    }
+
+    private boolean isJavaLibrary(String uid) {
+        return JAVA_PATTERN.matcher(uid).find();
+    }
+
     void addParameterReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
         classMetadataFile.getReferences().addAll(
                 methodItem.getSyntax().getParameters().stream()
@@ -299,13 +399,12 @@ public class YmlFilesBuilder {
     }
 
     void addOverloadReferences(MetadataFileItem item, MetadataFile classMetadataFile) {
-        MetadataFileItem overloadRefItem = new MetadataFileItem(item.getOverload()) {{
+        classMetadataFile.getReferences().add(new MetadataFileItem(item.getOverload()) {{
             setName(RegExUtils.removeAll(item.getName(), "\\(.*\\)$"));
             setNameWithType(RegExUtils.removeAll(item.getNameWithType(), "\\(.*\\)$"));
             setFullName(RegExUtils.removeAll(item.getFullName(), "\\(.*\\)$"));
             setPackageName(item.getPackageName());
-        }};
-        classMetadataFile.getReferences().add(overloadRefItem);
+        }});
     }
 
     void applyPostProcessing(MetadataFile classMetadataFile) {

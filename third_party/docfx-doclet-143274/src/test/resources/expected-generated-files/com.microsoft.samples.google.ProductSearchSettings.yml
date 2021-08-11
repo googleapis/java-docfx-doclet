@@ -1,0 +1,1649 @@
+### YamlMime:ManagedReference
+items:
+- uid: "com.microsoft.samples.google.ProductSearchSettings"
+  id: "ProductSearchSettings"
+  parent: "com.microsoft.samples.google"
+  children:
+  - "com.microsoft.samples.google.ProductSearchSettings.Builder"
+  - "com.microsoft.samples.google.ProductSearchSettings.ProductSearchSettings(com.microsoft.samples.google.ProductSearchSettings.Builder)"
+  - "com.microsoft.samples.google.ProductSearchSettings.addProductToProductSetSettings()"
+  - "com.microsoft.samples.google.ProductSearchSettings.create(com.google.cloud.vision.v1.stub.ProductSearchStubSettings)"
+  - "com.microsoft.samples.google.ProductSearchSettings.createProductSetSettings()"
+  - "com.microsoft.samples.google.ProductSearchSettings.createProductSettings()"
+  - "com.microsoft.samples.google.ProductSearchSettings.createReferenceImageSettings()"
+  - "com.microsoft.samples.google.ProductSearchSettings.defaultApiClientHeaderProviderBuilder()"
+  - "com.microsoft.samples.google.ProductSearchSettings.defaultCredentialsProviderBuilder()"
+  - "com.microsoft.samples.google.ProductSearchSettings.defaultExecutorProviderBuilder()"
+  - "com.microsoft.samples.google.ProductSearchSettings.defaultGrpcTransportProviderBuilder()"
+  - "com.microsoft.samples.google.ProductSearchSettings.defaultTransportChannelProvider()"
+  - "com.microsoft.samples.google.ProductSearchSettings.deleteProductSetSettings()"
+  - "com.microsoft.samples.google.ProductSearchSettings.deleteProductSettings()"
+  - "com.microsoft.samples.google.ProductSearchSettings.deleteReferenceImageSettings()"
+  - "com.microsoft.samples.google.ProductSearchSettings.getDefaultEndpoint()"
+  - "com.microsoft.samples.google.ProductSearchSettings.getDefaultServiceScopes()"
+  - "com.microsoft.samples.google.ProductSearchSettings.getProductSetSettings()"
+  - "com.microsoft.samples.google.ProductSearchSettings.getProductSettings()"
+  - "com.microsoft.samples.google.ProductSearchSettings.getReferenceImageSettings()"
+  - "com.microsoft.samples.google.ProductSearchSettings.importProductSetsOperationSettings()"
+  - "com.microsoft.samples.google.ProductSearchSettings.importProductSetsSettings()"
+  - "com.microsoft.samples.google.ProductSearchSettings.listProductSetsSettings()"
+  - "com.microsoft.samples.google.ProductSearchSettings.listProductsInProductSetSettings()"
+  - "com.microsoft.samples.google.ProductSearchSettings.listProductsSettings()"
+  - "com.microsoft.samples.google.ProductSearchSettings.listReferenceImagesSettings()"
+  - "com.microsoft.samples.google.ProductSearchSettings.newBuilder()"
+  - "com.microsoft.samples.google.ProductSearchSettings.newBuilder(com.google.api.gax.rpc.ClientContext)"
+  - "com.microsoft.samples.google.ProductSearchSettings.purgeProductsOperationSettings()"
+  - "com.microsoft.samples.google.ProductSearchSettings.purgeProductsSettings()"
+  - "com.microsoft.samples.google.ProductSearchSettings.removeProductFromProductSetSettings()"
+  - "com.microsoft.samples.google.ProductSearchSettings.toBuilder()"
+  - "com.microsoft.samples.google.ProductSearchSettings.updateProductSetSettings()"
+  - "com.microsoft.samples.google.ProductSearchSettings.updateProductSettings()"
+  langs:
+  - "java"
+  name: "ProductSearchSettings"
+  nameWithType: "ProductSearchSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings"
+  type: "Class"
+  package: "com.microsoft.samples.google"
+  summary: "Settings class to configure an instance of <xref uid=\"\" data-throw-if-not-resolved=\"false\">ProductSearchClient</xref>.\n\nThe default instance has everything set to sensible defaults:\n\n *  The default service address (vision.googleapis.com) and default port (443) are used.\n *  Credentials are acquired automatically through Application Default Credentials.\n *  Retries are configured for idempotent methods but not for non-idempotent methods.\n\nThe builder of this class is recursive, so contained classes are themselves builders. When build() is called, the tree of builders is called to create the complete settings object.\n\nFor example, to set the total timeout of createProductSet to 30 seconds:\n\njava\nProductSearchSettings.Builder productSearchSettingsBuilder = ProductSearchSettings.newBuilder();\n productSearchSettingsBuilder\n     .createProductSetSettings()\n     .setRetrySettings(\n         productSearchSettingsBuilder\n             .createProductSetSettings()\n             .getRetrySettings()\n             .toBuilder()\n             .setTotalTimeout(Duration.ofSeconds(30))\n             .build());\n ProductSearchSettings productSearchSettings = productSearchSettingsBuilder.build();\n"
+  syntax:
+    content: "public class ProductSearchSettings extends ClientSettings<ProductSearchSettings>"
+  inheritance:
+  - "java.lang.Object"
+  - "com.google.api.gax.rpc.ClientSettings"
+  inheritedMembers:
+  - "com.google.api.gax.rpc.ClientSettings.<B>toBuilder()"
+  - "com.google.api.gax.rpc.ClientSettings.getBackgroundExecutorProvider()"
+  - "com.google.api.gax.rpc.ClientSettings.getClock()"
+  - "com.google.api.gax.rpc.ClientSettings.getCredentialsProvider()"
+  - "com.google.api.gax.rpc.ClientSettings.getEndpoint()"
+  - "com.google.api.gax.rpc.ClientSettings.getExecutorProvider()"
+  - "com.google.api.gax.rpc.ClientSettings.getHeaderProvider()"
+  - "com.google.api.gax.rpc.ClientSettings.getInternalHeaderProvider()"
+  - "com.google.api.gax.rpc.ClientSettings.getQuotaProjectId()"
+  - "com.google.api.gax.rpc.ClientSettings.getStubSettings()"
+  - "com.google.api.gax.rpc.ClientSettings.getTransportChannelProvider()"
+  - "com.google.api.gax.rpc.ClientSettings.getWatchdogCheckInterval()"
+  - "com.google.api.gax.rpc.ClientSettings.getWatchdogProvider()"
+  - "com.google.api.gax.rpc.ClientSettings.toString()"
+  - "java.lang.Object.clone()"
+  - "java.lang.Object.equals(java.lang.Object)"
+  - "java.lang.Object.finalize()"
+  - "java.lang.Object.getClass()"
+  - "java.lang.Object.hashCode()"
+  - "java.lang.Object.notify()"
+  - "java.lang.Object.notifyAll()"
+  - "java.lang.Object.wait()"
+  - "java.lang.Object.wait(long)"
+  - "java.lang.Object.wait(long,int)"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.ProductSearchSettings(com.microsoft.samples.google.ProductSearchSettings.Builder)"
+  id: "ProductSearchSettings(com.microsoft.samples.google.ProductSearchSettings.Builder)"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "ProductSearchSettings(ProductSearchSettings.Builder settingsBuilder)"
+  nameWithType: "ProductSearchSettings.ProductSearchSettings(ProductSearchSettings.Builder settingsBuilder)"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.ProductSearchSettings(ProductSearchSettings.Builder settingsBuilder)"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.ProductSearchSettings*"
+  type: "Constructor"
+  package: "com.microsoft.samples.google"
+  syntax:
+    content: "protected ProductSearchSettings(ProductSearchSettings.Builder settingsBuilder)"
+    parameters:
+    - id: "settingsBuilder"
+      type: "com.microsoft.samples.google.ProductSearchSettings.Builder"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.addProductToProductSetSettings()"
+  id: "addProductToProductSetSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "addProductToProductSetSettings()"
+  nameWithType: "ProductSearchSettings.addProductToProductSetSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.addProductToProductSetSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.addProductToProductSetSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to addProductToProductSet."
+  syntax:
+    content: "public UnaryCallSettings<AddProductToProductSetRequest,Empty> addProductToProductSetSettings()"
+    return:
+      type: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.AddProductToProductSetRequest,com.google.protobuf.Empty>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.create(com.google.cloud.vision.v1.stub.ProductSearchStubSettings)"
+  id: "create(com.google.cloud.vision.v1.stub.ProductSearchStubSettings)"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "create(ProductSearchStubSettings stub)"
+  nameWithType: "ProductSearchSettings.create(ProductSearchStubSettings stub)"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.create(ProductSearchStubSettings stub)"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.create*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  syntax:
+    content: "public static final ProductSearchSettings create(ProductSearchStubSettings stub)"
+    parameters:
+    - id: "stub"
+      type: "com.google.cloud.vision.v1.stub.ProductSearchStubSettings"
+    return:
+      type: "com.microsoft.samples.google.ProductSearchSettings"
+  exceptions:
+  - type: "java.io.IOException"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.createProductSetSettings()"
+  id: "createProductSetSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "createProductSetSettings()"
+  nameWithType: "ProductSearchSettings.createProductSetSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.createProductSetSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.createProductSetSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to createProductSet."
+  syntax:
+    content: "public UnaryCallSettings<CreateProductSetRequest,ProductSet> createProductSetSettings()"
+    return:
+      type: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.CreateProductSetRequest,com.google.cloud.vision.v1.ProductSet>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.createProductSettings()"
+  id: "createProductSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "createProductSettings()"
+  nameWithType: "ProductSearchSettings.createProductSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.createProductSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.createProductSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to createProduct."
+  syntax:
+    content: "public UnaryCallSettings<CreateProductRequest,Product> createProductSettings()"
+    return:
+      type: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.CreateProductRequest,com.google.cloud.vision.v1.Product>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.createReferenceImageSettings()"
+  id: "createReferenceImageSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "createReferenceImageSettings()"
+  nameWithType: "ProductSearchSettings.createReferenceImageSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.createReferenceImageSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.createReferenceImageSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to createReferenceImage."
+  syntax:
+    content: "public UnaryCallSettings<CreateReferenceImageRequest,ReferenceImage> createReferenceImageSettings()"
+    return:
+      type: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.CreateReferenceImageRequest,com.google.cloud.vision.v1.ReferenceImage>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.defaultApiClientHeaderProviderBuilder()"
+  id: "defaultApiClientHeaderProviderBuilder()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "defaultApiClientHeaderProviderBuilder()"
+  nameWithType: "ProductSearchSettings.defaultApiClientHeaderProviderBuilder()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.defaultApiClientHeaderProviderBuilder()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.defaultApiClientHeaderProviderBuilder*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  syntax:
+    content: "public static ApiClientHeaderProvider.Builder defaultApiClientHeaderProviderBuilder()"
+    return:
+      type: "com.google.api.gax.rpc.ApiClientHeaderProvider.Builder"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.defaultCredentialsProviderBuilder()"
+  id: "defaultCredentialsProviderBuilder()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "defaultCredentialsProviderBuilder()"
+  nameWithType: "ProductSearchSettings.defaultCredentialsProviderBuilder()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.defaultCredentialsProviderBuilder()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.defaultCredentialsProviderBuilder*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns a builder for the default credentials for this service."
+  syntax:
+    content: "public static GoogleCredentialsProvider.Builder defaultCredentialsProviderBuilder()"
+    return:
+      type: "com.google.api.gax.core.GoogleCredentialsProvider.Builder"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.defaultExecutorProviderBuilder()"
+  id: "defaultExecutorProviderBuilder()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "defaultExecutorProviderBuilder()"
+  nameWithType: "ProductSearchSettings.defaultExecutorProviderBuilder()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.defaultExecutorProviderBuilder()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.defaultExecutorProviderBuilder*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns a builder for the default ExecutorProvider for this service."
+  syntax:
+    content: "public static InstantiatingExecutorProvider.Builder defaultExecutorProviderBuilder()"
+    return:
+      type: "com.google.api.gax.core.InstantiatingExecutorProvider.Builder"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.defaultGrpcTransportProviderBuilder()"
+  id: "defaultGrpcTransportProviderBuilder()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "defaultGrpcTransportProviderBuilder()"
+  nameWithType: "ProductSearchSettings.defaultGrpcTransportProviderBuilder()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.defaultGrpcTransportProviderBuilder()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.defaultGrpcTransportProviderBuilder*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns a builder for the default ChannelProvider for this service."
+  syntax:
+    content: "public static InstantiatingGrpcChannelProvider.Builder defaultGrpcTransportProviderBuilder()"
+    return:
+      type: "com.google.api.gax.grpc.InstantiatingGrpcChannelProvider.Builder"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.defaultTransportChannelProvider()"
+  id: "defaultTransportChannelProvider()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "defaultTransportChannelProvider()"
+  nameWithType: "ProductSearchSettings.defaultTransportChannelProvider()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.defaultTransportChannelProvider()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.defaultTransportChannelProvider*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  syntax:
+    content: "public static TransportChannelProvider defaultTransportChannelProvider()"
+    return:
+      type: "com.google.api.gax.rpc.TransportChannelProvider"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.deleteProductSetSettings()"
+  id: "deleteProductSetSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "deleteProductSetSettings()"
+  nameWithType: "ProductSearchSettings.deleteProductSetSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.deleteProductSetSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.deleteProductSetSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to deleteProductSet."
+  syntax:
+    content: "public UnaryCallSettings<DeleteProductSetRequest,Empty> deleteProductSetSettings()"
+    return:
+      type: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.DeleteProductSetRequest,com.google.protobuf.Empty>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.deleteProductSettings()"
+  id: "deleteProductSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "deleteProductSettings()"
+  nameWithType: "ProductSearchSettings.deleteProductSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.deleteProductSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.deleteProductSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to deleteProduct."
+  syntax:
+    content: "public UnaryCallSettings<DeleteProductRequest,Empty> deleteProductSettings()"
+    return:
+      type: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.DeleteProductRequest,com.google.protobuf.Empty>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.deleteReferenceImageSettings()"
+  id: "deleteReferenceImageSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "deleteReferenceImageSettings()"
+  nameWithType: "ProductSearchSettings.deleteReferenceImageSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.deleteReferenceImageSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.deleteReferenceImageSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to deleteReferenceImage."
+  syntax:
+    content: "public UnaryCallSettings<DeleteReferenceImageRequest,Empty> deleteReferenceImageSettings()"
+    return:
+      type: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.DeleteReferenceImageRequest,com.google.protobuf.Empty>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.getDefaultEndpoint()"
+  id: "getDefaultEndpoint()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "getDefaultEndpoint()"
+  nameWithType: "ProductSearchSettings.getDefaultEndpoint()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.getDefaultEndpoint()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.getDefaultEndpoint*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the default service endpoint."
+  syntax:
+    content: "public static String getDefaultEndpoint()"
+    return:
+      type: "java.lang.String"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.getDefaultServiceScopes()"
+  id: "getDefaultServiceScopes()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "getDefaultServiceScopes()"
+  nameWithType: "ProductSearchSettings.getDefaultServiceScopes()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.getDefaultServiceScopes()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.getDefaultServiceScopes*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the default service scopes."
+  syntax:
+    content: "public static List<String> getDefaultServiceScopes()"
+    return:
+      type: "java.util.List<java.lang.String>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.getProductSetSettings()"
+  id: "getProductSetSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "getProductSetSettings()"
+  nameWithType: "ProductSearchSettings.getProductSetSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.getProductSetSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.getProductSetSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to getProductSet."
+  syntax:
+    content: "public UnaryCallSettings<GetProductSetRequest,ProductSet> getProductSetSettings()"
+    return:
+      type: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.GetProductSetRequest,com.google.cloud.vision.v1.ProductSet>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.getProductSettings()"
+  id: "getProductSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "getProductSettings()"
+  nameWithType: "ProductSearchSettings.getProductSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.getProductSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.getProductSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to getProduct."
+  syntax:
+    content: "public UnaryCallSettings<GetProductRequest,Product> getProductSettings()"
+    return:
+      type: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.GetProductRequest,com.google.cloud.vision.v1.Product>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.getReferenceImageSettings()"
+  id: "getReferenceImageSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "getReferenceImageSettings()"
+  nameWithType: "ProductSearchSettings.getReferenceImageSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.getReferenceImageSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.getReferenceImageSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to getReferenceImage."
+  syntax:
+    content: "public UnaryCallSettings<GetReferenceImageRequest,ReferenceImage> getReferenceImageSettings()"
+    return:
+      type: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.GetReferenceImageRequest,com.google.cloud.vision.v1.ReferenceImage>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.importProductSetsOperationSettings()"
+  id: "importProductSetsOperationSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "importProductSetsOperationSettings()"
+  nameWithType: "ProductSearchSettings.importProductSetsOperationSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.importProductSetsOperationSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.importProductSetsOperationSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to importProductSets."
+  syntax:
+    content: "public OperationCallSettings<ImportProductSetsRequest,ImportProductSetsResponse,BatchOperationMetadata> importProductSetsOperationSettings()"
+    return:
+      type: "com.google.api.gax.rpc.OperationCallSettings<com.google.cloud.vision.v1.ImportProductSetsRequest,com.google.cloud.vision.v1.ImportProductSetsResponse,com.google.cloud.vision.v1.BatchOperationMetadata>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.importProductSetsSettings()"
+  id: "importProductSetsSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "importProductSetsSettings()"
+  nameWithType: "ProductSearchSettings.importProductSetsSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.importProductSetsSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.importProductSetsSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to importProductSets."
+  syntax:
+    content: "public UnaryCallSettings<ImportProductSetsRequest,Operation> importProductSetsSettings()"
+    return:
+      type: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.ImportProductSetsRequest,com.google.longrunning.Operation>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.listProductSetsSettings()"
+  id: "listProductSetsSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "listProductSetsSettings()"
+  nameWithType: "ProductSearchSettings.listProductSetsSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.listProductSetsSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.listProductSetsSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to listProductSets."
+  syntax:
+    content: "public PagedCallSettings<ListProductSetsRequest,ListProductSetsResponse,ProductSearchClient.ListProductSetsPagedResponse> listProductSetsSettings()"
+    return:
+      type: "com.google.api.gax.rpc.PagedCallSettings<com.google.cloud.vision.v1.ListProductSetsRequest,com.google.cloud.vision.v1.ListProductSetsResponse,com.google.cloud.vision.v1.ProductSearchClient.ListProductSetsPagedResponse>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.listProductsInProductSetSettings()"
+  id: "listProductsInProductSetSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "listProductsInProductSetSettings()"
+  nameWithType: "ProductSearchSettings.listProductsInProductSetSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.listProductsInProductSetSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.listProductsInProductSetSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to listProductsInProductSet."
+  syntax:
+    content: "public PagedCallSettings<ListProductsInProductSetRequest,ListProductsInProductSetResponse,ProductSearchClient.ListProductsInProductSetPagedResponse> listProductsInProductSetSettings()"
+    return:
+      type: "com.google.api.gax.rpc.PagedCallSettings<com.google.cloud.vision.v1.ListProductsInProductSetRequest,com.google.cloud.vision.v1.ListProductsInProductSetResponse,com.google.cloud.vision.v1.ProductSearchClient.ListProductsInProductSetPagedResponse>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.listProductsSettings()"
+  id: "listProductsSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "listProductsSettings()"
+  nameWithType: "ProductSearchSettings.listProductsSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.listProductsSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.listProductsSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to listProducts."
+  syntax:
+    content: "public PagedCallSettings<ListProductsRequest,ListProductsResponse,ProductSearchClient.ListProductsPagedResponse> listProductsSettings()"
+    return:
+      type: "com.google.api.gax.rpc.PagedCallSettings<com.google.cloud.vision.v1.ListProductsRequest,com.google.cloud.vision.v1.ListProductsResponse,com.google.cloud.vision.v1.ProductSearchClient.ListProductsPagedResponse>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.listReferenceImagesSettings()"
+  id: "listReferenceImagesSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "listReferenceImagesSettings()"
+  nameWithType: "ProductSearchSettings.listReferenceImagesSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.listReferenceImagesSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.listReferenceImagesSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to listReferenceImages."
+  syntax:
+    content: "public PagedCallSettings<ListReferenceImagesRequest,ListReferenceImagesResponse,ProductSearchClient.ListReferenceImagesPagedResponse> listReferenceImagesSettings()"
+    return:
+      type: "com.google.api.gax.rpc.PagedCallSettings<com.google.cloud.vision.v1.ListReferenceImagesRequest,com.google.cloud.vision.v1.ListReferenceImagesResponse,com.google.cloud.vision.v1.ProductSearchClient.ListReferenceImagesPagedResponse>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.newBuilder()"
+  id: "newBuilder()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "newBuilder()"
+  nameWithType: "ProductSearchSettings.newBuilder()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.newBuilder()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.newBuilder*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns a new builder for this class."
+  syntax:
+    content: "public static ProductSearchSettings.Builder newBuilder()"
+    return:
+      type: "com.microsoft.samples.google.ProductSearchSettings.Builder"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.newBuilder(com.google.api.gax.rpc.ClientContext)"
+  id: "newBuilder(com.google.api.gax.rpc.ClientContext)"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "newBuilder(ClientContext clientContext)"
+  nameWithType: "ProductSearchSettings.newBuilder(ClientContext clientContext)"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.newBuilder(ClientContext clientContext)"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.newBuilder*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns a new builder for this class."
+  syntax:
+    content: "public static ProductSearchSettings.Builder newBuilder(ClientContext clientContext)"
+    parameters:
+    - id: "clientContext"
+      type: "com.google.api.gax.rpc.ClientContext"
+    return:
+      type: "com.microsoft.samples.google.ProductSearchSettings.Builder"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.purgeProductsOperationSettings()"
+  id: "purgeProductsOperationSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "purgeProductsOperationSettings()"
+  nameWithType: "ProductSearchSettings.purgeProductsOperationSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.purgeProductsOperationSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.purgeProductsOperationSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to purgeProducts."
+  syntax:
+    content: "public OperationCallSettings<PurgeProductsRequest,Empty,BatchOperationMetadata> purgeProductsOperationSettings()"
+    return:
+      type: "com.google.api.gax.rpc.OperationCallSettings<com.google.cloud.vision.v1.PurgeProductsRequest,com.google.protobuf.Empty,com.google.cloud.vision.v1.BatchOperationMetadata>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.purgeProductsSettings()"
+  id: "purgeProductsSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "purgeProductsSettings()"
+  nameWithType: "ProductSearchSettings.purgeProductsSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.purgeProductsSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.purgeProductsSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to purgeProducts."
+  syntax:
+    content: "public UnaryCallSettings<PurgeProductsRequest,Operation> purgeProductsSettings()"
+    return:
+      type: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.PurgeProductsRequest,com.google.longrunning.Operation>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.removeProductFromProductSetSettings()"
+  id: "removeProductFromProductSetSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "removeProductFromProductSetSettings()"
+  nameWithType: "ProductSearchSettings.removeProductFromProductSetSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.removeProductFromProductSetSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.removeProductFromProductSetSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to removeProductFromProductSet."
+  syntax:
+    content: "public UnaryCallSettings<RemoveProductFromProductSetRequest,Empty> removeProductFromProductSetSettings()"
+    return:
+      type: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.RemoveProductFromProductSetRequest,com.google.protobuf.Empty>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.toBuilder()"
+  id: "toBuilder()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "toBuilder()"
+  nameWithType: "ProductSearchSettings.toBuilder()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.toBuilder()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.toBuilder*"
+  overridden: "com.google.api.gax.rpc.ClientSettings.<B>toBuilder()"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns a builder containing all the values of this settings class."
+  syntax:
+    content: "public ProductSearchSettings.Builder toBuilder()"
+    return:
+      type: "com.microsoft.samples.google.ProductSearchSettings.Builder"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.updateProductSetSettings()"
+  id: "updateProductSetSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "updateProductSetSettings()"
+  nameWithType: "ProductSearchSettings.updateProductSetSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.updateProductSetSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.updateProductSetSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to updateProductSet."
+  syntax:
+    content: "public UnaryCallSettings<UpdateProductSetRequest,ProductSet> updateProductSetSettings()"
+    return:
+      type: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.UpdateProductSetRequest,com.google.cloud.vision.v1.ProductSet>"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.updateProductSettings()"
+  id: "updateProductSettings()"
+  parent: "com.microsoft.samples.google.ProductSearchSettings"
+  langs:
+  - "java"
+  name: "updateProductSettings()"
+  nameWithType: "ProductSearchSettings.updateProductSettings()"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.updateProductSettings()"
+  overload: "com.microsoft.samples.google.ProductSearchSettings.updateProductSettings*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Returns the object with the settings used for calls to updateProduct."
+  syntax:
+    content: "public UnaryCallSettings<UpdateProductRequest,Product> updateProductSettings()"
+    return:
+      type: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.UpdateProductRequest,com.google.cloud.vision.v1.Product>"
+references:
+- uid: "com.microsoft.samples.google.ProductSearchSettings.Builder"
+  name: "ProductSearchSettings.Builder"
+  nameWithType: "ProductSearchSettings.Builder"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.Builder"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.ProductSearchSettings*"
+  name: "ProductSearchSettings"
+  nameWithType: "ProductSearchSettings.ProductSearchSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.ProductSearchSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.CreateProductSetRequest,com.google.cloud.vision.v1.ProductSet>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.UnaryCallSettings"
+    name: "UnaryCallSettings"
+    fullName: "com.google.api.gax.rpc.UnaryCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.CreateProductSetRequest"
+    name: "CreateProductSetRequest"
+    fullName: "com.google.cloud.vision.v1.CreateProductSetRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.ProductSet"
+    name: "ProductSet"
+    fullName: "com.google.cloud.vision.v1.ProductSet"
+    isExternal: false
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.createProductSetSettings*"
+  name: "createProductSetSettings"
+  nameWithType: "ProductSearchSettings.createProductSetSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.createProductSetSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.PagedCallSettings<com.google.cloud.vision.v1.ListProductSetsRequest,com.google.cloud.vision.v1.ListProductSetsResponse,com.google.cloud.vision.v1.ProductSearchClient.ListProductSetsPagedResponse>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.PagedCallSettings"
+    name: "PagedCallSettings"
+    fullName: "com.google.api.gax.rpc.PagedCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.ListProductSetsRequest"
+    name: "ListProductSetsRequest"
+    fullName: "com.google.cloud.vision.v1.ListProductSetsRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.ListProductSetsResponse"
+    name: "ListProductSetsResponse"
+    fullName: "com.google.cloud.vision.v1.ListProductSetsResponse"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.ProductSearchClient.ListProductSetsPagedResponse"
+    name: "ListProductSetsPagedResponse"
+    fullName: "com.google.cloud.vision.v1.ProductSearchClient.ListProductSetsPagedResponse"
+    isExternal: false
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.listProductSetsSettings*"
+  name: "listProductSetsSettings"
+  nameWithType: "ProductSearchSettings.listProductSetsSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.listProductSetsSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.GetProductSetRequest,com.google.cloud.vision.v1.ProductSet>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.UnaryCallSettings"
+    name: "UnaryCallSettings"
+    fullName: "com.google.api.gax.rpc.UnaryCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.GetProductSetRequest"
+    name: "GetProductSetRequest"
+    fullName: "com.google.cloud.vision.v1.GetProductSetRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.ProductSet"
+    name: "ProductSet"
+    fullName: "com.google.cloud.vision.v1.ProductSet"
+    isExternal: false
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.getProductSetSettings*"
+  name: "getProductSetSettings"
+  nameWithType: "ProductSearchSettings.getProductSetSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.getProductSetSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.UpdateProductSetRequest,com.google.cloud.vision.v1.ProductSet>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.UnaryCallSettings"
+    name: "UnaryCallSettings"
+    fullName: "com.google.api.gax.rpc.UnaryCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.UpdateProductSetRequest"
+    name: "UpdateProductSetRequest"
+    fullName: "com.google.cloud.vision.v1.UpdateProductSetRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.ProductSet"
+    name: "ProductSet"
+    fullName: "com.google.cloud.vision.v1.ProductSet"
+    isExternal: false
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.updateProductSetSettings*"
+  name: "updateProductSetSettings"
+  nameWithType: "ProductSearchSettings.updateProductSetSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.updateProductSetSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.DeleteProductSetRequest,com.google.protobuf.Empty>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.UnaryCallSettings"
+    name: "UnaryCallSettings"
+    fullName: "com.google.api.gax.rpc.UnaryCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.DeleteProductSetRequest"
+    name: "DeleteProductSetRequest"
+    fullName: "com.google.cloud.vision.v1.DeleteProductSetRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.protobuf.Empty"
+    name: "Empty"
+    fullName: "com.google.protobuf.Empty"
+    isExternal: true
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.deleteProductSetSettings*"
+  name: "deleteProductSetSettings"
+  nameWithType: "ProductSearchSettings.deleteProductSetSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.deleteProductSetSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.CreateProductRequest,com.google.cloud.vision.v1.Product>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.UnaryCallSettings"
+    name: "UnaryCallSettings"
+    fullName: "com.google.api.gax.rpc.UnaryCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.CreateProductRequest"
+    name: "CreateProductRequest"
+    fullName: "com.google.cloud.vision.v1.CreateProductRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.Product"
+    name: "Product"
+    fullName: "com.google.cloud.vision.v1.Product"
+    isExternal: false
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.createProductSettings*"
+  name: "createProductSettings"
+  nameWithType: "ProductSearchSettings.createProductSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.createProductSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.PagedCallSettings<com.google.cloud.vision.v1.ListProductsRequest,com.google.cloud.vision.v1.ListProductsResponse,com.google.cloud.vision.v1.ProductSearchClient.ListProductsPagedResponse>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.PagedCallSettings"
+    name: "PagedCallSettings"
+    fullName: "com.google.api.gax.rpc.PagedCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.ListProductsRequest"
+    name: "ListProductsRequest"
+    fullName: "com.google.cloud.vision.v1.ListProductsRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.ListProductsResponse"
+    name: "ListProductsResponse"
+    fullName: "com.google.cloud.vision.v1.ListProductsResponse"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.ProductSearchClient.ListProductsPagedResponse"
+    name: "ListProductsPagedResponse"
+    fullName: "com.google.cloud.vision.v1.ProductSearchClient.ListProductsPagedResponse"
+    isExternal: false
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.listProductsSettings*"
+  name: "listProductsSettings"
+  nameWithType: "ProductSearchSettings.listProductsSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.listProductsSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.GetProductRequest,com.google.cloud.vision.v1.Product>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.UnaryCallSettings"
+    name: "UnaryCallSettings"
+    fullName: "com.google.api.gax.rpc.UnaryCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.GetProductRequest"
+    name: "GetProductRequest"
+    fullName: "com.google.cloud.vision.v1.GetProductRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.Product"
+    name: "Product"
+    fullName: "com.google.cloud.vision.v1.Product"
+    isExternal: false
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.getProductSettings*"
+  name: "getProductSettings"
+  nameWithType: "ProductSearchSettings.getProductSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.getProductSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.UpdateProductRequest,com.google.cloud.vision.v1.Product>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.UnaryCallSettings"
+    name: "UnaryCallSettings"
+    fullName: "com.google.api.gax.rpc.UnaryCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.UpdateProductRequest"
+    name: "UpdateProductRequest"
+    fullName: "com.google.cloud.vision.v1.UpdateProductRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.Product"
+    name: "Product"
+    fullName: "com.google.cloud.vision.v1.Product"
+    isExternal: false
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.updateProductSettings*"
+  name: "updateProductSettings"
+  nameWithType: "ProductSearchSettings.updateProductSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.updateProductSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.DeleteProductRequest,com.google.protobuf.Empty>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.UnaryCallSettings"
+    name: "UnaryCallSettings"
+    fullName: "com.google.api.gax.rpc.UnaryCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.DeleteProductRequest"
+    name: "DeleteProductRequest"
+    fullName: "com.google.cloud.vision.v1.DeleteProductRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.protobuf.Empty"
+    name: "Empty"
+    fullName: "com.google.protobuf.Empty"
+    isExternal: true
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.deleteProductSettings*"
+  name: "deleteProductSettings"
+  nameWithType: "ProductSearchSettings.deleteProductSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.deleteProductSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.CreateReferenceImageRequest,com.google.cloud.vision.v1.ReferenceImage>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.UnaryCallSettings"
+    name: "UnaryCallSettings"
+    fullName: "com.google.api.gax.rpc.UnaryCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.CreateReferenceImageRequest"
+    name: "CreateReferenceImageRequest"
+    fullName: "com.google.cloud.vision.v1.CreateReferenceImageRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.ReferenceImage"
+    name: "ReferenceImage"
+    fullName: "com.google.cloud.vision.v1.ReferenceImage"
+    isExternal: false
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.createReferenceImageSettings*"
+  name: "createReferenceImageSettings"
+  nameWithType: "ProductSearchSettings.createReferenceImageSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.createReferenceImageSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.DeleteReferenceImageRequest,com.google.protobuf.Empty>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.UnaryCallSettings"
+    name: "UnaryCallSettings"
+    fullName: "com.google.api.gax.rpc.UnaryCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.DeleteReferenceImageRequest"
+    name: "DeleteReferenceImageRequest"
+    fullName: "com.google.cloud.vision.v1.DeleteReferenceImageRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.protobuf.Empty"
+    name: "Empty"
+    fullName: "com.google.protobuf.Empty"
+    isExternal: true
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.deleteReferenceImageSettings*"
+  name: "deleteReferenceImageSettings"
+  nameWithType: "ProductSearchSettings.deleteReferenceImageSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.deleteReferenceImageSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.PagedCallSettings<com.google.cloud.vision.v1.ListReferenceImagesRequest,com.google.cloud.vision.v1.ListReferenceImagesResponse,com.google.cloud.vision.v1.ProductSearchClient.ListReferenceImagesPagedResponse>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.PagedCallSettings"
+    name: "PagedCallSettings"
+    fullName: "com.google.api.gax.rpc.PagedCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.ListReferenceImagesRequest"
+    name: "ListReferenceImagesRequest"
+    fullName: "com.google.cloud.vision.v1.ListReferenceImagesRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.ListReferenceImagesResponse"
+    name: "ListReferenceImagesResponse"
+    fullName: "com.google.cloud.vision.v1.ListReferenceImagesResponse"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.ProductSearchClient.ListReferenceImagesPagedResponse"
+    name: "ListReferenceImagesPagedResponse"
+    fullName: "com.google.cloud.vision.v1.ProductSearchClient.ListReferenceImagesPagedResponse"
+    isExternal: false
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.listReferenceImagesSettings*"
+  name: "listReferenceImagesSettings"
+  nameWithType: "ProductSearchSettings.listReferenceImagesSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.listReferenceImagesSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.GetReferenceImageRequest,com.google.cloud.vision.v1.ReferenceImage>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.UnaryCallSettings"
+    name: "UnaryCallSettings"
+    fullName: "com.google.api.gax.rpc.UnaryCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.GetReferenceImageRequest"
+    name: "GetReferenceImageRequest"
+    fullName: "com.google.cloud.vision.v1.GetReferenceImageRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.ReferenceImage"
+    name: "ReferenceImage"
+    fullName: "com.google.cloud.vision.v1.ReferenceImage"
+    isExternal: false
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.getReferenceImageSettings*"
+  name: "getReferenceImageSettings"
+  nameWithType: "ProductSearchSettings.getReferenceImageSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.getReferenceImageSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.AddProductToProductSetRequest,com.google.protobuf.Empty>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.UnaryCallSettings"
+    name: "UnaryCallSettings"
+    fullName: "com.google.api.gax.rpc.UnaryCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.AddProductToProductSetRequest"
+    name: "AddProductToProductSetRequest"
+    fullName: "com.google.cloud.vision.v1.AddProductToProductSetRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.protobuf.Empty"
+    name: "Empty"
+    fullName: "com.google.protobuf.Empty"
+    isExternal: true
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.addProductToProductSetSettings*"
+  name: "addProductToProductSetSettings"
+  nameWithType: "ProductSearchSettings.addProductToProductSetSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.addProductToProductSetSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.RemoveProductFromProductSetRequest,com.google.protobuf.Empty>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.UnaryCallSettings"
+    name: "UnaryCallSettings"
+    fullName: "com.google.api.gax.rpc.UnaryCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.RemoveProductFromProductSetRequest"
+    name: "RemoveProductFromProductSetRequest"
+    fullName: "com.google.cloud.vision.v1.RemoveProductFromProductSetRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.protobuf.Empty"
+    name: "Empty"
+    fullName: "com.google.protobuf.Empty"
+    isExternal: true
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.removeProductFromProductSetSettings*"
+  name: "removeProductFromProductSetSettings"
+  nameWithType: "ProductSearchSettings.removeProductFromProductSetSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.removeProductFromProductSetSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.PagedCallSettings<com.google.cloud.vision.v1.ListProductsInProductSetRequest,com.google.cloud.vision.v1.ListProductsInProductSetResponse,com.google.cloud.vision.v1.ProductSearchClient.ListProductsInProductSetPagedResponse>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.PagedCallSettings"
+    name: "PagedCallSettings"
+    fullName: "com.google.api.gax.rpc.PagedCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.ListProductsInProductSetRequest"
+    name: "ListProductsInProductSetRequest"
+    fullName: "com.google.cloud.vision.v1.ListProductsInProductSetRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.ListProductsInProductSetResponse"
+    name: "ListProductsInProductSetResponse"
+    fullName: "com.google.cloud.vision.v1.ListProductsInProductSetResponse"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.ProductSearchClient.ListProductsInProductSetPagedResponse"
+    name: "ListProductsInProductSetPagedResponse"
+    fullName: "com.google.cloud.vision.v1.ProductSearchClient.ListProductsInProductSetPagedResponse"
+    isExternal: false
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.listProductsInProductSetSettings*"
+  name: "listProductsInProductSetSettings"
+  nameWithType: "ProductSearchSettings.listProductsInProductSetSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.listProductsInProductSetSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.ImportProductSetsRequest,com.google.longrunning.Operation>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.UnaryCallSettings"
+    name: "UnaryCallSettings"
+    fullName: "com.google.api.gax.rpc.UnaryCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.ImportProductSetsRequest"
+    name: "ImportProductSetsRequest"
+    fullName: "com.google.cloud.vision.v1.ImportProductSetsRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.longrunning.Operation"
+    name: "Operation"
+    fullName: "com.google.longrunning.Operation"
+    isExternal: true
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.importProductSetsSettings*"
+  name: "importProductSetsSettings"
+  nameWithType: "ProductSearchSettings.importProductSetsSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.importProductSetsSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.OperationCallSettings<com.google.cloud.vision.v1.ImportProductSetsRequest,com.google.cloud.vision.v1.ImportProductSetsResponse,com.google.cloud.vision.v1.BatchOperationMetadata>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.OperationCallSettings"
+    name: "OperationCallSettings"
+    fullName: "com.google.api.gax.rpc.OperationCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.ImportProductSetsRequest"
+    name: "ImportProductSetsRequest"
+    fullName: "com.google.cloud.vision.v1.ImportProductSetsRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.ImportProductSetsResponse"
+    name: "ImportProductSetsResponse"
+    fullName: "com.google.cloud.vision.v1.ImportProductSetsResponse"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.BatchOperationMetadata"
+    name: "BatchOperationMetadata"
+    fullName: "com.google.cloud.vision.v1.BatchOperationMetadata"
+    isExternal: false
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.importProductSetsOperationSettings*"
+  name: "importProductSetsOperationSettings"
+  nameWithType: "ProductSearchSettings.importProductSetsOperationSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.importProductSetsOperationSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.vision.v1.PurgeProductsRequest,com.google.longrunning.Operation>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.UnaryCallSettings"
+    name: "UnaryCallSettings"
+    fullName: "com.google.api.gax.rpc.UnaryCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.PurgeProductsRequest"
+    name: "PurgeProductsRequest"
+    fullName: "com.google.cloud.vision.v1.PurgeProductsRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.longrunning.Operation"
+    name: "Operation"
+    fullName: "com.google.longrunning.Operation"
+    isExternal: true
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.purgeProductsSettings*"
+  name: "purgeProductsSettings"
+  nameWithType: "ProductSearchSettings.purgeProductsSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.purgeProductsSettings"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.OperationCallSettings<com.google.cloud.vision.v1.PurgeProductsRequest,com.google.protobuf.Empty,com.google.cloud.vision.v1.BatchOperationMetadata>"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.OperationCallSettings"
+    name: "OperationCallSettings"
+    fullName: "com.google.api.gax.rpc.OperationCallSettings"
+    isExternal: true
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.PurgeProductsRequest"
+    name: "PurgeProductsRequest"
+    fullName: "com.google.cloud.vision.v1.PurgeProductsRequest"
+    isExternal: false
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.protobuf.Empty"
+    name: "Empty"
+    fullName: "com.google.protobuf.Empty"
+    isExternal: true
+  - name: ","
+    fullName: ","
+    isExternal: false
+  - uid: "com.google.cloud.vision.v1.BatchOperationMetadata"
+    name: "BatchOperationMetadata"
+    fullName: "com.google.cloud.vision.v1.BatchOperationMetadata"
+    isExternal: false
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.purgeProductsOperationSettings*"
+  name: "purgeProductsOperationSettings"
+  nameWithType: "ProductSearchSettings.purgeProductsOperationSettings"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.purgeProductsOperationSettings"
+  package: "com.microsoft.samples.google"
+- uid: "java.io.IOException"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/io/IOException.html"
+  spec.java:
+  - uid: "java.io.IOException"
+    name: "IOException"
+    fullName: "java.io.IOException"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/io/IOException.html"
+- uid: "com.google.cloud.vision.v1.stub.ProductSearchStubSettings"
+  spec.java:
+  - uid: "com.google.cloud.vision.v1.stub.ProductSearchStubSettings"
+    name: "ProductSearchStubSettings"
+    fullName: "com.google.cloud.vision.v1.stub.ProductSearchStubSettings"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.create*"
+  name: "create"
+  nameWithType: "ProductSearchSettings.create"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.create"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.core.InstantiatingExecutorProvider.Builder"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.core.InstantiatingExecutorProvider.Builder"
+    name: "Builder"
+    fullName: "com.google.api.gax.core.InstantiatingExecutorProvider.Builder"
+    isExternal: true
+- uid: "com.microsoft.samples.google.ProductSearchSettings.defaultExecutorProviderBuilder*"
+  name: "defaultExecutorProviderBuilder"
+  nameWithType: "ProductSearchSettings.defaultExecutorProviderBuilder"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.defaultExecutorProviderBuilder"
+  package: "com.microsoft.samples.google"
+- uid: "java.lang.String"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
+  spec.java:
+  - uid: "java.lang.String"
+    name: "String"
+    fullName: "java.lang.String"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.getDefaultEndpoint*"
+  name: "getDefaultEndpoint"
+  nameWithType: "ProductSearchSettings.getDefaultEndpoint"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.getDefaultEndpoint"
+  package: "com.microsoft.samples.google"
+- uid: "java.util.List<java.lang.String>"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/util/List<java/lang/String>.html"
+  spec.java:
+  - uid: "java.util.List"
+    name: "List"
+    fullName: "java.util.List"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/util/List.html"
+  - name: "<"
+    fullName: "<"
+    isExternal: false
+  - uid: "java.lang.String"
+    name: "String"
+    fullName: "java.lang.String"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
+  - name: ">"
+    fullName: ">"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ProductSearchSettings.getDefaultServiceScopes*"
+  name: "getDefaultServiceScopes"
+  nameWithType: "ProductSearchSettings.getDefaultServiceScopes"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.getDefaultServiceScopes"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.core.GoogleCredentialsProvider.Builder"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.core.GoogleCredentialsProvider.Builder"
+    name: "Builder"
+    fullName: "com.google.api.gax.core.GoogleCredentialsProvider.Builder"
+    isExternal: true
+- uid: "com.microsoft.samples.google.ProductSearchSettings.defaultCredentialsProviderBuilder*"
+  name: "defaultCredentialsProviderBuilder"
+  nameWithType: "ProductSearchSettings.defaultCredentialsProviderBuilder"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.defaultCredentialsProviderBuilder"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.grpc.InstantiatingGrpcChannelProvider.Builder"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.grpc.InstantiatingGrpcChannelProvider.Builder"
+    name: "Builder"
+    fullName: "com.google.api.gax.grpc.InstantiatingGrpcChannelProvider.Builder"
+    isExternal: true
+- uid: "com.microsoft.samples.google.ProductSearchSettings.defaultGrpcTransportProviderBuilder*"
+  name: "defaultGrpcTransportProviderBuilder"
+  nameWithType: "ProductSearchSettings.defaultGrpcTransportProviderBuilder"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.defaultGrpcTransportProviderBuilder"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.TransportChannelProvider"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.TransportChannelProvider"
+    name: "TransportChannelProvider"
+    fullName: "com.google.api.gax.rpc.TransportChannelProvider"
+    isExternal: true
+- uid: "com.microsoft.samples.google.ProductSearchSettings.defaultTransportChannelProvider*"
+  name: "defaultTransportChannelProvider"
+  nameWithType: "ProductSearchSettings.defaultTransportChannelProvider"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.defaultTransportChannelProvider"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.ApiClientHeaderProvider.Builder"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.ApiClientHeaderProvider.Builder"
+    name: "Builder"
+    fullName: "com.google.api.gax.rpc.ApiClientHeaderProvider.Builder"
+    isExternal: true
+- uid: "com.microsoft.samples.google.ProductSearchSettings.defaultApiClientHeaderProviderBuilder*"
+  name: "defaultApiClientHeaderProviderBuilder"
+  nameWithType: "ProductSearchSettings.defaultApiClientHeaderProviderBuilder"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.defaultApiClientHeaderProviderBuilder"
+  package: "com.microsoft.samples.google"
+- uid: "com.microsoft.samples.google.ProductSearchSettings.newBuilder*"
+  name: "newBuilder"
+  nameWithType: "ProductSearchSettings.newBuilder"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.newBuilder"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.ClientContext"
+  isExternal: true
+  spec.java:
+  - uid: "com.google.api.gax.rpc.ClientContext"
+    name: "ClientContext"
+    fullName: "com.google.api.gax.rpc.ClientContext"
+    isExternal: true
+- uid: "com.microsoft.samples.google.ProductSearchSettings.toBuilder*"
+  name: "toBuilder"
+  nameWithType: "ProductSearchSettings.toBuilder"
+  fullName: "com.microsoft.samples.google.ProductSearchSettings.toBuilder"
+  package: "com.microsoft.samples.google"
+- uid: "com.google.api.gax.rpc.ClientSettings<com.microsoft.samples.google.ProductSearchSettings>"
+  isExternal: true
+  name: "ClientSettings<ProductSearchSettings>"
+  nameWithType: "ClientSettings<ProductSearchSettings>"
+  fullName: "com.google.api.gax.rpc.ClientSettings<com.microsoft.samples.google.ProductSearchSettings>"
+- uid: "com.google.api.gax.rpc.ClientSettings.getHeaderProvider()"
+  isExternal: true
+  name: "ClientSettings.getHeaderProvider()"
+  nameWithType: "ClientSettings.getHeaderProvider()"
+  fullName: "com.google.api.gax.rpc.ClientSettings.getHeaderProvider()"
+- uid: "com.google.api.gax.rpc.ClientSettings.getQuotaProjectId()"
+  isExternal: true
+  name: "ClientSettings.getQuotaProjectId()"
+  nameWithType: "ClientSettings.getQuotaProjectId()"
+  fullName: "com.google.api.gax.rpc.ClientSettings.getQuotaProjectId()"
+- uid: "java.lang.Object.notify()"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#notify--"
+  name: "Object.notify()"
+  nameWithType: "Object.notify()"
+  fullName: "java.lang.Object.notify()"
+- uid: "java.lang.Object.wait()"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#wait--"
+  name: "Object.wait()"
+  nameWithType: "Object.wait()"
+  fullName: "java.lang.Object.wait()"
+- uid: "java.lang.Object.finalize()"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#finalize--"
+  name: "Object.finalize()"
+  nameWithType: "Object.finalize()"
+  fullName: "java.lang.Object.finalize()"
+- uid: "com.google.api.gax.rpc.ClientSettings.getWatchdogProvider()"
+  isExternal: true
+  name: "ClientSettings.getWatchdogProvider()"
+  nameWithType: "ClientSettings.getWatchdogProvider()"
+  fullName: "com.google.api.gax.rpc.ClientSettings.getWatchdogProvider()"
+- uid: "java.lang.Object.notifyAll()"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#notifyAll--"
+  name: "Object.notifyAll()"
+  nameWithType: "Object.notifyAll()"
+  fullName: "java.lang.Object.notifyAll()"
+- uid: "java.lang.Object.clone()"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#clone--"
+  name: "Object.clone()"
+  nameWithType: "Object.clone()"
+  fullName: "java.lang.Object.clone()"
+- uid: "com.google.api.gax.rpc.ClientSettings.getCredentialsProvider()"
+  isExternal: true
+  name: "ClientSettings.getCredentialsProvider()"
+  nameWithType: "ClientSettings.getCredentialsProvider()"
+  fullName: "com.google.api.gax.rpc.ClientSettings.getCredentialsProvider()"
+- uid: "com.google.api.gax.rpc.ClientSettings.getStubSettings()"
+  isExternal: true
+  name: "ClientSettings.getStubSettings()"
+  nameWithType: "ClientSettings.getStubSettings()"
+  fullName: "com.google.api.gax.rpc.ClientSettings.getStubSettings()"
+- uid: "com.google.api.gax.rpc.ClientSettings.<B>toBuilder()"
+  isExternal: true
+  name: "ClientSettings.<B>toBuilder()"
+  nameWithType: "ClientSettings.<B>toBuilder()"
+  fullName: "com.google.api.gax.rpc.ClientSettings.<B>toBuilder()"
+- uid: "java.lang.Object.equals(java.lang.Object)"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#equals-java.lang.Object-"
+  name: "Object.equals(Object)"
+  nameWithType: "Object.equals(Object)"
+  fullName: "java.lang.Object.equals(java.lang.Object)"
+- uid: "com.google.api.gax.rpc.ClientSettings.toString()"
+  isExternal: true
+  name: "ClientSettings.toString()"
+  nameWithType: "ClientSettings.toString()"
+  fullName: "com.google.api.gax.rpc.ClientSettings.toString()"
+- uid: "com.google.api.gax.rpc.ClientSettings.getInternalHeaderProvider()"
+  isExternal: true
+  name: "ClientSettings.getInternalHeaderProvider()"
+  nameWithType: "ClientSettings.getInternalHeaderProvider()"
+  fullName: "com.google.api.gax.rpc.ClientSettings.getInternalHeaderProvider()"
+- uid: "com.google.api.gax.rpc.ClientSettings.getWatchdogCheckInterval()"
+  isExternal: true
+  name: "ClientSettings.getWatchdogCheckInterval()"
+  nameWithType: "ClientSettings.getWatchdogCheckInterval()"
+  fullName: "com.google.api.gax.rpc.ClientSettings.getWatchdogCheckInterval()"
+- uid: "com.google.api.gax.rpc.ClientSettings.getTransportChannelProvider()"
+  isExternal: true
+  name: "ClientSettings.getTransportChannelProvider()"
+  nameWithType: "ClientSettings.getTransportChannelProvider()"
+  fullName: "com.google.api.gax.rpc.ClientSettings.getTransportChannelProvider()"
+- uid: "com.google.api.gax.rpc.ClientSettings.getBackgroundExecutorProvider()"
+  isExternal: true
+  name: "ClientSettings.getBackgroundExecutorProvider()"
+  nameWithType: "ClientSettings.getBackgroundExecutorProvider()"
+  fullName: "com.google.api.gax.rpc.ClientSettings.getBackgroundExecutorProvider()"
+- uid: "com.google.api.gax.rpc.ClientSettings.getEndpoint()"
+  isExternal: true
+  name: "ClientSettings.getEndpoint()"
+  nameWithType: "ClientSettings.getEndpoint()"
+  fullName: "com.google.api.gax.rpc.ClientSettings.getEndpoint()"
+- uid: "java.lang.Object.getClass()"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#getClass--"
+  name: "Object.getClass()"
+  nameWithType: "Object.getClass()"
+  fullName: "java.lang.Object.getClass()"
+- uid: "com.google.api.gax.rpc.ClientSettings.getClock()"
+  isExternal: true
+  name: "ClientSettings.getClock()"
+  nameWithType: "ClientSettings.getClock()"
+  fullName: "com.google.api.gax.rpc.ClientSettings.getClock()"
+- uid: "java.lang.Object.wait(long)"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#wait-long-"
+  name: "Object.wait(long)"
+  nameWithType: "Object.wait(long)"
+  fullName: "java.lang.Object.wait(long)"
+- uid: "java.lang.Object.hashCode()"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#hashCode--"
+  name: "Object.hashCode()"
+  nameWithType: "Object.hashCode()"
+  fullName: "java.lang.Object.hashCode()"
+- uid: "com.google.api.gax.rpc.ClientSettings.getExecutorProvider()"
+  isExternal: true
+  name: "ClientSettings.getExecutorProvider()"
+  nameWithType: "ClientSettings.getExecutorProvider()"
+  fullName: "com.google.api.gax.rpc.ClientSettings.getExecutorProvider()"
+- uid: "java.lang.Object.wait(long,int)"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#wait-long-int-"
+  name: "Object.wait(long,int)"
+  nameWithType: "Object.wait(long,int)"
+  fullName: "java.lang.Object.wait(long,int)"
+- uid: "com.google.cloud.vision.v1.CreateProductSetRequest,com.google.cloud.vision.v1.ProductSet"
+  name: "CreateProductSetRequest,ProductSet"
+  nameWithType: "CreateProductSetRequest,ProductSet"
+  fullName: "com.google.cloud.vision.v1.CreateProductSetRequest,com.google.cloud.vision.v1.ProductSet"
+- uid: "com.google.api.gax.rpc.UnaryCallSettings"
+  isExternal: true
+  name: "UnaryCallSettings"
+  nameWithType: "UnaryCallSettings"
+  fullName: "com.google.api.gax.rpc.UnaryCallSettings"
+- uid: "com.google.api.gax.rpc.PagedCallSettings"
+  isExternal: true
+  name: "PagedCallSettings"
+  nameWithType: "PagedCallSettings"
+  fullName: "com.google.api.gax.rpc.PagedCallSettings"
+- uid: "com.google.cloud.vision.v1.ListProductSetsRequest,com.google.cloud.vision.v1.ListProductSetsResponse,com.google.cloud.vision.v1.ProductSearchClient.ListProductSetsPagedResponse"
+  name: "ListProductSetsRequest,ListProductSetsResponse,ProductSearchClient.ListProductSetsPagedResponse"
+  nameWithType: "ListProductSetsRequest,ListProductSetsResponse,ProductSearchClient.ListProductSetsPagedResponse"
+  fullName: "com.google.cloud.vision.v1.ListProductSetsRequest,com.google.cloud.vision.v1.ListProductSetsResponse,com.google.cloud.vision.v1.ProductSearchClient.ListProductSetsPagedResponse"
+- uid: "com.google.cloud.vision.v1.GetProductSetRequest,com.google.cloud.vision.v1.ProductSet"
+  name: "GetProductSetRequest,ProductSet"
+  nameWithType: "GetProductSetRequest,ProductSet"
+  fullName: "com.google.cloud.vision.v1.GetProductSetRequest,com.google.cloud.vision.v1.ProductSet"
+- uid: "com.google.cloud.vision.v1.UpdateProductSetRequest,com.google.cloud.vision.v1.ProductSet"
+  name: "UpdateProductSetRequest,ProductSet"
+  nameWithType: "UpdateProductSetRequest,ProductSet"
+  fullName: "com.google.cloud.vision.v1.UpdateProductSetRequest,com.google.cloud.vision.v1.ProductSet"
+- uid: "com.google.cloud.vision.v1.DeleteProductSetRequest,com.google.protobuf.Empty"
+  name: "DeleteProductSetRequest,Empty"
+  nameWithType: "DeleteProductSetRequest,Empty"
+  fullName: "com.google.cloud.vision.v1.DeleteProductSetRequest,com.google.protobuf.Empty"
+- uid: "com.google.cloud.vision.v1.CreateProductRequest,com.google.cloud.vision.v1.Product"
+  name: "CreateProductRequest,Product"
+  nameWithType: "CreateProductRequest,Product"
+  fullName: "com.google.cloud.vision.v1.CreateProductRequest,com.google.cloud.vision.v1.Product"
+- uid: "com.google.cloud.vision.v1.ListProductsRequest,com.google.cloud.vision.v1.ListProductsResponse,com.google.cloud.vision.v1.ProductSearchClient.ListProductsPagedResponse"
+  name: "ListProductsRequest,ListProductsResponse,ProductSearchClient.ListProductsPagedResponse"
+  nameWithType: "ListProductsRequest,ListProductsResponse,ProductSearchClient.ListProductsPagedResponse"
+  fullName: "com.google.cloud.vision.v1.ListProductsRequest,com.google.cloud.vision.v1.ListProductsResponse,com.google.cloud.vision.v1.ProductSearchClient.ListProductsPagedResponse"
+- uid: "com.google.cloud.vision.v1.GetProductRequest,com.google.cloud.vision.v1.Product"
+  name: "GetProductRequest,Product"
+  nameWithType: "GetProductRequest,Product"
+  fullName: "com.google.cloud.vision.v1.GetProductRequest,com.google.cloud.vision.v1.Product"
+- uid: "com.google.cloud.vision.v1.UpdateProductRequest,com.google.cloud.vision.v1.Product"
+  name: "UpdateProductRequest,Product"
+  nameWithType: "UpdateProductRequest,Product"
+  fullName: "com.google.cloud.vision.v1.UpdateProductRequest,com.google.cloud.vision.v1.Product"
+- uid: "com.google.cloud.vision.v1.DeleteProductRequest,com.google.protobuf.Empty"
+  name: "DeleteProductRequest,Empty"
+  nameWithType: "DeleteProductRequest,Empty"
+  fullName: "com.google.cloud.vision.v1.DeleteProductRequest,com.google.protobuf.Empty"
+- uid: "com.google.cloud.vision.v1.CreateReferenceImageRequest,com.google.cloud.vision.v1.ReferenceImage"
+  name: "CreateReferenceImageRequest,ReferenceImage"
+  nameWithType: "CreateReferenceImageRequest,ReferenceImage"
+  fullName: "com.google.cloud.vision.v1.CreateReferenceImageRequest,com.google.cloud.vision.v1.ReferenceImage"
+- uid: "com.google.cloud.vision.v1.DeleteReferenceImageRequest,com.google.protobuf.Empty"
+  name: "DeleteReferenceImageRequest,Empty"
+  nameWithType: "DeleteReferenceImageRequest,Empty"
+  fullName: "com.google.cloud.vision.v1.DeleteReferenceImageRequest,com.google.protobuf.Empty"
+- uid: "com.google.cloud.vision.v1.ListReferenceImagesRequest,com.google.cloud.vision.v1.ListReferenceImagesResponse,com.google.cloud.vision.v1.ProductSearchClient.ListReferenceImagesPagedResponse"
+  name: "ListReferenceImagesRequest,ListReferenceImagesResponse,ProductSearchClient.ListReferenceImagesPagedResponse"
+  nameWithType: "ListReferenceImagesRequest,ListReferenceImagesResponse,ProductSearchClient.ListReferenceImagesPagedResponse"
+  fullName: "com.google.cloud.vision.v1.ListReferenceImagesRequest,com.google.cloud.vision.v1.ListReferenceImagesResponse,com.google.cloud.vision.v1.ProductSearchClient.ListReferenceImagesPagedResponse"
+- uid: "com.google.cloud.vision.v1.GetReferenceImageRequest,com.google.cloud.vision.v1.ReferenceImage"
+  name: "GetReferenceImageRequest,ReferenceImage"
+  nameWithType: "GetReferenceImageRequest,ReferenceImage"
+  fullName: "com.google.cloud.vision.v1.GetReferenceImageRequest,com.google.cloud.vision.v1.ReferenceImage"
+- uid: "com.google.cloud.vision.v1.AddProductToProductSetRequest,com.google.protobuf.Empty"
+  name: "AddProductToProductSetRequest,Empty"
+  nameWithType: "AddProductToProductSetRequest,Empty"
+  fullName: "com.google.cloud.vision.v1.AddProductToProductSetRequest,com.google.protobuf.Empty"
+- uid: "com.google.cloud.vision.v1.RemoveProductFromProductSetRequest,com.google.protobuf.Empty"
+  name: "RemoveProductFromProductSetRequest,Empty"
+  nameWithType: "RemoveProductFromProductSetRequest,Empty"
+  fullName: "com.google.cloud.vision.v1.RemoveProductFromProductSetRequest,com.google.protobuf.Empty"
+- uid: "com.google.cloud.vision.v1.ListProductsInProductSetRequest,com.google.cloud.vision.v1.ListProductsInProductSetResponse,com.google.cloud.vision.v1.ProductSearchClient.ListProductsInProductSetPagedResponse"
+  name: "ListProductsInProductSetRequest,ListProductsInProductSetResponse,ProductSearchClient.ListProductsInProductSetPagedResponse"
+  nameWithType: "ListProductsInProductSetRequest,ListProductsInProductSetResponse,ProductSearchClient.ListProductsInProductSetPagedResponse"
+  fullName: "com.google.cloud.vision.v1.ListProductsInProductSetRequest,com.google.cloud.vision.v1.ListProductsInProductSetResponse,com.google.cloud.vision.v1.ProductSearchClient.ListProductsInProductSetPagedResponse"
+- uid: "com.google.cloud.vision.v1.ImportProductSetsRequest,com.google.longrunning.Operation"
+  name: "ImportProductSetsRequest,Operation"
+  nameWithType: "ImportProductSetsRequest,Operation"
+  fullName: "com.google.cloud.vision.v1.ImportProductSetsRequest,com.google.longrunning.Operation"
+- uid: "com.google.api.gax.rpc.OperationCallSettings"
+  isExternal: true
+  name: "OperationCallSettings"
+  nameWithType: "OperationCallSettings"
+  fullName: "com.google.api.gax.rpc.OperationCallSettings"
+- uid: "com.google.cloud.vision.v1.ImportProductSetsRequest,com.google.cloud.vision.v1.ImportProductSetsResponse,com.google.cloud.vision.v1.BatchOperationMetadata"
+  name: "ImportProductSetsRequest,ImportProductSetsResponse,BatchOperationMetadata"
+  nameWithType: "ImportProductSetsRequest,ImportProductSetsResponse,BatchOperationMetadata"
+  fullName: "com.google.cloud.vision.v1.ImportProductSetsRequest,com.google.cloud.vision.v1.ImportProductSetsResponse,com.google.cloud.vision.v1.BatchOperationMetadata"
+- uid: "com.google.cloud.vision.v1.PurgeProductsRequest,com.google.longrunning.Operation"
+  name: "PurgeProductsRequest,Operation"
+  nameWithType: "PurgeProductsRequest,Operation"
+  fullName: "com.google.cloud.vision.v1.PurgeProductsRequest,com.google.longrunning.Operation"
+- uid: "com.google.cloud.vision.v1.PurgeProductsRequest,com.google.protobuf.Empty,com.google.cloud.vision.v1.BatchOperationMetadata"
+  name: "PurgeProductsRequest,Empty,BatchOperationMetadata"
+  nameWithType: "PurgeProductsRequest,Empty,BatchOperationMetadata"
+  fullName: "com.google.cloud.vision.v1.PurgeProductsRequest,com.google.protobuf.Empty,com.google.cloud.vision.v1.BatchOperationMetadata"
+- uid: "java.util.List"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/util/List.html"
+  name: "List"
+  nameWithType: "List"
+  fullName: "java.util.List"
+- uid: "com.google.api.gax.rpc.ClientSettings"
+  isExternal: true
+  name: "ClientSettings"
+  nameWithType: "ClientSettings"
+  fullName: "com.google.api.gax.rpc.ClientSettings"
+- uid: "com.google.api.gax.rpc.ClientSettings."
+  isExternal: true
+  name: "ClientSettings."
+  nameWithType: "ClientSettings."
+  fullName: "com.google.api.gax.rpc.ClientSettings."
+- uid: "B>toBuilder()"
+  name: "B>toBuilder()"
+  nameWithType: "B>toBuilder()"
+  fullName: "B>toBuilder()"

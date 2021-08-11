@@ -183,4 +183,37 @@ public class YmlFilesBuilderTest {
         assertTrue("Wrong references content", content.contains("tr.T"));
         assertTrue("Wrong references content", content.contains("a.b.c.List<df.mn.ClassOne<tr.T>>"));
     }
+
+
+    @Test
+    public void getJavaReferenceHref(){
+        String result1 = ymlFilesBuilder.getJavaReferenceHref("java.lang.Object");
+        String result2 = ymlFilesBuilder.getJavaReferenceHref("java.lang.Object.equals(java.lang.Object)");
+        String result3 = ymlFilesBuilder.getJavaReferenceHref("java.lang.Object.notify()");
+        String result4 = ymlFilesBuilder.getJavaReferenceHref("java.util.List");
+        String result5 = ymlFilesBuilder.getJavaReferenceHref("java.lang.Object.wait(long,int)");
+        String result6 = ymlFilesBuilder.getJavaReferenceHref("java.lang.Object.getClass()");
+        String result7 = ymlFilesBuilder.getJavaReferenceHref("java.io.IOException");
+        String result8 = ymlFilesBuilder.getJavaReferenceHref("java.io.InputStream");
+        String result9 = ymlFilesBuilder.getJavaReferenceHref("java.lang.Enum.hashCode()");
+        String result10 = ymlFilesBuilder.getJavaReferenceHref("java.nio.ByteBuffer");
+        String result11 = ymlFilesBuilder.getJavaReferenceHref("");
+        String result12 = ymlFilesBuilder.getJavaReferenceHref(null);
+
+
+        String baseURL = "https://docs.oracle.com/javase/8/docs/api/";
+
+        assertEquals(baseURL + "java/lang/Object.html", result1);
+        assertEquals(baseURL + "java/lang/Object.html#equals-java.lang.Object-", result2);
+        assertEquals(baseURL + "java/lang/Object.html#notify--", result3);
+        assertEquals(baseURL + "java/util/List.html", result4);
+        assertEquals(baseURL + "java/lang/Object.html#wait-long-int-", result5);
+        assertEquals(baseURL + "java/lang/Object.html#getClass--", result6);
+        assertEquals(baseURL + "java/io/IOException.html", result7);
+        assertEquals(baseURL + "java/io/InputStream.html", result8);
+        assertEquals(baseURL + "java/lang/Enum.html#hashCode--", result9);
+        assertEquals(baseURL + "java/nio/ByteBuffer.html", result10);
+        assertEquals(baseURL, result11);
+        assertEquals(baseURL, result12);
+    }
 }

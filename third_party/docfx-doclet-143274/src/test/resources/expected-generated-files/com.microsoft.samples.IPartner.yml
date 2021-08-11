@@ -34,10 +34,13 @@ items:
       description: "The partner credentials."
 references:
 - uid: "java.lang.String"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
   spec.java:
   - uid: "java.lang.String"
     name: "String"
     fullName: "java.lang.String"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
 - uid: "com.microsoft.samples.IPartner.getCredentials*"
   name: "getCredentials"
   nameWithType: "IPartner.getCredentials"

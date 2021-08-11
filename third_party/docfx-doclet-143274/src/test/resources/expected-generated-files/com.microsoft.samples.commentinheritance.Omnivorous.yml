@@ -85,10 +85,13 @@ references:
   nameWithType: "Herbivorous.Plant"
   fullName: "com.microsoft.samples.commentinheritance.Herbivorous.Plant"
 - uid: "java.lang.String"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
   spec.java:
   - uid: "java.lang.String"
     name: "String"
     fullName: "java.lang.String"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
 - uid: "com.microsoft.samples.commentinheritance.Omnivorous.getKind*"
   name: "getKind"
   nameWithType: "Omnivorous.getKind"
