@@ -156,10 +156,6 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
     }
 
     public void setSummary(String summary) {
-        // caused by <pre> - removing code block from summaries
-        if (this.summary != null) {
-            summary = summary.replaceAll("```", "");
-        }
         this.summary = summary;
     }
 
