@@ -68,7 +68,7 @@ references:
   nameWithType: "R"
   fullName: "R"
 - uid: "java.util.List<com.microsoft.samples.subpackage.Person<T>>"
-  href: "https://docs.oracle.com/javase/8/docs/api/java/util/List<com/microsoft/samples/subpackage/Person<T>>.html"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/util/List<com/microsoft/samples/subpackage/Person>.html"
   name: "List<Person<T>>"
   nameWithType: "List<Person<T>>"
   fullName: "java.util.List<com.microsoft.samples.subpackage.Person<T>>"

@@ -269,7 +269,7 @@ public class YmlFilesBuilder {
         }
         //  example1 uid: "java.lang.Object.equals(java.lang.Object)"
         //  example2 uid: "java.lang.Object"
-        String endURL = uid;
+        String endURL = uid.replaceAll("<T>", "");
 
         Pattern argPattern = Pattern.compile(".*\\(.*\\).*");
         if (argPattern.matcher(endURL).find()) {

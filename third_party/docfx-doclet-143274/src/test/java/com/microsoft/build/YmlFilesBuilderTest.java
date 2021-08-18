@@ -197,9 +197,9 @@ public class YmlFilesBuilderTest {
         String result8 = ymlFilesBuilder.getJavaReferenceHref("java.io.InputStream");
         String result9 = ymlFilesBuilder.getJavaReferenceHref("java.lang.Enum.hashCode()");
         String result10 = ymlFilesBuilder.getJavaReferenceHref("java.nio.ByteBuffer");
-        String result11 = ymlFilesBuilder.getJavaReferenceHref("");
-        String result12 = ymlFilesBuilder.getJavaReferenceHref(null);
-
+        String result11 = ymlFilesBuilder.getJavaReferenceHref("java.lang.Enum.<T>valueOf(java.lang.Class<T>,java.lang.String)");
+        String result12 = ymlFilesBuilder.getJavaReferenceHref("");
+        String result13 = ymlFilesBuilder.getJavaReferenceHref(null);
 
         String baseURL = "https://docs.oracle.com/javase/8/docs/api/";
 
@@ -213,7 +213,8 @@ public class YmlFilesBuilderTest {
         assertEquals(baseURL + "java/io/InputStream.html", result8);
         assertEquals(baseURL + "java/lang/Enum.html#hashCode--", result9);
         assertEquals(baseURL + "java/nio/ByteBuffer.html", result10);
-        assertEquals(baseURL, result11);
+        assertEquals(baseURL + "java/lang/Enum.html#valueOf-java.lang.Class-java.lang.String-", result11);
         assertEquals(baseURL, result12);
+        assertEquals(baseURL, result13);
     }
 }
