@@ -8,6 +8,8 @@
   - uid: "com.microsoft.samples"
     name: "com.microsoft.samples"
     items:
+    - uid: "com.microsoft.samples"
+      name: "Package summary"
     - uid: "com.microsoft.samples.BasePartnerComponent"
       name: "BasePartnerComponent"
     - uid: "com.microsoft.samples.BasePartnerComponentString"
@@ -25,6 +27,8 @@
   - uid: "com.microsoft.samples.agreements"
     name: "com.microsoft.samples.agreements"
     items:
+    - uid: "com.microsoft.samples.agreements"
+      name: "Package summary"
     - uid: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations"
       name: "AgreementDetailsCollectionOperations"
     - uid: "com.microsoft.samples.agreements.AgreementMetaData"
@@ -36,6 +40,8 @@
   - uid: "com.microsoft.samples.commentinheritance"
     name: "com.microsoft.samples.commentinheritance"
     items:
+    - uid: "com.microsoft.samples.commentinheritance"
+      name: "Package summary"
     - uid: "com.microsoft.samples.commentinheritance.Animal"
       name: "Animal"
     - uid: "com.microsoft.samples.commentinheritance.Carnivorous"
@@ -57,6 +63,8 @@
   - uid: "com.microsoft.samples.google"
     name: "com.microsoft.samples.google"
     items:
+    - uid: "com.microsoft.samples.google"
+      name: "Package summary"
     - uid: "com.microsoft.samples.google.ProductSearchSettings"
       name: "ProductSearchSettings"
     - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -74,11 +82,15 @@
   - uid: "com.microsoft.samples.offers"
     name: "com.microsoft.samples.offers"
     items:
+    - uid: "com.microsoft.samples.offers"
+      name: "Package summary"
     - uid: "com.microsoft.samples.offers.Offer"
       name: "Offer"
   - uid: "com.microsoft.samples.subpackage"
     name: "com.microsoft.samples.subpackage"
     items:
+    - uid: "com.microsoft.samples.subpackage"
+      name: "Package summary"
     - uid: "com.microsoft.samples.subpackage.CustomException"
       name: "CustomException"
     - uid: "com.microsoft.samples.subpackage.Display"
