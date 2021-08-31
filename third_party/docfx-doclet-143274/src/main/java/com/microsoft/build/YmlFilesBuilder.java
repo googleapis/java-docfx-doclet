@@ -71,6 +71,7 @@ public class YmlFilesBuilder {
             packageMetadataFiles.add(buildPackageMetadataFile(packageElement));
 
             TocItem packageTocItem = new TocItem(uid, uid);
+            packageTocItem.getItems().add(new TocItem(uid, "Package summary"));
             buildFilesForInnerClasses(packageElement, packageTocItem.getItems(), classMetadataFiles);
             tocFile.addTocItem(packageTocItem);
         }
