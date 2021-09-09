@@ -155,6 +155,8 @@ items:
     return:
       type: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase"
       description: "The enum associated with the given number."
+  status: "deprecated"
+  deprecated: "Use <xref uid=\"#forNumber(int)\" data-throw-if-not-resolved=\"false\">#forNumber(int)</xref> instead."
 - uid: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase.valueOf(java.lang.String)"
   id: "valueOf(java.lang.String)"
   parent: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase"

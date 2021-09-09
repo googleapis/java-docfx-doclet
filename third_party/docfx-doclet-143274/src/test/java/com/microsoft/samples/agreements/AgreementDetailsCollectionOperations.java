@@ -6,6 +6,7 @@ import com.microsoft.samples.IPartner;
 
 /**
  * Agreement details collection operations implementation class.
+ * @deprecated Use {@link AgreementMetaData} instead.
  */
 public class AgreementDetailsCollectionOperations
         extends BasePartnerComponentString
@@ -23,6 +24,7 @@ public class AgreementDetailsCollectionOperations
      * Retrieves the agreement details.
      *
      * @return A list of agreement details.
+     * @deprecated Some text
      */
     public ResourceCollection<AgreementMetaData> get() {
         return null;

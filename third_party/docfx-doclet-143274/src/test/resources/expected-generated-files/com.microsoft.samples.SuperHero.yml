@@ -270,6 +270,8 @@ items:
   exceptions:
   - type: "java.lang.IllegalArgumentException"
     description: "when incomingDamage is negative and thanks for <xref uid=\"Exception\" data-throw-if-not-resolved=\"false\">Exception</xref>"
+  status: "deprecated"
+  deprecated: "As of version 1.1, use . . . instead"
 references:
 - uid: "com.microsoft.samples.SuperHero.SuperHero*"
   name: "SuperHero"

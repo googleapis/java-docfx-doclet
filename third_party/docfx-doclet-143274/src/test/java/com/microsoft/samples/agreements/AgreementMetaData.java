@@ -28,6 +28,7 @@ public class AgreementMetaData {
 
     /**
      * Gets or sets URL to the agreement template.
+     * @deprecated
      */
     @JsonProperty("agreementLink")
     private String agreementLink;

@@ -2,7 +2,13 @@ package com.microsoft.lookup;
 
 import com.google.testing.compile.CompilationRule;
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
+import com.microsoft.model.Status;
 import com.microsoft.model.TypeParameter;
+import com.sun.source.doctree.DeprecatedTree;
+import com.sun.source.doctree.DocCommentTree;
+import com.sun.source.doctree.DocTree;
+import com.sun.source.doctree.TextTree;
+import com.sun.source.util.DocTrees;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.junit.Before;
 import org.junit.Rule;
@@ -13,10 +19,12 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ClassLookupTest {
@@ -26,12 +34,22 @@ public class ClassLookupTest {
     private Elements elements;
     private ClassLookup classLookup;
     private DocletEnvironment environment;
+    private DocTrees docTrees;
+    private DocTree docTree;
+    private DocCommentTree docCommentTree;
+    private DeprecatedTree deprecatedTree;
+    private TextTree textTree;
 
     @Before
     public void setup() {
         elements = rule.getElements();
         environment = Mockito.mock(DocletEnvironment.class);
         classLookup = new ClassLookup(environment);
+        docTrees = Mockito.mock(DocTrees.class);
+        docTree = Mockito.mock(DocTree.class);
+        docCommentTree = Mockito.mock(DocCommentTree.class);
+        deprecatedTree = Mockito.mock(DeprecatedTree.class);
+        textTree = Mockito.mock(TextTree.class);
     }
 
     @Test
@@ -145,5 +163,78 @@ public class ClassLookupTest {
         TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo");
 
         assertEquals(classLookup.determineType(element), "Class");
+    }
+
+    @Test
+    public void extractDeprecatedDescription() {
+        TypeElement element = elements.getTypeElement("com.microsoft.samples.agreements.AgreementDetailsCollectionOperations");
+        String depMsg = "Deprecated Message :(";
+
+        when(environment.getDocTrees()).thenReturn(docTrees);
+        when(docTrees.getDocCommentTree(element)).thenReturn(docCommentTree);
+        doReturn(Arrays.asList(deprecatedTree)).when(docCommentTree).getBlockTags();
+        when(deprecatedTree.getKind()).thenReturn(DocTree.Kind.DEPRECATED);
+
+        doReturn(Arrays.asList(textTree)).when(deprecatedTree).getBody();
+        when(textTree.getKind()).thenReturn(DocTree.Kind.TEXT);
+        when(textTree.toString()).thenReturn(depMsg);
+
+        String result = classLookup.extractDeprecatedDescription(element);
+
+        verify(environment).getDocTrees();
+        verify(docTrees).getDocCommentTree(element);
+        verify(docCommentTree).getBlockTags();
+        verify(deprecatedTree).getKind();
+        assertEquals("Wrong description", result, depMsg);
+    }
+
+    @Test
+    public void extractDeprecatedDescriptionNull() {
+        TypeElement element = elements.getTypeElement("com.microsoft.samples.agreements.AgreementDetailsCollectionOperations");
+
+        when(environment.getDocTrees()).thenReturn(docTrees);
+        when(docTrees.getDocCommentTree(element)).thenReturn(docCommentTree);
+        doReturn(Arrays.asList()).when(docCommentTree).getBlockTags();
+
+        String result = classLookup.extractDeprecatedDescription(element);
+
+        verify(environment).getDocTrees();
+        verify(docTrees).getDocCommentTree(element);
+        verify(docCommentTree).getBlockTags();
+        assertEquals("Wrong description", result, null);
+    }
+
+    @Test
+    public void extractStatusDeprecated() {
+        TypeElement element = elements.getTypeElement("com.microsoft.samples.agreements.AgreementDetailsCollectionOperations");
+
+        when(environment.getDocTrees()).thenReturn(docTrees);
+        when(docTrees.getDocCommentTree(element)).thenReturn(docCommentTree);
+        doReturn(Arrays.asList(deprecatedTree)).when(docCommentTree).getBlockTags();
+        when(deprecatedTree.getKind()).thenReturn(DocTree.Kind.DEPRECATED);
+
+        String result = classLookup.extractStatus(element);
+
+        verify(environment).getDocTrees();
+        verify(docTrees).getDocCommentTree(element);
+        verify(docCommentTree).getBlockTags();
+        verify(deprecatedTree).getKind();
+        assertEquals("Wrong description", result, Status.DEPRECATED.toString());
+    }
+
+    @Test
+    public void extractStatusNotDeprecated() {
+        TypeElement element = elements.getTypeElement("com.microsoft.samples.agreements.AgreementDetailsCollectionOperations");
+
+        when(environment.getDocTrees()).thenReturn(docTrees);
+        when(docTrees.getDocCommentTree(element)).thenReturn(docCommentTree);
+        doReturn(Arrays.asList()).when(docCommentTree).getBlockTags();
+
+        String result = classLookup.extractStatus(element);
+
+        verify(environment).getDocTrees();
+        verify(docTrees).getDocCommentTree(element);
+        verify(docCommentTree).getBlockTags();
+        assertEquals("Wrong description", result, null);
     }
 }

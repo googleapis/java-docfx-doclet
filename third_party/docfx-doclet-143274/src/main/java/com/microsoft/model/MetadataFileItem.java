@@ -10,7 +10,7 @@ import java.util.List;
 
 @JsonPropertyOrder({"uid", "id", "parent", "children", "href", "langs", "isExternal", "name", "nameWithType",
         "fullName", "overload", "overridden", "type", "package", "summary", "syntax", "inheritance", "implements", "exceptions",
-        "spec.java", "inheritedMembers"})
+        "spec.java", "inheritedMembers", "status", "deprecated"})
 public class MetadataFileItem implements Comparable<MetadataFileItem> {
 
     private final String uid;
@@ -38,6 +38,8 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
     private List<SpecViewModel> specForJava = new ArrayList<>();
     @JsonProperty("inheritedMembers")
     private List<String> inheritedMethods = new ArrayList<>();
+    private String status;
+    private String deprecated;
 
     @Override
     public int compareTo(MetadataFileItem item) {
@@ -241,12 +243,9 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) { return true; }
+
+        if (o == null || getClass() != o.getClass()) { return false; }
 
         MetadataFileItem that = (MetadataFileItem) o;
 
@@ -262,11 +261,19 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
         return isExternal ? true : null;
     }
 
+    public void setIsExternal(boolean external) {
+        isExternal = external;
+    }
+
     public String handleGenericForOverLoad(String value) {
         return RegExUtils.removeAll(value, "<\\w+(,\\s*\\w+)*>");
     }
 
-    public void setIsExternal(boolean external) {
-        isExternal = external;
-    }
+    public String getStatus() { return status; }
+
+    public void setStatus(String status) { this.status = status; }
+
+    public String getDeprecated() { return deprecated; }
+
+    public void setDeprecated(String deprecated) { this.deprecated = deprecated; }
 }

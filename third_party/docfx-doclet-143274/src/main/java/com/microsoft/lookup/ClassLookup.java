@@ -2,8 +2,11 @@ package com.microsoft.lookup;
 
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.MetadataFileItem;
+import com.microsoft.model.Status;
 import com.microsoft.model.TypeParameter;
 import com.microsoft.util.Utils;
+import com.sun.source.doctree.DeprecatedTree;
+import com.sun.source.doctree.DocTree;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -49,8 +52,34 @@ public class ClassLookup extends BaseLookup<TypeElement> {
         result.setInheritedMethods(determineInheritedMembers(inheritedMethods));
         populateContent(classElement, classSNameWithGenericsSupport, result);
         result.setTocName(classQName.replace(packageName.concat("."), ""));
-
+        String depMsg = extractDeprecatedDescription(classElement);
+        if (depMsg != null) {
+            result.setDeprecated(depMsg);
+            result.setStatus(Status.DEPRECATED.toString());
+        }
         return result;
+    }
+
+    public String extractStatus(TypeElement classElement) {
+        DocTree deprecated = getDocCommentTree(classElement)
+                .map(docTree -> docTree.getBlockTags().stream()
+                        .filter(o -> o.getKind() == DocTree.Kind.DEPRECATED)
+                        .findFirst().orElse(null)
+                ).orElse(null);
+
+        if (deprecated != null) {
+            return Status.DEPRECATED.toString();
+        }
+        return null;
+    }
+
+    public String extractDeprecatedDescription(TypeElement classElement) {
+        return getDocCommentTree(classElement).map(docTree -> docTree.getBlockTags().stream()
+                .filter(o -> o.getKind() == DocTree.Kind.DEPRECATED)
+                .map(o -> (DeprecatedTree) o)
+                .map(o -> replaceLinksAndCodes(o.getBody()))
+                .findFirst().orElse(null)
+        ).orElse(null);
     }
 
     void populateContent(TypeElement classElement, String shortNameWithGenericsSupport,

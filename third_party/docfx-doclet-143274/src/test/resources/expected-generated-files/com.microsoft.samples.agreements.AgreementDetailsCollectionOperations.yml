@@ -36,6 +36,8 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
+  status: "deprecated"
+  deprecated: "Use <xref uid=\"AgreementMetaData\" data-throw-if-not-resolved=\"false\">AgreementMetaData</xref> instead."
 - uid: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.AgreementDetailsCollectionOperations(com.microsoft.samples.IPartner)"
   id: "AgreementDetailsCollectionOperations(com.microsoft.samples.IPartner)"
   parent: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations"
@@ -71,6 +73,8 @@ items:
     return:
       type: "com.microsoft.samples.agreements.ResourceCollection<com.microsoft.samples.agreements.AgreementMetaData>"
       description: "A list of agreement details."
+  status: "deprecated"
+  deprecated: "Some text"
 references:
 - uid: "com.microsoft.samples.IPartner"
   name: "IPartner"
