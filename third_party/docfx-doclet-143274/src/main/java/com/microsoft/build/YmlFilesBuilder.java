@@ -174,7 +174,7 @@ public class YmlFilesBuilder {
         classItem.setInheritedMethods(classLookup.extractInheritedMethods(classElement));
         String depMsg = classLookup.extractDeprecatedDescription(classElement);
         if (depMsg != null) {
-            classItem.setDeprecated(classLookup.extractDeprecatedDescription(classElement));
+            classItem.setDeprecated(depMsg);
             classItem.setStatus(Status.DEPRECATED.toString());
         }
         classMetadataFile.getItems().add(classItem);
@@ -213,6 +213,7 @@ public class YmlFilesBuilder {
                 constructorItem.setStatus(Status.DEPRECATED.toString());
             }
             classMetadataFile.getItems().add(constructorItem);
+
             addParameterReferences(constructorItem, classMetadataFile);
             addOverloadReferences(constructorItem, classMetadataFile);
         }
