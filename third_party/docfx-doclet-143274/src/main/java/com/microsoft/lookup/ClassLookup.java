@@ -52,11 +52,6 @@ public class ClassLookup extends BaseLookup<TypeElement> {
         result.setInheritedMethods(determineInheritedMembers(inheritedMethods));
         populateContent(classElement, classSNameWithGenericsSupport, result);
         result.setTocName(classQName.replace(packageName.concat("."), ""));
-        String depMsg = extractDeprecatedDescription(classElement);
-        if (depMsg != null) {
-            result.setDeprecated(depMsg);
-            result.setStatus(Status.DEPRECATED.toString());
-        }
         return result;
     }
 

@@ -174,10 +174,18 @@ public class YmlFilesBuilder {
         classItem.setInheritedMethods(classLookup.extractInheritedMethods(classElement));
         String depMsg = classLookup.extractDeprecatedDescription(classElement);
         if (depMsg != null) {
-            classItem.setDeprecated(depMsg);
+            classItem.setSummary(getDeprecatedSummary(depMsg, classItem.getSummary()));
             classItem.setStatus(Status.DEPRECATED.toString());
         }
         classMetadataFile.getItems().add(classItem);
+    }
+
+    String getDeprecatedSummary(String depMsg, String summary){
+        String result = "(deprecated) " + depMsg;
+        if (summary != null && !summary.equals("")) {
+            result = result + " - " + summary;
+        }
+        return  result;
     }
 
     void addChildren(TypeElement classElement, List<String> children) {
@@ -209,7 +217,7 @@ public class YmlFilesBuilder {
             constructorItem.setParameters(classItemsLookup.extractParameters(constructorElement));
             String depMsg = classItemsLookup.extractDeprecatedDescription(constructorElement);
             if (depMsg != null) {
-                constructorItem.setDeprecated(depMsg);
+                constructorItem.setSummary(getDeprecatedSummary(depMsg, constructorItem.getSummary()));
                 constructorItem.setStatus(Status.DEPRECATED.toString());
             }
             classMetadataFile.getItems().add(constructorItem);
@@ -232,7 +240,7 @@ public class YmlFilesBuilder {
                     methodItem.setOverridden(classItemsLookup.extractOverridden(methodElement));
                     String depMsg = classItemsLookup.extractDeprecatedDescription(methodElement);
                     if (depMsg != null) {
-                        methodItem.setDeprecated(depMsg);
+                        methodItem.setSummary(getDeprecatedSummary(depMsg, methodItem.getSummary()));
                         methodItem.setStatus(Status.DEPRECATED.toString());
                     }
 
@@ -253,7 +261,7 @@ public class YmlFilesBuilder {
                     fieldItem.setReturn(classItemsLookup.extractReturn(fieldElement));
                     String depMsg = classItemsLookup.extractDeprecatedDescription(fieldElement);
                     if (depMsg != null) {
-                        fieldItem.setDeprecated(depMsg);
+                        fieldItem.setSummary(getDeprecatedSummary(depMsg, fieldItem.getSummary()));
                         fieldItem.setStatus(Status.DEPRECATED.toString());
                     }
 
@@ -283,11 +291,6 @@ public class YmlFilesBuilder {
             setType(classItemsLookup.extractType(element));
             setPackageName(classItemsLookup.extractPackageName(element));
             setSummary(classItemsLookup.extractSummary(element));
-            String depMsg = classItemsLookup.extractDeprecatedDescription(element);
-            if (depMsg != null) {
-                setDeprecated(depMsg);
-                setStatus(Status.DEPRECATED.toString());
-            }
         }};
     }
 

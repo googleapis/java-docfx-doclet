@@ -146,6 +146,7 @@ items:
   overload: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase.valueOf*"
   type: "Method"
   package: "com.microsoft.samples.google"
+  summary: "(deprecated) Use <xref uid=\"com.microsoft.samples.google.RecognitionAudio.AudioSourceCase.forNumber(int)\" data-throw-if-not-resolved=\"false\">#forNumber(int)</xref> instead."
   syntax:
     content: "public static RecognitionAudio.AudioSourceCase valueOf(int value)"
     parameters:
@@ -156,7 +157,6 @@ items:
       type: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase"
       description: "The enum associated with the given number."
   status: "deprecated"
-  deprecated: "Use <xref uid=\"#forNumber(int)\" data-throw-if-not-resolved=\"false\">#forNumber(int)</xref> instead."
 - uid: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase.valueOf(java.lang.String)"
   id: "valueOf(java.lang.String)"
   parent: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase"

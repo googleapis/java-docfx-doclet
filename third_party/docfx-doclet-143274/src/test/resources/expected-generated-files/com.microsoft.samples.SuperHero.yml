@@ -254,7 +254,7 @@ items:
   overload: "com.microsoft.samples.SuperHero.successfullyAttacked*"
   type: "Method"
   package: "com.microsoft.samples"
-  summary: "This is a simple description of the method. . . [Superman!][Superman]\n\n\n[Superman]: http://www.supermanisthegreatest.com"
+  summary: "(deprecated) As of version 1.1, use . . . instead -\n\nThis is a simple description of the method. . . [Superman!][Superman]\n\n\n[Superman]: http://www.supermanisthegreatest.com"
   syntax:
     content: "public int successfullyAttacked(int incomingDamage, String damageType)"
     parameters:
@@ -271,7 +271,6 @@ items:
   - type: "java.lang.IllegalArgumentException"
     description: "when incomingDamage is negative and thanks for <xref uid=\"Exception\" data-throw-if-not-resolved=\"false\">Exception</xref>"
   status: "deprecated"
-  deprecated: "As of version 1.1, use . . . instead"
 references:
 - uid: "com.microsoft.samples.SuperHero.SuperHero*"
   name: "SuperHero"

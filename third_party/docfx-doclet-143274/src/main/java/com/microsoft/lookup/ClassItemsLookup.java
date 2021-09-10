@@ -4,7 +4,6 @@ import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
-import com.microsoft.model.Status;
 import com.microsoft.util.CommentHelper;
 import com.microsoft.util.Utils;
 import com.sun.source.doctree.*;
@@ -75,12 +74,6 @@ public class ClassItemsLookup extends BaseLookup<Element> {
             String type = makeTypeShort(String.valueOf(element.asType()));
             result.setFieldContent(String.format("%s %s %s", modifiers, type, elementQName));
             result.setReturn(extractReturn((VariableElement) element));
-        }
-
-        String depMsg = extractDeprecatedDescription(element);
-        if (depMsg != null) {
-            result.setDeprecated(depMsg);
-            result.setStatus(Status.DEPRECATED.toString());
         }
 
         return result;

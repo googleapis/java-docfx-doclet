@@ -10,7 +10,7 @@ import java.util.List;
 
 @JsonPropertyOrder({"uid", "id", "parent", "children", "href", "langs", "isExternal", "name", "nameWithType",
         "fullName", "overload", "overridden", "type", "package", "summary", "syntax", "inheritance", "implements", "exceptions",
-        "spec.java", "inheritedMembers", "status", "deprecated"})
+        "spec.java", "inheritedMembers", "status"})
 public class MetadataFileItem implements Comparable<MetadataFileItem> {
 
     private final String uid;
@@ -39,7 +39,6 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
     @JsonProperty("inheritedMembers")
     private List<String> inheritedMethods = new ArrayList<>();
     private String status;
-    private String deprecated;
 
     @Override
     public int compareTo(MetadataFileItem item) {
@@ -272,8 +271,4 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
     public String getStatus() { return status; }
 
     public void setStatus(String status) { this.status = status; }
-
-    public String getDeprecated() { return deprecated; }
-
-    public void setDeprecated(String deprecated) { this.deprecated = deprecated; }
 }
