@@ -68,9 +68,9 @@ public class YmlFilesBuilder {
         TocFile tocFile = new TocFile(outputPath, projectName);
         for (PackageElement packageElement : elementUtil.extractPackageElements(environment.getIncludedElements())) {
             String uid = packageLookup.extractUid(packageElement);
+            String status = packageLookup.extractStatus(packageElement.getQualifiedName().toString());
+            TocItem packageTocItem = new TocItem(uid, uid, status);
             packageMetadataFiles.add(buildPackageMetadataFile(packageElement));
-
-            TocItem packageTocItem = new TocItem(uid, uid);
             packageTocItem.getItems().add(new TocItem(uid, "Package summary"));
             buildFilesForInnerClasses(packageElement, packageTocItem.getItems(), classMetadataFiles);
             tocFile.addTocItem(packageTocItem);
@@ -102,8 +102,9 @@ public class YmlFilesBuilder {
         for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
             String uid = classLookup.extractUid(classElement);
             String name = classLookup.extractTocName(classElement);
+            String status = classLookup.extractStatus(classElement);
 
-            listToAddItems.add(new TocItem(uid, name));
+            listToAddItems.add(new TocItem(uid, name, status));
 
             container.add(buildClassYmlFile(classElement));
             buildFilesForInnerClasses(classElement, listToAddItems, container);
@@ -171,7 +172,20 @@ public class YmlFilesBuilder {
         classItem.setInheritance(classLookup.extractSuperclass(classElement));
         classItem.setInterfaces(classLookup.extractInterfaces(classElement));
         classItem.setInheritedMethods(classLookup.extractInheritedMethods(classElement));
+        String depMsg = classLookup.extractDeprecatedDescription(classElement);
+        if (depMsg != null) {
+            classItem.setSummary(getDeprecatedSummary(depMsg, classItem.getSummary()));
+            classItem.setStatus(Status.DEPRECATED.toString());
+        }
         classMetadataFile.getItems().add(classItem);
+    }
+
+    String getDeprecatedSummary(String depMsg, String summary){
+        String result = "(deprecated) " + depMsg;
+        if (summary != null && !summary.equals("")) {
+            result = result + " - " + summary;
+        }
+        return  result;
     }
 
     void addChildren(TypeElement classElement, List<String> children) {
@@ -201,6 +215,11 @@ public class YmlFilesBuilder {
             constructorItem.setOverload(classItemsLookup.extractOverload(constructorElement));
             constructorItem.setContent(classItemsLookup.extractConstructorContent(constructorElement));
             constructorItem.setParameters(classItemsLookup.extractParameters(constructorElement));
+            String depMsg = classItemsLookup.extractDeprecatedDescription(constructorElement);
+            if (depMsg != null) {
+                constructorItem.setSummary(getDeprecatedSummary(depMsg, constructorItem.getSummary()));
+                constructorItem.setStatus(Status.DEPRECATED.toString());
+            }
             classMetadataFile.getItems().add(constructorItem);
 
             addParameterReferences(constructorItem, classMetadataFile);
@@ -219,6 +238,11 @@ public class YmlFilesBuilder {
                     methodItem.setParameters(classItemsLookup.extractParameters(methodElement));
                     methodItem.setReturn(classItemsLookup.extractReturn(methodElement));
                     methodItem.setOverridden(classItemsLookup.extractOverridden(methodElement));
+                    String depMsg = classItemsLookup.extractDeprecatedDescription(methodElement);
+                    if (depMsg != null) {
+                        methodItem.setSummary(getDeprecatedSummary(depMsg, methodItem.getSummary()));
+                        methodItem.setStatus(Status.DEPRECATED.toString());
+                    }
 
                     classMetadataFile.getItems().add(methodItem);
                     addExceptionReferences(methodItem, classMetadataFile);
@@ -235,6 +259,12 @@ public class YmlFilesBuilder {
                     MetadataFileItem fieldItem = buildMetadataFileItem(fieldElement);
                     fieldItem.setContent(classItemsLookup.extractFieldContent(fieldElement));
                     fieldItem.setReturn(classItemsLookup.extractReturn(fieldElement));
+                    String depMsg = classItemsLookup.extractDeprecatedDescription(fieldElement);
+                    if (depMsg != null) {
+                        fieldItem.setSummary(getDeprecatedSummary(depMsg, fieldItem.getSummary()));
+                        fieldItem.setStatus(Status.DEPRECATED.toString());
+                    }
+
                     classMetadataFile.getItems().add(fieldItem);
                     addReturnReferences(fieldItem, classMetadataFile);
                 });
@@ -335,9 +365,9 @@ public class YmlFilesBuilder {
         }
     }
 
-    private String updateReferenceUid(String uid){
+    private String updateReferenceUid(String uid) {
         if (ENDING_PATTERN.matcher(uid).find()) {
-            uid = uid.replace("<?>","");
+            uid = uid.replace("<?>", "");
         }
         return uid;
     }
@@ -346,7 +376,7 @@ public class YmlFilesBuilder {
         return (PROTOBUF_PATTERN.matcher(uid).find() || GAX_PATTERN.matcher(uid).find() || APICOMMON_PATTERN.matcher(uid).find() || GAX_PATTERN.matcher(uid).find() || LONGRUNNING_PATTERN.matcher(uid).find());
     }
 
-     private boolean isJavaPrimitive(String uid) {
+    private boolean isJavaPrimitive(String uid) {
         return (uid.equals("boolean") || uid.equals("int") || uid.equals("byte") || uid.equals("long") || uid.equals("float") || uid.equals("double") || uid.equals("char") || uid.equals("short"));
     }
 

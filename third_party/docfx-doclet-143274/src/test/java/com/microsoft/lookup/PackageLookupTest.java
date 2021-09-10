@@ -1,6 +1,7 @@
 package com.microsoft.lookup;
 
 import com.google.testing.compile.CompilationRule;
+import com.microsoft.model.Status;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.junit.Before;
 import org.junit.Rule;
@@ -38,4 +39,17 @@ public class PackageLookupTest {
 
         assertEquals("Wrong result", result, "package com.microsoft.samples");
     }
+
+    @Test
+    public void extractPackageStatus() {
+        PackageElement elementBeta = elements.getPackageElement("com.microsoft.samples.google.v1beta");
+        PackageElement elementAlpha = elements.getPackageElement("com.microsoft.samples.google.v1p1alpha");
+
+        String resultA = packageLookup.extractStatus(elementAlpha.getQualifiedName().toString());
+        String resultB = packageLookup.extractStatus(elementBeta.getQualifiedName().toString());
+
+        assertEquals("Wrong result", resultA, Status.ALPHA.toString());
+        assertEquals("Wrong result", resultB, Status.BETA.toString());
+    }
+
 }

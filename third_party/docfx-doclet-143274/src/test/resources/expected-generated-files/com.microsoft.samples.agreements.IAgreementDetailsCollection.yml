@@ -12,9 +12,10 @@ items:
   fullName: "com.microsoft.samples.agreements.IAgreementDetailsCollection"
   type: "Interface"
   package: "com.microsoft.samples.agreements"
-  summary: "Encapsulates the operations on the agreement metadata collection."
+  summary: "(deprecated) This one is deprecated :( - Encapsulates the operations on the agreement metadata collection."
   syntax:
     content: "public interface IAgreementDetailsCollection"
+  status: "deprecated"
 - uid: "com.microsoft.samples.agreements.IAgreementDetailsCollection.get()"
   id: "get()"
   parent: "com.microsoft.samples.agreements.IAgreementDetailsCollection"

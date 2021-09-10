@@ -6,11 +6,8 @@ import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
 import com.microsoft.util.CommentHelper;
 import com.microsoft.util.Utils;
-import com.sun.source.doctree.DocTree;
+import com.sun.source.doctree.*;
 import com.sun.source.doctree.DocTree.Kind;
-import com.sun.source.doctree.ParamTree;
-import com.sun.source.doctree.ReturnTree;
-import com.sun.source.doctree.ThrowsTree;
 import jdk.javadoc.doclet.DocletEnvironment;
 
 import javax.lang.model.element.*;
@@ -78,7 +75,17 @@ public class ClassItemsLookup extends BaseLookup<Element> {
             result.setFieldContent(String.format("%s %s %s", modifiers, type, elementQName));
             result.setReturn(extractReturn((VariableElement) element));
         }
+
         return result;
+    }
+
+    public String extractDeprecatedDescription(Element element) {
+        return getDocCommentTree(element).map(docTree -> docTree.getBlockTags().stream()
+                .filter(o -> o.getKind() == DocTree.Kind.DEPRECATED)
+                .map(o -> (DeprecatedTree) o)
+                .map(o -> replaceLinksAndCodes(o.getBody()))
+                .findFirst().orElse(null)
+        ).orElse(null);
     }
 
     List<MethodParameter> extractParameters(ExecutableElement element) {

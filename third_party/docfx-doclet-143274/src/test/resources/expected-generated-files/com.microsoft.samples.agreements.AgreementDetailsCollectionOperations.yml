@@ -13,7 +13,7 @@ items:
   fullName: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations"
   type: "Class"
   package: "com.microsoft.samples.agreements"
-  summary: "Agreement details collection operations implementation class."
+  summary: "(deprecated) Use <xref uid=\"com.microsoft.samples.agreements.AgreementMetaData\" data-throw-if-not-resolved=\"false\">AgreementMetaData</xref> instead. - Agreement details collection operations implementation class."
   syntax:
     content: "public class AgreementDetailsCollectionOperations extends BasePartnerComponentString implements IAgreementDetailsCollection"
   inheritance:
@@ -36,6 +36,7 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
+  status: "deprecated"
 - uid: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.AgreementDetailsCollectionOperations(com.microsoft.samples.IPartner)"
   id: "AgreementDetailsCollectionOperations(com.microsoft.samples.IPartner)"
   parent: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations"
@@ -65,12 +66,13 @@ items:
   overload: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.get*"
   type: "Method"
   package: "com.microsoft.samples.agreements"
-  summary: "Retrieves the agreement details."
+  summary: "(deprecated) Some text - Retrieves the agreement details."
   syntax:
     content: "public ResourceCollection<AgreementMetaData> get()"
     return:
       type: "com.microsoft.samples.agreements.ResourceCollection<com.microsoft.samples.agreements.AgreementMetaData>"
       description: "A list of agreement details."
+  status: "deprecated"
 references:
 - uid: "com.microsoft.samples.IPartner"
   name: "IPartner"
