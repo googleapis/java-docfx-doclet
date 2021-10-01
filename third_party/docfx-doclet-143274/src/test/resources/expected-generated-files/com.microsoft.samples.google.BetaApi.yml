@@ -1,0 +1,54 @@
+### YamlMime:ManagedReference
+items:
+- uid: "com.microsoft.samples.google.BetaApi"
+  id: "BetaApi"
+  parent: "com.microsoft.samples.google"
+  children:
+  - "com.microsoft.samples.google.BetaApi.value()"
+  langs:
+  - "java"
+  name: "BetaApi"
+  nameWithType: "BetaApi"
+  fullName: "com.microsoft.samples.google.BetaApi"
+  type: "Interface"
+  package: "com.microsoft.samples.google"
+  summary: "Indicates a public API that can change at any time, and has no guarantee of API stability and backward-compatibility.\n\nUsage guidelines:\n\n1.  This annotation is used only on APIs with public visibility. Internal interfaces should not use it.\n2.  This annotation should only be added to new APIs. Adding it to an existing API is considered API-breaking.\n3.  Removing this annotation from an API gives it stable status, assuming the API doesn't have other annotations denoting instability."
+  syntax:
+    content: "public interface BetaApi implements Annotation"
+  implements:
+  - "java.lang.annotation.Annotation"
+- uid: "com.microsoft.samples.google.BetaApi.value()"
+  id: "value()"
+  parent: "com.microsoft.samples.google.BetaApi"
+  langs:
+  - "java"
+  name: "value()"
+  nameWithType: "BetaApi.value()"
+  fullName: "com.microsoft.samples.google.BetaApi.value()"
+  overload: "com.microsoft.samples.google.BetaApi.value*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  summary: "Context information such as links to a discussion thread, tracking issue, etc."
+  syntax:
+    content: "public abstract String value()"
+    return:
+      type: "java.lang.String"
+references:
+- uid: "java.lang.String"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
+  spec.java:
+  - uid: "java.lang.String"
+    name: "String"
+    fullName: "java.lang.String"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
+- uid: "com.microsoft.samples.google.BetaApi.value*"
+  name: "value"
+  nameWithType: "BetaApi.value"
+  fullName: "com.microsoft.samples.google.BetaApi.value"
+  package: "com.microsoft.samples.google"
+- uid: "java.lang.annotation.Annotation"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/annotation/Annotation.html"
+  name: "Annotation"
+  nameWithType: "Annotation"
+  fullName: "java.lang.annotation.Annotation"
