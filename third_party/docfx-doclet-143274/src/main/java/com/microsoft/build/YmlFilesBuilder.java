@@ -102,8 +102,10 @@ public class YmlFilesBuilder {
     List<TocItem> joinTocTypeItems(TocTypeMap tocTypeMap){
         return tocTypeMap.getTitleList().stream()
                 .filter(kindTitle -> tocTypeMap.get(kindTitle.getElementKind()).size() > 0)
-                .map(kindTitle -> new TocItem(kindTitle.getTitle(), tocTypeMap.get(kindTitle.getElementKind())))
-                .collect(Collectors.toList());
+                .flatMap(kindTitle -> {
+                    tocTypeMap.get(kindTitle.getElementKind()).add(0, new TocItem(kindTitle.getTitle()));
+                    return tocTypeMap.get(kindTitle.getElementKind()).stream();
+                }).collect(Collectors.toList());
     }
 
     void buildFilesForInnerClasses(Element element, TocTypeMap tocTypeMap, List<MetadataFile> container) {
