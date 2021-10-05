@@ -5,7 +5,7 @@ import java.util.List;
 
 public class TocItem {
 
-    private final String uid;
+    private String uid;
     private final String name;
     private String status;
     private List<TocItem> items = new ArrayList<>();
@@ -19,6 +19,11 @@ public class TocItem {
         this.uid = uid;
         this.name = name;
         this.status = status;
+    }
+
+    public TocItem(String name, List<TocItem> items) {
+        this.name = name;
+        this.items = items;
     }
 
     public String getUid() {

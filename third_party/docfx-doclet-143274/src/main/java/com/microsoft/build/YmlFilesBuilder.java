@@ -13,10 +13,7 @@ import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.lang.model.element.Element;
-import javax.lang.model.element.ExecutableElement;
-import javax.lang.model.element.PackageElement;
-import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.*;
 import javax.lang.model.util.ElementFilter;
 import java.util.*;
 import java.util.function.Function;
@@ -71,8 +68,12 @@ public class YmlFilesBuilder {
             String status = packageLookup.extractStatus(packageElement.getQualifiedName().toString());
             TocItem packageTocItem = new TocItem(uid, uid, status);
             packageMetadataFiles.add(buildPackageMetadataFile(packageElement));
-            packageTocItem.getItems().add(new TocItem(uid, "Package summary"));
-            buildFilesForInnerClasses(packageElement, packageTocItem.getItems(), classMetadataFiles);
+            packageTocItem.getItems().add(new TocItem("Package summary", uid));
+
+            TocTypeMap typeMap = new TocTypeMap();
+            buildFilesForInnerClasses(packageElement,typeMap, classMetadataFiles);
+            packageTocItem.getItems().addAll(joinTocTypeItems(typeMap));
+
             tocFile.addTocItem(packageTocItem);
         }
 
@@ -98,16 +99,31 @@ public class YmlFilesBuilder {
         return true;
     }
 
-    void buildFilesForInnerClasses(Element element, List<TocItem> listToAddItems, List<MetadataFile> container) {
+    List<TocItem> joinTocTypeItems(TocTypeMap tocTypeMap){
+        return tocTypeMap.getTitleList().stream()
+                .filter(kindTitle -> tocTypeMap.get(kindTitle.getElementKind()).size() > 0)
+                .map(kindTitle -> new TocItem(kindTitle.getTitle(), tocTypeMap.get(kindTitle.getElementKind())))
+                .collect(Collectors.toList());
+    }
+
+    void buildFilesForInnerClasses(Element element, TocTypeMap tocTypeMap, List<MetadataFile> container) {
         for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
             String uid = classLookup.extractUid(classElement);
             String name = classLookup.extractTocName(classElement);
             String status = classLookup.extractStatus(classElement);
 
-            listToAddItems.add(new TocItem(uid, name, status));
+            if (tocTypeMap.get(classElement.getKind().name()) != null) {
+                if (classElement.getKind().name().equals(ElementKind.CLASS.name()) && name.contains("Exception")) {
+                    tocTypeMap.get("EXCEPTION").add(new TocItem(uid, name, status));
+                } else {
+                    tocTypeMap.get(classElement.getKind().name()).add(new TocItem(uid, name, status));
+                }
+            } else {
+                tocTypeMap.get(ElementKind.CLASS.name()).add(new TocItem(uid, name, status));
+            }
 
             container.add(buildClassYmlFile(classElement));
-            buildFilesForInnerClasses(classElement, listToAddItems, container);
+            buildFilesForInnerClasses(classElement, tocTypeMap, container);
         }
     }
 
