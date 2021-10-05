@@ -68,7 +68,7 @@ public class YmlFilesBuilder {
             String status = packageLookup.extractStatus(packageElement.getQualifiedName().toString());
             TocItem packageTocItem = new TocItem(uid, uid, status);
             packageMetadataFiles.add(buildPackageMetadataFile(packageElement));
-            packageTocItem.getItems().add(new TocItem("Package summary", uid));
+            packageTocItem.getItems().add(new TocItem(uid, "Package summary"));
 
             TocTypeMap typeMap = new TocTypeMap();
             buildFilesForInnerClasses(packageElement,typeMap, classMetadataFiles);
