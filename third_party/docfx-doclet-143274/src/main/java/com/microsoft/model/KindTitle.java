@@ -16,8 +16,8 @@
 package com.microsoft.model;
 
 public class KindTitle {
-    final String elementKind;
-    final String title;
+    private final String elementKind;
+    private final String title;
 
     public KindTitle(String elementKind, String title) {
         this.elementKind = elementKind;
