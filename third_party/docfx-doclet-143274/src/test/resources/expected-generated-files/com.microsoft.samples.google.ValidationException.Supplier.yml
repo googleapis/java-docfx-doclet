@@ -1,0 +1,45 @@
+### YamlMime:ManagedReference
+items:
+- uid: "com.microsoft.samples.google.ValidationException.Supplier"
+  id: "Supplier"
+  parent: "com.microsoft.samples.google"
+  children:
+  - "com.microsoft.samples.google.ValidationException.Supplier.get()"
+  langs:
+  - "java"
+  name: "ValidationException.Supplier<T>"
+  nameWithType: "ValidationException.Supplier<T>"
+  fullName: "com.microsoft.samples.google.ValidationException.Supplier<T>"
+  type: "Interface"
+  package: "com.microsoft.samples.google"
+  syntax:
+    content: "public static interface ValidationException.Supplier<T>"
+    typeParameters:
+    - id: "T"
+- uid: "com.microsoft.samples.google.ValidationException.Supplier.get()"
+  id: "get()"
+  parent: "com.microsoft.samples.google.ValidationException.Supplier"
+  langs:
+  - "java"
+  name: "get()"
+  nameWithType: "ValidationException.Supplier<T>.get()"
+  fullName: "com.microsoft.samples.google.ValidationException.Supplier<T>.get()"
+  overload: "com.microsoft.samples.google.ValidationException.Supplier.get*"
+  type: "Method"
+  package: "com.microsoft.samples.google"
+  syntax:
+    content: "public abstract T get()"
+    return:
+      type: "T"
+references:
+- uid: "T"
+  spec.java:
+  - uid: "T"
+    name: "T"
+    fullName: "T"
+    isExternal: false
+- uid: "com.microsoft.samples.google.ValidationException.Supplier.get*"
+  name: "get"
+  nameWithType: "ValidationException.Supplier<T>.get"
+  fullName: "com.microsoft.samples.google.ValidationException.Supplier<T>.get"
+  package: "com.microsoft.samples.google"

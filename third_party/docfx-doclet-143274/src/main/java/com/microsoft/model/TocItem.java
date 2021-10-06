@@ -5,10 +5,12 @@ import java.util.List;
 
 public class TocItem {
 
-    private final String uid;
-    private final String name;
+    private String uid;
+    private String name;
     private String status;
+    private String heading;
     private List<TocItem> items = new ArrayList<>();
+
 
     public TocItem(String uid, String name) {
         this.uid = uid;
@@ -19,6 +21,10 @@ public class TocItem {
         this.uid = uid;
         this.name = name;
         this.status = status;
+    }
+
+    public TocItem(String heading) {
+        this.heading = heading;
     }
 
     public String getUid() {
@@ -34,4 +40,6 @@ public class TocItem {
     }
 
     public String getStatus() { return status; }
+
+    public String getHeading() { return heading; }
 }
