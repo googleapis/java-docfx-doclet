@@ -30,7 +30,7 @@ items:
   fullName: "com.microsoft.samples.google.RecognitionAudio"
   type: "Class"
   package: "com.microsoft.samples.google"
-  summary: "\n Contains audio data in the encoding specified in the <code>RecognitionConfig</code>.\n Either <code>content</code> or <code>uri</code> must be supplied. Supplying both or neither\n returns [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. See\n <a href=\"https://cloud.google.com/speech-to-text/quotas#content\">content limits</a>.\n \n\n Protobuf type <code>google.cloud.speech.v1.RecognitionAudio</code>"
+  summary: "\n Contains audio data in the encoding specified in the <code>RecognitionConfig</code>.\n Either <code>content</code> or <code>uri</code> must be supplied. Supplying both or neither\n returns <xref uid=\"\" data-throw-if-not-resolved=\"false\">google.rpc.Code.INVALID_ARGUMENT</xref>. See\n <a href=\"https://cloud.google.com/speech-to-text/quotas#content\">content limits</a>.\n \n\n Protobuf type <code>google.cloud.speech.v1.RecognitionAudio</code>"
   syntax:
     content: "public final class RecognitionAudio extends GeneratedMessageV3 implements RecognitionAudioOrBuilder"
   inheritance:
@@ -284,7 +284,7 @@ items:
   overload: "com.microsoft.samples.google.RecognitionAudio.getUri*"
   type: "Method"
   package: "com.microsoft.samples.google"
-  summary: "\n URI that points to a file that contains audio data bytes as specified in\n <code>RecognitionConfig</code>. The file must not be compressed (for example, gzip).\n Currently, only Google Cloud Storage URIs are\n supported, which must be specified in the following format:\n <code>gs://bucket_name/object_name</code> (other URI formats return\n [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]). For more information, see\n <a href=\"https://cloud.google.com/storage/docs/reference-uris\">Request URIs</a>.\n \n\n <code>string uri = 2;</code>"
+  summary: "\n URI that points to a file that contains audio data bytes as specified in\n <code>RecognitionConfig</code>. The file must not be compressed (for example, gzip).\n Currently, only Google Cloud Storage URIs are\n supported, which must be specified in the following format:\n <code>gs://bucket_name/object_name</code> (other URI formats return\n <xref uid=\"\" data-throw-if-not-resolved=\"false\">google.rpc.Code.INVALID_ARGUMENT</xref>). For more information, see\n <a href=\"https://cloud.google.com/storage/docs/reference-uris\">Request URIs</a>.\n \n\n <code>string uri = 2;</code>"
   syntax:
     content: "public String getUri()"
     return:
@@ -301,7 +301,7 @@ items:
   overload: "com.microsoft.samples.google.RecognitionAudio.getUriBytes*"
   type: "Method"
   package: "com.microsoft.samples.google"
-  summary: "\n URI that points to a file that contains audio data bytes as specified in\n <code>RecognitionConfig</code>. The file must not be compressed (for example, gzip).\n Currently, only Google Cloud Storage URIs are\n supported, which must be specified in the following format:\n <code>gs://bucket_name/object_name</code> (other URI formats return\n [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]). For more information, see\n <a href=\"https://cloud.google.com/storage/docs/reference-uris\">Request URIs</a>.\n \n\n <code>string uri = 2;</code>"
+  summary: "\n URI that points to a file that contains audio data bytes as specified in\n <code>RecognitionConfig</code>. The file must not be compressed (for example, gzip).\n Currently, only Google Cloud Storage URIs are\n supported, which must be specified in the following format:\n <code>gs://bucket_name/object_name</code> (other URI formats return\n <xref uid=\"\" data-throw-if-not-resolved=\"false\">google.rpc.Code.INVALID_ARGUMENT</xref>). For more information, see\n <a href=\"https://cloud.google.com/storage/docs/reference-uris\">Request URIs</a>.\n \n\n <code>string uri = 2;</code>"
   syntax:
     content: "public ByteString getUriBytes()"
     return:
@@ -335,7 +335,7 @@ items:
   overload: "com.microsoft.samples.google.RecognitionAudio.hasUri*"
   type: "Method"
   package: "com.microsoft.samples.google"
-  summary: "\n URI that points to a file that contains audio data bytes as specified in\n <code>RecognitionConfig</code>. The file must not be compressed (for example, gzip).\n Currently, only Google Cloud Storage URIs are\n supported, which must be specified in the following format:\n <code>gs://bucket_name/object_name</code> (other URI formats return\n [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]). For more information, see\n <a href=\"https://cloud.google.com/storage/docs/reference-uris\">Request URIs</a>.\n \n\n <code>string uri = 2;</code>"
+  summary: "\n URI that points to a file that contains audio data bytes as specified in\n <code>RecognitionConfig</code>. The file must not be compressed (for example, gzip).\n Currently, only Google Cloud Storage URIs are\n supported, which must be specified in the following format:\n <code>gs://bucket_name/object_name</code> (other URI formats return\n <xref uid=\"\" data-throw-if-not-resolved=\"false\">google.rpc.Code.INVALID_ARGUMENT</xref>). For more information, see\n <a href=\"https://cloud.google.com/storage/docs/reference-uris\">Request URIs</a>.\n \n\n <code>string uri = 2;</code>"
   syntax:
     content: "public boolean hasUri()"
     return:

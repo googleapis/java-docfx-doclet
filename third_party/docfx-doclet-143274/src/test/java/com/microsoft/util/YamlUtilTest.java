@@ -119,4 +119,18 @@ public class YamlUtilTest {
         assertEquals(expectedResult + random + expectedResult, YamlUtil.cleanupHtml(expectedActual + random + expectedActual));
         assertEquals("= text =", YamlUtil.cleanupHtml("= text ="));
     }
+
+    @Test
+    public void cleanupHtmlReferenceTest() {
+        String expectedActual = "[KeyRing][google.cloud.kms.v1.KeyRing]";
+        String expectedResult = "<xref uid=\"google.cloud.kms.v1.KeyRing\" data-throw-if-not-resolved=\"false\">KeyRing</xref>";
+        String random = UUID.randomUUID().toString();
+
+        assertEquals(expectedResult, YamlUtil.cleanupHtml(expectedActual));
+        assertEquals(random + expectedResult + random, YamlUtil.cleanupHtml(random + expectedActual + random));
+        assertEquals(expectedResult + random + expectedResult, YamlUtil.cleanupHtml(expectedActual + random + expectedActual));
+
+        assertEquals("[uid]][text]", YamlUtil.cleanupHtml("[uid]][text]"));
+        assertFalse(YamlUtil.cleanupHtml("[text[uid]]").contains("xref"));
+    }
 }
