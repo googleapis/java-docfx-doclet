@@ -9,10 +9,10 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.UUID;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 public class YamlUtilTest {
 
@@ -45,22 +45,6 @@ public class YamlUtilTest {
                 + "      description: \"Some desc 5\"\n");
     }
 
-    @Test
-    public void convertHtmlToMarkdown() throws IOException {
-        String text = FileUtils.readFileToString(new File("target/test-classes/html2md/initial.html"), UTF_8);
-        String expectedResult = FileUtils.readFileToString(new File("target/test-classes/html2md/converted.md"), UTF_8);
-
-        String result = YamlUtil.convertHtmlToMarkdown(text);
-
-        assertEquals("Wrong result", result, expectedResult);
-    }
-
-    @Test
-    public void convertHtmlToMarkdownForBlankParam() {
-        assertNull("Wrong result for null", YamlUtil.convertHtmlToMarkdown(null));
-        assertEquals("Wrong result for empty string", YamlUtil.convertHtmlToMarkdown(""), "");
-    }
-
     private MetadataFileItem buildMetadataFileItem(int seed) {
         MetadataFileItem metadataFileItem = new MetadataFileItem("Some uid " + seed);
         metadataFileItem.setId("Some id" + seed);
@@ -69,5 +53,70 @@ public class YamlUtilTest {
                 new MethodParameter("Some id " + seed, "Some type " + seed, "Some desc " + seed)));
 
         return metadataFileItem;
+    }
+
+
+    @Test
+    public void cleanupHtmlRemoveLonePreTagsTest() {
+        String expectedActual = "<pre>text</pre>";
+        String expectedResult = "text";
+        String expectedWithCode = "<pre><code class=\"pretty-print\">text</code></pre>";
+        String random = UUID.randomUUID().toString();
+
+        assertEquals(expectedResult, YamlUtil.cleanupHtml(expectedActual));
+        assertEquals(random + expectedResult + random, YamlUtil.cleanupHtml(random + expectedActual + random));
+        assertEquals(expectedResult + random + expectedResult, YamlUtil.cleanupHtml(expectedActual + random + expectedActual));
+        assertEquals(expectedWithCode, YamlUtil.cleanupHtml(expectedWithCode));
+    }
+
+    @Test
+    public void cleanupHtmlIncludePrettyPrintTest() {
+        String expectedActual = "<pre><code>";
+        String expectedResult = "<pre><code class=\"pretty-print\">";
+        String random = UUID.randomUUID().toString();
+
+        assertEquals(expectedResult, YamlUtil.cleanupHtml(expectedActual));
+        assertEquals(random + expectedResult + random, YamlUtil.cleanupHtml(random + expectedActual + random));
+        assertEquals(expectedResult + random + expectedResult, YamlUtil.cleanupHtml(expectedActual + random + expectedActual));
+        assertNotEquals(expectedResult, YamlUtil.cleanupHtml("<pre>" + random + "<code>"));
+        assertFalse(YamlUtil.cleanupHtml("<pre>" + random + "<code>").contains("class=\"pretty-print\""));
+    }
+
+    @Test
+    public void cleanupHtmlAddCodeTagsTest() {
+        String expectedActual = "`text`";
+        String expectedResult = "<code>text</code>";
+        String random = UUID.randomUUID().toString();
+
+        assertEquals(expectedResult, YamlUtil.cleanupHtml(expectedActual));
+        assertEquals(random + expectedResult + random, YamlUtil.cleanupHtml(random + expectedActual + random));
+        assertEquals(expectedResult + random + expectedResult, YamlUtil.cleanupHtml(expectedActual + random + expectedActual));
+        assertEquals("`" + expectedResult, YamlUtil.cleanupHtml("`" + expectedActual));
+        assertFalse(YamlUtil.cleanupHtml("`" + random).contains("<code>"));
+    }
+
+    @Test
+    public void cleanupHtmlAddHrefTagsTest() {
+        String expectedActual = "[text](link)";
+        String expectedResult = "<a href=\"link\">text</a>";
+        String random = UUID.randomUUID().toString();
+
+        assertEquals(expectedResult, YamlUtil.cleanupHtml(expectedActual));
+        assertEquals(random + expectedResult + random, YamlUtil.cleanupHtml(random + expectedActual + random));
+        assertEquals(expectedResult + random + expectedResult, YamlUtil.cleanupHtml(expectedActual + random + expectedActual));
+        assertEquals("[text]](link)", YamlUtil.cleanupHtml("[text]](link)"));
+        assertFalse(YamlUtil.cleanupHtml("[text(link)]").contains("href"));
+    }
+
+    @Test
+    public void cleanupHtmlEqualTitlesTest() {
+        String expectedActual = "======================= SpeechClient =======================";
+        String expectedResult = "<h2> SpeechClient </h2>";
+        String random = UUID.randomUUID().toString();
+
+        assertEquals(expectedResult, YamlUtil.cleanupHtml(expectedActual));
+        assertEquals(random + expectedResult + random, YamlUtil.cleanupHtml(random + expectedActual + random));
+        assertEquals(expectedResult + random + expectedResult, YamlUtil.cleanupHtml(expectedActual + random + expectedActual));
+        assertEquals("= text =", YamlUtil.cleanupHtml("= text ="));
     }
 }

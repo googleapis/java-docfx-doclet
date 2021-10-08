@@ -158,7 +158,7 @@ items:
   overridden: "com.microsoft.samples.subpackage.Person.getLastName()"
   type: "Method"
   package: "com.microsoft.samples"
-  summary: "Get capitalized last name. But it's not the end, because of multiline comment"
+  summary: "Get capitalized last name. But it's not the end,\n because of multiline comment"
   syntax:
     content: "public String getLastName()"
     return:
@@ -254,7 +254,7 @@ items:
   overload: "com.microsoft.samples.SuperHero.successfullyAttacked*"
   type: "Method"
   package: "com.microsoft.samples"
-  summary: "(deprecated) As of version 1.1, use . . . instead -\n\nThis is a simple description of the method. . . [Superman!][Superman]\n\n\n[Superman]: http://www.supermanisthegreatest.com"
+  summary: "<p>(deprecated) As of version 1.1, use . . . instead</p>\n<p>This is a simple description of the method. . .\n <a href=\"http://www.supermanisthegreatest.com\">Superman!</a>\n </p>"
   syntax:
     content: "public int successfullyAttacked(int incomingDamage, String damageType)"
     parameters:

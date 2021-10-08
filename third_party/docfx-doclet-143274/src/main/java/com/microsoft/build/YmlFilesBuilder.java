@@ -199,9 +199,9 @@ public class YmlFilesBuilder {
     }
 
     String getDeprecatedSummary(String depMsg, String summary){
-        String result = "(deprecated) " + depMsg;
+        String result = "<p>(deprecated) " + depMsg + "</p>";
         if (summary != null && !summary.equals("")) {
-            result = result + " - " + summary;
+            result = result + "\n" + summary;
         }
         return  result;
     }
@@ -495,7 +495,7 @@ public class YmlFilesBuilder {
             LookupContext lookupContext = lookup.buildContext(classMetadataFile);
 
             for (MetadataFileItem item : classMetadataFile.getItems()) {
-                item.setSummary(YamlUtil.convertHtmlToMarkdown(
+                item.setSummary(YamlUtil.cleanupHtml(
                         populateUidValues(item.getSummary(), lookupContext)
                 ));
 

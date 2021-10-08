@@ -12,7 +12,7 @@ items:
   fullName: "com.microsoft.samples.agreements.IAgreementDetailsCollection"
   type: "Interface"
   package: "com.microsoft.samples.agreements"
-  summary: "(deprecated) This one is deprecated :( - Encapsulates the operations on the agreement metadata collection."
+  summary: "<p>(deprecated) This one is deprecated :(</p>\nEncapsulates the operations on the agreement metadata collection."
   syntax:
     content: "public interface IAgreementDetailsCollection"
   status: "deprecated"

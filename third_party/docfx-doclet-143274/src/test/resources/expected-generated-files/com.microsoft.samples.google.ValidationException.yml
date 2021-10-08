@@ -16,7 +16,7 @@ items:
   fullName: "com.microsoft.samples.google.ValidationException"
   type: "Class"
   package: "com.microsoft.samples.google"
-  summary: "Exception thrown if there is a validation problem with a path template, http config, or related framework methods. Comes as an illegal argument exception subclass. Allows to globally set a thread-local validation context description which each exception inherits."
+  summary: "Exception thrown if there is a validation problem with a path template, http config, or related\n framework methods. Comes as an illegal argument exception subclass. Allows to globally set a\n thread-local validation context description which each exception inherits."
   syntax:
     content: "public class ValidationException extends IllegalArgumentException"
   inheritance:
@@ -93,7 +93,7 @@ items:
   overload: "com.microsoft.samples.google.ValidationException.pushCurrentThreadValidationContext*"
   type: "Method"
   package: "com.microsoft.samples.google"
-  summary: "Sets the validation context description. Each thread has its own description, so this is thread safe."
+  summary: "Sets the validation context description. Each thread has its own description, so this is thread\n safe."
   syntax:
     content: "public static void pushCurrentThreadValidationContext(ValidationException.Supplier<String> supplier)"
     parameters:
