@@ -2,6 +2,7 @@ package com.microsoft.lookup;
 
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.*;
+import com.microsoft.util.YamlUtil;
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree;
 import com.sun.source.doctree.LinkTree;
@@ -174,7 +175,7 @@ public abstract class BaseLookup<T extends Element> {
      * </ul>
      */
     String replaceLinksAndCodes(List<? extends DocTree> items) {
-        return items.stream().map(
+        return YamlUtil.cleanupHtml(items.stream().map(
                 bodyItem -> {
                     switch (bodyItem.getKind()) {
                         case LINK:
@@ -188,7 +189,7 @@ public abstract class BaseLookup<T extends Element> {
                             return String.valueOf(bodyItem);
                     }
                 }
-        ).collect(Collectors.joining());
+        ).collect(Collectors.joining()));
     }
 
     /**

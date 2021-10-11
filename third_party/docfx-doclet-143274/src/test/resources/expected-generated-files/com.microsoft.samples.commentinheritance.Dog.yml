@@ -138,7 +138,7 @@ items:
   overridden: "com.microsoft.samples.commentinheritance.Mammal.getKind()"
   type: "Method"
   package: "com.microsoft.samples.commentinheritance"
-  summary: "Get kind from Organism. Get kind from Animal. Get kind from Mammal. Get kind from Dog."
+  summary: "Get kind from Organism.\n Get kind from Animal.\n Get kind from Mammal.\n Get kind from Dog."
   syntax:
     content: "public String getKind()"
     return:

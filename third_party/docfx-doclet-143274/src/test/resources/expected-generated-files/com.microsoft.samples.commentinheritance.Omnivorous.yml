@@ -65,7 +65,7 @@ items:
   overload: "com.microsoft.samples.commentinheritance.Omnivorous.getKind*"
   type: "Method"
   package: "com.microsoft.samples.commentinheritance"
-  summary: "Get kind from Carnivorous. Get kind from Omnivorous."
+  summary: "Get kind from Carnivorous.\n Get kind from Omnivorous."
   syntax:
     content: "public abstract String getKind()"
     return:

@@ -13,7 +13,7 @@ items:
   fullName: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations"
   type: "Class"
   package: "com.microsoft.samples.agreements"
-  summary: "(deprecated) Use <xref uid=\"com.microsoft.samples.agreements.AgreementMetaData\" data-throw-if-not-resolved=\"false\">AgreementMetaData</xref> instead. - Agreement details collection operations implementation class."
+  summary: "<p>(deprecated) Use <xref uid=\"com.microsoft.samples.agreements.AgreementMetaData\" data-throw-if-not-resolved=\"false\">AgreementMetaData</xref> instead.</p>\nAgreement details collection operations implementation class."
   syntax:
     content: "public class AgreementDetailsCollectionOperations extends BasePartnerComponentString implements IAgreementDetailsCollection"
   inheritance:
@@ -66,7 +66,7 @@ items:
   overload: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.get*"
   type: "Method"
   package: "com.microsoft.samples.agreements"
-  summary: "(deprecated) Some text - Retrieves the agreement details."
+  summary: "<p>(deprecated) Some text</p>\nRetrieves the agreement details."
   syntax:
     content: "public ResourceCollection<AgreementMetaData> get()"
     return:
