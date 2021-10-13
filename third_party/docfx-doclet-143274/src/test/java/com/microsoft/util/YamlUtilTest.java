@@ -72,7 +72,7 @@ public class YamlUtilTest {
     @Test
     public void cleanupHtmlIncludePrettyPrintTest() {
         String expectedActual = "<pre><code>";
-        String expectedResult = "<pre><code class=\"pretty-print\">";
+        String expectedResult = "<pre><code class=\"prettyprint lang-java\">";
         String random = UUID.randomUUID().toString();
 
         assertEquals(expectedResult, YamlUtil.cleanupHtml(expectedActual));
