@@ -79,7 +79,7 @@ public class YamlUtilTest {
         assertEquals(random + expectedResult + random, YamlUtil.cleanupHtml(random + expectedActual + random));
         assertEquals(expectedResult + random + expectedResult, YamlUtil.cleanupHtml(expectedActual + random + expectedActual));
         assertNotEquals(expectedResult, YamlUtil.cleanupHtml("<pre>" + random + "<code>"));
-        assertFalse(YamlUtil.cleanupHtml("<pre>" + random + "<code>").contains("class=\"pretty-print\""));
+        assertFalse(YamlUtil.cleanupHtml("<pre>" + random + "<code>").contains("class=\"prettyprint lang-java\""));
     }
 
     @Test
