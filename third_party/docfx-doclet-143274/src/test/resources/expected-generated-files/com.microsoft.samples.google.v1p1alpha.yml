@@ -12,6 +12,7 @@ items:
   type: "Namespace"
   syntax:
     content: "package com.microsoft.samples.google.v1p1alpha"
+  javaType: "package"
 references:
 - uid: "com.microsoft.samples.google.v1p1alpha.SpeechClient"
   name: "SpeechClient"

@@ -12,6 +12,7 @@ items:
   type: "Namespace"
   syntax:
     content: "package com.microsoft.samples.offers"
+  javaType: "package"
 references:
 - uid: "com.microsoft.samples.offers.Offer"
   name: "Offer"

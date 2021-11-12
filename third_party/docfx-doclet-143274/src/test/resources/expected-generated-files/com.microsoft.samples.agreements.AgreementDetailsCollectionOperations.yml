@@ -37,6 +37,7 @@ items:
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
   status: "deprecated"
+  javaType: "class"
 - uid: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.AgreementDetailsCollectionOperations(com.microsoft.samples.IPartner)"
   id: "AgreementDetailsCollectionOperations(com.microsoft.samples.IPartner)"
   parent: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations"
@@ -55,6 +56,7 @@ items:
     - id: "rootPartnerOperations"
       type: "com.microsoft.samples.IPartner"
       description: "The root partner operations instance."
+  javaType: "constructor"
 - uid: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations.get()"
   id: "get()"
   parent: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations"
@@ -73,6 +75,7 @@ items:
       type: "com.microsoft.samples.agreements.ResourceCollection<com.microsoft.samples.agreements.AgreementMetaData>"
       description: "A list of agreement details."
   status: "deprecated"
+  javaType: "method"
 references:
 - uid: "com.microsoft.samples.IPartner"
   name: "IPartner"

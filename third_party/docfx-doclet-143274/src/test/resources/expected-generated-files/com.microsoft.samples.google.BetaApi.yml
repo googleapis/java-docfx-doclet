@@ -17,6 +17,7 @@ items:
     content: "public interface BetaApi implements Annotation"
   implements:
   - "java.lang.annotation.Annotation"
+  javaType: "annotationtype"
 - uid: "com.microsoft.samples.google.BetaApi.value()"
   id: "value()"
   parent: "com.microsoft.samples.google.BetaApi"
@@ -33,6 +34,7 @@ items:
     content: "public abstract String value()"
     return:
       type: "java.lang.String"
+  javaType: "method"
 references:
 - uid: "java.lang.String"
   href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"

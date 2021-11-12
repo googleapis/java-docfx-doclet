@@ -43,6 +43,7 @@ items:
   - "java.lang.Throwable.printStackTrace(java.io.PrintWriter)"
   - "java.lang.Throwable.setStackTrace(java.lang.StackTraceElement[])"
   - "java.lang.Throwable.toString()"
+  javaType: "exception"
 - uid: "com.microsoft.samples.subpackage.CustomException.CustomException(java.lang.String)"
   id: "CustomException(java.lang.String)"
   parent: "com.microsoft.samples.subpackage.CustomException"
@@ -59,6 +60,7 @@ items:
     parameters:
     - id: "message"
       type: "java.lang.String"
+  javaType: "constructor"
 - uid: "com.microsoft.samples.subpackage.CustomException.makeSomething()"
   id: "makeSomething()"
   parent: "com.microsoft.samples.subpackage.CustomException"
@@ -76,6 +78,7 @@ items:
   exceptions:
   - type: "com.microsoft.samples.subpackage.CustomException"
     description: "with reason message"
+  javaType: "method"
 references:
 - uid: "java.lang.String"
   href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"

@@ -35,6 +35,7 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
+  javaType: "class"
 - uid: "com.microsoft.samples.agreements.AgreementMetaData.AgreementMetaData()"
   id: "AgreementMetaData()"
   parent: "com.microsoft.samples.agreements.AgreementMetaData"
@@ -48,6 +49,7 @@ items:
   package: "com.microsoft.samples.agreements"
   syntax:
     content: "public AgreementMetaData()"
+  javaType: "constructor"
 - uid: "com.microsoft.samples.agreements.AgreementMetaData.getAgreementLink()"
   id: "getAgreementLink()"
   parent: "com.microsoft.samples.agreements.AgreementMetaData"
@@ -63,6 +65,7 @@ items:
     content: "public String getAgreementLink()"
     return:
       type: "java.lang.String"
+  javaType: "method"
 - uid: "com.microsoft.samples.agreements.AgreementMetaData.getTemplateId()"
   id: "getTemplateId()"
   parent: "com.microsoft.samples.agreements.AgreementMetaData"
@@ -78,6 +81,7 @@ items:
     content: "public String getTemplateId()"
     return:
       type: "java.lang.String"
+  javaType: "method"
 - uid: "com.microsoft.samples.agreements.AgreementMetaData.getVersionRank()"
   id: "getVersionRank()"
   parent: "com.microsoft.samples.agreements.AgreementMetaData"
@@ -93,6 +97,7 @@ items:
     content: "public int getVersionRank()"
     return:
       type: "int"
+  javaType: "method"
 - uid: "com.microsoft.samples.agreements.AgreementMetaData.setAgreementLink(java.lang.String)"
   id: "setAgreementLink(java.lang.String)"
   parent: "com.microsoft.samples.agreements.AgreementMetaData"
@@ -109,6 +114,7 @@ items:
     parameters:
     - id: "value"
       type: "java.lang.String"
+  javaType: "method"
 - uid: "com.microsoft.samples.agreements.AgreementMetaData.setTemplateId(java.lang.String)"
   id: "setTemplateId(java.lang.String)"
   parent: "com.microsoft.samples.agreements.AgreementMetaData"
@@ -125,6 +131,7 @@ items:
     parameters:
     - id: "value"
       type: "java.lang.String"
+  javaType: "method"
 - uid: "com.microsoft.samples.agreements.AgreementMetaData.setVersionRank(int)"
   id: "setVersionRank(int)"
   parent: "com.microsoft.samples.agreements.AgreementMetaData"
@@ -141,6 +148,7 @@ items:
     parameters:
     - id: "value"
       type: "int"
+  javaType: "method"
 references:
 - uid: "com.microsoft.samples.agreements.AgreementMetaData.AgreementMetaData*"
   name: "AgreementMetaData"

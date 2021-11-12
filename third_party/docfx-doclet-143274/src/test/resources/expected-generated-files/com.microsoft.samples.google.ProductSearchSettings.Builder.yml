@@ -83,6 +83,7 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
+  javaType: "class"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.Builder()"
   id: "Builder()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -96,6 +97,7 @@ items:
   package: "com.microsoft.samples.google"
   syntax:
     content: "protected Builder()"
+  javaType: "constructor"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.Builder(com.google.api.gax.rpc.ClientContext)"
   id: "Builder(com.google.api.gax.rpc.ClientContext)"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -112,6 +114,7 @@ items:
     parameters:
     - id: "clientContext"
       type: "com.google.api.gax.rpc.ClientContext"
+  javaType: "constructor"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.Builder(com.google.cloud.vision.v1.stub.ProductSearchStubSettings.Builder)"
   id: "Builder(com.google.cloud.vision.v1.stub.ProductSearchStubSettings.Builder)"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -128,6 +131,7 @@ items:
     parameters:
     - id: "stubSettings"
       type: "com.google.cloud.vision.v1.stub.ProductSearchStubSettings.Builder"
+  javaType: "constructor"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.Builder(com.microsoft.samples.google.ProductSearchSettings)"
   id: "Builder(com.microsoft.samples.google.ProductSearchSettings)"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -144,6 +148,7 @@ items:
     parameters:
     - id: "settings"
       type: "com.microsoft.samples.google.ProductSearchSettings"
+  javaType: "constructor"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.addProductToProductSetSettings()"
   id: "addProductToProductSetSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -160,6 +165,7 @@ items:
     content: "public UnaryCallSettings.Builder<AddProductToProductSetRequest,Empty> addProductToProductSetSettings()"
     return:
       type: "com.google.api.gax.rpc.UnaryCallSettings.Builder<com.google.cloud.vision.v1.AddProductToProductSetRequest,com.google.protobuf.Empty>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.applyToAllUnaryMethods(com.google.api.core.ApiFunction<com.google.api.gax.rpc.UnaryCallSettings.Builder<?,?>,java.lang.Void>)"
   id: "applyToAllUnaryMethods(com.google.api.core.ApiFunction<com.google.api.gax.rpc.UnaryCallSettings.Builder<?,?>,java.lang.Void>)"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -179,6 +185,7 @@ items:
       type: "com.google.api.core.ApiFunction<com.google.api.gax.rpc.UnaryCallSettings.Builder<?,?>,java.lang.Void>"
     return:
       type: "com.microsoft.samples.google.ProductSearchSettings.Builder"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.build()"
   id: "build()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -197,6 +204,7 @@ items:
       type: "com.microsoft.samples.google.ProductSearchSettings"
   exceptions:
   - type: "java.io.IOException"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.createProductSetSettings()"
   id: "createProductSetSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -213,6 +221,7 @@ items:
     content: "public UnaryCallSettings.Builder<CreateProductSetRequest,ProductSet> createProductSetSettings()"
     return:
       type: "com.google.api.gax.rpc.UnaryCallSettings.Builder<com.google.cloud.vision.v1.CreateProductSetRequest,com.google.cloud.vision.v1.ProductSet>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.createProductSettings()"
   id: "createProductSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -229,6 +238,7 @@ items:
     content: "public UnaryCallSettings.Builder<CreateProductRequest,Product> createProductSettings()"
     return:
       type: "com.google.api.gax.rpc.UnaryCallSettings.Builder<com.google.cloud.vision.v1.CreateProductRequest,com.google.cloud.vision.v1.Product>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.createReferenceImageSettings()"
   id: "createReferenceImageSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -245,6 +255,7 @@ items:
     content: "public UnaryCallSettings.Builder<CreateReferenceImageRequest,ReferenceImage> createReferenceImageSettings()"
     return:
       type: "com.google.api.gax.rpc.UnaryCallSettings.Builder<com.google.cloud.vision.v1.CreateReferenceImageRequest,com.google.cloud.vision.v1.ReferenceImage>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.deleteProductSetSettings()"
   id: "deleteProductSetSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -261,6 +272,7 @@ items:
     content: "public UnaryCallSettings.Builder<DeleteProductSetRequest,Empty> deleteProductSetSettings()"
     return:
       type: "com.google.api.gax.rpc.UnaryCallSettings.Builder<com.google.cloud.vision.v1.DeleteProductSetRequest,com.google.protobuf.Empty>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.deleteProductSettings()"
   id: "deleteProductSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -277,6 +289,7 @@ items:
     content: "public UnaryCallSettings.Builder<DeleteProductRequest,Empty> deleteProductSettings()"
     return:
       type: "com.google.api.gax.rpc.UnaryCallSettings.Builder<com.google.cloud.vision.v1.DeleteProductRequest,com.google.protobuf.Empty>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.deleteReferenceImageSettings()"
   id: "deleteReferenceImageSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -293,6 +306,7 @@ items:
     content: "public UnaryCallSettings.Builder<DeleteReferenceImageRequest,Empty> deleteReferenceImageSettings()"
     return:
       type: "com.google.api.gax.rpc.UnaryCallSettings.Builder<com.google.cloud.vision.v1.DeleteReferenceImageRequest,com.google.protobuf.Empty>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.getProductSetSettings()"
   id: "getProductSetSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -309,6 +323,7 @@ items:
     content: "public UnaryCallSettings.Builder<GetProductSetRequest,ProductSet> getProductSetSettings()"
     return:
       type: "com.google.api.gax.rpc.UnaryCallSettings.Builder<com.google.cloud.vision.v1.GetProductSetRequest,com.google.cloud.vision.v1.ProductSet>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.getProductSettings()"
   id: "getProductSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -325,6 +340,7 @@ items:
     content: "public UnaryCallSettings.Builder<GetProductRequest,Product> getProductSettings()"
     return:
       type: "com.google.api.gax.rpc.UnaryCallSettings.Builder<com.google.cloud.vision.v1.GetProductRequest,com.google.cloud.vision.v1.Product>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.getReferenceImageSettings()"
   id: "getReferenceImageSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -341,6 +357,7 @@ items:
     content: "public UnaryCallSettings.Builder<GetReferenceImageRequest,ReferenceImage> getReferenceImageSettings()"
     return:
       type: "com.google.api.gax.rpc.UnaryCallSettings.Builder<com.google.cloud.vision.v1.GetReferenceImageRequest,com.google.cloud.vision.v1.ReferenceImage>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.getStubSettingsBuilder()"
   id: "getStubSettingsBuilder()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -356,6 +373,7 @@ items:
     content: "public ProductSearchStubSettings.Builder getStubSettingsBuilder()"
     return:
       type: "com.google.cloud.vision.v1.stub.ProductSearchStubSettings.Builder"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.importProductSetsOperationSettings()"
   id: "importProductSetsOperationSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -372,6 +390,7 @@ items:
     content: "public OperationCallSettings.Builder<ImportProductSetsRequest,ImportProductSetsResponse,BatchOperationMetadata> importProductSetsOperationSettings()"
     return:
       type: "com.google.api.gax.rpc.OperationCallSettings.Builder<com.google.cloud.vision.v1.ImportProductSetsRequest,com.google.cloud.vision.v1.ImportProductSetsResponse,com.google.cloud.vision.v1.BatchOperationMetadata>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.importProductSetsSettings()"
   id: "importProductSetsSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -388,6 +407,7 @@ items:
     content: "public UnaryCallSettings.Builder<ImportProductSetsRequest,Operation> importProductSetsSettings()"
     return:
       type: "com.google.api.gax.rpc.UnaryCallSettings.Builder<com.google.cloud.vision.v1.ImportProductSetsRequest,com.google.longrunning.Operation>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.listProductSetsSettings()"
   id: "listProductSetsSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -404,6 +424,7 @@ items:
     content: "public PagedCallSettings.Builder<ListProductSetsRequest,ListProductSetsResponse,ProductSearchClient.ListProductSetsPagedResponse> listProductSetsSettings()"
     return:
       type: "com.google.api.gax.rpc.PagedCallSettings.Builder<com.google.cloud.vision.v1.ListProductSetsRequest,com.google.cloud.vision.v1.ListProductSetsResponse,com.google.cloud.vision.v1.ProductSearchClient.ListProductSetsPagedResponse>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.listProductsInProductSetSettings()"
   id: "listProductsInProductSetSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -420,6 +441,7 @@ items:
     content: "public PagedCallSettings.Builder<ListProductsInProductSetRequest,ListProductsInProductSetResponse,ProductSearchClient.ListProductsInProductSetPagedResponse> listProductsInProductSetSettings()"
     return:
       type: "com.google.api.gax.rpc.PagedCallSettings.Builder<com.google.cloud.vision.v1.ListProductsInProductSetRequest,com.google.cloud.vision.v1.ListProductsInProductSetResponse,com.google.cloud.vision.v1.ProductSearchClient.ListProductsInProductSetPagedResponse>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.listProductsSettings()"
   id: "listProductsSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -436,6 +458,7 @@ items:
     content: "public PagedCallSettings.Builder<ListProductsRequest,ListProductsResponse,ProductSearchClient.ListProductsPagedResponse> listProductsSettings()"
     return:
       type: "com.google.api.gax.rpc.PagedCallSettings.Builder<com.google.cloud.vision.v1.ListProductsRequest,com.google.cloud.vision.v1.ListProductsResponse,com.google.cloud.vision.v1.ProductSearchClient.ListProductsPagedResponse>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.listReferenceImagesSettings()"
   id: "listReferenceImagesSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -452,6 +475,7 @@ items:
     content: "public PagedCallSettings.Builder<ListReferenceImagesRequest,ListReferenceImagesResponse,ProductSearchClient.ListReferenceImagesPagedResponse> listReferenceImagesSettings()"
     return:
       type: "com.google.api.gax.rpc.PagedCallSettings.Builder<com.google.cloud.vision.v1.ListReferenceImagesRequest,com.google.cloud.vision.v1.ListReferenceImagesResponse,com.google.cloud.vision.v1.ProductSearchClient.ListReferenceImagesPagedResponse>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.purgeProductsOperationSettings()"
   id: "purgeProductsOperationSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -468,6 +492,7 @@ items:
     content: "public OperationCallSettings.Builder<PurgeProductsRequest,Empty,BatchOperationMetadata> purgeProductsOperationSettings()"
     return:
       type: "com.google.api.gax.rpc.OperationCallSettings.Builder<com.google.cloud.vision.v1.PurgeProductsRequest,com.google.protobuf.Empty,com.google.cloud.vision.v1.BatchOperationMetadata>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.purgeProductsSettings()"
   id: "purgeProductsSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -484,6 +509,7 @@ items:
     content: "public UnaryCallSettings.Builder<PurgeProductsRequest,Operation> purgeProductsSettings()"
     return:
       type: "com.google.api.gax.rpc.UnaryCallSettings.Builder<com.google.cloud.vision.v1.PurgeProductsRequest,com.google.longrunning.Operation>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.removeProductFromProductSetSettings()"
   id: "removeProductFromProductSetSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -500,6 +526,7 @@ items:
     content: "public UnaryCallSettings.Builder<RemoveProductFromProductSetRequest,Empty> removeProductFromProductSetSettings()"
     return:
       type: "com.google.api.gax.rpc.UnaryCallSettings.Builder<com.google.cloud.vision.v1.RemoveProductFromProductSetRequest,com.google.protobuf.Empty>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.updateProductSetSettings()"
   id: "updateProductSetSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -516,6 +543,7 @@ items:
     content: "public UnaryCallSettings.Builder<UpdateProductSetRequest,ProductSet> updateProductSetSettings()"
     return:
       type: "com.google.api.gax.rpc.UnaryCallSettings.Builder<com.google.cloud.vision.v1.UpdateProductSetRequest,com.google.cloud.vision.v1.ProductSet>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.updateProductSettings()"
   id: "updateProductSettings()"
   parent: "com.microsoft.samples.google.ProductSearchSettings.Builder"
@@ -532,6 +560,7 @@ items:
     content: "public UnaryCallSettings.Builder<UpdateProductRequest,Product> updateProductSettings()"
     return:
       type: "com.google.api.gax.rpc.UnaryCallSettings.Builder<com.google.cloud.vision.v1.UpdateProductRequest,com.google.cloud.vision.v1.Product>"
+  javaType: "method"
 references:
 - uid: "com.microsoft.samples.google.ProductSearchSettings.Builder.Builder*"
   name: "Builder"

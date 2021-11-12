@@ -20,6 +20,7 @@ items:
   implements:
   - "com.microsoft.samples.commentinheritance.Carnivorous"
   - "com.microsoft.samples.commentinheritance.Herbivorous"
+  javaType: "interface"
 - uid: "com.microsoft.samples.commentinheritance.Omnivorous.eat(com.microsoft.samples.commentinheritance.Animal)"
   id: "eat(com.microsoft.samples.commentinheritance.Animal)"
   parent: "com.microsoft.samples.commentinheritance.Omnivorous"
@@ -37,6 +38,7 @@ items:
     parameters:
     - id: "animalToBeEaten"
       type: "com.microsoft.samples.commentinheritance.Animal"
+  javaType: "method"
 - uid: "com.microsoft.samples.commentinheritance.Omnivorous.eat(com.microsoft.samples.commentinheritance.Herbivorous.Plant)"
   id: "eat(com.microsoft.samples.commentinheritance.Herbivorous.Plant)"
   parent: "com.microsoft.samples.commentinheritance.Omnivorous"
@@ -54,6 +56,7 @@ items:
     parameters:
     - id: "plantToBeEaten"
       type: "com.microsoft.samples.commentinheritance.Herbivorous.Plant"
+  javaType: "method"
 - uid: "com.microsoft.samples.commentinheritance.Omnivorous.getKind()"
   id: "getKind()"
   parent: "com.microsoft.samples.commentinheritance.Omnivorous"
@@ -70,6 +73,7 @@ items:
     content: "public abstract String getKind()"
     return:
       type: "java.lang.String"
+  javaType: "method"
 references:
 - uid: "com.microsoft.samples.commentinheritance.Animal"
   name: "Animal"

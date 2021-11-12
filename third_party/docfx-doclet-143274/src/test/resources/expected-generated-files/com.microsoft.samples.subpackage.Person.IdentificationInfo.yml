@@ -30,6 +30,7 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
+  javaType: "class"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo()"
   id: "IdentificationInfo()"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo"
@@ -43,6 +44,7 @@ items:
   package: "com.microsoft.samples.subpackage"
   syntax:
     content: "public IdentificationInfo()"
+  javaType: "constructor"
 references:
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.IdentificationInfo*"
   name: "IdentificationInfo"

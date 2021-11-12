@@ -52,6 +52,7 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
+  javaType: "class"
 - uid: "com.microsoft.samples.SuperHero.SOME_PUBLIC_STRING"
   id: "SOME_PUBLIC_STRING"
   parent: "com.microsoft.samples.SuperHero"
@@ -66,6 +67,7 @@ items:
     content: "public final String SOME_PUBLIC_STRING"
     return:
       type: "java.lang.String"
+  javaType: "field"
 - uid: "com.microsoft.samples.SuperHero.SuperHero()"
   id: "SuperHero()"
   parent: "com.microsoft.samples.SuperHero"
@@ -79,6 +81,7 @@ items:
   package: "com.microsoft.samples"
   syntax:
     content: "public SuperHero()"
+  javaType: "constructor"
 - uid: "com.microsoft.samples.SuperHero.SuperHero(java.lang.String,java.lang.String,int,int)"
   id: "SuperHero(java.lang.String,java.lang.String,int,int)"
   parent: "com.microsoft.samples.SuperHero"
@@ -101,6 +104,7 @@ items:
       type: "int"
     - id: "defense"
       type: "int"
+  javaType: "constructor"
 - uid: "com.microsoft.samples.SuperHero.getDefense()"
   id: "getDefense()"
   parent: "com.microsoft.samples.SuperHero"
@@ -116,6 +120,7 @@ items:
     content: "public int getDefense()"
     return:
       type: "int"
+  javaType: "method"
 - uid: "com.microsoft.samples.SuperHero.getHealth()"
   id: "getHealth()"
   parent: "com.microsoft.samples.SuperHero"
@@ -131,6 +136,7 @@ items:
     content: "protected int getHealth()"
     return:
       type: "int"
+  javaType: "method"
 - uid: "com.microsoft.samples.SuperHero.getHeroName()"
   id: "getHeroName()"
   parent: "com.microsoft.samples.SuperHero"
@@ -146,6 +152,7 @@ items:
     content: "public String getHeroName()"
     return:
       type: "java.lang.String"
+  javaType: "method"
 - uid: "com.microsoft.samples.SuperHero.getLastName()"
   id: "getLastName()"
   parent: "com.microsoft.samples.SuperHero"
@@ -164,6 +171,7 @@ items:
     return:
       type: "java.lang.String"
       description: "lastName in uppercase. But it's not the end,\n because of multiline comment"
+  javaType: "method"
 - uid: "com.microsoft.samples.SuperHero.getUniquePower()"
   id: "getUniquePower()"
   parent: "com.microsoft.samples.SuperHero"
@@ -179,6 +187,7 @@ items:
     content: "public String getUniquePower()"
     return:
       type: "java.lang.String"
+  javaType: "method"
 - uid: "com.microsoft.samples.SuperHero.setDefense(int)"
   id: "setDefense(int)"
   parent: "com.microsoft.samples.SuperHero"
@@ -195,6 +204,7 @@ items:
     parameters:
     - id: "defense"
       type: "int"
+  javaType: "method"
 - uid: "com.microsoft.samples.SuperHero.setHealth(int)"
   id: "setHealth(int)"
   parent: "com.microsoft.samples.SuperHero"
@@ -211,6 +221,7 @@ items:
     parameters:
     - id: "health"
       type: "int"
+  javaType: "method"
 - uid: "com.microsoft.samples.SuperHero.setHeroName(java.lang.String)"
   id: "setHeroName(java.lang.String)"
   parent: "com.microsoft.samples.SuperHero"
@@ -227,6 +238,7 @@ items:
     parameters:
     - id: "heroName"
       type: "java.lang.String"
+  javaType: "method"
 - uid: "com.microsoft.samples.SuperHero.setUniquePower(java.lang.String)"
   id: "setUniquePower(java.lang.String)"
   parent: "com.microsoft.samples.SuperHero"
@@ -243,6 +255,7 @@ items:
     parameters:
     - id: "uniquePower"
       type: "java.lang.String"
+  javaType: "method"
 - uid: "com.microsoft.samples.SuperHero.successfullyAttacked(int,java.lang.String)"
   id: "successfullyAttacked(int,java.lang.String)"
   parent: "com.microsoft.samples.SuperHero"
@@ -271,6 +284,7 @@ items:
   - type: "java.lang.IllegalArgumentException"
     description: "when incomingDamage is negative and thanks for <xref uid=\"Exception\" data-throw-if-not-resolved=\"false\">Exception</xref>"
   status: "deprecated"
+  javaType: "method"
 references:
 - uid: "com.microsoft.samples.SuperHero.SuperHero*"
   name: "SuperHero"

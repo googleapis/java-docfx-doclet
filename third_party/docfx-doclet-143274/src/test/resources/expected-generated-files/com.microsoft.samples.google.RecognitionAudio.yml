@@ -119,6 +119,7 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
+  javaType: "class"
 - uid: "com.microsoft.samples.google.RecognitionAudio.CONTENT_FIELD_NUMBER"
   id: "CONTENT_FIELD_NUMBER"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -133,6 +134,7 @@ items:
     content: "public static final int CONTENT_FIELD_NUMBER"
     return:
       type: "int"
+  javaType: "field"
 - uid: "com.microsoft.samples.google.RecognitionAudio.RecognitionAudio()"
   id: "RecognitionAudio()"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -146,6 +148,7 @@ items:
   package: "com.microsoft.samples.google"
   syntax:
     content: "private RecognitionAudio()"
+  javaType: "constructor"
 - uid: "com.microsoft.samples.google.RecognitionAudio.RecognitionAudio(com.google.protobuf.CodedInputStream,com.google.protobuf.ExtensionRegistryLite)"
   id: "RecognitionAudio(com.google.protobuf.CodedInputStream,com.google.protobuf.ExtensionRegistryLite)"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -164,6 +167,7 @@ items:
       type: "com.google.protobuf.CodedInputStream"
     - id: "extensionRegistry"
       type: "com.google.protobuf.ExtensionRegistryLite"
+  javaType: "constructor"
 - uid: "com.microsoft.samples.google.RecognitionAudio.RecognitionAudio(com.google.protobuf.GeneratedMessageV3.Builder<?>)"
   id: "RecognitionAudio(com.google.protobuf.GeneratedMessageV3.Builder<?>)"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -180,6 +184,7 @@ items:
     parameters:
     - id: "builder"
       type: "com.google.protobuf.GeneratedMessageV3.Builder<?>"
+  javaType: "constructor"
 - uid: "com.microsoft.samples.google.RecognitionAudio.URI_FIELD_NUMBER"
   id: "URI_FIELD_NUMBER"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -194,6 +199,7 @@ items:
     content: "public static final int URI_FIELD_NUMBER"
     return:
       type: "int"
+  javaType: "field"
 - uid: "com.microsoft.samples.google.RecognitionAudio.getAudioSourceCase()"
   id: "getAudioSourceCase()"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -209,6 +215,7 @@ items:
     content: "public RecognitionAudio.AudioSourceCase getAudioSourceCase()"
     return:
       type: "com.google.cloud.speech.v1.RecognitionAudio.AudioSourceCase"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.RecognitionAudio.getContent()"
   id: "getContent()"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -226,6 +233,7 @@ items:
     return:
       type: "com.google.protobuf.ByteString"
       description: "The content."
+  javaType: "method"
 - uid: "com.microsoft.samples.google.RecognitionAudio.getDefaultInstanceForType()"
   id: "getDefaultInstanceForType()"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -241,6 +249,7 @@ items:
     content: "public Message getDefaultInstanceForType()"
     return:
       type: "com.google.protobuf.Message"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.RecognitionAudio.getSerializedSize()"
   id: "getSerializedSize()"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -257,6 +266,7 @@ items:
     content: "public int getSerializedSize()"
     return:
       type: "int"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.RecognitionAudio.getUnknownFields()"
   id: "getUnknownFields()"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -273,6 +283,7 @@ items:
     content: "public final UnknownFieldSet getUnknownFields()"
     return:
       type: "com.google.protobuf.UnknownFieldSet"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.RecognitionAudio.getUri()"
   id: "getUri()"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -290,6 +301,7 @@ items:
     return:
       type: "java.lang.String"
       description: "The uri."
+  javaType: "method"
 - uid: "com.microsoft.samples.google.RecognitionAudio.getUriBytes()"
   id: "getUriBytes()"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -307,6 +319,7 @@ items:
     return:
       type: "com.google.protobuf.ByteString"
       description: "The bytes for uri."
+  javaType: "method"
 - uid: "com.microsoft.samples.google.RecognitionAudio.hasContent()"
   id: "hasContent()"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -324,6 +337,7 @@ items:
     return:
       type: "boolean"
       description: "Whether the content field is set."
+  javaType: "method"
 - uid: "com.microsoft.samples.google.RecognitionAudio.hasUri()"
   id: "hasUri()"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -341,6 +355,7 @@ items:
     return:
       type: "boolean"
       description: "Whether the uri field is set."
+  javaType: "method"
 - uid: "com.microsoft.samples.google.RecognitionAudio.internalGetFieldAccessorTable()"
   id: "internalGetFieldAccessorTable()"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -357,6 +372,7 @@ items:
     content: "protected GeneratedMessageV3.FieldAccessorTable internalGetFieldAccessorTable()"
     return:
       type: "com.google.protobuf.GeneratedMessageV3.FieldAccessorTable"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.RecognitionAudio.isInitialized()"
   id: "isInitialized()"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -373,6 +389,7 @@ items:
     content: "public final boolean isInitialized()"
     return:
       type: "boolean"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.RecognitionAudio.newBuilderForType()"
   id: "newBuilderForType()"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -388,6 +405,7 @@ items:
     content: "public Message.Builder newBuilderForType()"
     return:
       type: "com.google.protobuf.Message.Builder"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.RecognitionAudio.newBuilderForType(com.google.protobuf.GeneratedMessageV3.BuilderParent)"
   id: "newBuilderForType(com.google.protobuf.GeneratedMessageV3.BuilderParent)"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -407,6 +425,7 @@ items:
       type: "com.google.protobuf.GeneratedMessageV3.BuilderParent"
     return:
       type: "com.google.protobuf.Message.Builder"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.RecognitionAudio.newInstance(com.google.protobuf.GeneratedMessageV3.UnusedPrivateParameter)"
   id: "newInstance(com.google.protobuf.GeneratedMessageV3.UnusedPrivateParameter)"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -426,6 +445,7 @@ items:
       type: "com.google.protobuf.GeneratedMessageV3.UnusedPrivateParameter"
     return:
       type: "java.lang.Object"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.RecognitionAudio.toBuilder()"
   id: "toBuilder()"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -441,6 +461,7 @@ items:
     content: "public Message.Builder toBuilder()"
     return:
       type: "com.google.protobuf.Message.Builder"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.RecognitionAudio.writeTo(com.google.protobuf.CodedOutputStream)"
   id: "writeTo(com.google.protobuf.CodedOutputStream)"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -460,6 +481,7 @@ items:
       type: "com.google.protobuf.CodedOutputStream"
   exceptions:
   - type: "java.io.IOException"
+  javaType: "method"
 references:
 - uid: "com.google.protobuf.GeneratedMessageV3.Builder<?>"
   isExternal: true

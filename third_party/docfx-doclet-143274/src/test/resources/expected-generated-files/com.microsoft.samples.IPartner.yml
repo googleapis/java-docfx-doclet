@@ -15,6 +15,7 @@ items:
   summary: "The main entry point into using the partner SDK functionality. Represents a partner and encapsulates all the behavior\n attached to partners. Use this interface to get to the partner's customers, profiles, and customer orders, profiles\n and subscriptions and more."
   syntax:
     content: "public interface IPartner"
+  javaType: "interface"
 - uid: "com.microsoft.samples.IPartner.getCredentials()"
   id: "getCredentials()"
   parent: "com.microsoft.samples.IPartner"
@@ -32,6 +33,7 @@ items:
     return:
       type: "java.lang.String"
       description: "The partner credentials."
+  javaType: "method"
 references:
 - uid: "java.lang.String"
   href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"

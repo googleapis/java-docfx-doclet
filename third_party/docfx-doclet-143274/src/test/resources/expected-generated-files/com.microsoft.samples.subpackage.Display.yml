@@ -22,6 +22,7 @@ items:
   implements:
   - "java.io.Serializable"
   - "java.util.List<com.microsoft.samples.subpackage.Person<T>>"
+  javaType: "interface"
 - uid: "com.microsoft.samples.subpackage.Display.hide()"
   id: "hide()"
   parent: "com.microsoft.samples.subpackage.Display"
@@ -35,6 +36,7 @@ items:
   package: "com.microsoft.samples.subpackage"
   syntax:
     content: "public abstract void hide()"
+  javaType: "method"
 - uid: "com.microsoft.samples.subpackage.Display.show()"
   id: "show()"
   parent: "com.microsoft.samples.subpackage.Display"
@@ -48,6 +50,7 @@ items:
   package: "com.microsoft.samples.subpackage"
   syntax:
     content: "public abstract void show()"
+  javaType: "method"
 references:
 - uid: "com.microsoft.samples.subpackage.Display.show*"
   name: "show"

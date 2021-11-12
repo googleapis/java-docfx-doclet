@@ -15,6 +15,7 @@ items:
   type: "Namespace"
   syntax:
     content: "package com.microsoft.samples.agreements"
+  javaType: "package"
 references:
 - uid: "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations"
   name: "AgreementDetailsCollectionOperations"

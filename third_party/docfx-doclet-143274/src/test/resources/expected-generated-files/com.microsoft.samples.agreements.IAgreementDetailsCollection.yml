@@ -16,6 +16,7 @@ items:
   syntax:
     content: "public interface IAgreementDetailsCollection"
   status: "deprecated"
+  javaType: "interface"
 - uid: "com.microsoft.samples.agreements.IAgreementDetailsCollection.get()"
   id: "get()"
   parent: "com.microsoft.samples.agreements.IAgreementDetailsCollection"
@@ -33,6 +34,7 @@ items:
     return:
       type: "com.microsoft.samples.agreements.ResourceCollection<com.microsoft.samples.agreements.AgreementMetaData>"
       description: "The current agreement metadata."
+  javaType: "method"
 references:
 - uid: "com.microsoft.samples.agreements.ResourceCollection<com.microsoft.samples.agreements.AgreementMetaData>"
   spec.java:

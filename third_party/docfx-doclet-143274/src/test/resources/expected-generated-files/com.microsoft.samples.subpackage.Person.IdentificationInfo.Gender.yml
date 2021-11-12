@@ -38,6 +38,7 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
+  javaType: "enum"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.FEMALE"
   id: "FEMALE"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
@@ -52,6 +53,7 @@ items:
     content: "public static final Person.IdentificationInfo.Gender FEMALE"
     return:
       type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  javaType: "enumconstant"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender()"
   id: "Gender()"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
@@ -65,6 +67,7 @@ items:
   package: "com.microsoft.samples.subpackage"
   syntax:
     content: "private Gender()"
+  javaType: "constructor"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.MALE"
   id: "MALE"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
@@ -79,6 +82,7 @@ items:
     content: "public static final Person.IdentificationInfo.Gender MALE"
     return:
       type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  javaType: "enumconstant"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)"
   id: "valueOf(java.lang.String)"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
@@ -97,6 +101,7 @@ items:
       type: "java.lang.String"
     return:
       type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  javaType: "method"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()"
   id: "values()"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
@@ -112,6 +117,7 @@ items:
     content: "public static Person.IdentificationInfo.Gender[] values()"
     return:
       type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender[]"
+  javaType: "method"
 references:
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender*"
   name: "Gender"

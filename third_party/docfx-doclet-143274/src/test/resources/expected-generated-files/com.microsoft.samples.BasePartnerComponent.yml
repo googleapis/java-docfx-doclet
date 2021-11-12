@@ -33,6 +33,7 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
+  javaType: "class"
 - uid: "com.microsoft.samples.BasePartnerComponent.BasePartnerComponent(com.microsoft.samples.IPartner,TContext)"
   id: "BasePartnerComponent(com.microsoft.samples.IPartner,TContext)"
   parent: "com.microsoft.samples.BasePartnerComponent"
@@ -54,6 +55,7 @@ items:
     - id: "componentContext"
       type: "TContext"
       description: "A component context object to work with."
+  javaType: "constructor"
 - uid: "com.microsoft.samples.BasePartnerComponent.testBase()"
   id: "testBase()"
   parent: "com.microsoft.samples.BasePartnerComponent"
@@ -67,6 +69,7 @@ items:
   package: "com.microsoft.samples"
   syntax:
     content: "protected void testBase()"
+  javaType: "method"
 - uid: "com.microsoft.samples.BasePartnerComponent.testInherited()"
   id: "testInherited()"
   parent: "com.microsoft.samples.BasePartnerComponent"
@@ -80,6 +83,7 @@ items:
   package: "com.microsoft.samples"
   syntax:
     content: "protected void testInherited()"
+  javaType: "method"
 references:
 - uid: "com.microsoft.samples.IPartner"
   name: "IPartner"

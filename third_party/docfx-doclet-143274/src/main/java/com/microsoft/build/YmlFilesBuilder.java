@@ -59,6 +59,8 @@ public class YmlFilesBuilder {
     }
 
     public boolean build() {
+        MetadataFile projectMetadataFile = new MetadataFile(outputPath,"overview.yml");;
+        List<MetadataFileItem> packageItems = new ArrayList<>();
         List<MetadataFile> packageMetadataFiles = new ArrayList<>();
         List<MetadataFile> classMetadataFiles = new ArrayList<>();
 
@@ -78,6 +80,7 @@ public class YmlFilesBuilder {
         }
 
         for (MetadataFile packageFile : packageMetadataFiles) {
+            packageItems.addAll(packageFile.getItems());
             String packageFileName = packageFile.getFileName();
             for (MetadataFile classFile : classMetadataFiles) {
                 String classFileName = classFile.getFileName();
@@ -88,10 +91,11 @@ public class YmlFilesBuilder {
                 }
             }
         }
-
+        buildProjectMetadataFile(packageItems, projectMetadataFile);
         populateUidValues(packageMetadataFiles, classMetadataFiles);
         updateExternalReferences(classMetadataFiles);
 
+        FileUtil.dumpToFile(projectMetadataFile);
         packageMetadataFiles.forEach(FileUtil::dumpToFile);
         classMetadataFiles.forEach(FileUtil::dumpToFile);
         FileUtil.dumpToFile(tocFile);
@@ -129,6 +133,30 @@ public class YmlFilesBuilder {
         }
     }
 
+
+    void buildProjectMetadataFile(List<MetadataFileItem> packageItems, MetadataFile projectMetadataFile) {
+        MetadataFileItem projectItem = new MetadataFileItem(LANGS, projectName);
+        projectItem.setNameWithType(projectName);
+        projectItem.setFullName(projectName);
+        projectItem.setType("Namespace");
+        projectItem.setJavaType("overview");
+
+        List<String> children = new ArrayList<>();
+        List<MetadataFileItem> references = new ArrayList<>();
+        packageItems.stream().forEach(i ->  {
+            children.add(i.getUid());
+            MetadataFileItem refItem = new MetadataFileItem(i.getUid());
+            refItem.setName(i.getName());
+            refItem.setNameWithType(i.getNameWithType());
+            refItem.setFullName(i.getFullName());
+            references.add(refItem);
+        });
+
+        projectItem.getChildren().addAll(children);
+        projectMetadataFile.getReferences().addAll(references);
+        projectMetadataFile.getItems().add(projectItem);
+    }
+
     MetadataFile buildPackageMetadataFile(PackageElement packageElement) {
         String fileName = packageLookup.extractHref(packageElement);
         MetadataFile packageMetadataFile = new MetadataFile(outputPath, fileName);
@@ -159,10 +187,13 @@ public class YmlFilesBuilder {
     }
 
     <T extends Element> void populateItemFields(MetadataFileItem item, BaseLookup<T> lookup, T element) {
-        item.setName(lookup.extractName(element));
+        String name = lookup.extractName(element);
+        item.setName(name);
         item.setNameWithType(lookup.extractNameWithType(element));
         item.setFullName(lookup.extractFullName(element));
         item.setType(lookup.extractType(element));
+        String javatype = lookup.extractJavaType(element,name);
+        item.setJavaType(javatype);
         item.setSummary(lookup.extractSummary(element));
         item.setContent(lookup.extractContent(element));
     }
@@ -301,12 +332,14 @@ public class YmlFilesBuilder {
 
     MetadataFileItem buildMetadataFileItem(Element element) {
         return new MetadataFileItem(LANGS, classItemsLookup.extractUid(element)) {{
+            String name = classItemsLookup.extractName(element);
             setId(classItemsLookup.extractId(element));
             setParent(classItemsLookup.extractParent(element));
-            setName(classItemsLookup.extractName(element));
+            setName(name);
             setNameWithType(classItemsLookup.extractNameWithType(element));
             setFullName(classItemsLookup.extractFullName(element));
             setType(classItemsLookup.extractType(element));
+            setJavaType(classItemsLookup.extractJavaType(element, name));
             setPackageName(classItemsLookup.extractPackageName(element));
             setSummary(classItemsLookup.extractSummary(element));
         }};

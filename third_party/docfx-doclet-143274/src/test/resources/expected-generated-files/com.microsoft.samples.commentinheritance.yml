@@ -20,6 +20,7 @@ items:
   type: "Namespace"
   syntax:
     content: "package com.microsoft.samples.commentinheritance"
+  javaType: "package"
 references:
 - uid: "com.microsoft.samples.commentinheritance.Animal"
   name: "Animal"

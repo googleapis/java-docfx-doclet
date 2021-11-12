@@ -52,6 +52,7 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
+  javaType: "class"
 - uid: "com.microsoft.samples.google.SpeechClient.SpeechClient(com.google.cloud.speech.v1p1beta1.stub.SpeechStub)"
   id: "SpeechClient(com.google.cloud.speech.v1p1beta1.stub.SpeechStub)"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -68,6 +69,7 @@ items:
     parameters:
     - id: "stub"
       type: "com.google.cloud.speech.v1p1beta1.stub.SpeechStub"
+  javaType: "constructor"
 - uid: "com.microsoft.samples.google.SpeechClient.SpeechClient(com.microsoft.samples.google.SpeechSettings)"
   id: "SpeechClient(com.microsoft.samples.google.SpeechSettings)"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -85,6 +87,7 @@ items:
     parameters:
     - id: "settings"
       type: "com.microsoft.samples.google.SpeechSettings"
+  javaType: "constructor"
 - uid: "com.microsoft.samples.google.SpeechClient.awaitTermination(long,java.util.concurrent.TimeUnit)"
   id: "awaitTermination(long,java.util.concurrent.TimeUnit)"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -107,6 +110,7 @@ items:
       type: "boolean"
   exceptions:
   - type: "java.lang.InterruptedException"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechClient.close()"
   id: "close()"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -120,6 +124,7 @@ items:
   package: "com.microsoft.samples.google"
   syntax:
     content: "public final void close()"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechClient.create()"
   id: "create()"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -138,6 +143,7 @@ items:
       type: "com.microsoft.samples.google.SpeechClient"
   exceptions:
   - type: "java.io.IOException"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechClient.create(com.google.cloud.speech.v1p1beta1.stub.SpeechStub)"
   id: "create(com.google.cloud.speech.v1p1beta1.stub.SpeechStub)"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -157,6 +163,7 @@ items:
       type: "com.google.cloud.speech.v1p1beta1.stub.SpeechStub"
     return:
       type: "com.microsoft.samples.google.SpeechClient"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechClient.create(com.microsoft.samples.google.SpeechSettings)"
   id: "create(com.microsoft.samples.google.SpeechSettings)"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -178,6 +185,7 @@ items:
       type: "com.microsoft.samples.google.SpeechClient"
   exceptions:
   - type: "java.io.IOException"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechClient.getOperationsClient()"
   id: "getOperationsClient()"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -194,6 +202,7 @@ items:
     content: "public final OperationsClient getOperationsClient()"
     return:
       type: "com.google.longrunning.OperationsClient"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechClient.getSettings()"
   id: "getSettings()"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -209,6 +218,7 @@ items:
     content: "public final SpeechSettings getSettings()"
     return:
       type: "com.microsoft.samples.google.SpeechSettings"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechClient.getStub()"
   id: "getStub()"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -224,6 +234,7 @@ items:
     content: "public SpeechStub getStub()"
     return:
       type: "com.google.cloud.speech.v1p1beta1.stub.SpeechStub"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechClient.isShutdown()"
   id: "isShutdown()"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -239,6 +250,7 @@ items:
     content: "public boolean isShutdown()"
     return:
       type: "boolean"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechClient.isTerminated()"
   id: "isTerminated()"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -254,6 +266,7 @@ items:
     content: "public boolean isTerminated()"
     return:
       type: "boolean"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechClient.longRunningRecognizeAsync(com.google.cloud.speech.v1p1beta1.LongRunningRecognizeRequest)"
   id: "longRunningRecognizeAsync(com.google.cloud.speech.v1p1beta1.LongRunningRecognizeRequest)"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -274,6 +287,7 @@ items:
       description: "The request object containing all of the parameters for the API call."
     return:
       type: "com.google.api.gax.longrunning.OperationFuture<com.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse,com.google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechClient.longRunningRecognizeAsync(com.google.cloud.speech.v1p1beta1.RecognitionConfig,com.google.cloud.speech.v1p1beta1.RecognitionAudio)"
   id: "longRunningRecognizeAsync(com.google.cloud.speech.v1p1beta1.RecognitionConfig,com.google.cloud.speech.v1p1beta1.RecognitionAudio)"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -297,6 +311,7 @@ items:
       description: "Required. The audio data to be recognized."
     return:
       type: "com.google.api.gax.longrunning.OperationFuture<com.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse,com.google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechClient.longRunningRecognizeCallable()"
   id: "longRunningRecognizeCallable()"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -313,6 +328,7 @@ items:
     content: "public final UnaryCallable<LongRunningRecognizeRequest,Operation> longRunningRecognizeCallable()"
     return:
       type: "com.google.api.gax.rpc.UnaryCallable<com.google.cloud.speech.v1p1beta1.LongRunningRecognizeRequest,com.google.longrunning.Operation>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechClient.longRunningRecognizeOperationCallable()"
   id: "longRunningRecognizeOperationCallable()"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -329,6 +345,7 @@ items:
     content: "public final OperationCallable<LongRunningRecognizeRequest,LongRunningRecognizeResponse,LongRunningRecognizeMetadata> longRunningRecognizeOperationCallable()"
     return:
       type: "com.google.api.gax.rpc.OperationCallable<com.google.cloud.speech.v1p1beta1.LongRunningRecognizeRequest,com.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse,com.google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechClient.recognize(com.google.cloud.speech.v1p1beta1.RecognitionConfig,com.google.cloud.speech.v1p1beta1.RecognitionAudio)"
   id: "recognize(com.google.cloud.speech.v1p1beta1.RecognitionConfig,com.google.cloud.speech.v1p1beta1.RecognitionAudio)"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -352,6 +369,7 @@ items:
       description: "Required. The audio data to be recognized."
     return:
       type: "com.google.cloud.speech.v1p1beta1.RecognizeResponse"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechClient.recognize(com.google.cloud.speech.v1p1beta1.RecognizeRequest)"
   id: "recognize(com.google.cloud.speech.v1p1beta1.RecognizeRequest)"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -372,6 +390,7 @@ items:
       description: "The request object containing all of the parameters for the API call."
     return:
       type: "com.google.cloud.speech.v1p1beta1.RecognizeResponse"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechClient.recognizeCallable()"
   id: "recognizeCallable()"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -388,6 +407,7 @@ items:
     content: "public final UnaryCallable<RecognizeRequest,RecognizeResponse> recognizeCallable()"
     return:
       type: "com.google.api.gax.rpc.UnaryCallable<com.google.cloud.speech.v1p1beta1.RecognizeRequest,com.google.cloud.speech.v1p1beta1.RecognizeResponse>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechClient.shutdown()"
   id: "shutdown()"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -401,6 +421,7 @@ items:
   package: "com.microsoft.samples.google"
   syntax:
     content: "public void shutdown()"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechClient.shutdownNow()"
   id: "shutdownNow()"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -414,6 +435,7 @@ items:
   package: "com.microsoft.samples.google"
   syntax:
     content: "public void shutdownNow()"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechClient.streamingRecognizeCallable()"
   id: "streamingRecognizeCallable()"
   parent: "com.microsoft.samples.google.SpeechClient"
@@ -430,6 +452,7 @@ items:
     content: "public final BidiStreamingCallable<StreamingRecognizeRequest,StreamingRecognizeResponse> streamingRecognizeCallable()"
     return:
       type: "com.google.api.gax.rpc.BidiStreamingCallable<com.google.cloud.speech.v1p1beta1.StreamingRecognizeRequest,com.google.cloud.speech.v1p1beta1.StreamingRecognizeResponse>"
+  javaType: "method"
 references:
 - uid: "com.microsoft.samples.google.SpeechSettings"
   name: "SpeechSettings"

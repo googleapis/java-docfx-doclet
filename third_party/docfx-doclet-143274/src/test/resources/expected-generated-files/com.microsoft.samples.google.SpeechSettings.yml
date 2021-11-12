@@ -59,6 +59,7 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
+  javaType: "class"
 - uid: "com.microsoft.samples.google.SpeechSettings.SpeechSettings(com.microsoft.samples.google.SpeechSettings.Builder)"
   id: "SpeechSettings(com.microsoft.samples.google.SpeechSettings.Builder)"
   parent: "com.microsoft.samples.google.SpeechSettings"
@@ -75,6 +76,7 @@ items:
     parameters:
     - id: "settingsBuilder"
       type: "com.microsoft.samples.google.SpeechSettings.Builder"
+  javaType: "constructor"
 - uid: "com.microsoft.samples.google.SpeechSettings.create(com.google.cloud.speech.v1p1beta1.stub.SpeechStubSettings)"
   id: "create(com.google.cloud.speech.v1p1beta1.stub.SpeechStubSettings)"
   parent: "com.microsoft.samples.google.SpeechSettings"
@@ -95,6 +97,7 @@ items:
       type: "com.microsoft.samples.google.SpeechSettings"
   exceptions:
   - type: "java.io.IOException"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechSettings.defaultApiClientHeaderProviderBuilder()"
   id: "defaultApiClientHeaderProviderBuilder()"
   parent: "com.microsoft.samples.google.SpeechSettings"
@@ -110,6 +113,7 @@ items:
     content: "public static ApiClientHeaderProvider.Builder defaultApiClientHeaderProviderBuilder()"
     return:
       type: "com.google.api.gax.rpc.ApiClientHeaderProvider.Builder"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechSettings.defaultCredentialsProviderBuilder()"
   id: "defaultCredentialsProviderBuilder()"
   parent: "com.microsoft.samples.google.SpeechSettings"
@@ -126,6 +130,7 @@ items:
     content: "public static GoogleCredentialsProvider.Builder defaultCredentialsProviderBuilder()"
     return:
       type: "com.google.api.gax.core.GoogleCredentialsProvider.Builder"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechSettings.defaultExecutorProviderBuilder()"
   id: "defaultExecutorProviderBuilder()"
   parent: "com.microsoft.samples.google.SpeechSettings"
@@ -142,6 +147,7 @@ items:
     content: "public static InstantiatingExecutorProvider.Builder defaultExecutorProviderBuilder()"
     return:
       type: "com.google.api.gax.core.InstantiatingExecutorProvider.Builder"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechSettings.defaultGrpcTransportProviderBuilder()"
   id: "defaultGrpcTransportProviderBuilder()"
   parent: "com.microsoft.samples.google.SpeechSettings"
@@ -158,6 +164,7 @@ items:
     content: "public static InstantiatingGrpcChannelProvider.Builder defaultGrpcTransportProviderBuilder()"
     return:
       type: "com.google.api.gax.grpc.InstantiatingGrpcChannelProvider.Builder"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechSettings.defaultTransportChannelProvider()"
   id: "defaultTransportChannelProvider()"
   parent: "com.microsoft.samples.google.SpeechSettings"
@@ -173,6 +180,7 @@ items:
     content: "public static TransportChannelProvider defaultTransportChannelProvider()"
     return:
       type: "com.google.api.gax.rpc.TransportChannelProvider"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechSettings.getDefaultEndpoint()"
   id: "getDefaultEndpoint()"
   parent: "com.microsoft.samples.google.SpeechSettings"
@@ -189,6 +197,7 @@ items:
     content: "public static String getDefaultEndpoint()"
     return:
       type: "java.lang.String"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechSettings.getDefaultServiceScopes()"
   id: "getDefaultServiceScopes()"
   parent: "com.microsoft.samples.google.SpeechSettings"
@@ -205,6 +214,7 @@ items:
     content: "public static List<String> getDefaultServiceScopes()"
     return:
       type: "java.util.List<java.lang.String>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechSettings.longRunningRecognizeOperationSettings()"
   id: "longRunningRecognizeOperationSettings()"
   parent: "com.microsoft.samples.google.SpeechSettings"
@@ -221,6 +231,7 @@ items:
     content: "public OperationCallSettings<LongRunningRecognizeRequest,LongRunningRecognizeResponse,LongRunningRecognizeMetadata> longRunningRecognizeOperationSettings()"
     return:
       type: "com.google.api.gax.rpc.OperationCallSettings<com.google.cloud.speech.v1p1beta1.LongRunningRecognizeRequest,com.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse,com.google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechSettings.longRunningRecognizeSettings()"
   id: "longRunningRecognizeSettings()"
   parent: "com.microsoft.samples.google.SpeechSettings"
@@ -237,6 +248,7 @@ items:
     content: "public UnaryCallSettings<LongRunningRecognizeRequest,Operation> longRunningRecognizeSettings()"
     return:
       type: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.speech.v1p1beta1.LongRunningRecognizeRequest,com.google.longrunning.Operation>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechSettings.newBuilder()"
   id: "newBuilder()"
   parent: "com.microsoft.samples.google.SpeechSettings"
@@ -253,6 +265,7 @@ items:
     content: "public static SpeechSettings.Builder newBuilder()"
     return:
       type: "com.microsoft.samples.google.SpeechSettings.Builder"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechSettings.newBuilder(com.google.api.gax.rpc.ClientContext)"
   id: "newBuilder(com.google.api.gax.rpc.ClientContext)"
   parent: "com.microsoft.samples.google.SpeechSettings"
@@ -272,6 +285,7 @@ items:
       type: "com.google.api.gax.rpc.ClientContext"
     return:
       type: "com.microsoft.samples.google.SpeechSettings.Builder"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechSettings.recognizeSettings()"
   id: "recognizeSettings()"
   parent: "com.microsoft.samples.google.SpeechSettings"
@@ -288,6 +302,7 @@ items:
     content: "public UnaryCallSettings<RecognizeRequest,RecognizeResponse> recognizeSettings()"
     return:
       type: "com.google.api.gax.rpc.UnaryCallSettings<com.google.cloud.speech.v1p1beta1.RecognizeRequest,com.google.cloud.speech.v1p1beta1.RecognizeResponse>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechSettings.streamingRecognizeSettings()"
   id: "streamingRecognizeSettings()"
   parent: "com.microsoft.samples.google.SpeechSettings"
@@ -304,6 +319,7 @@ items:
     content: "public StreamingCallSettings<StreamingRecognizeRequest,StreamingRecognizeResponse> streamingRecognizeSettings()"
     return:
       type: "com.google.api.gax.rpc.StreamingCallSettings<com.google.cloud.speech.v1p1beta1.StreamingRecognizeRequest,com.google.cloud.speech.v1p1beta1.StreamingRecognizeResponse>"
+  javaType: "method"
 - uid: "com.microsoft.samples.google.SpeechSettings.toBuilder()"
   id: "toBuilder()"
   parent: "com.microsoft.samples.google.SpeechSettings"
@@ -321,6 +337,7 @@ items:
     content: "public SpeechSettings.Builder toBuilder()"
     return:
       type: "com.microsoft.samples.google.SpeechSettings.Builder"
+  javaType: "method"
 references:
 - uid: "com.microsoft.samples.google.SpeechSettings.Builder"
   name: "SpeechSettings.Builder"

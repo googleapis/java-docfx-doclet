@@ -15,10 +15,13 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -38,6 +41,7 @@ public class BaseLookupTest {
     private LinkTree linkTree;
     private ReferenceTree referenceTree;
     private LiteralTree literalTree;
+    private TypeElement typeElement;
     private BaseLookup<Element> baseLookup;
     private ExtendedMetadataFileItem lastBuiltItem;
 
@@ -51,6 +55,7 @@ public class BaseLookupTest {
         linkTree = Mockito.mock(LinkTree.class);
         referenceTree = Mockito.mock(ReferenceTree.class);
         literalTree = Mockito.mock(LiteralTree.class);
+        typeElement = Mockito.mock(TypeElement.class);
 
         baseLookup = new BaseLookup<>(environment) {
             @Override
@@ -217,6 +222,25 @@ public class BaseLookupTest {
         assertEquals("Wrong references", baseLookup.extractReferences(element), lastBuiltItem.getReferences());
     }
 
+    @Test
+    public void testExtractJavaType() {
+        String name = "com.microsoft.samples.google.SpeechClient";
+        when(typeElement.getKind()).thenReturn(ElementKind.CLASS);
+        assertEquals("Wrong javaType", baseLookup.extractJavaType(typeElement, name), "class");
+
+        name = "com.microsoft.samples.google.ValidationException";
+        when(typeElement.getKind()).thenReturn(ElementKind.CLASS);
+        assertEquals("Wrong javaType", baseLookup.extractJavaType(typeElement, name), "exception");
+
+        name = "com.microsoft.samples.google.BetaApi";
+        when(typeElement.getKind()).thenReturn(ElementKind.ANNOTATION_TYPE);
+        assertEquals("Wrong javaType", baseLookup.extractJavaType(typeElement, name), "annotationtype");
+
+        name = "com.microsoft.samples.google";
+        when(typeElement.getKind()).thenReturn(ElementKind.PACKAGE);
+        assertEquals("Wrong javaType", baseLookup.extractJavaType(typeElement, name), "package");
+    }
+
     private ExtendedMetadataFileItem buildExtendedMetadataFileItem(Element element) {
         ExtendedMetadataFileItem result = new ExtendedMetadataFileItem(String.valueOf(element));
         result.setPackageName("Some package name");
@@ -235,6 +259,7 @@ public class BaseLookupTest {
         result.setReturn(new Return("return type", "return desc"));
         result.setSummary("Some summary");
         result.setType("Some type");
+        result.setJavaType("Some type");
         result.setContent("Some content");
         result.setTypeParameters(Arrays.asList(new TypeParameter("type param id")));
         result.setSuperclass(Arrays.asList("Some "));

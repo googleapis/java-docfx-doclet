@@ -32,6 +32,7 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
+  javaType: "class"
 - uid: "com.microsoft.samples.Link.Link()"
   id: "Link()"
   parent: "com.microsoft.samples.Link"
@@ -45,6 +46,7 @@ items:
   package: "com.microsoft.samples"
   syntax:
     content: "public Link()"
+  javaType: "constructor"
 - uid: "com.microsoft.samples.Link.getHeaders()"
   id: "getHeaders()"
   parent: "com.microsoft.samples.Link"
@@ -60,6 +62,7 @@ items:
     content: "public Collection<KeyValuePair<String,String>> getHeaders()"
     return:
       type: "java.util.Collection<com.microsoft.samples.KeyValuePair<java.lang.String,java.lang.String>>"
+  javaType: "method"
 - uid: "com.microsoft.samples.Link.getMethod()"
   id: "getMethod()"
   parent: "com.microsoft.samples.Link"
@@ -75,6 +78,7 @@ items:
     content: "public String getMethod()"
     return:
       type: "java.lang.String"
+  javaType: "method"
 - uid: "com.microsoft.samples.Link.setHeaders(java.util.Collection<com.microsoft.samples.KeyValuePair<java.lang.String,java.lang.String>>)"
   id: "setHeaders(java.util.Collection<com.microsoft.samples.KeyValuePair<java.lang.String,java.lang.String>>)"
   parent: "com.microsoft.samples.Link"
@@ -91,6 +95,7 @@ items:
     parameters:
     - id: "value"
       type: "java.util.Collection<com.microsoft.samples.KeyValuePair<java.lang.String,java.lang.String>>"
+  javaType: "method"
 - uid: "com.microsoft.samples.Link.setMethod(java.lang.String)"
   id: "setMethod(java.lang.String)"
   parent: "com.microsoft.samples.Link"
@@ -107,6 +112,7 @@ items:
     parameters:
     - id: "value"
       type: "java.lang.String"
+  javaType: "method"
 references:
 - uid: "com.microsoft.samples.Link.Link*"
   name: "Link"
