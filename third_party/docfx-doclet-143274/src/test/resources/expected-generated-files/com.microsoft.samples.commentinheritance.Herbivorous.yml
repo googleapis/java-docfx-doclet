@@ -17,7 +17,6 @@ items:
   summary: "Marks animals that eat plants."
   syntax:
     content: "public interface Herbivorous"
-  javaType: "interface"
 - uid: "com.microsoft.samples.commentinheritance.Herbivorous.eat(com.microsoft.samples.commentinheritance.Herbivorous.Plant)"
   id: "eat(com.microsoft.samples.commentinheritance.Herbivorous.Plant)"
   parent: "com.microsoft.samples.commentinheritance.Herbivorous"
@@ -36,7 +35,6 @@ items:
     - id: "plantToBeEaten"
       type: "com.microsoft.samples.commentinheritance.Herbivorous.Plant"
       description: "Plant that will be eaten."
-  javaType: "method"
 - uid: "com.microsoft.samples.commentinheritance.Herbivorous.getKind()"
   id: "getKind()"
   parent: "com.microsoft.samples.commentinheritance.Herbivorous"
@@ -53,7 +51,6 @@ items:
     content: "public abstract String getKind()"
     return:
       type: "java.lang.String"
-  javaType: "method"
 references:
 - uid: "com.microsoft.samples.commentinheritance.Herbivorous.Plant"
   name: "Herbivorous.Plant"

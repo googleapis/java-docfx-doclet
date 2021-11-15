@@ -16,7 +16,6 @@ items:
     content: "public static interface ValidationException.Supplier<T>"
     typeParameters:
     - id: "T"
-  javaType: "interface"
 - uid: "com.microsoft.samples.google.ValidationException.Supplier.get()"
   id: "get()"
   parent: "com.microsoft.samples.google.ValidationException.Supplier"
@@ -32,7 +31,6 @@ items:
     content: "public abstract T get()"
     return:
       type: "T"
-  javaType: "method"
 references:
 - uid: "T"
   spec.java:

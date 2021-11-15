@@ -28,7 +28,6 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
-  javaType: "class"
 - uid: "com.microsoft.samples.commentinheritance.Herbivorous.Plant.Plant()"
   id: "Plant()"
   parent: "com.microsoft.samples.commentinheritance.Herbivorous.Plant"
@@ -42,7 +41,6 @@ items:
   package: "com.microsoft.samples.commentinheritance"
   syntax:
     content: "public Plant()"
-  javaType: "constructor"
 references:
 - uid: "com.microsoft.samples.commentinheritance.Herbivorous.Plant.Plant*"
   name: "Plant"

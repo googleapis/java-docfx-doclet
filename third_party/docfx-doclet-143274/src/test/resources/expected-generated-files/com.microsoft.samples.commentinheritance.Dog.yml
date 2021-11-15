@@ -45,7 +45,6 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
-  javaType: "class"
 - uid: "com.microsoft.samples.commentinheritance.Dog.Dog()"
   id: "Dog()"
   parent: "com.microsoft.samples.commentinheritance.Dog"
@@ -59,7 +58,6 @@ items:
   package: "com.microsoft.samples.commentinheritance"
   syntax:
     content: "public Dog()"
-  javaType: "constructor"
 - uid: "com.microsoft.samples.commentinheritance.Dog.eat(com.microsoft.samples.commentinheritance.Animal)"
   id: "eat(com.microsoft.samples.commentinheritance.Animal)"
   parent: "com.microsoft.samples.commentinheritance.Dog"
@@ -78,7 +76,6 @@ items:
     - id: "otherAnimal"
       type: "com.microsoft.samples.commentinheritance.Animal"
       description: "Tasty treat."
-  javaType: "method"
 - uid: "com.microsoft.samples.commentinheritance.Dog.eat(com.microsoft.samples.commentinheritance.Herbivorous.Plant)"
   id: "eat(com.microsoft.samples.commentinheritance.Herbivorous.Plant)"
   parent: "com.microsoft.samples.commentinheritance.Dog"
@@ -97,7 +94,6 @@ items:
     - id: "plantToBeEaten"
       type: "com.microsoft.samples.commentinheritance.Herbivorous.Plant"
       description: "Plant that this dog will eat."
-  javaType: "method"
 - uid: "com.microsoft.samples.commentinheritance.Dog.feed()"
   id: "feed()"
   parent: "com.microsoft.samples.commentinheritance.Dog"
@@ -113,7 +109,6 @@ items:
   summary: "Feed offspring."
   syntax:
     content: "public void feed()"
-  javaType: "method"
 - uid: "com.microsoft.samples.commentinheritance.Dog.getHairColor()"
   id: "getHairColor()"
   parent: "com.microsoft.samples.commentinheritance.Dog"
@@ -131,7 +126,6 @@ items:
     return:
       type: "java.awt.Color"
       description: "Color of the dog's fur."
-  javaType: "method"
 - uid: "com.microsoft.samples.commentinheritance.Dog.getKind()"
   id: "getKind()"
   parent: "com.microsoft.samples.commentinheritance.Dog"
@@ -149,7 +143,6 @@ items:
     content: "public String getKind()"
     return:
       type: "java.lang.String"
-  javaType: "method"
 - uid: "com.microsoft.samples.commentinheritance.Dog.giveBirth(int)"
   id: "giveBirth(int)"
   parent: "com.microsoft.samples.commentinheritance.Dog"
@@ -167,7 +160,6 @@ items:
     - id: "numberPuppies"
       type: "int"
       description: "Number of puppies being born."
-  javaType: "method"
 - uid: "com.microsoft.samples.commentinheritance.Dog.verballyCommunicate()"
   id: "verballyCommunicate()"
   parent: "com.microsoft.samples.commentinheritance.Dog"
@@ -183,7 +175,6 @@ items:
   summary: "Communicate verbally. Bark."
   syntax:
     content: "public void verballyCommunicate()"
-  javaType: "method"
 references:
 - uid: "com.microsoft.samples.commentinheritance.Dog.Dog*"
   name: "Dog"

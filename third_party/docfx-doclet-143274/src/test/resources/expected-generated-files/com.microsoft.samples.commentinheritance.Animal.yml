@@ -35,7 +35,6 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
-  javaType: "class"
 - uid: "com.microsoft.samples.commentinheritance.Animal.Animal()"
   id: "Animal()"
   parent: "com.microsoft.samples.commentinheritance.Animal"
@@ -49,7 +48,6 @@ items:
   package: "com.microsoft.samples.commentinheritance"
   syntax:
     content: "public Animal()"
-  javaType: "constructor"
 - uid: "com.microsoft.samples.commentinheritance.Animal.breathe()"
   id: "breathe()"
   parent: "com.microsoft.samples.commentinheritance.Animal"
@@ -64,7 +62,6 @@ items:
   summary: "Breathe."
   syntax:
     content: "public void breathe()"
-  javaType: "method"
 - uid: "com.microsoft.samples.commentinheritance.Animal.feed()"
   id: "feed()"
   parent: "com.microsoft.samples.commentinheritance.Animal"
@@ -79,7 +76,6 @@ items:
   summary: "Feed offspring."
   syntax:
     content: "public abstract void feed()"
-  javaType: "method"
 - uid: "com.microsoft.samples.commentinheritance.Animal.getKind()"
   id: "getKind()"
   parent: "com.microsoft.samples.commentinheritance.Animal"
@@ -96,7 +92,6 @@ items:
     content: "public abstract String getKind()"
     return:
       type: "java.lang.String"
-  javaType: "method"
 - uid: "com.microsoft.samples.commentinheritance.Animal.verballyCommunicate()"
   id: "verballyCommunicate()"
   parent: "com.microsoft.samples.commentinheritance.Animal"
@@ -111,7 +106,6 @@ items:
   summary: "Communicate verbally."
   syntax:
     content: "public abstract void verballyCommunicate()"
-  javaType: "method"
 references:
 - uid: "com.microsoft.samples.commentinheritance.Animal.Animal*"
   name: "Animal"

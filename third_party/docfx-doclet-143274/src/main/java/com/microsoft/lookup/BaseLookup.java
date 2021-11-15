@@ -123,7 +123,12 @@ public abstract class BaseLookup<T extends Element> {
         if (element.getKind().name().equals(ElementKind.CLASS.name()) && name.contains("Exception")){
             return "exception";
         }
-        return element.getKind().name().toLowerCase().replaceAll("_","");
+        String javatype = element.getKind().name().toLowerCase().replaceAll("_","");
+
+        if (javatype.equals("package") || javatype.equals("overview") || javatype.equals("annotationtype")){
+            return javatype;
+        }
+        return null;
     }
 
     public String extractContent(T key) {

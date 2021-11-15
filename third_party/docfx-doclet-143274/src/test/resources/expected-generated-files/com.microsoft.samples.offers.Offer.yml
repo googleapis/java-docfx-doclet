@@ -33,7 +33,6 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
-  javaType: "class"
 - uid: "com.microsoft.samples.offers.Offer.Offer()"
   id: "Offer()"
   parent: "com.microsoft.samples.offers.Offer"
@@ -48,7 +47,6 @@ items:
   summary: "Initializes a new instance of the Offer class."
   syntax:
     content: "public Offer()"
-  javaType: "constructor"
 - uid: "com.microsoft.samples.offers.Offer.getReselleeQualifications()"
   id: "getReselleeQualifications()"
   parent: "com.microsoft.samples.offers.Offer"
@@ -64,7 +62,6 @@ items:
     content: "public String[] getReselleeQualifications()"
     return:
       type: "java.lang.String[]"
-  javaType: "method"
 - uid: "com.microsoft.samples.offers.Offer.getResellerQualifications()"
   id: "getResellerQualifications()"
   parent: "com.microsoft.samples.offers.Offer"
@@ -80,7 +77,6 @@ items:
     content: "public String[] getResellerQualifications()"
     return:
       type: "java.lang.String[]"
-  javaType: "method"
 - uid: "com.microsoft.samples.offers.Offer.setReselleeQualifications(java.lang.String[])"
   id: "setReselleeQualifications(java.lang.String[])"
   parent: "com.microsoft.samples.offers.Offer"
@@ -97,7 +93,6 @@ items:
     parameters:
     - id: "value"
       type: "java.lang.String[]"
-  javaType: "method"
 - uid: "com.microsoft.samples.offers.Offer.setResellerQualifications(java.lang.String[])"
   id: "setResellerQualifications(java.lang.String[])"
   parent: "com.microsoft.samples.offers.Offer"
@@ -114,7 +109,6 @@ items:
     parameters:
     - id: "value"
       type: "java.lang.String[]"
-  javaType: "method"
 references:
 - uid: "com.microsoft.samples.offers.Offer.Offer*"
   name: "Offer"

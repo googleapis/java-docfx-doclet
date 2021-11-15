@@ -69,7 +69,6 @@ items:
       type: "java.lang.String"
     - id: "args"
       type: "java.lang.Object[]"
-  javaType: "constructor"
 - uid: "com.microsoft.samples.google.ValidationException.popCurrentThreadValidationContext()"
   id: "popCurrentThreadValidationContext()"
   parent: "com.microsoft.samples.google.ValidationException"
@@ -84,7 +83,6 @@ items:
   summary: "Clears the validation context."
   syntax:
     content: "public static void popCurrentThreadValidationContext()"
-  javaType: "method"
 - uid: "com.microsoft.samples.google.ValidationException.pushCurrentThreadValidationContext(com.microsoft.samples.google.ValidationException.Supplier<java.lang.String>)"
   id: "pushCurrentThreadValidationContext(com.microsoft.samples.google.ValidationException.Supplier<java.lang.String>)"
   parent: "com.microsoft.samples.google.ValidationException"
@@ -102,7 +100,6 @@ items:
     parameters:
     - id: "supplier"
       type: "com.microsoft.samples.google.ValidationException.Supplier<java.lang.String>"
-  javaType: "method"
 - uid: "com.microsoft.samples.google.ValidationException.pushCurrentThreadValidationContext(java.lang.String)"
   id: "pushCurrentThreadValidationContext(java.lang.String)"
   parent: "com.microsoft.samples.google.ValidationException"
@@ -119,7 +116,6 @@ items:
     parameters:
     - id: "context"
       type: "java.lang.String"
-  javaType: "method"
 references:
 - uid: "java.lang.String"
   href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"

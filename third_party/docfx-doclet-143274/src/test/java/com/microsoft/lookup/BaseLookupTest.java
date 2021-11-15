@@ -224,11 +224,7 @@ public class BaseLookupTest {
 
     @Test
     public void testExtractJavaType() {
-        String name = "com.microsoft.samples.google.SpeechClient";
-        when(typeElement.getKind()).thenReturn(ElementKind.CLASS);
-        assertEquals("Wrong javaType", baseLookup.extractJavaType(typeElement, name), "class");
-
-        name = "com.microsoft.samples.google.ValidationException";
+        String name = "com.microsoft.samples.google.ValidationException";
         when(typeElement.getKind()).thenReturn(ElementKind.CLASS);
         assertEquals("Wrong javaType", baseLookup.extractJavaType(typeElement, name), "exception");
 
@@ -239,6 +235,14 @@ public class BaseLookupTest {
         name = "com.microsoft.samples.google";
         when(typeElement.getKind()).thenReturn(ElementKind.PACKAGE);
         assertEquals("Wrong javaType", baseLookup.extractJavaType(typeElement, name), "package");
+
+        name = "com.microsoft.samples.google.SpeechClient";
+        when(typeElement.getKind()).thenReturn(ElementKind.CLASS);
+        assertEquals("Wrong javaType", baseLookup.extractJavaType(typeElement, name), null);
+
+        name = "com.microsoft.samples.google.ValidationException.Supplier";
+        when(typeElement.getKind()).thenReturn(ElementKind.INTERFACE);
+        assertEquals("Wrong javaType", baseLookup.extractJavaType(typeElement, name), null);
     }
 
     private ExtendedMetadataFileItem buildExtendedMetadataFileItem(Element element) {

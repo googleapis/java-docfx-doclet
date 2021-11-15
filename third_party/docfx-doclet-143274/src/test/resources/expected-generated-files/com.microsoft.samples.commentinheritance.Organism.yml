@@ -14,7 +14,6 @@ items:
   package: "com.microsoft.samples.commentinheritance"
   syntax:
     content: "public interface Organism"
-  javaType: "interface"
 - uid: "com.microsoft.samples.commentinheritance.Organism.getKind()"
   id: "getKind()"
   parent: "com.microsoft.samples.commentinheritance.Organism"
@@ -31,7 +30,6 @@ items:
     content: "public abstract String getKind()"
     return:
       type: "java.lang.String"
-  javaType: "method"
 references:
 - uid: "java.lang.String"
   href: "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"

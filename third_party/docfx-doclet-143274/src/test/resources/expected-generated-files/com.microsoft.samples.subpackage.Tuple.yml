@@ -35,7 +35,6 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
-  javaType: "class"
 - uid: "com.microsoft.samples.subpackage.Tuple.Tuple(T1,T2)"
   id: "Tuple(T1,T2)"
   parent: "com.microsoft.samples.subpackage.Tuple"
@@ -54,7 +53,6 @@ items:
       type: "T1"
     - id: "item2"
       type: "T2"
-  javaType: "constructor"
 - uid: "com.microsoft.samples.subpackage.Tuple.getItem1()"
   id: "getItem1()"
   parent: "com.microsoft.samples.subpackage.Tuple"
@@ -70,7 +68,6 @@ items:
     content: "public T1 getItem1()"
     return:
       type: "T1"
-  javaType: "method"
 - uid: "com.microsoft.samples.subpackage.Tuple.getItem2()"
   id: "getItem2()"
   parent: "com.microsoft.samples.subpackage.Tuple"
@@ -86,7 +83,6 @@ items:
     content: "public T2 getItem2()"
     return:
       type: "T2"
-  javaType: "method"
 - uid: "com.microsoft.samples.subpackage.Tuple.setItem1(T1)"
   id: "setItem1(T1)"
   parent: "com.microsoft.samples.subpackage.Tuple"
@@ -103,7 +99,6 @@ items:
     parameters:
     - id: "item1"
       type: "T1"
-  javaType: "method"
 - uid: "com.microsoft.samples.subpackage.Tuple.setItem2(T2)"
   id: "setItem2(T2)"
   parent: "com.microsoft.samples.subpackage.Tuple"
@@ -120,7 +115,6 @@ items:
     parameters:
     - id: "item2"
       type: "T2"
-  javaType: "method"
 references:
 - uid: "T1"
   spec.java:
