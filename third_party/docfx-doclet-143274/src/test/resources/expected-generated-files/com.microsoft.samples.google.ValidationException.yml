@@ -49,6 +49,7 @@ items:
   - "java.lang.Throwable.printStackTrace(java.io.PrintWriter)"
   - "java.lang.Throwable.setStackTrace(java.lang.StackTraceElement[])"
   - "java.lang.Throwable.toString()"
+  javaType: "exception"
 - uid: "com.microsoft.samples.google.ValidationException.ValidationException(java.lang.String,java.lang.Object...)"
   id: "ValidationException(java.lang.String,java.lang.Object...)"
   parent: "com.microsoft.samples.google.ValidationException"

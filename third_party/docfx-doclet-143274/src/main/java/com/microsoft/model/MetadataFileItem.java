@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 @JsonPropertyOrder({"uid", "id", "parent", "children", "href", "langs", "isExternal", "name", "nameWithType",
-        "fullName", "overload", "overridden", "type", "package", "summary", "syntax", "inheritance", "implements", "exceptions",
+        "fullName", "overload", "overridden", "type", "javatype", "package", "summary", "syntax", "inheritance", "implements", "exceptions",
         "spec.java", "inheritedMembers", "status"})
 public class MetadataFileItem implements Comparable<MetadataFileItem> {
 
@@ -25,6 +25,7 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
     private String overload;
     private String overridden;
     private String type;
+    private String javatype;
     @JsonProperty("package")
     private String packageName;
     private String summary;
@@ -140,8 +141,16 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
         return type;
     }
 
+    public String getJavaType() {
+        return javatype;
+    }
+
     public void setType(String type) {
         this.type = type;
+    }
+
+    public void setJavaType(String javaType) {
+        this.javatype = javaType;
     }
 
     public String getPackageName() {

@@ -43,6 +43,7 @@ items:
   - "java.lang.Throwable.printStackTrace(java.io.PrintWriter)"
   - "java.lang.Throwable.setStackTrace(java.lang.StackTraceElement[])"
   - "java.lang.Throwable.toString()"
+  javaType: "exception"
 - uid: "com.microsoft.samples.subpackage.CustomException.CustomException(java.lang.String)"
   id: "CustomException(java.lang.String)"
   parent: "com.microsoft.samples.subpackage.CustomException"

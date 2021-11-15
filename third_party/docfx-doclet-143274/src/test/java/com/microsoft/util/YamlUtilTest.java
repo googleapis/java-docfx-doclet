@@ -60,7 +60,7 @@ public class YamlUtilTest {
     public void cleanupHtmlRemoveLonePreTagsTest() {
         String expectedActual = "<pre>text</pre>";
         String expectedResult = "text";
-        String expectedWithCode = "<pre><code class=\"pretty-print\">text</code></pre>";
+        String expectedWithCode = "<pre class=\"pretty-print\"><code>text</code></pre>";
         String random = UUID.randomUUID().toString();
 
         assertEquals(expectedResult, YamlUtil.cleanupHtml(expectedActual));
@@ -72,7 +72,7 @@ public class YamlUtilTest {
     @Test
     public void cleanupHtmlIncludePrettyPrintTest() {
         String expectedActual = "<pre><code>";
-        String expectedResult = "<pre><code class=\"prettyprint lang-java\">";
+        String expectedResult = "<pre class=\"prettyprint lang-java\"><code>";
         String random = UUID.randomUUID().toString();
 
         assertEquals(expectedResult, YamlUtil.cleanupHtml(expectedActual));

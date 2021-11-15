@@ -26,6 +26,7 @@ public class PackageLookup extends BaseLookup<PackageElement> {
         result.setNameWithType(qName);
         result.setFullName(qName);
         result.setType(determineType(packageElement));
+        result.setJavaType(extractJavaType(packageElement, qName));
         result.setSummary(determineComment(packageElement));
         result.setContent(determinePackageContent(packageElement));
         return result;

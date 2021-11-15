@@ -152,4 +152,12 @@ public class MetadataFileItemTest {
         assertTrue("Wrong isExternal when true", (new MetadataFileItem("123", "name", true)).getIsExternal());
         assertNull("Wrong isExternal when false", (new MetadataFileItem("123", "name", false)).getIsExternal());
     }
+
+    @Test
+    public void setJavaType() {
+        MetadataFileItem metadataFileItem = new MetadataFileItem("123");
+        assertNull("Wrong javaType when null", metadataFileItem.getJavaType());
+        metadataFileItem.setJavaType("javaType");
+        assertEquals("Wrong javaType when set","javaType", metadataFileItem.getJavaType());
+    }
 }

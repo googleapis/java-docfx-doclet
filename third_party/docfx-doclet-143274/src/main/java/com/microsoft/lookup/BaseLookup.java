@@ -13,6 +13,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.Modifier;
+import javax.lang.model.element.TypeElement;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -115,6 +117,18 @@ public abstract class BaseLookup<T extends Element> {
 
     public String extractType(T key) {
         return resolve(key).getType();
+    }
+
+    public String extractJavaType(T element, String name) {
+        if (element.getKind().name().equals(ElementKind.CLASS.name()) && name.contains("Exception")){
+            return "exception";
+        }
+        String javatype = element.getKind().name().toLowerCase().replaceAll("_","");
+
+        if (javatype.equals("package") || javatype.equals("overview") || javatype.equals("annotationtype")){
+            return javatype;
+        }
+        return null;
     }
 
     public String extractContent(T key) {

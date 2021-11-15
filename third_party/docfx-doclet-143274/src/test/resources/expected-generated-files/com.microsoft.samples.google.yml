@@ -21,6 +21,7 @@ items:
   type: "Namespace"
   syntax:
     content: "package com.microsoft.samples.google"
+  javaType: "package"
 references:
 - uid: "com.microsoft.samples.google.BetaApi"
   name: "BetaApi"

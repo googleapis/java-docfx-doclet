@@ -56,15 +56,19 @@ public class TocContentsTest {
         assertEquals(contents.getName(), "google-cloud-project");
 
         List<Object> items = contents.getItems();
-        assertEquals("Should be 4 items", items.size(), 4);
+        assertEquals("Should be 5 items", items.size(), 5);
 
         assertEquals("Guide should be first", items.get(0).getClass(), Guide.class);
-        Guide history = (Guide) items.get(0);
+        Guide overview = (Guide) items.get(0);
+        assertEquals("First guide should be Overview", overview.getName(), "Overview");
+
+        assertEquals("Guide should be second", items.get(1).getClass(), Guide.class);
+        Guide history = (Guide) items.get(1);
         assertEquals("Second guide should be Version History", history.getName(), "Version history");
 
-        assertEquals("Item A should be second", items.get(1), tocItemA);
-        assertEquals("Item B should be third", items.get(2), tocItemB);
-        assertEquals("Item C should be fourth", items.get(3), tocItemC);
+        assertEquals("Item A should be third", items.get(2), tocItemA);
+        assertEquals("Item B should be fourth", items.get(3), tocItemB);
+        assertEquals("Item C should be fifth", items.get(4), tocItemC);
     }
 
     @Test
