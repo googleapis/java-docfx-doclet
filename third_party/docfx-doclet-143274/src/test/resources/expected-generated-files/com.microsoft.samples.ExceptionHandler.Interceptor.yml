@@ -1,0 +1,93 @@
+### YamlMime:ManagedReference
+items:
+- uid: "com.microsoft.samples.ExceptionHandler.Interceptor"
+  id: "Interceptor"
+  parent: "com.microsoft.samples"
+  children:
+  - "com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult"
+  - "com.microsoft.samples.ExceptionHandler.Interceptor.afterEval(java.lang.Exception,com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult)"
+  - "com.microsoft.samples.ExceptionHandler.Interceptor.beforeEval(java.lang.Exception)"
+  langs:
+  - "java"
+  name: "ExceptionHandler.Interceptor"
+  nameWithType: "ExceptionHandler.Interceptor"
+  fullName: "com.microsoft.samples.ExceptionHandler.Interceptor"
+  type: "Interface"
+  package: "com.microsoft.samples"
+  syntax:
+    content: "public static interface ExceptionHandler.Interceptor extends Serializable"
+  implements:
+  - "java.io.Serializable"
+- uid: "com.microsoft.samples.ExceptionHandler.Interceptor.afterEval(java.lang.Exception,com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult)"
+  id: "afterEval(java.lang.Exception,com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult)"
+  parent: "com.microsoft.samples.ExceptionHandler.Interceptor"
+  langs:
+  - "java"
+  name: "afterEval(Exception exception, ExceptionHandler.Interceptor.RetryResult retryResult)"
+  nameWithType: "ExceptionHandler.Interceptor.afterEval(Exception exception, ExceptionHandler.Interceptor.RetryResult retryResult)"
+  fullName: "com.microsoft.samples.ExceptionHandler.Interceptor.afterEval(Exception exception, ExceptionHandler.Interceptor.RetryResult retryResult)"
+  overload: "com.microsoft.samples.ExceptionHandler.Interceptor.afterEval*"
+  type: "Method"
+  package: "com.microsoft.samples"
+  summary: "This method is called after the evaluation and could alter its result."
+  syntax:
+    content: "public abstract ExceptionHandler.Interceptor.RetryResult afterEval(Exception exception, ExceptionHandler.Interceptor.RetryResult retryResult)"
+    parameters:
+    - id: "exception"
+      type: "java.lang.Exception"
+      description: "the exception that is being evaluated"
+    - id: "retryResult"
+      type: "com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult"
+      description: "the result of the evaluation so far"
+    return:
+      type: "com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult"
+      description: "<xref uid=\"\" data-throw-if-not-resolved=\"false\">RetryResult</xref> to indicate if the exception should be ignored ( <xref uid=\"\" data-throw-if-not-resolved=\"false\">RetryResult#RETRY</xref>), propagated (<xref uid=\"\" data-throw-if-not-resolved=\"false\">RetryResult#NO_RETRY</xref>), or evaluation should\n     proceed (<xref uid=\"\" data-throw-if-not-resolved=\"false\">RetryResult#CONTINUE_EVALUATION</xref>)."
+- uid: "com.microsoft.samples.ExceptionHandler.Interceptor.beforeEval(java.lang.Exception)"
+  id: "beforeEval(java.lang.Exception)"
+  parent: "com.microsoft.samples.ExceptionHandler.Interceptor"
+  langs:
+  - "java"
+  name: "beforeEval(Exception exception)"
+  nameWithType: "ExceptionHandler.Interceptor.beforeEval(Exception exception)"
+  fullName: "com.microsoft.samples.ExceptionHandler.Interceptor.beforeEval(Exception exception)"
+  overload: "com.microsoft.samples.ExceptionHandler.Interceptor.beforeEval*"
+  type: "Method"
+  package: "com.microsoft.samples"
+  summary: "This method is called before exception evaluation and could short-circuit the process."
+  syntax:
+    content: "public abstract ExceptionHandler.Interceptor.RetryResult beforeEval(Exception exception)"
+    parameters:
+    - id: "exception"
+      type: "java.lang.Exception"
+      description: "the exception that is being evaluated"
+    return:
+      type: "com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult"
+      description: "<xref uid=\"\" data-throw-if-not-resolved=\"false\">RetryResult</xref> to indicate if the exception should be ignored ( <xref uid=\"\" data-throw-if-not-resolved=\"false\">RetryResult#RETRY</xref>), propagated (<xref uid=\"\" data-throw-if-not-resolved=\"false\">RetryResult#NO_RETRY</xref>), or evaluation should\n     proceed (<xref uid=\"\" data-throw-if-not-resolved=\"false\">RetryResult#CONTINUE_EVALUATION</xref>)."
+references:
+- uid: "java.lang.Exception"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html"
+  spec.java:
+  - uid: "java.lang.Exception"
+    name: "Exception"
+    fullName: "java.lang.Exception"
+    isExternal: false
+    href: "https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html"
+- uid: "com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult"
+  name: "ExceptionHandler.Interceptor.RetryResult"
+  nameWithType: "ExceptionHandler.Interceptor.RetryResult"
+  fullName: "com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult"
+- uid: "com.microsoft.samples.ExceptionHandler.Interceptor.beforeEval*"
+  name: "beforeEval"
+  nameWithType: "ExceptionHandler.Interceptor.beforeEval"
+  fullName: "com.microsoft.samples.ExceptionHandler.Interceptor.beforeEval"
+  package: "com.microsoft.samples"
+- uid: "com.microsoft.samples.ExceptionHandler.Interceptor.afterEval*"
+  name: "afterEval"
+  nameWithType: "ExceptionHandler.Interceptor.afterEval"
+  fullName: "com.microsoft.samples.ExceptionHandler.Interceptor.afterEval"
+  package: "com.microsoft.samples"
+- uid: "java.io.Serializable"
+  href: "https://docs.oracle.com/javase/8/docs/api/java/io/Serializable.html"
+  name: "Serializable"
+  nameWithType: "Serializable"
+  fullName: "java.io.Serializable"

@@ -192,8 +192,7 @@ public class YmlFilesBuilder {
         item.setNameWithType(lookup.extractNameWithType(element));
         item.setFullName(lookup.extractFullName(element));
         item.setType(lookup.extractType(element));
-        String javatype = lookup.extractJavaType(element,name);
-        item.setJavaType(javatype);
+        item.setJavaType(lookup.extractJavaType(element));
         item.setSummary(lookup.extractSummary(element));
         item.setContent(lookup.extractContent(element));
     }
@@ -339,7 +338,7 @@ public class YmlFilesBuilder {
             setNameWithType(classItemsLookup.extractNameWithType(element));
             setFullName(classItemsLookup.extractFullName(element));
             setType(classItemsLookup.extractType(element));
-            setJavaType(classItemsLookup.extractJavaType(element, name));
+            setJavaType(classItemsLookup.extractJavaType(element));
             setPackageName(classItemsLookup.extractPackageName(element));
             setSummary(classItemsLookup.extractSummary(element));
         }};

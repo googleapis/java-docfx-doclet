@@ -17,11 +17,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 import java.util.Arrays;
 import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
@@ -39,6 +40,7 @@ public class ClassLookupTest {
     private DocCommentTree docCommentTree;
     private DeprecatedTree deprecatedTree;
     private TextTree textTree;
+    private TypeMirror typeMirror;
 
     @Before
     public void setup() {
@@ -50,6 +52,7 @@ public class ClassLookupTest {
         docCommentTree = Mockito.mock(DocCommentTree.class);
         deprecatedTree = Mockito.mock(DeprecatedTree.class);
         textTree = Mockito.mock(TextTree.class);
+        typeMirror = Mockito.mock(TypeMirror.class);
     }
 
     @Test
@@ -236,5 +239,20 @@ public class ClassLookupTest {
         verify(docTrees).getDocCommentTree(element);
         verify(docCommentTree).getBlockTags();
         assertEquals("Wrong description", result, null);
+    }
+
+    @Test
+    public void testExtractJavaType() {
+        TypeElement typeElement = elements.getTypeElement("com.microsoft.samples.google.ValidationException");
+        assertEquals("Wrong javaType", classLookup.extractJavaType(typeElement), "exception");
+
+        typeElement = elements.getTypeElement("com.microsoft.samples.google.RecognitionAudio");
+        assertEquals("Wrong javaType", classLookup.extractJavaType(typeElement), null);
+
+        typeElement = elements.getTypeElement("com.microsoft.samples.google.BetaApi");
+        assertEquals("Wrong javaType", classLookup.extractJavaType(typeElement), "annotationtype");
+
+        typeElement = elements.getTypeElement("com.microsoft.samples.IPartner");
+        assertEquals("Wrong javaType", classLookup.extractJavaType(typeElement), null);
     }
 }

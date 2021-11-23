@@ -2,11 +2,10 @@ package com.microsoft.lookup;
 
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.Status;
-import com.sun.source.doctree.DeprecatedTree;
-import com.sun.source.doctree.DocTree;
 import jdk.javadoc.doclet.DocletEnvironment;
 
 import javax.lang.model.element.PackageElement;
+import javax.lang.model.element.TypeElement;
 
 public class PackageLookup extends BaseLookup<PackageElement> {
 
@@ -26,7 +25,7 @@ public class PackageLookup extends BaseLookup<PackageElement> {
         result.setNameWithType(qName);
         result.setFullName(qName);
         result.setType(determineType(packageElement));
-        result.setJavaType(extractJavaType(packageElement, qName));
+        result.setJavaType(extractJavaType(packageElement));
         result.setSummary(determineComment(packageElement));
         result.setContent(determinePackageContent(packageElement));
         return result;
@@ -44,5 +43,13 @@ public class PackageLookup extends BaseLookup<PackageElement> {
 
     String determinePackageContent(PackageElement packageElement) {
         return "package " + packageElement.getQualifiedName();
+    }
+
+    public String extractJavaType(PackageElement element) {
+        String javatype = element.getKind().name().toLowerCase().replaceAll("_","");
+        if (javatype.equals("package")){
+            return javatype;
+        }
+        return null;
     }
 }
