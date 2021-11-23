@@ -83,6 +83,16 @@ public class YamlUtilTest {
     }
 
     @Test
+    public void cleanupHtmlEncodeBracketsTest() {
+        String expectedActual = "<code> List<String> things = new ArrayList<>(); \n </code> <p>text</p> <Object>" ;
+        String expectedResult = "<code> List&lt;String&gt; things = new ArrayList&lt;&gt;(); \n </code> <p>text</p> &lt;Object&gt;";
+        String random = UUID.randomUUID().toString();
+
+        assertEquals(expectedResult, YamlUtil.cleanupHtml(expectedActual));
+        assertEquals(random + expectedResult + random, YamlUtil.cleanupHtml(random + expectedActual + random));
+    }
+
+    @Test
     public void cleanupHtmlAddCodeTagsTest() {
         String expectedActual = "`text`";
         String expectedResult = "<code>text</code>";
