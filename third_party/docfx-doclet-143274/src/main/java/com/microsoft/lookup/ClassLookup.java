@@ -46,12 +46,12 @@ public class ClassLookup extends BaseLookup<TypeElement> {
         result.setNameWithType(classSNameWithGenericsSupport);
         result.setFullName(classQNameWithGenericsSupport);
         result.setType(determineType(classElement));
-        result.setJavaType(extractJavaType(classElement, classSNameWithGenericsSupport));
         result.setPackageName(packageName);
         result.setSummary(determineComment(classElement));
         result.setSuperclass(determineNestedSuperclass(classElement, result, inheritedMethods));
         result.setTypeParameters(determineTypeParameters(classElement));
         result.setInheritedMethods(determineInheritedMembers(inheritedMethods));
+        result.setJavaType(extractJavaType(classElement));
         populateContent(classElement, classSNameWithGenericsSupport, result);
         result.setTocName(classQName.replace(packageName.concat("."), ""));
         return result;
@@ -219,5 +219,18 @@ public class ClassLookup extends BaseLookup<TypeElement> {
             return methods;
         }
         return new ArrayList<>();
+    }
+
+    public String extractJavaType(TypeElement element) {
+        String superClass = determineSuperclass(element);
+        if (superClass != null && superClass.contains("Exception")) {
+            return "exception";
+        }
+
+        String javatype = element.getKind().name().toLowerCase().replaceAll("_","");
+        if (javatype.equals("annotationtype")){
+            return javatype;
+        }
+        return null;
     }
 }

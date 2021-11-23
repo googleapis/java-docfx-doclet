@@ -119,17 +119,7 @@ public abstract class BaseLookup<T extends Element> {
         return resolve(key).getType();
     }
 
-    public String extractJavaType(T element, String name) {
-        if (element.getKind().name().equals(ElementKind.CLASS.name()) && name.contains("Exception")){
-            return "exception";
-        }
-        String javatype = element.getKind().name().toLowerCase().replaceAll("_","");
-
-        if (javatype.equals("package") || javatype.equals("overview") || javatype.equals("annotationtype")){
-            return javatype;
-        }
-        return null;
-    }
+    public String extractJavaType(T element) {return null;}
 
     public String extractContent(T key) {
         return resolve(key).getContent();

@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.lang.model.element.PackageElement;
+import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 
 import static org.junit.Assert.assertEquals;
@@ -52,4 +53,9 @@ public class PackageLookupTest {
         assertEquals("Wrong result", resultB, Status.BETA.toString());
     }
 
+    @Test
+    public void testExtractJavaType() {
+        PackageElement packageElement = elements.getPackageElement("com.microsoft.samples.google.v1beta");
+        assertEquals("Wrong javaType", packageLookup.extractJavaType(packageElement), "package");
+    }
 }

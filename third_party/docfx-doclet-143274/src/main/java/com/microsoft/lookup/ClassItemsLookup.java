@@ -40,7 +40,6 @@ public class ClassItemsLookup extends BaseLookup<Element> {
             setHref(classQName + ".yml");
             setName(elementQName);
             setType(determineType(element));
-            setJavaType(extractJavaType(element, elementQName));
             setPackageName(packageName);
             setSummary(determineComment(element));
         }};

@@ -222,29 +222,6 @@ public class BaseLookupTest {
         assertEquals("Wrong references", baseLookup.extractReferences(element), lastBuiltItem.getReferences());
     }
 
-    @Test
-    public void testExtractJavaType() {
-        String name = "com.microsoft.samples.google.ValidationException";
-        when(typeElement.getKind()).thenReturn(ElementKind.CLASS);
-        assertEquals("Wrong javaType", baseLookup.extractJavaType(typeElement, name), "exception");
-
-        name = "com.microsoft.samples.google.BetaApi";
-        when(typeElement.getKind()).thenReturn(ElementKind.ANNOTATION_TYPE);
-        assertEquals("Wrong javaType", baseLookup.extractJavaType(typeElement, name), "annotationtype");
-
-        name = "com.microsoft.samples.google";
-        when(typeElement.getKind()).thenReturn(ElementKind.PACKAGE);
-        assertEquals("Wrong javaType", baseLookup.extractJavaType(typeElement, name), "package");
-
-        name = "com.microsoft.samples.google.SpeechClient";
-        when(typeElement.getKind()).thenReturn(ElementKind.CLASS);
-        assertEquals("Wrong javaType", baseLookup.extractJavaType(typeElement, name), null);
-
-        name = "com.microsoft.samples.google.ValidationException.Supplier";
-        when(typeElement.getKind()).thenReturn(ElementKind.INTERFACE);
-        assertEquals("Wrong javaType", baseLookup.extractJavaType(typeElement, name), null);
-    }
-
     private ExtendedMetadataFileItem buildExtendedMetadataFileItem(Element element) {
         ExtendedMetadataFileItem result = new ExtendedMetadataFileItem(String.valueOf(element));
         result.setPackageName("Some package name");
@@ -271,5 +248,10 @@ public class BaseLookupTest {
         result.setTocName("Some toc name");
         result.addReferences(Set.of(new MetadataFileItem("ref uid")));
         return result;
+    }
+
+    @Test
+    public void testExtractJavaType() {
+        assertEquals("Wrong javaType", baseLookup.extractJavaType(typeElement), null);
     }
 }
