@@ -59,7 +59,7 @@ public class YmlFilesBuilder {
     }
 
     public boolean build() {
-        MetadataFile projectMetadataFile = new MetadataFile(outputPath,"overview.yml");;
+        MetadataFile projectMetadataFile = new MetadataFile(outputPath,"index.yml");;
         List<MetadataFileItem> packageItems = new ArrayList<>();
         List<MetadataFile> packageMetadataFiles = new ArrayList<>();
         List<MetadataFile> classMetadataFiles = new ArrayList<>();
