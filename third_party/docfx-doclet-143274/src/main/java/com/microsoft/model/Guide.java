@@ -19,8 +19,8 @@ package com.microsoft.model;
 //  for including guides with toc items
 // [items: [name: Overview,
 //          href: overview.html,
-//          name: Version history,
-//          href: history.md,
+//          name: Changelog,
+//          href: changelog.md,
 //          name: name,
 //          uid: package.name,...]]
 public class Guide {

@@ -63,8 +63,8 @@ public class TocContentsTest {
         assertEquals("First guide should be Overview", overview.getName(), "Overview");
 
         assertEquals("Guide should be second", items.get(1).getClass(), Guide.class);
-        Guide history = (Guide) items.get(1);
-        assertEquals("Second guide should be Version History", history.getName(), "Version history");
+        Guide changelog = (Guide) items.get(1);
+        assertEquals("Second guide should be Changelog", changelog.getName(), "Changelog");
 
         assertEquals("Item A should be third", items.get(2), tocItemA);
         assertEquals("Item B should be fourth", items.get(3), tocItemB);

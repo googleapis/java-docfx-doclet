@@ -3,8 +3,8 @@
   items:
   - name: "Overview"
     href: "index.html"
-  - name: "Version history"
-    href: "history.md"
+  - name: "Changelog"
+    href: "changelog.md"
   - uid: "com.microsoft.samples"
     name: "com.microsoft.samples"
     items:
