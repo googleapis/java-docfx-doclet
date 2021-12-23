@@ -202,7 +202,7 @@ public abstract class BaseLookup<T extends Element> {
     }
 
     /**
-     * Provides support for @deprecated and @see tags
+     * Provides support for deprecated and see tags
      */
     String replaceBlockTags(DocCommentTree docCommentTree, String comment) {
         List<String> seeItems = new ArrayList<>();
