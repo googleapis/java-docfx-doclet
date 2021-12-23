@@ -265,28 +265,4 @@ public class ClassItemsLookupTest {
         assertEquals(classItemsLookup.determineType(element.getEnclosedElements().get(0)), "Field");
         assertEquals(classItemsLookup.determineType(element.getEnclosedElements().get(1)), "Field");
     }
-
-    @Test
-    public void extractDeprecatedDescription() {
-        TypeElement element = elements.getTypeElement("com.microsoft.samples.agreements.AgreementDetailsCollectionOperations");
-        ExecutableElement method = ElementFilter.methodsIn(element.getEnclosedElements()).get(0);
-        String depMsg = "Deprecated Message :(";
-
-        when(environment.getDocTrees()).thenReturn(docTrees);
-        when(docTrees.getDocCommentTree(method)).thenReturn(docCommentTree);
-        doReturn(Arrays.asList(deprecatedTree)).when(docCommentTree).getBlockTags();
-        when(deprecatedTree.getKind()).thenReturn(Kind.DEPRECATED);
-
-        doReturn(Arrays.asList(textTree)).when(deprecatedTree).getBody();
-        when(textTree.getKind()).thenReturn(Kind.TEXT);
-        when(textTree.toString()).thenReturn(depMsg);
-
-        String result = classItemsLookup.extractDeprecatedDescription(method);
-
-        verify(environment).getDocTrees();
-        verify(docTrees).getDocCommentTree(method);
-        verify(docCommentTree).getBlockTags();
-        verify(deprecatedTree).getKind();
-        assertEquals("Wrong description", result, depMsg);
-    }
 }

@@ -46,8 +46,8 @@ public class PackageLookupTest {
         PackageElement elementBeta = elements.getPackageElement("com.microsoft.samples.google.v1beta");
         PackageElement elementAlpha = elements.getPackageElement("com.microsoft.samples.google.v1p1alpha");
 
-        String resultA = packageLookup.extractStatus(elementAlpha.getQualifiedName().toString());
-        String resultB = packageLookup.extractStatus(elementBeta.getQualifiedName().toString());
+        String resultA = packageLookup.extractStatus(elementAlpha);
+        String resultB = packageLookup.extractStatus(elementBeta);
 
         assertEquals("Wrong result", resultA, Status.ALPHA.toString());
         assertEquals("Wrong result", resultB, Status.BETA.toString());
