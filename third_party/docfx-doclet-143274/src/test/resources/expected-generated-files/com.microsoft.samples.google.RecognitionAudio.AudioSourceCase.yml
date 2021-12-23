@@ -146,7 +146,7 @@ items:
   overload: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase.valueOf*"
   type: "Method"
   package: "com.microsoft.samples.google"
-  summary: "<p>(deprecated) Use <xref uid=\"com.microsoft.samples.google.RecognitionAudio.AudioSourceCase.forNumber(int)\" data-throw-if-not-resolved=\"false\">#forNumber(int)</xref> instead.</p>"
+  summary: "\n<strong>Deprecated.</strong> <em>Use <xref uid=\"com.microsoft.samples.google.RecognitionAudio.AudioSourceCase.forNumber(int)\" data-throw-if-not-resolved=\"false\">#forNumber(int)</xref> instead.</em>\n\n"
   syntax:
     content: "public static RecognitionAudio.AudioSourceCase valueOf(int value)"
     parameters:
