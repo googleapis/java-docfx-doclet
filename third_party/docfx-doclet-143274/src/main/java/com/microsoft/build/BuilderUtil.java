@@ -37,14 +37,6 @@ final class BuilderUtil {
     private static final Pattern XREF_LINK_RESOLVE_PATTERN = Pattern.compile("(?<class>\\w+)\\#(?<member>\\w+)(\\((?<param>.*)\\))?");
     public final static String[] LANGS = {"java"};
 
-    static String getDeprecatedSummary(String depMsg, String summary) {
-        String result = "<p>(deprecated) " + depMsg + "</p>";
-        if (summary != null && !summary.equals("")) {
-            result = result + "\n" + summary;
-        }
-        return result;
-    }
-
     static String populateUidValues(String text, LookupContext lookupContext) {
         if (StringUtils.isBlank(text)) {
             return text;
@@ -196,6 +188,7 @@ final class BuilderUtil {
         item.setType(lookup.extractType(element));
         item.setJavaType(lookup.extractJavaType(element));
         item.setSummary(lookup.extractSummary(element));
+        item.setStatus(lookup.extractStatus(element));
         item.setContent(lookup.extractContent(element));
     }
 }

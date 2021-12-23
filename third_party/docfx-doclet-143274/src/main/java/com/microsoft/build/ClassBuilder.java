@@ -19,7 +19,6 @@ import com.microsoft.lookup.ClassItemsLookup;
 import com.microsoft.lookup.ClassLookup;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
-import com.microsoft.model.Status;
 import com.microsoft.model.TocItem;
 import com.microsoft.model.TocTypeMap;
 import com.microsoft.util.ElementUtil;
@@ -35,7 +34,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static com.microsoft.build.BuilderUtil.LANGS;
-import static com.microsoft.build.BuilderUtil.getDeprecatedSummary;
 import static com.microsoft.build.BuilderUtil.populateItemFields;
 
 class ClassBuilder {
@@ -97,11 +95,8 @@ class ClassBuilder {
         classItem.setInheritance(classLookup.extractSuperclass(classElement));
         classItem.setInterfaces(classLookup.extractInterfaces(classElement));
         classItem.setInheritedMethods(classLookup.extractInheritedMethods(classElement));
-        String depMsg = classLookup.extractDeprecatedDescription(classElement);
-        if (depMsg != null) {
-            classItem.setSummary(getDeprecatedSummary(depMsg, classItem.getSummary()));
-            classItem.setStatus(Status.DEPRECATED.toString());
-        }
+        classItem.setSummary(classLookup.extractSummary(classElement));
+        classItem.setStatus(classLookup.extractStatus(classElement));
         classMetadataFile.getItems().add(classItem);
     }
 
@@ -111,11 +106,6 @@ class ClassBuilder {
             constructorItem.setOverload(classItemsLookup.extractOverload(constructorElement));
             constructorItem.setContent(classItemsLookup.extractConstructorContent(constructorElement));
             constructorItem.setParameters(classItemsLookup.extractParameters(constructorElement));
-            String depMsg = classItemsLookup.extractDeprecatedDescription(constructorElement);
-            if (depMsg != null) {
-                constructorItem.setSummary(getDeprecatedSummary(depMsg, constructorItem.getSummary()));
-                constructorItem.setStatus(Status.DEPRECATED.toString());
-            }
             classMetadataFile.getItems().add(constructorItem);
 
             referenceBuilder.addParameterReferences(constructorItem, classMetadataFile);
@@ -134,11 +124,6 @@ class ClassBuilder {
                     methodItem.setParameters(classItemsLookup.extractParameters(methodElement));
                     methodItem.setReturn(classItemsLookup.extractReturn(methodElement));
                     methodItem.setOverridden(classItemsLookup.extractOverridden(methodElement));
-                    String depMsg = classItemsLookup.extractDeprecatedDescription(methodElement);
-                    if (depMsg != null) {
-                        methodItem.setSummary(getDeprecatedSummary(depMsg, methodItem.getSummary()));
-                        methodItem.setStatus(Status.DEPRECATED.toString());
-                    }
 
                     classMetadataFile.getItems().add(methodItem);
                     referenceBuilder.addExceptionReferences(methodItem, classMetadataFile);
@@ -155,12 +140,6 @@ class ClassBuilder {
                     MetadataFileItem fieldItem = buildMetadataFileItem(fieldElement);
                     fieldItem.setContent(classItemsLookup.extractFieldContent(fieldElement));
                     fieldItem.setReturn(classItemsLookup.extractReturn(fieldElement));
-                    String depMsg = classItemsLookup.extractDeprecatedDescription(fieldElement);
-                    if (depMsg != null) {
-                        fieldItem.setSummary(getDeprecatedSummary(depMsg, fieldItem.getSummary()));
-                        fieldItem.setStatus(Status.DEPRECATED.toString());
-                    }
-
                     classMetadataFile.getItems().add(fieldItem);
                     referenceBuilder.addReturnReferences(fieldItem, classMetadataFile);
                 });
@@ -182,6 +161,7 @@ class ClassBuilder {
             setJavaType(classItemsLookup.extractJavaType(element));
             setPackageName(classItemsLookup.extractPackageName(element));
             setSummary(classItemsLookup.extractSummary(element));
+            setStatus(classItemsLookup.extractStatus(element));
         }};
     }
 

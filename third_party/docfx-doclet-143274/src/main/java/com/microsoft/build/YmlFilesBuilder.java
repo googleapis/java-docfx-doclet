@@ -59,7 +59,7 @@ public class YmlFilesBuilder {
         for (PackageElement packageElement :
                 elementUtil.extractPackageElements(environment.getIncludedElements())) {
             String packageUid = packageLookup.extractUid(packageElement);
-            String packageStatus = packageLookup.extractStatus(packageElement.getQualifiedName().toString());
+            String packageStatus = packageLookup.extractStatus(packageElement);
             TocItem packageTocItem = new TocItem(packageUid, packageUid, packageStatus);
             //  build package summary
             packageMetadataFiles.add(packageBuilder.buildPackageMetadataFile(packageElement));
