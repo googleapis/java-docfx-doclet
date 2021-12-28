@@ -52,6 +52,7 @@ items:
     content: "public static final Person.IdentificationInfo.Gender FEMALE"
     return:
       type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  javaType: "static field"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender()"
   id: "Gender()"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
@@ -79,6 +80,7 @@ items:
     content: "public static final Person.IdentificationInfo.Gender MALE"
     return:
       type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  javaType: "static field"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.valueOf(java.lang.String)"
   id: "valueOf(java.lang.String)"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
@@ -97,6 +99,7 @@ items:
       type: "java.lang.String"
     return:
       type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
+  javaType: "static method"
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.values()"
   id: "values()"
   parent: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender"
@@ -112,6 +115,7 @@ items:
     content: "public static Person.IdentificationInfo.Gender[] values()"
     return:
       type: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender[]"
+  javaType: "static method"
 references:
 - uid: "com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender.Gender*"
   name: "Gender"

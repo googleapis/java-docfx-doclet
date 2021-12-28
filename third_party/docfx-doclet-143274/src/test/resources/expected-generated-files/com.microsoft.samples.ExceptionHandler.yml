@@ -112,6 +112,7 @@ items:
     content: "public static ExceptionHandler getDefaultInstance()"
     return:
       type: "com.microsoft.samples.ExceptionHandler"
+  javaType: "static method"
 - uid: "com.microsoft.samples.ExceptionHandler.hashCode()"
   id: "hashCode()"
   parent: "com.microsoft.samples.ExceptionHandler"
@@ -143,6 +144,7 @@ items:
     content: "public static ExceptionHandler.Builder newBuilder()"
     return:
       type: "com.microsoft.samples.ExceptionHandler.Builder"
+  javaType: "static method"
 - uid: "com.microsoft.samples.ExceptionHandler.shouldRetry(java.lang.Throwable,java.lang.Object)"
   id: "shouldRetry(java.lang.Throwable,java.lang.Object)"
   parent: "com.microsoft.samples.ExceptionHandler"

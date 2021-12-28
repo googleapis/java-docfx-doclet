@@ -86,6 +86,7 @@ items:
       type: "com.microsoft.samples.subpackage.Person"
     return:
       type: "com.microsoft.samples.subpackage.Person"
+  javaType: "static method"
 - uid: "com.microsoft.samples.subpackage.Person.getFirstName()"
   id: "getFirstName()"
   parent: "com.microsoft.samples.subpackage.Person"

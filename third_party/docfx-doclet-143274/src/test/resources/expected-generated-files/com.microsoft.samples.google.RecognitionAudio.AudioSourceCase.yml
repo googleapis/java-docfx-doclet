@@ -58,6 +58,7 @@ items:
     content: "public static final RecognitionAudio.AudioSourceCase AUDIOSOURCE_NOT_SET"
     return:
       type: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase"
+  javaType: "static field"
 - uid: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase.AudioSourceCase(int)"
   id: "AudioSourceCase(int)"
   parent: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase"
@@ -88,6 +89,7 @@ items:
     content: "public static final RecognitionAudio.AudioSourceCase CONTENT"
     return:
       type: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase"
+  javaType: "static field"
 - uid: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase.URI"
   id: "URI"
   parent: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase"
@@ -102,6 +104,7 @@ items:
     content: "public static final RecognitionAudio.AudioSourceCase URI"
     return:
       type: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase"
+  javaType: "static field"
 - uid: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase.forNumber(int)"
   id: "forNumber(int)"
   parent: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase"
@@ -120,6 +123,7 @@ items:
       type: "int"
     return:
       type: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase"
+  javaType: "static method"
 - uid: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase.getNumber()"
   id: "getNumber()"
   parent: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase"
@@ -157,6 +161,7 @@ items:
       type: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase"
       description: "The enum associated with the given number."
   status: "deprecated"
+  javaType: "static method"
 - uid: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase.valueOf(java.lang.String)"
   id: "valueOf(java.lang.String)"
   parent: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase"
@@ -175,6 +180,7 @@ items:
       type: "java.lang.String"
     return:
       type: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase"
+  javaType: "static method"
 - uid: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase.values()"
   id: "values()"
   parent: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase"
@@ -190,6 +196,7 @@ items:
     content: "public static RecognitionAudio.AudioSourceCase[] values()"
     return:
       type: "com.microsoft.samples.google.RecognitionAudio.AudioSourceCase[]"
+  javaType: "static method"
 references:
 - uid: "int"
   href: "https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html"

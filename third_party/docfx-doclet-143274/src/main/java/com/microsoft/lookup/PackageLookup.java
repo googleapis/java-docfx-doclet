@@ -46,7 +46,7 @@ public class PackageLookup extends BaseLookup<PackageElement> {
     }
 
     public String extractJavaType(PackageElement element) {
-        String javaType = element.getKind().name().toLowerCase().replaceAll("_", "");
+        String javaType = element.getKind().name().toLowerCase();
         if (javaType.equals("package")) {
             return javaType;
         }
