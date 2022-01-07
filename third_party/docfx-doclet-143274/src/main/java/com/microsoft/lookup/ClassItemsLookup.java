@@ -6,11 +6,20 @@ import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
 import com.microsoft.util.CommentHelper;
 import com.microsoft.util.Utils;
-import com.sun.source.doctree.*;
+import com.sun.source.doctree.DocCommentTree;
+import com.sun.source.doctree.DocTree;
 import com.sun.source.doctree.DocTree.Kind;
+import com.sun.source.doctree.ParamTree;
+import com.sun.source.doctree.ReturnTree;
+import com.sun.source.doctree.ThrowsTree;
 import jdk.javadoc.doclet.DocletEnvironment;
 
-import javax.lang.model.element.*;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.Modifier;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeKind;
 import java.util.ArrayList;
 import java.util.List;
@@ -151,7 +160,7 @@ public class ClassItemsLookup extends BaseLookup<Element> {
     private String determineComment(ExecutableElement methodElement) {
         String inheritedInlineComment = getInheritedInlineCommentString(methodElement);
         Optional<DocCommentTree> docCommentTree = getDocCommentTree(methodElement);
-        if (docCommentTree.isPresent()){
+        if (docCommentTree.isPresent()) {
             return replaceBlockTags(docCommentTree.get(), inheritedInlineComment);
         }
         return inheritedInlineComment;
@@ -197,5 +206,17 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         }
 
         return output;
+    }
+
+    public String extractJavaType(Element element) {
+        if (element.getModifiers().contains(Modifier.STATIC)) {
+            if (element.getKind().equals(ElementKind.METHOD)) {
+                return "static method";
+            }
+            if (element.getKind().equals(ElementKind.FIELD) || element.getKind().equals(ElementKind.ENUM_CONSTANT)) {
+                return "static field";
+            }
+        }
+        return null;
     }
 }

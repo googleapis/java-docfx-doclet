@@ -174,7 +174,7 @@ public abstract class BaseLookup<T extends Element> {
                     .filter(docTree -> docTree.getKind().equals(DocTree.Kind.DEPRECATED))
                     .findFirst()
                     .isPresent();
-            if (isDeprecated){
+            if (isDeprecated) {
                 return DocTree.Kind.DEPRECATED.name().toLowerCase();
             }
         }
