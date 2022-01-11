@@ -1,21 +1,31 @@
 package com.microsoft.lookup;
 
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
-import com.microsoft.model.*;
+import com.microsoft.model.ExceptionItem;
+import com.microsoft.model.MetadataFileItem;
+import com.microsoft.model.MethodParameter;
+import com.microsoft.model.Return;
+import com.microsoft.model.TypeParameter;
 import com.microsoft.util.YamlUtil;
+import com.sun.source.doctree.DeprecatedTree;
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree;
 import com.sun.source.doctree.LinkTree;
 import com.sun.source.doctree.LiteralTree;
+import com.sun.source.doctree.SeeTree;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.Modifier;
-import javax.lang.model.element.TypeElement;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -157,6 +167,20 @@ public abstract class BaseLookup<T extends Element> {
         return resolve(key).getOverridden();
     }
 
+    public String extractStatus(T element) {
+        Optional<DocCommentTree> docCommentTree = getDocCommentTree(element);
+        if (docCommentTree.isPresent()) {
+            boolean isDeprecated = docCommentTree.get().getBlockTags().stream()
+                    .filter(docTree -> docTree.getKind().equals(DocTree.Kind.DEPRECATED))
+                    .findFirst()
+                    .isPresent();
+            if (isDeprecated) {
+                return DocTree.Kind.DEPRECATED.name().toLowerCase();
+            }
+        }
+        return null;
+    }
+
     protected String determineType(T element) {
         return elementKindLookup.get(element.getKind());
     }
@@ -166,10 +190,38 @@ public abstract class BaseLookup<T extends Element> {
     }
 
     protected String determineComment(T element) {
-        return getDocCommentTree(element)
-                .map(DocCommentTree::getFullBody)
-                .map(this::replaceLinksAndCodes)
-                .orElse(null);
+        Optional<DocCommentTree> docCommentTree = getDocCommentTree(element);
+        if (docCommentTree.isPresent()) {
+            String comment = docCommentTree
+                    .map(DocCommentTree::getFullBody)
+                    .map(this::replaceLinksAndCodes)
+                    .orElse(null);
+            return replaceBlockTags(docCommentTree.get(), comment);
+        }
+        return null;
+    }
+
+    /**
+     * Provides support for deprecated and see tags
+     */
+    String replaceBlockTags(DocCommentTree docCommentTree, String comment) {
+        List<String> seeItems = new ArrayList<>();
+        String commentWithBlockTags = comment;
+        for (DocTree blockTag : docCommentTree.getBlockTags()) {
+            switch (blockTag.getKind()) {
+                case DEPRECATED:
+                    commentWithBlockTags = getDeprecatedSummary((DeprecatedTree) blockTag).concat(comment);
+                    break;
+                case SEE:
+                    seeItems.add(getSeeTagRef((SeeTree) blockTag));
+                    break;
+                default:
+            }
+        }
+        if (!seeItems.isEmpty()) {
+            commentWithBlockTags = commentWithBlockTags.concat(getSeeAlsoSummary(seeItems));
+        }
+        return commentWithBlockTags;
     }
 
     /**
@@ -230,5 +282,24 @@ public abstract class BaseLookup<T extends Element> {
         return Stream.of(StringUtils.split(value, "<"))
                 .map(s -> RegExUtils.removeAll(s, "\\b[a-z0-9_.]+\\."))
                 .collect(Collectors.joining("<"));
+    }
+
+    private String getSeeAlsoSummary(List<String> seeItems) {
+        return String.format("\n<b>See Also:</b> %s\n", String.join(", ", seeItems));
+    }
+
+    private String getDeprecatedSummary(DeprecatedTree deprecatedTree) {
+        return String.format("\n<strong>Deprecated.</strong> <em>%s</em>\n\n",
+                replaceLinksAndCodes(deprecatedTree.getBody()));
+    }
+
+    private String getSeeTagRef(SeeTree seeTree) {
+        String ref = seeTree.getReference().stream()
+                .map(r -> String.valueOf(r)).collect(Collectors.joining(""));
+        // if it's already a tag, use that otherwise build xref tag
+        if (ref.matches("^<.+>.*")) {
+            return ref;
+        }
+        return String.format("<xref uid=\"%1$s\" data-throw-if-not-resolved=\"false\">%1$s</xref>", ref);
     }
 }

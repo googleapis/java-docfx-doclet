@@ -53,6 +53,7 @@ items:
     content: "public static final ExceptionHandler.Interceptor.RetryResult CONTINUE_EVALUATION"
     return:
       type: "com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult"
+  javaType: "static field"
 - uid: "com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult.NO_RETRY"
   id: "NO_RETRY"
   parent: "com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult"
@@ -67,6 +68,7 @@ items:
     content: "public static final ExceptionHandler.Interceptor.RetryResult NO_RETRY"
     return:
       type: "com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult"
+  javaType: "static field"
 - uid: "com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult.RETRY"
   id: "RETRY"
   parent: "com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult"
@@ -81,6 +83,7 @@ items:
     content: "public static final ExceptionHandler.Interceptor.RetryResult RETRY"
     return:
       type: "com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult"
+  javaType: "static field"
 - uid: "com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult.RetryResult()"
   id: "RetryResult()"
   parent: "com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult"
@@ -112,6 +115,7 @@ items:
       type: "java.lang.String"
     return:
       type: "com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult"
+  javaType: "static method"
 - uid: "com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult.values()"
   id: "values()"
   parent: "com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult"
@@ -127,6 +131,7 @@ items:
     content: "public static ExceptionHandler.Interceptor.RetryResult[] values()"
     return:
       type: "com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult[]"
+  javaType: "static method"
 references:
 - uid: "com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult.RetryResult*"
   name: "RetryResult"

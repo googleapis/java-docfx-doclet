@@ -6,14 +6,24 @@ import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
 import com.microsoft.util.CommentHelper;
 import com.microsoft.util.Utils;
-import com.sun.source.doctree.*;
+import com.sun.source.doctree.DocCommentTree;
+import com.sun.source.doctree.DocTree;
 import com.sun.source.doctree.DocTree.Kind;
+import com.sun.source.doctree.ParamTree;
+import com.sun.source.doctree.ReturnTree;
+import com.sun.source.doctree.ThrowsTree;
 import jdk.javadoc.doclet.DocletEnvironment;
 
-import javax.lang.model.element.*;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.Modifier;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeKind;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ClassItemsLookup extends BaseLookup<Element> {
@@ -63,7 +73,7 @@ public class ClassItemsLookup extends BaseLookup<Element> {
             result.setReturn(extractReturn(exeElement));
             if (exeElement.getKind() == ElementKind.METHOD) {
                 result.setOverridden(extractOverriddenUid(utils.overriddenMethod(exeElement)));
-                result.setSummary(getInheritedInlineCommentString(exeElement));
+                result.setSummary(determineComment(exeElement));
             }
         }
         result.setNameWithType(String.format("%s.%s", classSNameWithGenericsSupport, result.getName()));
@@ -77,15 +87,6 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         }
 
         return result;
-    }
-
-    public String extractDeprecatedDescription(Element element) {
-        return getDocCommentTree(element).map(docTree -> docTree.getBlockTags().stream()
-                .filter(o -> o.getKind() == DocTree.Kind.DEPRECATED)
-                .map(o -> (DeprecatedTree) o)
-                .map(o -> replaceLinksAndCodes(o.getBody()))
-                .findFirst().orElse(null)
-        ).orElse(null);
     }
 
     List<MethodParameter> extractParameters(ExecutableElement element) {
@@ -156,19 +157,28 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         return "";
     }
 
+    private String determineComment(ExecutableElement methodElement) {
+        String inheritedInlineComment = getInheritedInlineCommentString(methodElement);
+        Optional<DocCommentTree> docCommentTree = getDocCommentTree(methodElement);
+        if (docCommentTree.isPresent()) {
+            return replaceBlockTags(docCommentTree.get(), inheritedInlineComment);
+        }
+        return inheritedInlineComment;
+    }
+
     /**
      * If the item being inherited from is declared from external compiled package,
      * or is declared in the packages like java.lang.Object,
      * comments may be not available as doclet resolves from byte code.
      */
-    String getInheritedInlineCommentString(ExecutableElement exeElement) {
+    private String getInheritedInlineCommentString(ExecutableElement exeElement) {
         CommentHelper ch = getInheritedInlineTags(new CommentHelper(exeElement, utils));
         // Remove unresolved "@inheritDoc" tag.
         List<? extends DocTree> dctree = utils.removeBlockTag(ch.inlineTags, DocTree.Kind.INHERIT_DOC);
         return replaceLinksAndCodes(dctree);
     }
 
-    CommentHelper getInheritedInlineTags(CommentHelper input) {
+    private CommentHelper getInheritedInlineTags(CommentHelper input) {
         CommentHelper output = input.copy();
         if (!output.hasInheritDocTag() && !output.isSimpleOverride()) {
             return output;
@@ -196,5 +206,17 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         }
 
         return output;
+    }
+
+    public String extractJavaType(Element element) {
+        if (element.getModifiers().contains(Modifier.STATIC)) {
+            if (element.getKind().equals(ElementKind.METHOD)) {
+                return "static method";
+            }
+            if (element.getKind().equals(ElementKind.FIELD) || element.getKind().equals(ElementKind.ENUM_CONSTANT)) {
+                return "static field";
+            }
+        }
+        return null;
     }
 }

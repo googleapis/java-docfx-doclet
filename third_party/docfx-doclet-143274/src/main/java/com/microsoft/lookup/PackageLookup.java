@@ -5,7 +5,6 @@ import com.microsoft.model.Status;
 import jdk.javadoc.doclet.DocletEnvironment;
 
 import javax.lang.model.element.PackageElement;
-import javax.lang.model.element.TypeElement;
 
 public class PackageLookup extends BaseLookup<PackageElement> {
 
@@ -31,7 +30,8 @@ public class PackageLookup extends BaseLookup<PackageElement> {
         return result;
     }
 
-    public String extractStatus(String name) {
+    public String extractStatus(PackageElement packageElement) {
+        String name = String.valueOf(packageElement.getQualifiedName());
         if (name.contains(Status.ALPHA.toString())) {
             return Status.ALPHA.toString();
         }
@@ -46,9 +46,9 @@ public class PackageLookup extends BaseLookup<PackageElement> {
     }
 
     public String extractJavaType(PackageElement element) {
-        String javatype = element.getKind().name().toLowerCase().replaceAll("_","");
-        if (javatype.equals("package")){
-            return javatype;
+        String javaType = element.getKind().name().toLowerCase();
+        if (javaType.equals("package")) {
+            return javaType;
         }
         return null;
     }

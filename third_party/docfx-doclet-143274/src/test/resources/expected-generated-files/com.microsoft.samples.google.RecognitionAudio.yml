@@ -133,6 +133,7 @@ items:
     content: "public static final int CONTENT_FIELD_NUMBER"
     return:
       type: "int"
+  javaType: "static field"
 - uid: "com.microsoft.samples.google.RecognitionAudio.RecognitionAudio()"
   id: "RecognitionAudio()"
   parent: "com.microsoft.samples.google.RecognitionAudio"
@@ -194,6 +195,7 @@ items:
     content: "public static final int URI_FIELD_NUMBER"
     return:
       type: "int"
+  javaType: "static field"
 - uid: "com.microsoft.samples.google.RecognitionAudio.getAudioSourceCase()"
   id: "getAudioSourceCase()"
   parent: "com.microsoft.samples.google.RecognitionAudio"

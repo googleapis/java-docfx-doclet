@@ -13,7 +13,7 @@
     <java.version>11</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
-    <jackson.version>2.13.0</jackson.version>
+    <jackson.version>2.13.1</jackson.version>
     <apache.commons-lang.version>3.12.0</apache.commons-lang.version>
     <apache.commons-collections.version>4.4</apache.commons-collections.version>
     <apache.commons-io.version>2.11.0</apache.commons-io.version>
@@ -137,7 +137,7 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
-      <version>4.1.0</version>
+      <version>4.2.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -155,7 +155,7 @@
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>google-cloud-speech</artifactId>
-      <version>2.2.1</version>
+      <version>2.2.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

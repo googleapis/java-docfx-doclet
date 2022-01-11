@@ -4,8 +4,14 @@ import com.google.testing.compile.CompilationRule;
 import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
-import com.sun.source.doctree.*;
+import com.sun.source.doctree.DeprecatedTree;
+import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree.Kind;
+import com.sun.source.doctree.IdentifierTree;
+import com.sun.source.doctree.ParamTree;
+import com.sun.source.doctree.ReturnTree;
+import com.sun.source.doctree.TextTree;
+import com.sun.source.doctree.ThrowsTree;
 import com.sun.source.util.DocTrees;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.junit.Before;
@@ -15,6 +21,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
@@ -22,10 +29,14 @@ import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Elements;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ClassItemsLookupTest {
@@ -33,6 +44,8 @@ public class ClassItemsLookupTest {
     @Rule
     public CompilationRule rule = new CompilationRule();
     private Elements elements;
+    private List<Element> allGenderElements;
+    private List<Element> allPersonElements;
     private DocletEnvironment environment;
     private DocTrees docTrees;
     private DocCommentTree docCommentTree;
@@ -47,6 +60,10 @@ public class ClassItemsLookupTest {
     @Before
     public void setup() {
         elements = rule.getElements();
+        allGenderElements = elements.getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender")
+                .getEnclosedElements().stream().collect(Collectors.toList());
+        allPersonElements = elements.getTypeElement("com.microsoft.samples.subpackage.Person")
+                .getEnclosedElements().stream().collect(Collectors.toList());
         environment = Mockito.mock(DocletEnvironment.class);
         docTrees = Mockito.mock(DocTrees.class);
         docCommentTree = Mockito.mock(DocCommentTree.class);
@@ -267,26 +284,32 @@ public class ClassItemsLookupTest {
     }
 
     @Test
-    public void extractDeprecatedDescription() {
-        TypeElement element = elements.getTypeElement("com.microsoft.samples.agreements.AgreementDetailsCollectionOperations");
-        ExecutableElement method = ElementFilter.methodsIn(element.getEnclosedElements()).get(0);
-        String depMsg = "Deprecated Message :(";
+    public void testExtractJavaTypeStaticMethod() {
+        Element staticMethod = getElementByName(allGenderElements,"valueOf(java.lang.String)");
+        assertEquals("Wrong javaType","static method", classItemsLookup.extractJavaType(staticMethod));
+    }
 
-        when(environment.getDocTrees()).thenReturn(docTrees);
-        when(docTrees.getDocCommentTree(method)).thenReturn(docCommentTree);
-        doReturn(Arrays.asList(deprecatedTree)).when(docCommentTree).getBlockTags();
-        when(deprecatedTree.getKind()).thenReturn(Kind.DEPRECATED);
+    @Test
+    public void testExtractJavaTypeStaticField() {
+        Element field = getElementByName(allGenderElements,"FEMALE");
+        assertEquals("Wrong javaType", "static field", classItemsLookup.extractJavaType(field));
+    }
 
-        doReturn(Arrays.asList(textTree)).when(deprecatedTree).getBody();
-        when(textTree.getKind()).thenReturn(Kind.TEXT);
-        when(textTree.toString()).thenReturn(depMsg);
+    @Test
+    public void testExtractJavaTypeNonStatic() {
+        Element constructor = getElementByName(allGenderElements,"Gender()");
+        assertEquals("Wrong javaType",null, classItemsLookup.extractJavaType(constructor));
 
-        String result = classItemsLookup.extractDeprecatedDescription(method);
+        Element nonStaticMethod = getElementByName(allPersonElements,"getFirstName()");
+        assertEquals("Wrong javaType",null, classItemsLookup.extractJavaType(nonStaticMethod));
 
-        verify(environment).getDocTrees();
-        verify(docTrees).getDocCommentTree(method);
-        verify(docCommentTree).getBlockTags();
-        verify(deprecatedTree).getKind();
-        assertEquals("Wrong description", result, depMsg);
+        Element nonStaticField = getElementByName(allPersonElements,"age");
+        assertEquals("Wrong javaType",null, classItemsLookup.extractJavaType(nonStaticField));
+    }
+
+    private Element getElementByName(List<Element> elements, String name) {
+        return elements.stream()
+                .filter(e -> e.toString().equals(name))
+                .findFirst().orElse(null);
     }
 }
