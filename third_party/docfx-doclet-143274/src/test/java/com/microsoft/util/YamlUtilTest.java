@@ -143,4 +143,26 @@ public class YamlUtilTest {
         assertEquals("[uid]][text]", YamlUtil.cleanupHtml("[uid]][text]"));
         assertFalse(YamlUtil.cleanupHtml("[text[uid]]").contains("xref"));
     }
+
+    @Test
+    public void cleanupHtmlLinkTagWithLinkTest() {
+        String expectedActual = "{@link \"http://www.bad-way-to-include-link.com#section\"}";
+        String expectedResult = "<a href=\"http://www.bad-way-to-include-link.com#section\">http://www.bad-way-to-include-link.com#section</a>";
+        String random = UUID.randomUUID().toString();
+
+        assertEquals(expectedResult, YamlUtil.cleanupHtml(expectedActual));
+        assertEquals(random + expectedResult + random, YamlUtil.cleanupHtml(random + expectedActual + random));
+        assertEquals(expectedResult + random + expectedResult, YamlUtil.cleanupHtml(expectedActual + random + expectedActual));
+    }
+
+    @Test
+    public void cleanupHtmlLinkTagNotRecognizedTest() {
+        String expectedActual = "{@link WeirdLink#didntResolve(null)}";
+        String expectedResult = "<xref uid=\"WeirdLink#didntResolve(null)\" data-throw-if-not-resolved=\"false\">WeirdLink#didntResolve(null)</xref>";
+        String random = UUID.randomUUID().toString();
+
+        assertEquals(expectedResult, YamlUtil.cleanupHtml(expectedActual));
+        assertEquals(random + expectedResult + random, YamlUtil.cleanupHtml(random + expectedActual + random));
+        assertEquals(expectedResult + random + expectedResult, YamlUtil.cleanupHtml(expectedActual + random + expectedActual));
+    }
 }

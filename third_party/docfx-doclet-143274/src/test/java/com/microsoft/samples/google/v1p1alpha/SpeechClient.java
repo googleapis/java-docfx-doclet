@@ -108,6 +108,8 @@ public class SpeechClient implements BackgroundResource {
   /**
    * Constructs an instance of SpeechClient, using the given settings. The channels are created
    * based on the settings passed in, or defaults for any settings that are not set.
+   * Example broken links: {@link "http://tools.ietf.org/html/rfc2616#section-3.7"}
+   * {@link ApiFutures#immediateFuture(null)}.
    */
   public static final SpeechClient create(com.microsoft.samples.google.SpeechSettings settings) throws IOException {
     return new SpeechClient(settings);
