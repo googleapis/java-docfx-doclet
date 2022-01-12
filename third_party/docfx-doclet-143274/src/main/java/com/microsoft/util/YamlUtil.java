@@ -32,7 +32,9 @@ public class YamlUtil {
                 .replaceAll("<([A-Z][a-z]+||)>", "&lt;$1&gt;")
                 .replaceAll("`([^`]+)`", "<code>$1</code>")
                 .replaceAll("\\[([^]]+)]\\(([^)]+)\\)", "<a href=\"$2\">$1</a>")
+                .replaceAll("\\{@link *\"([^\\{]+)\" *\\}", "<a href=\"$1\">$1</a>")
                 .replaceAll("\\[([^]]+)]\\[([^]]+)\\]", "<xref uid=\"$2\" data-throw-if-not-resolved=\"false\">$1</xref>")
+                .replaceAll("\\{@link *([^\\{\"]+) *\\}", "<xref uid=\"$1\" data-throw-if-not-resolved=\"false\">$1</xref>")
                 .replaceAll("==+([^=]+)==+", "<h2>$1</h2>");
     }
 }
