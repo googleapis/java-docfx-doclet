@@ -37,6 +37,8 @@ import java.util.Stack;
  * Exception thrown if there is a validation problem with a path template, http config, or related
  * framework methods. Comes as an illegal argument exception subclass. Allows to globally set a
  * thread-local validation context description which each exception inherits.
+ * @see <a href="https://cloud.google.com/storage/docs/json_api/v1/status-codes">Google Cloud
+ *      Storage error codes</a>
  */
 public class ValidationException extends IllegalArgumentException {
 
