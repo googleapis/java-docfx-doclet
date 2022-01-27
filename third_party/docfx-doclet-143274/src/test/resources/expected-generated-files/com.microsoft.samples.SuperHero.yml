@@ -254,7 +254,7 @@ items:
   overload: "com.microsoft.samples.SuperHero.successfullyAttacked*"
   type: "Method"
   package: "com.microsoft.samples"
-  summary: "\n<strong>Deprecated.</strong> <em>As of version 1.1, use . . . instead</em>\n\n<p>This is a simple description of the method. . .\n <a href=\"http://www.supermanisthegreatest.com\">Superman!</a>\n </p>\n<b>See Also:</b> <a href=\"http://www.link_to_jira/HERO-402\">HERO-402</a>\n"
+  summary: "\n<strong>Deprecated.</strong> <em>As of version 1.1, use . . . instead</em>\n\n<p>This is a simple description of the method. . .\n <a href=\"http://www.supermanisthegreatest.com\">Superman!</a>\n </p>\nSee Also: <a href=\"http://www.link_to_jira/HERO-402\">HERO-402</a>\n"
   syntax:
     content: "public int successfullyAttacked(int incomingDamage, String damageType)"
     parameters:

@@ -16,7 +16,7 @@ items:
   fullName: "com.microsoft.samples.google.ValidationException"
   type: "Class"
   package: "com.microsoft.samples.google"
-  summary: "Exception thrown if there is a validation problem with a path template, http config, or related\n framework methods. Comes as an illegal argument exception subclass. Allows to globally set a\n thread-local validation context description which each exception inherits."
+  summary: "Exception thrown if there is a validation problem with a path template, http config, or related\n framework methods. Comes as an illegal argument exception subclass. Allows to globally set a\n thread-local validation context description which each exception inherits.\nSee Also: <a href=\"https://cloud.google.com/storage/docs/json_api/v1/status-codes\">Google Cloud Storage error codes</a>\n"
   syntax:
     content: "public class ValidationException extends IllegalArgumentException"
   inheritance:

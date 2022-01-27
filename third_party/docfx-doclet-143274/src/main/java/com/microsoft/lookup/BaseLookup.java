@@ -22,6 +22,7 @@ import javax.lang.model.element.ElementKind;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -205,7 +206,7 @@ public abstract class BaseLookup<T extends Element> {
      * Provides support for deprecated and see tags
      */
     String replaceBlockTags(DocCommentTree docCommentTree, String comment) {
-        List<String> seeItems = new ArrayList<>();
+        Set<String> seeItems = new HashSet<>();
         String commentWithBlockTags = comment;
         for (DocTree blockTag : docCommentTree.getBlockTags()) {
             switch (blockTag.getKind()) {
@@ -284,8 +285,8 @@ public abstract class BaseLookup<T extends Element> {
                 .collect(Collectors.joining("<"));
     }
 
-    private String getSeeAlsoSummary(List<String> seeItems) {
-        return String.format("\n<b>See Also:</b> %s\n", String.join(", ", seeItems));
+    private String getSeeAlsoSummary(Set<String> seeItems) {
+        return String.format("\nSee Also: %s\n", String.join(", ", seeItems));
     }
 
     private String getDeprecatedSummary(DeprecatedTree deprecatedTree) {
@@ -297,8 +298,8 @@ public abstract class BaseLookup<T extends Element> {
         String ref = seeTree.getReference().stream()
                 .map(r -> String.valueOf(r)).collect(Collectors.joining(""));
         // if it's already a tag, use that otherwise build xref tag
-        if (ref.matches("^<.+>.*")) {
-            return ref;
+        if (ref.matches("^<.+>(.|\n)*")) {
+            return ref.replaceAll("\n", "").replaceAll("(  )+", " ");
         }
         return String.format("<xref uid=\"%1$s\" data-throw-if-not-resolved=\"false\">%1$s</xref>", ref);
     }
