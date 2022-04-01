@@ -29,7 +29,7 @@ public class YamlUtil {
         }
         return text.replaceAll("<pre>([^<]+)</pre>","$1")
                 .replaceAll("<pre><code>", "<pre class=\"prettyprint lang-java\"><code>")
-                .replaceAll("<([A-Z][a-z]+||)>", "&lt;$1&gt;")
+                .replaceAll("<([A-Z][^<]+||)>", "&lt;$1&gt;")
                 .replaceAll("`([^`]+)`", "<code>$1</code>")
                 .replaceAll("\\[([^]]+)]\\(([^)]+)\\)", "<a href=\"$2\">$1</a>")
                 .replaceAll("\\{@link *\"([^\\{]+)\" *\\}", "<a href=\"$1\">$1</a>")
