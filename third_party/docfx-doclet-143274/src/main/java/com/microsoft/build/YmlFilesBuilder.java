@@ -25,18 +25,20 @@ public class YmlFilesBuilder {
     private ElementUtil elementUtil;
     private PackageLookup packageLookup;
     private String projectName;
+    private boolean disableChangelog;
     private ProjectBuilder projectBuilder;
     private PackageBuilder packageBuilder;
     private ClassBuilder classBuilder;
     private ReferenceBuilder referenceBuilder;
 
     public YmlFilesBuilder(DocletEnvironment environment, String outputPath,
-                           String[] excludePackages, String[] excludeClasses, String projectName) {
+                           String[] excludePackages, String[] excludeClasses, String projectName, boolean disableChangelog) {
         this.environment = environment;
         this.outputPath = outputPath;
         this.elementUtil = new ElementUtil(excludePackages, excludeClasses);
         this.packageLookup = new PackageLookup(environment);
         this.projectName = projectName;
+        this.disableChangelog = disableChangelog;
         this.projectBuilder = new ProjectBuilder(projectName);
         ClassLookup classLookup = new ClassLookup(environment);
         this.referenceBuilder = new ReferenceBuilder(environment, classLookup, elementUtil);
@@ -46,7 +48,7 @@ public class YmlFilesBuilder {
 
     public boolean build() {
         //  table of contents
-        TocFile tocFile = new TocFile(outputPath, projectName);
+        TocFile tocFile = new TocFile(outputPath, projectName, disableChangelog);
         //  overview page
         MetadataFile projectMetadataFile = new MetadataFile(outputPath, "overview.yml");
         //  package summary pages
