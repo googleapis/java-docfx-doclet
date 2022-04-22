@@ -14,10 +14,12 @@ public class TocFile extends ArrayList<TocItem> implements YmlFile {
     private final static String TOC_FILE_NAME = "toc.yml";
     private final String outputPath;
     private final String projectName;
+    private final boolean disableChangelog;
 
-    public TocFile(String outputPath, String projectName) {
+    public TocFile(String outputPath, String projectName, boolean disableChangelog) {
         this.outputPath = outputPath;
         this.projectName = projectName;
+        this.disableChangelog = disableChangelog;
     }
 
     public void addTocItem(TocItem packageTocItem) {
@@ -31,7 +33,7 @@ public class TocFile extends ArrayList<TocItem> implements YmlFile {
     @Override
     public String getFileContent() {
         sortByUid();
-        List<Object> tocContents = new TocContents(projectName, this).getContents();
+        List<Object> tocContents = new TocContents(projectName, disableChangelog, this).getContents();
         return TOC_FILE_HEADER + YamlUtil.objectToYamlString(tocContents);
     }
 

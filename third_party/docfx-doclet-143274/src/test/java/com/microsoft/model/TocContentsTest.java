@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class TocContentsTest {
 
@@ -31,6 +32,7 @@ public class TocContentsTest {
     private TocItem tocItemC;
     private List<TocItem> tocItems;
     private String projectName = "google-cloud-project";
+    private boolean disableChangelog = false;
 
     @Before
     public void setup() {
@@ -47,7 +49,7 @@ public class TocContentsTest {
     @Test
     public void getContentsWithProjectName() {
         //  should include ProjectContents and Guides
-        List<Object> tocContents = new TocContents(projectName, tocItems).getContents();
+        List<Object> tocContents = new TocContents(projectName, disableChangelog, tocItems).getContents();
 
         assertEquals("Should only include 1 item", tocContents.size(), 1);
         assertEquals("Should include ProjectContents", tocContents.get(0).getClass(), ProjectContents.class);
@@ -73,12 +75,29 @@ public class TocContentsTest {
 
     @Test
     public void getContentsNoProjectName() {
-        List<Object> tocContents = new TocContents("", tocItems).getContents();
+        List<Object> tocContents = new TocContents("", disableChangelog, tocItems).getContents();
 
         //  should not include ProjectContents or Guides
         assertEquals("Should be 3 items", tocContents.size(), 3);
         assertEquals("Item A should be first", tocContents.get(0), tocItemA);
         assertEquals("Item B should be second", tocContents.get(1), tocItemB);
         assertEquals("Item C should be third", tocContents.get(2), tocItemC);
+    }
+
+    @Test
+    public void getContentsWithDisabledChangelog() {
+        disableChangelog = true;
+        List<Object> tocContents = new TocContents(projectName, disableChangelog, tocItems).getContents();
+
+        ProjectContents contents = (ProjectContents) tocContents.get(0);
+        List<Object> items = contents.getItems();
+        assertEquals("Should be 4 items", items.size(), 4);
+
+        Guide overview = (Guide) items.get(0);
+        assertEquals("First guide should be Overview", overview.getName(), "Overview");
+        assertNotEquals("Second item should not be Version History guide", items.get(1).getClass(), Guide.class);
+        assertEquals("Item A should be second", items.get(1), tocItemA);
+        assertEquals("Item B should be third", items.get(2), tocItemB);
+        assertEquals("Item C should be fourth", items.get(3), tocItemC);
     }
 }

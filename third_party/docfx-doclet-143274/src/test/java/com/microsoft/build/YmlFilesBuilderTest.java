@@ -23,7 +23,7 @@ public class YmlFilesBuilderTest {
     @Before
     public void setup() {
         environment = Mockito.mock(DocletEnvironment.class);
-        ymlFilesBuilder = new YmlFilesBuilder(environment, "./target", new String[]{}, new String[]{}, "google-cloud-product");
+        ymlFilesBuilder = new YmlFilesBuilder(environment, "./target", new String[]{}, new String[]{}, "google-cloud-product", false);
     }
 
     @Test
