@@ -4,7 +4,7 @@ Designed to generate YAML files from Javadoc output for DocFX consumption. While
 
 The original github repository for the doclet can be found at [github.com/docascode/docfx-doclet](https://github.com/docascode/docfx-doclet).
 
-This doclet is forked from release [143274](https://github.com/docascode/docfx-doclet/releases/tag/143274) from June 2020 as it is still compatible with DocFX V2.
+This doclet is forked from release [143274](https://github.com/docascode/docfx-doclet/releases/tag/143274) from June 2020 as it is still compatible with DocFX V2. This doclet has since been refactored and various features and fixes have been included.
 
 \
 This is not an officially supported Google product.
