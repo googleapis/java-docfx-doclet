@@ -102,7 +102,7 @@ class ClassBuilder {
     }
 
     void addConstructorsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
-        for (ExecutableElement constructorElement : ElementFilter.constructorsIn(classElement.getEnclosedElements())) {
+        for (ExecutableElement constructorElement : ElementFilter.constructorsIn(ElementUtil.getEnclosedElements(classElement))) {
             MetadataFileItem constructorItem = buildMetadataFileItem(constructorElement);
             constructorItem.setOverload(classItemsLookup.extractOverload(constructorElement));
             constructorItem.setContent(classItemsLookup.extractConstructorContent(constructorElement));
@@ -115,7 +115,7 @@ class ClassBuilder {
     }
 
     private void addMethodsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
-        ElementFilter.methodsIn(classElement.getEnclosedElements()).stream()
+        ElementFilter.methodsIn(ElementUtil.getEnclosedElements(classElement)).stream()
                 .filter(methodElement -> !Utils.isPrivateOrPackagePrivate(methodElement))
                 .forEach(methodElement -> {
                     MetadataFileItem methodItem = buildMetadataFileItem(methodElement);
@@ -135,7 +135,7 @@ class ClassBuilder {
     }
 
     private void addFieldsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
-        ElementFilter.fieldsIn(classElement.getEnclosedElements()).stream()
+        ElementFilter.fieldsIn(ElementUtil.getEnclosedElements(classElement)).stream()
                 .filter(fieldElement -> !Utils.isPrivateOrPackagePrivate(fieldElement))
                 .forEach(fieldElement -> {
                     MetadataFileItem fieldItem = buildMetadataFileItem(fieldElement);
@@ -177,7 +177,7 @@ class ClassBuilder {
                  Function<Iterable<? extends Element>, List<? extends Element>> selectFunc,
                  Function<? super Element, String> mapFunc) {
 
-        List<? extends Element> elements = selectFunc.apply(classElement.getEnclosedElements());
+        List<? extends Element> elements = selectFunc.apply(ElementUtil.getEnclosedElements(classElement));
         children.addAll(filterPrivateElements(elements).stream()
                 .map(mapFunc).collect(Collectors.toList()));
     }

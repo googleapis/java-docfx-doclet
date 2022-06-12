@@ -28,7 +28,7 @@ public class DocFxDoclet implements Doclet {
         reporter.print(Kind.NOTE, "Project name: " + projectName);
         reporter.print(Kind.NOTE, "Disable changelog: " + disableChangelog);
 
-        return (new YmlFilesBuilder(environment, outputPath, excludePackages, excludeClasses, projectName, disableChangelog)).build();
+        return (new YmlFilesBuilder(environment, outputPath, excludePackages, excludeClasses, projectName, disableChangelog, reporter)).build();
     }
 
     @Override

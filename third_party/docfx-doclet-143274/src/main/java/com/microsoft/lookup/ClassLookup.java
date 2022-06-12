@@ -3,7 +3,9 @@ package com.microsoft.lookup;
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.TypeParameter;
+import com.microsoft.util.ElementUtil;
 import com.microsoft.util.Utils;
+import java.util.Collections;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -30,8 +32,8 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     }
 
     @Override
-    protected ExtendedMetadataFileItem buildMetadataFileItem(TypeElement classElement) {
-        List<ExtendedMetadataFileItem> inheritedMethods = new ArrayList<>();
+    protected synchronized ExtendedMetadataFileItem buildMetadataFileItem(TypeElement classElement) {
+        List<ExtendedMetadataFileItem> inheritedMethods = Collections.synchronizedList(new ArrayList<>());
 
         String packageName = determinePackageName(classElement);
         String classQName = String.valueOf(classElement.getQualifiedName());
@@ -146,7 +148,7 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     }
 
     void appendInheritedMethods(TypeElement element, List<ExtendedMetadataFileItem> inheritedMethods) {
-        List<? extends Element> members = element.getEnclosedElements();
+        List<? extends Element> members = ElementUtil.getEnclosedElements(element);
         Integer level = Optional.ofNullable(getMaxNestedLevel(inheritedMethods))
                 .orElse(0);
 

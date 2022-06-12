@@ -35,7 +35,7 @@ public class ClassItemsLookup extends BaseLookup<Element> {
     }
 
     @Override
-    protected ExtendedMetadataFileItem buildMetadataFileItem(Element element) {
+    protected synchronized ExtendedMetadataFileItem buildMetadataFileItem(Element element) {
         String packageName = determinePackageName(element);
         TypeElement classElement = (TypeElement) element.getEnclosingElement();
         String classQName = String.valueOf(classElement.getQualifiedName());
@@ -59,14 +59,14 @@ public class ClassItemsLookup extends BaseLookup<Element> {
             ExecutableElement exeElement = (ExecutableElement) element;
             List<MethodParameter> parameters = extractParameters(exeElement);
             String paramsString = parameters.stream()
-                    .map(parameter -> String.format("%s %s", makeTypeShort(parameter.getType()), parameter.getId()))
-                    .collect(Collectors.joining(", "));
+                .map(parameter -> String.format("%s %s", makeTypeShort(parameter.getType()), parameter.getId()))
+                .collect(Collectors.joining(", "));
             String nameWithoutBrackets = elementQName.replaceAll("\\(.*\\)", "");
             String methodName = String.format("%s(%s)", nameWithoutBrackets, paramsString);
 
             result.setName(methodName);
             result.setMethodContent(String.format("%s %s %s", modifiers,
-                    makeTypeShort(String.valueOf(exeElement.getReturnType())), result.getName()));
+                makeTypeShort(String.valueOf(exeElement.getReturnType())), result.getName()));
             result.setConstructorContent(String.format("%s %s", modifiers, result.getName()));
             result.setParameters(parameters);
             result.setExceptions(extractExceptions(exeElement));

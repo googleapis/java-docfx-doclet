@@ -1,5 +1,7 @@
 package com.microsoft.util;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.lang.model.element.Element;
@@ -18,6 +20,8 @@ public class ElementUtil {
     private final Set<Pattern> excludePackages = new HashSet<>();
     private final Set<Pattern> excludeClasses = new HashSet<>();
 
+    private static final Map<Element, List<? extends Element>> elementMap = new ConcurrentHashMap<>(10000);
+
     public ElementUtil(String[] excludePackages, String[] excludeClasses) {
         this.excludePackages.addAll(Stream.of(excludePackages)
                 .map(o -> Pattern.compile(o)).collect(Collectors.toSet()));
@@ -29,12 +33,17 @@ public class ElementUtil {
         // Need to apply sorting, because order of result items for Element.getEnclosedElements() depend on JDK implementation
         // By default, exclude private and package-private items
         // todo allow pass parameter for filter items by access modifiers
-        return ElementFilter.typesIn(element.getEnclosedElements()).stream()
+        return ElementFilter.typesIn(getEnclosedElements(element)).stream()
                 .filter(o -> !Utils.isPrivateOrPackagePrivate(o))
                 .filter(o -> !matchAnyPattern(excludeClasses, String.valueOf(o.getQualifiedName())))
                 .sorted((o1, o2) ->
                         StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))
                 ).collect(Collectors.toList());
+    }
+
+    public static synchronized List<? extends Element> getEnclosedElements(Element element) {
+        elementMap.computeIfAbsent(element, Element::getEnclosedElements);
+        return elementMap.get(element);
     }
 
     public List<PackageElement> extractPackageElements(Set<? extends Element> elements) {

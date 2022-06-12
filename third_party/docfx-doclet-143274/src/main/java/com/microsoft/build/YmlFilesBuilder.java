@@ -10,12 +10,20 @@ import com.microsoft.model.TocItem;
 import com.microsoft.model.TocTypeMap;
 import com.microsoft.util.ElementUtil;
 import com.microsoft.util.FileUtil;
+import java.util.Collections;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import javax.tools.Diagnostic.Kind;
 import jdk.javadoc.doclet.DocletEnvironment;
 
 import javax.lang.model.element.PackageElement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import jdk.javadoc.doclet.Reporter;
 
 import static com.microsoft.build.BuilderUtil.populateUidValues;
 
@@ -30,9 +38,10 @@ public class YmlFilesBuilder {
     private PackageBuilder packageBuilder;
     private ClassBuilder classBuilder;
     private ReferenceBuilder referenceBuilder;
+    private Reporter reporter;
 
     public YmlFilesBuilder(DocletEnvironment environment, String outputPath,
-                           String[] excludePackages, String[] excludeClasses, String projectName, boolean disableChangelog) {
+                           String[] excludePackages, String[] excludeClasses, String projectName, boolean disableChangelog, Reporter reporter) {
         this.environment = environment;
         this.outputPath = outputPath;
         this.elementUtil = new ElementUtil(excludePackages, excludeClasses);
@@ -43,10 +52,12 @@ public class YmlFilesBuilder {
         ClassLookup classLookup = new ClassLookup(environment);
         this.referenceBuilder = new ReferenceBuilder(environment, classLookup, elementUtil);
         this.packageBuilder = new PackageBuilder(packageLookup, outputPath, referenceBuilder);
+        this.reporter = reporter;
         this.classBuilder = new ClassBuilder(elementUtil, classLookup, new ClassItemsLookup(environment), outputPath, referenceBuilder);
     }
 
     public boolean build() {
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
         //  table of contents
         TocFile tocFile = new TocFile(outputPath, projectName, disableChangelog);
         //  overview page
@@ -56,23 +67,46 @@ public class YmlFilesBuilder {
         //  packages
         List<MetadataFileItem> packageItems = new ArrayList<>();
         //  class/enum/interface/etc. pages
-        List<MetadataFile> classMetadataFiles = new ArrayList<>();
+        List<MetadataFile> classMetadataFiles = Collections.synchronizedList(new ArrayList<>());
 
+        List<Future<?>> futureList = new ArrayList<>();
         for (PackageElement packageElement :
                 elementUtil.extractPackageElements(environment.getIncludedElements())) {
-            String packageUid = packageLookup.extractUid(packageElement);
-            String packageStatus = packageLookup.extractStatus(packageElement);
-            TocItem packageTocItem = new TocItem(packageUid, packageUid, packageStatus);
-            //  build package summary
-            packageMetadataFiles.add(packageBuilder.buildPackageMetadataFile(packageElement));
-            // add package summary to toc
-            packageTocItem.getItems().add(new TocItem(packageUid, "Package summary"));
-            tocFile.addTocItem(packageTocItem);
+            Future<?> future = executorService.submit(() -> {
+                reporter.print(Kind.NOTE, "Running for " + packageElement + " on " + Thread.currentThread().getName());
+                String packageUid = packageLookup.extractUid(packageElement);
+                String packageStatus = packageLookup.extractStatus(packageElement);
+                TocItem packageTocItem = new TocItem(packageUid, packageUid, packageStatus);
+                //  build package summary
+                packageMetadataFiles.add(packageBuilder.buildPackageMetadataFile(packageElement));
+                // add package summary to toc
+                packageTocItem.getItems().add(new TocItem(packageUid, "Package summary"));
+                tocFile.addTocItem(packageTocItem);
 
-            // build classes/interfaces/enums/exceptions/annotations
-            TocTypeMap typeMap = new TocTypeMap();
-            classBuilder.buildFilesForInnerClasses(packageElement, typeMap, classMetadataFiles);
-            packageTocItem.getItems().addAll(joinTocTypeItems(typeMap));
+                // build classes/interfaces/enums/exceptions/annotations
+                TocTypeMap typeMap = new TocTypeMap();
+                classBuilder.buildFilesForInnerClasses(packageElement, typeMap, classMetadataFiles);
+                packageTocItem.getItems().addAll(joinTocTypeItems(typeMap));
+                reporter.print(Kind.NOTE, "Finished running for " + packageElement + " on " + Thread.currentThread().getName());
+            });
+            futureList.add(future);
+        }
+
+        for (Future<?> future : futureList) {
+            try {
+                future.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+
+        executorService.shutdown();
+        try {
+            executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.MICROSECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
         for (MetadataFile packageFile : packageMetadataFiles) {

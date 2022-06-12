@@ -13,6 +13,7 @@ import com.sun.source.doctree.DocTree;
 import com.sun.source.doctree.LinkTree;
 import com.sun.source.doctree.LiteralTree;
 import com.sun.source.doctree.SeeTree;
+import java.util.concurrent.ConcurrentHashMap;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -44,7 +45,7 @@ public abstract class BaseLookup<T extends Element> {
         put(ElementKind.FIELD, "Field");
     }};
 
-    protected Map<T, ExtendedMetadataFileItem> map = new HashMap<>(10000);
+    protected Map<T, ExtendedMetadataFileItem> map = new ConcurrentHashMap<>(10000);
     protected final DocletEnvironment environment;
 
     protected BaseLookup(DocletEnvironment environment) {

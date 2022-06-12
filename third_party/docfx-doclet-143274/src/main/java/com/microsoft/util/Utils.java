@@ -219,7 +219,7 @@ public class Utils {
      * @return a list of visible enclosed members in this type
      */
     public List<? extends Element> getMembers(TypeElement te, ElementKind kind) {
-        return te.getEnclosedElements().stream()
+        return ElementUtil.getEnclosedElements(te).stream()
                 .filter(e -> e.getKind() == kind && !isPrivateOrPackagePrivate(e))
                 .collect(Collectors.toList());
     }
