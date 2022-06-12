@@ -44,7 +44,7 @@ public abstract class BaseLookup<T extends Element> {
         put(ElementKind.FIELD, "Field");
     }};
 
-    protected Map<T, ExtendedMetadataFileItem> map = new HashMap<>();
+    protected Map<T, ExtendedMetadataFileItem> map = new HashMap<>(10000);
     protected final DocletEnvironment environment;
 
     protected BaseLookup(DocletEnvironment environment) {
@@ -52,12 +52,8 @@ public abstract class BaseLookup<T extends Element> {
     }
 
     protected ExtendedMetadataFileItem resolve(T key) {
-        ExtendedMetadataFileItem value = map.get(key);
-        if (value == null) {
-            value = buildMetadataFileItem(key);
-            map.put(key, value);
-        }
-        return value;
+        map.computeIfAbsent(key, this::buildMetadataFileItem);
+        return map.get(key);
     }
 
     protected abstract ExtendedMetadataFileItem buildMetadataFileItem(T key);
