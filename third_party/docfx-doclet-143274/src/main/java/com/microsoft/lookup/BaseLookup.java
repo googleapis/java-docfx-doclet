@@ -45,7 +45,7 @@ public abstract class BaseLookup<T extends Element> {
         put(ElementKind.FIELD, "Field");
     }};
 
-    protected Map<T, ExtendedMetadataFileItem> map = new ConcurrentHashMap<>(10000);
+    protected Map<T, ExtendedMetadataFileItem> map = new ConcurrentHashMap<>(500000);
     protected final DocletEnvironment environment;
 
     protected BaseLookup(DocletEnvironment environment) {

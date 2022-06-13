@@ -50,11 +50,11 @@ public class ClassBuilderTest {
         environment = Mockito.mock(DocletEnvironment.class);
         docTrees = Mockito.mock(DocTrees.class);
         ElementUtil elementUtil = new ElementUtil(new String[0], new String[0]);
-        ClassLookup classLookup = new ClassLookup(environment);
+        ClassLookup classLookup = new ClassLookup(environment, elementUtil);
         classBuilder = new ClassBuilder(
                 elementUtil,
                 classLookup,
-                new ClassItemsLookup(environment),
+                new ClassItemsLookup(environment, null),
                 "./target",
                 new ReferenceBuilder(environment, classLookup, elementUtil));
     }

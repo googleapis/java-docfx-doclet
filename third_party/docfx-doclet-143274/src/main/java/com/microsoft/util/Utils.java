@@ -21,13 +21,15 @@ import static javax.lang.model.type.TypeKind.DECLARED;
 public class Utils {
 
     public final DocletEnvironment docletEnvironment;
-    public final Elements elementUtils;
+    public final Elements elements;
     public final Types typeUtils;
+    private final ElementUtil elementUtil;
 
-    public Utils(DocletEnvironment docEnv) {
+    public Utils(DocletEnvironment docEnv, ElementUtil elementUtil) {
         docletEnvironment = docEnv;
-        elementUtils = docEnv.getElementUtils();
+        elements = docEnv.getElementUtils();
         typeUtils = docEnv.getTypeUtils();
+        this.elementUtil = elementUtil;
     }
 
     public static boolean isPackagePrivate(Element e) {
@@ -90,7 +92,7 @@ public class Utils {
     }
 
     public TypeElement getObjectType() {
-        return elementUtils.getTypeElement("java.lang.Object");
+        return elements.getTypeElement("java.lang.Object");
     }
 
     /**
@@ -147,7 +149,7 @@ public class Utils {
 
             for (Element e : getMembers(te, ElementKind.METHOD)) {
                 ExecutableElement ee = (ExecutableElement) e;
-                if (elementUtils.overrides(method, ee, origin)
+                if (elements.overrides(method, ee, origin)
                 ) {
                     return ee;
                 }
@@ -219,7 +221,7 @@ public class Utils {
      * @return a list of visible enclosed members in this type
      */
     public List<? extends Element> getMembers(TypeElement te, ElementKind kind) {
-        return ElementUtil.getEnclosedElements(te).stream()
+        return elementUtil.getEnclosedElements(te).stream()
                 .filter(e -> e.getKind() == kind && !isPrivateOrPackagePrivate(e))
                 .collect(Collectors.toList());
     }

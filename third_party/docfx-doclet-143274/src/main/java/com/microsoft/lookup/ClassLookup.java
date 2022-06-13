@@ -27,13 +27,16 @@ public class ClassLookup extends BaseLookup<TypeElement> {
 
     private static final String JAVA_LANG_OBJECT = "java.lang.Object";
 
-    public ClassLookup(DocletEnvironment environment) {
+    private ElementUtil elementUtil;
+
+    public ClassLookup(DocletEnvironment environment, ElementUtil elementUtil) {
         super(environment);
+        this.elementUtil = elementUtil;
     }
 
     @Override
     protected synchronized ExtendedMetadataFileItem buildMetadataFileItem(TypeElement classElement) {
-        List<ExtendedMetadataFileItem> inheritedMethods = Collections.synchronizedList(new ArrayList<>());
+        List<ExtendedMetadataFileItem> inheritedMethods = new ArrayList<>();
 
         String packageName = determinePackageName(classElement);
         String classQName = String.valueOf(classElement.getQualifiedName());
@@ -148,7 +151,7 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     }
 
     void appendInheritedMethods(TypeElement element, List<ExtendedMetadataFileItem> inheritedMethods) {
-        List<? extends Element> members = ElementUtil.getEnclosedElements(element);
+        List<? extends Element> members = elementUtil.getEnclosedElements(element);
         Integer level = Optional.ofNullable(getMaxNestedLevel(inheritedMethods))
                 .orElse(0);
 

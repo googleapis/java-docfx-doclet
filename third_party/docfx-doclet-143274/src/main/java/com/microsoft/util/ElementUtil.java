@@ -20,30 +20,42 @@ public class ElementUtil {
     private final Set<Pattern> excludePackages = new HashSet<>();
     private final Set<Pattern> excludeClasses = new HashSet<>();
 
-    private static final Map<Element, List<? extends Element>> elementMap = new ConcurrentHashMap<>(10000);
+    private final Map<Element, List<? extends Element>> elementMap;
+    private final Map<Element, List<TypeElement>> elementSortedMap;
 
     public ElementUtil(String[] excludePackages, String[] excludeClasses) {
         this.excludePackages.addAll(Stream.of(excludePackages)
                 .map(o -> Pattern.compile(o)).collect(Collectors.toSet()));
         this.excludeClasses.addAll(Stream.of(excludeClasses)
                 .map(o -> Pattern.compile(o)).collect(Collectors.toSet()));
+        this.elementMap = new ConcurrentHashMap<>(500000);
+        this.elementSortedMap = new ConcurrentHashMap<>(500000);
     }
 
     public List<TypeElement> extractSortedElements(Element element) {
+        elementSortedMap.computeIfAbsent(element, this::extractSortedElementsInternal);
+        return elementSortedMap.get(element);
+    }
+
+    private List<TypeElement> extractSortedElementsInternal(Element element) {
         // Need to apply sorting, because order of result items for Element.getEnclosedElements() depend on JDK implementation
         // By default, exclude private and package-private items
         // todo allow pass parameter for filter items by access modifiers
         return ElementFilter.typesIn(getEnclosedElements(element)).stream()
-                .filter(o -> !Utils.isPrivateOrPackagePrivate(o))
-                .filter(o -> !matchAnyPattern(excludeClasses, String.valueOf(o.getQualifiedName())))
-                .sorted((o1, o2) ->
-                        StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))
-                ).collect(Collectors.toList());
+            .filter(o -> !Utils.isPrivateOrPackagePrivate(o))
+            .filter(o -> !matchAnyPattern(excludeClasses, String.valueOf(o.getQualifiedName())))
+            .sorted((o1, o2) ->
+                StringUtils.compare(String.valueOf(o1.getSimpleName()), String.valueOf(o2.getSimpleName()))
+            ).collect(Collectors.toList());
     }
 
-    public static synchronized List<? extends Element> getEnclosedElements(Element element) {
-        elementMap.computeIfAbsent(element, Element::getEnclosedElements);
+    public List<? extends Element> getEnclosedElements(Element element) {
+        elementMap.computeIfAbsent(element, this::getEnclosedElementsInternal);
         return elementMap.get(element);
+    }
+
+    private synchronized List<? extends Element> getEnclosedElementsInternal(Element element) {
+        return element.getEnclosedElements();
     }
 
     public List<PackageElement> extractPackageElements(Set<? extends Element> elements) {

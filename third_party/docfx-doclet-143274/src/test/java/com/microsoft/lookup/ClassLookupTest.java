@@ -46,7 +46,7 @@ public class ClassLookupTest {
     public void setup() {
         elements = rule.getElements();
         environment = Mockito.mock(DocletEnvironment.class);
-        classLookup = new ClassLookup(environment);
+        classLookup = new ClassLookup(environment, null);
         docTrees = Mockito.mock(DocTrees.class);
         docTree = Mockito.mock(DocTree.class);
         docCommentTree = Mockito.mock(DocCommentTree.class);
