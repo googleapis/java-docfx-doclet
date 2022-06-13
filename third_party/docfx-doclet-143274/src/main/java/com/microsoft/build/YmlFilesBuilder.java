@@ -72,16 +72,16 @@ public class YmlFilesBuilder {
         List<Future<?>> futureList = new ArrayList<>();
         for (PackageElement packageElement :
                 elementUtil.extractPackageElements(environment.getIncludedElements())) {
-            String packageUid = packageLookup.extractUid(packageElement);
-            String packageStatus = packageLookup.extractStatus(packageElement);
-            TocItem packageTocItem = new TocItem(packageUid, packageUid, packageStatus);
-            //  build package summary
-            packageMetadataFiles.add(packageBuilder.buildPackageMetadataFile(packageElement));
-            // add package summary to toc
-            packageTocItem.getItems().add(new TocItem(packageUid, "Package summary"));
-            tocFile.addTocItem(packageTocItem);
-
             Future<?> future = executorService.submit(() -> {
+                String packageUid = packageLookup.extractUid(packageElement);
+                String packageStatus = packageLookup.extractStatus(packageElement);
+                TocItem packageTocItem = new TocItem(packageUid, packageUid, packageStatus);
+                //  build package summary
+                packageMetadataFiles.add(packageBuilder.buildPackageMetadataFile(packageElement));
+                // add package summary to toc
+                packageTocItem.getItems().add(new TocItem(packageUid, "Package summary"));
+                tocFile.addTocItem(packageTocItem);
+
                 // build classes/interfaces/enums/exceptions/annotations
                 TocTypeMap typeMap = new TocTypeMap();
                 classBuilder.buildFilesForInnerClasses(packageElement, typeMap, classMetadataFiles);

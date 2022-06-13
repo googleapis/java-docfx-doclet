@@ -15,27 +15,25 @@
  */
 package com.microsoft.build;
 
+import static com.microsoft.build.BuilderUtil.LANGS;
+import static com.microsoft.build.BuilderUtil.populateItemFields;
+
 import com.microsoft.lookup.ClassItemsLookup;
 import com.microsoft.lookup.ClassLookup;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
-import com.microsoft.model.Status;
 import com.microsoft.model.TocItem;
 import com.microsoft.model.TocTypeMap;
 import com.microsoft.util.ElementUtil;
 import com.microsoft.util.Utils;
-
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.ElementFilter;
-import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
-import static com.microsoft.build.BuilderUtil.LANGS;
-import static com.microsoft.build.BuilderUtil.populateItemFields;
 
 class ClassBuilder {
     private ElementUtil elementUtil;

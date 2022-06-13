@@ -27,7 +27,7 @@ public class ClassLookup extends BaseLookup<TypeElement> {
 
     private static final String JAVA_LANG_OBJECT = "java.lang.Object";
 
-    private ElementUtil elementUtil;
+    private final ElementUtil elementUtil;
 
     public ClassLookup(DocletEnvironment environment, ElementUtil elementUtil) {
         super(environment);
