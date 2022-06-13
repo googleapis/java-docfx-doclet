@@ -17,6 +17,7 @@ import java.util.stream.Stream;
 
 public class ElementUtil {
 
+    private static final int INITIAL_CAPACITY = 1000000;
     private final Set<Pattern> excludePackages = new HashSet<>();
     private final Set<Pattern> excludeClasses = new HashSet<>();
 
@@ -28,8 +29,8 @@ public class ElementUtil {
                 .map(o -> Pattern.compile(o)).collect(Collectors.toSet()));
         this.excludeClasses.addAll(Stream.of(excludeClasses)
                 .map(o -> Pattern.compile(o)).collect(Collectors.toSet()));
-        this.elementMap = new ConcurrentHashMap<>(500000);
-        this.elementSortedMap = new ConcurrentHashMap<>(500000);
+        this.elementMap = new ConcurrentHashMap<>(INITIAL_CAPACITY);
+        this.elementSortedMap = new ConcurrentHashMap<>(INITIAL_CAPACITY);
     }
 
     public List<TypeElement> extractSortedElements(Element element) {

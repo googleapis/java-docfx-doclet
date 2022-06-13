@@ -126,7 +126,7 @@ class ReferenceBuilder {
 
     void updateExternalReferences(List<MetadataFile> classMetadataFiles) {
         classMetadataFiles.forEach(file -> file.getReferences()
-                .forEach(ref -> updateExternalReference(ref)));
+                .forEach(this::updateExternalReference));
     }
 
     private void updateExternalReference(MetadataFileItem reference) {
@@ -245,15 +245,13 @@ class ReferenceBuilder {
      */
     void expandComplexGenericsInReferences(MetadataFile classMetadataFile) {
         Set<MetadataFileItem> additionalItems = new LinkedHashSet<>();
-        Iterator<MetadataFileItem> iterator = classMetadataFile.getReferences().iterator();
-        while (iterator.hasNext()) {
-            MetadataFileItem item = iterator.next();
+        for (MetadataFileItem item : classMetadataFile.getReferences()) {
             String uid = item.getUid();
             if (!uid.endsWith("*") && uid.contains("<")) {
                 List<String> classNames = splitUidWithGenericsIntoClassNames(uid);
                 additionalItems.addAll(classNames.stream()
-                        .map(s -> new MetadataFileItem(s, classLookup.makeTypeShort(s), false))
-                        .collect(Collectors.toSet()));
+                    .map(s -> new MetadataFileItem(s, classLookup.makeTypeShort(s), false))
+                    .collect(Collectors.toSet()));
             }
         }
         // Remove items which already exist in 'items' section (compared by 'uid' field)

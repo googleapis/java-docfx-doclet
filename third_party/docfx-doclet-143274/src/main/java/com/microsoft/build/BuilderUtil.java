@@ -124,6 +124,10 @@ final class BuilderUtil {
         Lookup lookup = new Lookup(packageMetadataFiles, classMetadataFiles);
 
         classMetadataFiles.forEach(classMetadataFile -> {
+            if (classMetadataFile.getFileName().equals("com.google.cloud.scheduler.v1.CloudSchedulerSettings.yml")) {
+                System.out.println("here");
+                System.out.println("testing");
+            }
             LookupContext lookupContext = lookup.buildContext(classMetadataFile);
 
             for (MetadataFileItem item : classMetadataFile.getItems()) {

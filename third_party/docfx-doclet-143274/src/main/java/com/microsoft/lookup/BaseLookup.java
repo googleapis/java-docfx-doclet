@@ -33,6 +33,7 @@ import java.util.stream.Stream;
 
 public abstract class BaseLookup<T extends Element> {
 
+    private static final int INITIAL_CAPACITY = 500000;
     protected final Map<ElementKind, String> elementKindLookup = new HashMap<>() {{
         put(ElementKind.PACKAGE, "Namespace");
         put(ElementKind.CLASS, "Class");
@@ -50,7 +51,7 @@ public abstract class BaseLookup<T extends Element> {
 
     protected BaseLookup(DocletEnvironment environment) {
         this.environment = environment;
-        this.map = new ConcurrentHashMap<>(500000);
+        this.map = new ConcurrentHashMap<>(INITIAL_CAPACITY);
     }
 
     protected ExtendedMetadataFileItem resolve(T key) {
