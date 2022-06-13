@@ -22,7 +22,7 @@ public class TocFile extends ArrayList<TocItem> implements YmlFile {
         this.disableChangelog = disableChangelog;
     }
 
-    public synchronized void addTocItem(TocItem packageTocItem) {
+    public void addTocItem(TocItem packageTocItem) {
         add(packageTocItem);
     }
 
