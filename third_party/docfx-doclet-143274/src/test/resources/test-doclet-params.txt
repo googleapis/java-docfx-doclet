@@ -1,4 +1,5 @@
--doclet com.microsoft.doclet.DocFxDoclet
+-doclet
+'com.microsoft.doclet.DocFxDoclet'
 -sourcepath ./src/test/java
 -outputpath ./target/test-out
 -encoding UTF-8

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class DocletRunnerTest {
 
@@ -45,15 +46,18 @@ public class DocletRunnerTest {
         DocletRunner.main(new String[]{});
 
         assertEquals("Wrong System.err content",
-                errContent.toString().trim(), "Usage: java DocletRunner <doclet-params-filename>");
+                errContent.toString().trim(), "Usage: java DocletRunner <options file> <argfile>");
     }
 
     @Test
     public void testFilesGenerationWhenTargetFileDoesNotExist() {
-        DocletRunner.main(new String[]{"some-name.txt"});
-
-        assertEquals("Wrong System.err content",
+        try {
+            DocletRunner.main(new String[]{"some-name.txt"});
+            fail();
+        } catch (RuntimeException ex) {
+            assertEquals("Wrong System.err content",
                 errContent.toString().trim(), "File 'some-name.txt' does not exist");
+        }
     }
 
     @Test

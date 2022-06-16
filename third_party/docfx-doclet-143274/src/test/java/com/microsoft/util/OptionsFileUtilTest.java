@@ -1,8 +1,6 @@
 package com.microsoft.util;
 
 import org.junit.Test;
-
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
@@ -13,7 +11,7 @@ public class OptionsFileUtilTest {
 
     @Test
     public void processOptionsFile() {
-        List<String> strings = Arrays.asList(OptionsFileUtil.processOptionsFile(PARAMS_DIR));
+        List<String> strings = OptionsFileUtil.processOptionsFile(PARAMS_DIR);
 
         assertTrue("Wrong result", strings.contains("-doclet"));
         assertTrue("Wrong result", strings.contains("com.microsoft.doclet.DocFxDoclet"));

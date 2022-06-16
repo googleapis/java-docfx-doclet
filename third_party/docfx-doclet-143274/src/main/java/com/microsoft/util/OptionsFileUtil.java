@@ -9,7 +9,7 @@ import java.util.StringTokenizer;
 
 public class OptionsFileUtil {
 
-    public static String[] processOptionsFile(String filename) {
+    public static List<String> processOptionsFile(String filename) {
         List<String> jargs = new ArrayList<>();
 
         String options = readOptionsFromFile(filename);
@@ -18,7 +18,7 @@ public class OptionsFileUtil {
             jargs.add(tokens.nextToken());
         }
 
-        return jargs.toArray(new String[0]);
+        return jargs;
     }
 
     private static String readOptionsFromFile(String filename) {
@@ -26,7 +26,9 @@ public class OptionsFileUtil {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                buffer.append(line).append("\n");
+                // remove single quote at the head and tail
+                String trimmedLine = line.replaceAll("^'|'$", "");
+                buffer.append(trimmedLine).append("\n");
             }
         } catch (IOException ioe) {
             buffer.setLength(0);
