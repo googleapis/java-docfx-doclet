@@ -32,7 +32,7 @@ import static org.junit.Assert.assertTrue;
 
 public class BuilderUtilTest {
     @Test
-    public void populateUidValues() {
+    public void testPopulateUidValues() {
         MetadataFile classMetadataFile = new MetadataFile("output", "name");
 
         MetadataFileItem ownerClassItem = buildMetadataFileItem("a.b.OwnerClass", "Not important summary value");
@@ -41,15 +41,21 @@ public class BuilderUtilTest {
         populateSyntax(item1, "SomeClass#someMethod(String param)");
         MetadataFileItem item2 = buildMetadataFileItem("UID known class", "SomeClass#someMethod(String param)");
         MetadataFileItem item3 = buildMetadataFileItem("UID method only", "#someMethod2(String p1, String p2)");
+        item3.setPackageName("a.b");
         classMetadataFile.getItems().addAll(Arrays.asList(ownerClassItem, item1, item2, item3));
 
         MetadataFileItem reference1 = new MetadataFileItem("a.b.SomeClass.someMethod(String param)");
+        reference1.setPackageName("a.b");
         reference1.setNameWithType("SomeClass.someMethod(String param)");
         MetadataFileItem reference2 = new MetadataFileItem("a.b.OwnerClass.someMethod2(String p1, String p2)");
+        reference2.setPackageName("a.b");
         reference2.setNameWithType("OwnerClass.someMethod2(String p1, String p2)");
-        classMetadataFile.getReferences().addAll(Arrays.asList(reference1, reference2));
+        MetadataFileItem reference3 = new MetadataFileItem("c.d.OwnerClass.someMethod2(String p1, String p2)");
+        reference3.setPackageName("c.d");
+        reference3.setNameWithType("OwnerClass.someMethod2(String p1, String p2)");
+        classMetadataFile.getReferences().addAll(Arrays.asList(reference1, reference2, reference3));
 
-        BuilderUtil.populateUidValues(Collections.emptyList(), Arrays.asList(classMetadataFile));
+        BuilderUtil.populateUidValues(Collections.emptyList(), List.of(classMetadataFile));
 
         assertEquals("Wrong summary for unknown class", item1.getSummary(),
                 "Bla bla <xref uid=\"\" data-throw-if-not-resolved=\"false\">UnknownClass</xref> bla");
@@ -79,21 +85,31 @@ public class BuilderUtilTest {
     }
 
     @Test
-    public void determineUidByLinkContent() {
+    public void testDetermineUidByLinkContent() {
+        // Map similar to what is created in Lookup#consume()
         Map<String, String> lookup = new HashMap<>() {{
             put("SomeClass", "a.b.c.SomeClass");
             put("SomeClass.someMethod()", "a.b.c.SomeClass.someMethod()");
             put("SomeClass.someMethod(String param)", "a.b.c.SomeClass.someMethod(String param)");
+            put("a.b.c.SomeClass", "a.b.c.SomeClass");
+            put("a.b.c.SomeClass.someMethod()", "a.b.c.SomeClass.someMethod()");
+            put("a.b.c.SomeClass.someMethod(String param)", "a.b.c.SomeClass.someMethod(String param)");
+            put("SomeClass", "d.e.f.SomeClass");
+            put("d.e.f.SomeClass", "d.e.f.SomeClass");
         }};
 
+        String packageName = "a.b.c";
+
         LookupContext lookupContext = new LookupContext(lookup, lookup);
-        assertEquals("Wrong result for class", BuilderUtil.
-                resolveUidByLookup("SomeClass", lookupContext), "a.b.c.SomeClass");
-        assertEquals("Wrong result for method", BuilderUtil.
-                resolveUidFromLinkContent("SomeClass#someMethod()", lookupContext), "a.b.c.SomeClass.someMethod()");
-        assertEquals("Wrong result for method with param", BuilderUtil.
-                        resolveUidFromLinkContent("SomeClass#someMethod(String param)", lookupContext),
+        assertEquals("Wrong result for class",
+                BuilderUtil.resolveUidFromLinkContent("SomeClass", packageName, lookupContext), "a.b.c.SomeClass");
+        assertEquals("Wrong result for method",
+                BuilderUtil.resolveUidFromLinkContent("SomeClass#someMethod()", packageName, lookupContext), "a.b.c.SomeClass.someMethod()");
+        assertEquals("Wrong result for method with param",
+                BuilderUtil.resolveUidFromLinkContent("SomeClass#someMethod(String param)", packageName, lookupContext),
                 "a.b.c.SomeClass.someMethod(String param)");
+        assertEquals("Wrong result for class with duplicate className",
+                BuilderUtil.resolveUidFromLinkContent("SomeClass", packageName, lookupContext), "a.b.c.SomeClass");
 
         assertEquals("Wrong result for unknown class", BuilderUtil.
                 resolveUidByLookup("UnknownClass", lookupContext), "");

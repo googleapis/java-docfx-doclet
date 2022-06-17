@@ -12,14 +12,18 @@ import static org.apache.commons.lang3.RegExUtils.replaceAll;
 
 public class Lookup {
 
-    private Map<String, String> globalLookup = new HashMap<>();
-    private Map<String, Map<String, String>> localLookupByFileName = new HashMap<>();
+    private static final int INITIAL_GLOBAL_CAPACITY = 250000;
+
+    private final Map<String, String> globalLookup;
+    private final Map<String, Map<String, String>> localLookupByFileName;
 
     private final String UID_PACKAGE_NAME_REGEXP = "^.*?\\.(?=[A-Z].*)";
     private final String PARAM_PACKAGE_NAME_REGEXP = "(?<=[\\( ]).*?(?=[A-Z].*)";
     private final String METHOD_PARAMS_REGEXP = "\\s[^\\s]+?(?=[,)])";
 
     public Lookup(List<MetadataFile> packageMetadataFiles, List<MetadataFile> classMetadataFiles) {
+        this.globalLookup = new HashMap<>(INITIAL_GLOBAL_CAPACITY);
+        this.localLookupByFileName = new HashMap<>();
         consume(packageMetadataFiles);
         consume(classMetadataFiles);
     }
