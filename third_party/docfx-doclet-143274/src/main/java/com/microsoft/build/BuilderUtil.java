@@ -104,7 +104,7 @@ final class BuilderUtil {
         // First, prefer references inside local package
         String exactResolveUid = resolveUidByLookup(qualifiedLink, lookupContext);
         if (exactResolveUid.isEmpty()) {
-            // Resolve without local package context
+            // Resolve with original linkContent
             exactResolveUid = resolveUidByLookup(linkContent, lookupContext);
         }
         // Resolve with fuzzyResolve / external references
