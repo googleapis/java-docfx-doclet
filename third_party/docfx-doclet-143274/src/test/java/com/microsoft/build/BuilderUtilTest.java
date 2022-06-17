@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 public class BuilderUtilTest {
@@ -94,11 +95,13 @@ public class BuilderUtilTest {
             put("a.b.c.SomeClass", "a.b.c.SomeClass");
             put("a.b.c.SomeClass.someMethod()", "a.b.c.SomeClass.someMethod()");
             put("a.b.c.SomeClass.someMethod(String param)", "a.b.c.SomeClass.someMethod(String param)");
+            // Duplicate entry to simulate same ClassName in a different package
             put("SomeClass", "d.e.f.SomeClass");
             put("d.e.f.SomeClass", "d.e.f.SomeClass");
         }};
 
         String packageName = "a.b.c";
+        String otherPackageName = "d.e.f";
 
         LookupContext lookupContext = new LookupContext(lookup, lookup);
         assertEquals("Wrong result for class",
@@ -109,7 +112,7 @@ public class BuilderUtilTest {
                 BuilderUtil.resolveUidFromLinkContent("SomeClass#someMethod(String param)", packageName, lookupContext),
                 "a.b.c.SomeClass.someMethod(String param)");
         assertEquals("Wrong result for class with duplicate className",
-                BuilderUtil.resolveUidFromLinkContent("SomeClass", packageName, lookupContext), "a.b.c.SomeClass");
+                BuilderUtil.resolveUidFromLinkContent("SomeClass", otherPackageName, lookupContext), "d.e.f.SomeClass");
 
         assertEquals("Wrong result for unknown class", BuilderUtil.
                 resolveUidByLookup("UnknownClass", lookupContext), "");
