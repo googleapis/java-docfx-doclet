@@ -127,7 +127,11 @@ public class YamlUtilTest {
         assertEquals(expectedResult, YamlUtil.cleanupHtml(expectedActual));
         assertEquals(random + expectedResult + random, YamlUtil.cleanupHtml(random + expectedActual + random));
         assertEquals(expectedResult + random + expectedResult, YamlUtil.cleanupHtml(expectedActual + random + expectedActual));
+
         assertEquals("= text =", YamlUtil.cleanupHtml("= text ="));
+        assertEquals("==testing==", YamlUtil.cleanupHtml("==testing=="));
+        assertEquals("======= test1234 ===== sfs === d =", YamlUtil.cleanupHtml("======= test1234 ===== sfs === d ="));
+        assertEquals("====== Markdown H1 Test ======", YamlUtil.cleanupHtml("====== Markdown H1 Test ======"));
     }
 
     @Test
