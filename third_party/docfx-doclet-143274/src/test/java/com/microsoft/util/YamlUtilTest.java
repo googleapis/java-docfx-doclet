@@ -131,6 +131,7 @@ public class YamlUtilTest {
         assertEquals("= text =", YamlUtil.cleanupHtml("= text ="));
         assertEquals("==testing==", YamlUtil.cleanupHtml("==testing=="));
         assertEquals("=======================SpeechClient=======================", "=======================SpeechClient=======================");
+        assertEquals("\"scikit-learn\":\"==0.19.0\"TextTextText\"botocore\":\"==1.7.14\"", "\"scikit-learn\":\"==0.19.0\"TextTextText\"botocore\":\"==1.7.14\"");
         assertEquals("======= test1234 ===== 1234test === 1234test1234 == test =", YamlUtil.cleanupHtml("======= test1234 ===== 1234test === 1234test1234 == test ="));
         assertEquals("====== Markdown H1 Test ======", YamlUtil.cleanupHtml("====== Markdown H1 Test ======"));
     }
