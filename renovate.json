@@ -1,5 +1,11 @@
 {
   "extends": [
     "config:base"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["com.google.cloud:google-cloud-vision"],
+      "allowedVersions": "<=2.0.13"
+    }
   ]
 }
