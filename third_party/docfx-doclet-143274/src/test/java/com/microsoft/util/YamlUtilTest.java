@@ -130,7 +130,8 @@ public class YamlUtilTest {
 
         assertEquals("= text =", YamlUtil.cleanupHtml("= text ="));
         assertEquals("==testing==", YamlUtil.cleanupHtml("==testing=="));
-        assertEquals("======= test1234 ===== sfs === d =", YamlUtil.cleanupHtml("======= test1234 ===== sfs === d ="));
+        assertEquals("=======================SpeechClient=======================", "=======================SpeechClient=======================");
+        assertEquals("======= test1234 ===== 1234test === 1234test1234 == test =", YamlUtil.cleanupHtml("======= test1234 ===== 1234test === 1234test1234 == test ="));
         assertEquals("====== Markdown H1 Test ======", YamlUtil.cleanupHtml("====== Markdown H1 Test ======"));
     }
 
