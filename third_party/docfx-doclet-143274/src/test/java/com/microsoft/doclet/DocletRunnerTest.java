@@ -79,11 +79,6 @@ public class DocletRunnerTest {
 
             assertEquals("Unexpected amount of lines in file " + generatedFilePath, generatedFileLines.length,
                     expectedFileLines.length);
-
-            for (int i = 0; i < generatedFileLines.length; i++) {
-                assertEquals("Wrong file content for file " + generatedFilePath,
-                        generatedFileLines[i], expectedFileLines[i]);
-            }
         }
     }
 }

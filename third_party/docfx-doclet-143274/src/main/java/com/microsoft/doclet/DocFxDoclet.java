@@ -27,8 +27,9 @@ public class DocFxDoclet implements Doclet {
         reporter.print(Kind.NOTE, "Excluded classes: " + Arrays.toString(excludeClasses));
         reporter.print(Kind.NOTE, "Project name: " + projectName);
         reporter.print(Kind.NOTE, "Disable changelog: " + disableChangelog);
+        reporter.print(Kind.NOTE, "Num Threads: " + numThreads);
 
-        return (new YmlFilesBuilder(environment, outputPath, excludePackages, excludeClasses, projectName, disableChangelog, reporter)).build();
+        return (new YmlFilesBuilder(environment, outputPath, excludePackages, excludeClasses, projectName, disableChangelog, numThreads, reporter)).build();
     }
 
     @Override
@@ -41,6 +42,7 @@ public class DocFxDoclet implements Doclet {
     private String[] excludeClasses = {};
     private String projectName;
     private boolean disableChangelog;
+    private int numThreads = 10;
 
     @Override
     public Set<? extends Option> getSupportedOptions() {
@@ -89,6 +91,14 @@ public class DocFxDoclet implements Doclet {
                         return true;
                     }
                 },
+            new CustomOption(
+                "Number Threads", Arrays.asList("-numThreads", "--num-threads"), "numThreads") {
+                @Override
+                public boolean process(String option, List<String> arguments) {
+                    numThreads = Integer.parseInt(option);
+                    return true;
+                }
+            },
                 // Support next properties for compatibility with Gradle javadoc task.
                 // According to javadoc spec - these properties used by StandardDoclet and used only when
                 // 'doclet' parameter not populated. But Gradle javadoc not align with this rule and

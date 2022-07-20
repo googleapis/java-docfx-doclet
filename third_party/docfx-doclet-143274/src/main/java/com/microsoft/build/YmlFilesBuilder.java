@@ -39,9 +39,12 @@ public class YmlFilesBuilder {
     private ClassBuilder classBuilder;
     private ReferenceBuilder referenceBuilder;
     private Reporter reporter;
+    private ExecutorService executorService;
+    private int numThreads;
 
     public YmlFilesBuilder(DocletEnvironment environment, String outputPath,
-                           String[] excludePackages, String[] excludeClasses, String projectName, boolean disableChangelog, Reporter reporter) {
+        String[] excludePackages, String[] excludeClasses, String projectName,
+        boolean disableChangelog, int numThreads, Reporter reporter) {
         this.environment = environment;
         this.outputPath = outputPath;
         this.elementUtil = new ElementUtil(excludePackages, excludeClasses);
@@ -53,11 +56,12 @@ public class YmlFilesBuilder {
         this.referenceBuilder = new ReferenceBuilder(environment, classLookup, elementUtil);
         this.packageBuilder = new PackageBuilder(packageLookup, outputPath, referenceBuilder);
         this.reporter = reporter;
+        this.numThreads = numThreads;
         this.classBuilder = new ClassBuilder(elementUtil, classLookup, new ClassItemsLookup(environment, elementUtil), outputPath, referenceBuilder);
     }
 
     public boolean build() {
-        ExecutorService executorService = Executors.newFixedThreadPool(10);
+        executorService = Executors.newFixedThreadPool(numThreads);
         //  table of contents
         TocFile tocFile = new TocFile(outputPath, projectName, disableChangelog);
         //  overview page
