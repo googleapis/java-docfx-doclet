@@ -54,7 +54,7 @@ public class ClassBuilderTest {
         classBuilder = new ClassBuilder(
             elementUtil,
             classLookup,
-            new ClassItemsLookup(environment, null),
+            new ClassItemsLookup(environment, elementUtil),
             "./target",
             new ReferenceBuilder(environment, classLookup, elementUtil));
     }
