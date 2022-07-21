@@ -35,6 +35,6 @@ public class YamlUtil {
                 .replaceAll("\\{@link *\"([^\\{]+)\" *\\}", "<a href=\"$1\">$1</a>")
                 .replaceAll("\\[([^]]+)]\\[([^]]+)\\]", "<xref uid=\"$2\" data-throw-if-not-resolved=\"false\">$1</xref>")
                 .replaceAll("\\{@link *([^\\{\"]+) *\\}", "<xref uid=\"$1\" data-throw-if-not-resolved=\"false\">$1</xref>")
-                .replaceAll("==+([^=]+)==+", "<h2>$1</h2>");
+                .replaceAll("=======================([^=]+)=======================", "<h2>$1</h2>");
     }
 }
