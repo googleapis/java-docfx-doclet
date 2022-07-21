@@ -35,7 +35,7 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     }
 
     @Override
-    protected synchronized ExtendedMetadataFileItem buildMetadataFileItem(TypeElement classElement) {
+    protected ExtendedMetadataFileItem buildMetadataFileItem(TypeElement classElement) {
         List<ExtendedMetadataFileItem> inheritedMethods = new ArrayList<>();
 
         String packageName = determinePackageName(classElement);
