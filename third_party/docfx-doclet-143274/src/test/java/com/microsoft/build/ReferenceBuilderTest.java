@@ -40,7 +40,7 @@ public class ReferenceBuilderTest {
     public void setup() {
         DocletEnvironment environment = Mockito.mock(DocletEnvironment.class);
         ElementUtil elementUtil = new ElementUtil(new String[0], new String[0]);
-        ClassLookup classLookup = new ClassLookup(environment);
+        ClassLookup classLookup = new ClassLookup(environment, elementUtil);
         referenceBuilder = new ReferenceBuilder(environment, classLookup, elementUtil);
     }
 

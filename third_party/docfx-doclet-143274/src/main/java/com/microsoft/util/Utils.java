@@ -21,13 +21,15 @@ import static javax.lang.model.type.TypeKind.DECLARED;
 public class Utils {
 
     public final DocletEnvironment docletEnvironment;
-    public final Elements elementUtils;
+    public final Elements elements;
     public final Types typeUtils;
+    private final ElementUtil elementUtil;
 
-    public Utils(DocletEnvironment docEnv) {
-        docletEnvironment = docEnv;
-        elementUtils = docEnv.getElementUtils();
-        typeUtils = docEnv.getTypeUtils();
+    public Utils(DocletEnvironment docEnv, ElementUtil elementUtil) {
+        this.docletEnvironment = docEnv;
+        this.elements = docEnv.getElementUtils();
+        this.typeUtils = docEnv.getTypeUtils();
+        this.elementUtil = elementUtil;
     }
 
     public static boolean isPackagePrivate(Element e) {
@@ -71,7 +73,7 @@ public class Utils {
 
         List<? extends DocTree> fullBody = getFullBody(m);
         return fullBody.isEmpty() ||
-                (fullBody.size() == 1 && fullBody.get(0).getKind().equals(DocTree.Kind.INHERIT_DOC));
+            (fullBody.size() == 1 && fullBody.get(0).getKind().equals(DocTree.Kind.INHERIT_DOC));
     }
 
     public boolean hasInlineTag(List<? extends DocTree> inlineTags, DocTree.Kind kind) {
@@ -85,12 +87,12 @@ public class Utils {
 
     public Element getMemberBySignature(TypeElement te, ElementKind kind, String signature) {
         return getMembers(te, kind).stream()
-                .filter(e -> e.toString().equals(signature))
-                .findFirst().orElse(null);
+            .filter(e -> e.toString().equals(signature))
+            .findFirst().orElse(null);
     }
 
     public TypeElement getObjectType() {
-        return elementUtils.getTypeElement("java.lang.Object");
+        return elements.getTypeElement("java.lang.Object");
     }
 
     /**
@@ -138,8 +140,8 @@ public class Utils {
         }
         final TypeElement origin = getEnclosingTypeElement(method);
         for (TypeMirror t = getSuperType(origin);
-             t.getKind() == DECLARED;
-             t = getSuperType(asTypeElement(t))) {
+            t.getKind() == DECLARED;
+            t = getSuperType(asTypeElement(t))) {
             TypeElement te = asTypeElement(t);
             if (te == null) {
                 return null;
@@ -147,7 +149,7 @@ public class Utils {
 
             for (Element e : getMembers(te, ElementKind.METHOD)) {
                 ExecutableElement ee = (ExecutableElement) e;
-                if (elementUtils.overrides(method, ee, origin)
+                if (elements.overrides(method, ee, origin)
                 ) {
                     return ee;
                 }
@@ -173,8 +175,8 @@ public class Utils {
 
     protected List<? extends DocTree> getFullBody(Element element) {
         return getDocCommentTree(element)
-                .map(DocCommentTree::getFullBody)
-                .orElse(Collections.emptyList());
+            .map(DocCommentTree::getFullBody)
+            .orElse(Collections.emptyList());
     }
 
     public static List<? extends DocTree> filteredList(List<? extends DocTree> dlist, DocTree.Kind... select) {
@@ -207,8 +209,8 @@ public class Utils {
 
     public List<? extends DocTree> removeBlockTag(List<? extends DocTree> dctree, DocTree.Kind kind) {
         return dctree.stream()
-                .filter(dc -> !dc.getKind().equals(kind))
-                .collect(Collectors.toList());
+            .filter(dc -> !dc.getKind().equals(kind))
+            .collect(Collectors.toList());
     }
 
     /**
@@ -219,9 +221,9 @@ public class Utils {
      * @return a list of visible enclosed members in this type
      */
     public List<? extends Element> getMembers(TypeElement te, ElementKind kind) {
-        return te.getEnclosedElements().stream()
-                .filter(e -> e.getKind() == kind && !isPrivateOrPackagePrivate(e))
-                .collect(Collectors.toList());
+        return elementUtil.getEnclosedElements(te).stream()
+            .filter(e -> e.getKind() == kind && !isPrivateOrPackagePrivate(e))
+            .collect(Collectors.toList());
     }
 
     /**
@@ -255,7 +257,7 @@ public class Utils {
      */
     public List<TypeElement> getImplementedInterfaces(TypeElement element) {
         return element.getInterfaces().stream()
-                .map(e -> asTypeElement(e))
-                .collect(Collectors.toList());
+            .map(e -> asTypeElement(e))
+            .collect(Collectors.toList());
     }
 }

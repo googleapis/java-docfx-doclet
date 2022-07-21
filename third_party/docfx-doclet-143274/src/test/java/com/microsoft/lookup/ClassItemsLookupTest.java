@@ -73,8 +73,7 @@ public class ClassItemsLookupTest {
         deprecatedTree = Mockito.mock(DeprecatedTree.class);
         textTree = Mockito.mock(TextTree.class);
         identifierTree = Mockito.mock(IdentifierTree.class);
-        classItemsLookup = new ClassItemsLookup(environment);
-
+        classItemsLookup = new ClassItemsLookup(environment, null);
     }
 
     @Test

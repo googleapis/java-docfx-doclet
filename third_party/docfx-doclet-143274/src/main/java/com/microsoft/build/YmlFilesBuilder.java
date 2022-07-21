@@ -40,10 +40,10 @@ public class YmlFilesBuilder {
         this.projectName = projectName;
         this.disableChangelog = disableChangelog;
         this.projectBuilder = new ProjectBuilder(projectName);
-        ClassLookup classLookup = new ClassLookup(environment);
+        ClassLookup classLookup = new ClassLookup(environment, elementUtil);
         this.referenceBuilder = new ReferenceBuilder(environment, classLookup, elementUtil);
         this.packageBuilder = new PackageBuilder(packageLookup, outputPath, referenceBuilder);
-        this.classBuilder = new ClassBuilder(elementUtil, classLookup, new ClassItemsLookup(environment), outputPath, referenceBuilder);
+        this.classBuilder = new ClassBuilder(elementUtil, classLookup, new ClassItemsLookup(environment, elementUtil), outputPath, referenceBuilder);
     }
 
     public boolean build() {
