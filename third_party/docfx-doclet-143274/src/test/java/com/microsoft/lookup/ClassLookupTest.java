@@ -1,14 +1,26 @@
 package com.microsoft.lookup;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.google.testing.compile.CompilationRule;
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.Status;
 import com.microsoft.model.TypeParameter;
+import com.microsoft.util.ElementUtil;
 import com.sun.source.doctree.DeprecatedTree;
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree;
 import com.sun.source.doctree.TextTree;
 import com.sun.source.util.DocTrees;
+import java.util.Arrays;
+import java.util.List;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.TypeMirror;
+import javax.lang.model.util.Elements;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.junit.Before;
 import org.junit.Rule;
@@ -16,16 +28,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import javax.lang.model.element.ElementKind;
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.type.TypeMirror;
-import javax.lang.model.util.Elements;
-import java.util.Arrays;
-import java.util.List;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ClassLookupTest {
@@ -46,7 +48,7 @@ public class ClassLookupTest {
     public void setup() {
         elements = rule.getElements();
         environment = Mockito.mock(DocletEnvironment.class);
-        classLookup = new ClassLookup(environment, null);
+        classLookup = new ClassLookup(environment, Mockito.mock(ElementUtil.class));
         docTrees = Mockito.mock(DocTrees.class);
         docTree = Mockito.mock(DocTree.class);
         docCommentTree = Mockito.mock(DocCommentTree.class);
