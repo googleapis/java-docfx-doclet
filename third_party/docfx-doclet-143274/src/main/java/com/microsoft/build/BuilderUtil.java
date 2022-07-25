@@ -37,7 +37,15 @@ final class BuilderUtil {
     private static final Pattern XREF_LINK_RESOLVE_PATTERN = Pattern.compile("(?<class>\\w+)\\#(?<member>\\w+)(\\((?<param>.*)\\))?");
     public final static String[] LANGS = {"java"};
 
-    static String populateUidValues(String text, LookupContext lookupContext) {
+    /**
+     * Replaces all the references the link in the linkContent with the UID
+     *
+     * @param text Text that potentially contains a link reference
+     * @param packageName MetaFileItem's packageName
+     * @param lookupContext Lookup Context
+     * @return Text with a link reference to the full qualified link
+     */
+    static String populateUidValues(String text, String packageName, LookupContext lookupContext) {
         if (StringUtils.isBlank(text)) {
             return text;
         }
@@ -51,7 +59,7 @@ final class BuilderUtil {
             }
 
             String linkContent = linkContentMatcher.group();
-            String uid = resolveUidFromLinkContent(linkContent, lookupContext);
+            String uid = resolveUidFromLinkContent(linkContent, packageName, lookupContext);
             String updatedLink = linkContentMatcher.replaceAll(uid);
             text = StringUtils.replace(text, link, updatedLink);
         }
@@ -59,13 +67,21 @@ final class BuilderUtil {
     }
 
     /**
+     *
      * The linkContent could be in following format
-     * #memeber
-     * Class#member
-     * Class#method()
-     * Class#method(params)
+     * 1. #member
+     * 2. Class#member
+     * 3. Class#method()
+     * 4. Class#method(params)
+     * 5. Package.Class# +{Any combination of above}
+     * All Possibilities listed: https://docs.oracle.com/javase/7/docs/technotes/tools/windows/javadoc.html#link
+     *
+     * @param linkContent Text of the link
+     * @param packageName MetaFileItem's packageName
+     * @param lookupContext LookupContext
+     * @return Fully qualified link url
      */
-    static String resolveUidFromLinkContent(String linkContent, LookupContext lookupContext) {
+    static String resolveUidFromLinkContent(String linkContent, String packageName, LookupContext lookupContext) {
         if (StringUtils.isBlank(linkContent)) {
             return "";
         }
@@ -74,17 +90,40 @@ final class BuilderUtil {
 
         // complete class name for class internal link
         if (linkContent.startsWith("#")) {
+            // Can't use packageName because it is missing the ClassName
             String firstKey = lookupContext.getOwnerUid();
             linkContent = firstKey + linkContent;
         }
-
         // fuzzy resolve, target for items from project external references
         String fuzzyResolvedUid = resolveUidFromReference(linkContent, lookupContext);
 
         // exact resolve in lookupContext
         linkContent = linkContent.replace("#", ".");
-        String exactResolveUid = resolveUidByLookup(linkContent, lookupContext);
+        String qualifiedLink = getFullyQualifiedLinkUrl(linkContent, packageName);
+
+        // First, prefer references inside local package
+        String exactResolveUid = resolveUidByLookup(qualifiedLink, lookupContext);
+        if (exactResolveUid.isEmpty()) {
+            // Resolve with original linkContent
+            exactResolveUid = resolveUidByLookup(linkContent, lookupContext);
+        }
+        // Resolve with fuzzyResolve / external references
         return exactResolveUid.isEmpty() ? fuzzyResolvedUid : exactResolveUid;
+    }
+
+    /**
+     * Logic to ensure that resulting link is in the format Package.Class.Method(Params...)
+     *
+     * @param linkContent String of the Class#Method
+     * @param packageName Package Name that should go in front of the link
+     * @return Fully qualified link url
+     */
+    private static String getFullyQualifiedLinkUrl(String linkContent, String packageName) {
+        // If packageName does not exist/error'd or is already at the beginning of the link
+        if (packageName == null || linkContent.indexOf(packageName) == 0) {
+            return linkContent;
+        }
+        return String.format("%s.%s", packageName, linkContent);
     }
 
     static List<String> splitUidWithGenericsIntoClassNames(String uid) {
@@ -120,6 +159,23 @@ final class BuilderUtil {
         return specList;
     }
 
+    /**
+     * Populate the links for references based on a UID. Looker generates mappings for local context
+     * (file specific) and global context (all the UID references). Searching is done first in the
+     * local context and then in the global context if local context is not found.
+     *
+     * ex. {@link Lookup } would search all the references to find which Lookup file to use
+     * It would parse the text to search ("Lookup")
+     *
+     * Since packages (v1 and v1beta) may contain the same generated java file names, there may be some
+     * conflicts between which link it should be.
+     *
+     * The Looker#consumer() function guarantees that the UID (+ other combinations) will be put into the LookupContext.
+     * As long as the link that we extract contains Package#Method, it will match in either local or global context
+     *
+     * @param packageMetadataFiles Package specific metadata files
+     * @param classMetadataFiles Class specific metadata files
+     */
     static void populateUidValues(List<MetadataFile> packageMetadataFiles, List<MetadataFile> classMetadataFiles) {
         Lookup lookup = new Lookup(packageMetadataFiles, classMetadataFiles);
 
@@ -127,20 +183,19 @@ final class BuilderUtil {
             LookupContext lookupContext = lookup.buildContext(classMetadataFile);
 
             for (MetadataFileItem item : classMetadataFile.getItems()) {
+                String packageName = item.getPackageName();
                 item.setSummary(YamlUtil.cleanupHtml(
-                        populateUidValues(item.getSummary(), lookupContext)
+                        populateUidValues(item.getSummary(), packageName, lookupContext)
                 ));
 
                 Optional.ofNullable(item.getSyntax()).ifPresent(syntax -> {
                             Optional.ofNullable(syntax.getParameters()).ifPresent(
                                     methodParams -> methodParams.forEach(
-                                            param -> {
-                                                param.setDescription(populateUidValues(param.getDescription(), lookupContext));
-                                            })
+                                            param -> param.setDescription(populateUidValues(param.getDescription(), packageName, lookupContext)))
                             );
                             Optional.ofNullable(syntax.getReturnValue()).ifPresent(returnValue ->
                                     returnValue.setReturnDescription(
-                                            populateUidValues(syntax.getReturnValue().getReturnDescription(), lookupContext)
+                                            populateUidValues(syntax.getReturnValue().getReturnDescription(), packageName, lookupContext)
                                     )
                             );
                         }
