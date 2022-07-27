@@ -3,7 +3,9 @@ package com.microsoft.lookup;
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.TypeParameter;
+import com.microsoft.util.ElementUtil;
 import com.microsoft.util.Utils;
+import java.util.Collections;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -25,8 +27,11 @@ public class ClassLookup extends BaseLookup<TypeElement> {
 
     private static final String JAVA_LANG_OBJECT = "java.lang.Object";
 
-    public ClassLookup(DocletEnvironment environment) {
+    private final ElementUtil elementUtil;
+
+    public ClassLookup(DocletEnvironment environment, ElementUtil elementUtil) {
         super(environment);
+        this.elementUtil = elementUtil;
     }
 
     @Override
@@ -59,14 +64,14 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     }
 
     void populateContent(TypeElement classElement, String shortNameWithGenericsSupport,
-                         ExtendedMetadataFileItem container) {
+        ExtendedMetadataFileItem container) {
         String type = elementKindLookup.get(classElement.getKind());
         String result = String.format("%s %s %s",
-                classElement.getModifiers().stream().map(String::valueOf)
-                        .filter(modifier -> !("Interface".equals(type) && "abstract".equals(modifier)))
-                        .filter(modifier -> !("Enum".equals(type) && ("static".equals(modifier) || "final".equals(modifier))))
-                        .collect(Collectors.joining(" ")),
-                StringUtils.lowerCase(type), shortNameWithGenericsSupport);
+            classElement.getModifiers().stream().map(String::valueOf)
+                .filter(modifier -> !("Interface".equals(type) && "abstract".equals(modifier)))
+                .filter(modifier -> !("Enum".equals(type) && ("static".equals(modifier) || "final".equals(modifier))))
+                .collect(Collectors.joining(" ")),
+            StringUtils.lowerCase(type), shortNameWithGenericsSupport);
 
         String superclass = determineSuperclass(classElement);
         if (superclass != null && !JAVA_LANG_OBJECT.equals(superclass)) {
@@ -79,11 +84,11 @@ public class ClassLookup extends BaseLookup<TypeElement> {
         if (CollectionUtils.isNotEmpty(interfaces)) {
             String prefix = (classElement.getKind() == ElementKind.INTERFACE) ? " extends " : " implements ";
             result += prefix + interfaces.stream().map(String::valueOf).map(this::makeTypeShort)
-                    .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(", "));
 
             container.setInterfaces(interfaces.stream()
-                    .map(String::valueOf)
-                    .collect(Collectors.toList()));
+                .map(String::valueOf)
+                .collect(Collectors.toList()));
 
             addInterfacesToReferencesMap(interfaces, container);
 
@@ -98,16 +103,16 @@ public class ClassLookup extends BaseLookup<TypeElement> {
 
     void addInheritedMethodsToReferencesMap(ExtendedMetadataFileItem container) {
         container.addReferences(container.getInheritedMethods().stream()
-                .map(o -> new MetadataFileItem(o, makeTypeShort(o), false))
-                .collect(Collectors.toSet())
+            .map(o -> new MetadataFileItem(o, makeTypeShort(o), false))
+            .collect(Collectors.toSet())
         );
     }
 
     void addInterfacesToReferencesMap(List<? extends TypeMirror> interfaces, ExtendedMetadataFileItem container) {
         container.addReferences(interfaces.stream()
-                .map(String::valueOf)
-                .map(o -> new MetadataFileItem(o, makeTypeShort(o), false))
-                .collect(Collectors.toSet())
+            .map(String::valueOf)
+            .map(o -> new MetadataFileItem(o, makeTypeShort(o), false))
+            .collect(Collectors.toSet())
         );
     }
 
@@ -141,14 +146,14 @@ public class ClassLookup extends BaseLookup<TypeElement> {
 
     List<TypeParameter> determineTypeParameters(TypeElement element) {
         return element.getTypeParameters().stream()
-                .map(typeParameter -> new TypeParameter(String.valueOf(typeParameter)))
-                .collect(Collectors.toList());
+            .map(typeParameter -> new TypeParameter(String.valueOf(typeParameter)))
+            .collect(Collectors.toList());
     }
 
     void appendInheritedMethods(TypeElement element, List<ExtendedMetadataFileItem> inheritedMethods) {
-        List<? extends Element> members = element.getEnclosedElements();
+        List<? extends Element> members = elementUtil.getEnclosedElements(element);
         Integer level = Optional.ofNullable(getMaxNestedLevel(inheritedMethods))
-                .orElse(0);
+            .orElse(0);
 
         for (Element m : members) {
             if (m.getKind() == ElementKind.METHOD && !Utils.isPrivateOrPackagePrivate(m)) {
@@ -168,9 +173,9 @@ public class ClassLookup extends BaseLookup<TypeElement> {
 
         if (inheritedMethods.size() > 0) {
             level = inheritedMethods
-                    .stream()
-                    .mapToInt(v -> v.getNestedLevel())
-                    .max().orElseThrow(NoSuchElementException::new);
+                .stream()
+                .mapToInt(v -> v.getNestedLevel())
+                .max().orElseThrow(NoSuchElementException::new);
         }
         return level;
     }
@@ -191,9 +196,9 @@ public class ClassLookup extends BaseLookup<TypeElement> {
                 }
             }
             List<String> methods = map.values()
-                    .stream()
-                    .map(x -> x.getUid())
-                    .collect(Collectors.toList());
+                .stream()
+                .map(x -> x.getUid())
+                .collect(Collectors.toList());
 
             return methods;
         }

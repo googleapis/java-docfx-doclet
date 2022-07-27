@@ -4,6 +4,7 @@ import com.google.testing.compile.CompilationRule;
 import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
+import com.microsoft.util.ElementUtil;
 import com.sun.source.doctree.DeprecatedTree;
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree.Kind;
@@ -73,8 +74,7 @@ public class ClassItemsLookupTest {
         deprecatedTree = Mockito.mock(DeprecatedTree.class);
         textTree = Mockito.mock(TextTree.class);
         identifierTree = Mockito.mock(IdentifierTree.class);
-        classItemsLookup = new ClassItemsLookup(environment);
-
+        classItemsLookup = new ClassItemsLookup(environment, Mockito.mock(ElementUtil.class));
     }
 
     @Test

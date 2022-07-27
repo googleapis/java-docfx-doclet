@@ -5,6 +5,7 @@ import com.microsoft.model.ExceptionItem;
 import com.microsoft.model.MethodParameter;
 import com.microsoft.model.Return;
 import com.microsoft.util.CommentHelper;
+import com.microsoft.util.ElementUtil;
 import com.microsoft.util.Utils;
 import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree;
@@ -29,9 +30,9 @@ import java.util.stream.Collectors;
 public class ClassItemsLookup extends BaseLookup<Element> {
     private Utils utils;
 
-    public ClassItemsLookup(DocletEnvironment environment) {
+    public ClassItemsLookup(DocletEnvironment environment, ElementUtil elementUtil) {
         super(environment);
-        utils = new Utils(environment);
+        utils = new Utils(environment, elementUtil);
     }
 
     @Override

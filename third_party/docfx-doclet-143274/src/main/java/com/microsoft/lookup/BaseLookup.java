@@ -13,6 +13,7 @@ import com.sun.source.doctree.DocTree;
 import com.sun.source.doctree.LinkTree;
 import com.sun.source.doctree.LiteralTree;
 import com.sun.source.doctree.SeeTree;
+import java.util.concurrent.ConcurrentHashMap;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -32,6 +33,7 @@ import java.util.stream.Stream;
 
 public abstract class BaseLookup<T extends Element> {
 
+    private static final int INITIAL_CAPACITY = 500000;
     protected final Map<ElementKind, String> elementKindLookup = new HashMap<>() {{
         put(ElementKind.PACKAGE, "Namespace");
         put(ElementKind.CLASS, "Class");
@@ -44,20 +46,17 @@ public abstract class BaseLookup<T extends Element> {
         put(ElementKind.FIELD, "Field");
     }};
 
-    protected Map<T, ExtendedMetadataFileItem> map = new HashMap<>();
+    protected Map<T, ExtendedMetadataFileItem> map;
     protected final DocletEnvironment environment;
 
     protected BaseLookup(DocletEnvironment environment) {
         this.environment = environment;
+        this.map = new HashMap<>(INITIAL_CAPACITY);
     }
 
     protected ExtendedMetadataFileItem resolve(T key) {
-        ExtendedMetadataFileItem value = map.get(key);
-        if (value == null) {
-            value = buildMetadataFileItem(key);
-            map.put(key, value);
-        }
-        return value;
+        map.computeIfAbsent(key, this::buildMetadataFileItem);
+        return map.get(key);
     }
 
     protected abstract ExtendedMetadataFileItem buildMetadataFileItem(T key);
@@ -172,9 +171,9 @@ public abstract class BaseLookup<T extends Element> {
         Optional<DocCommentTree> docCommentTree = getDocCommentTree(element);
         if (docCommentTree.isPresent()) {
             boolean isDeprecated = docCommentTree.get().getBlockTags().stream()
-                    .filter(docTree -> docTree.getKind().equals(DocTree.Kind.DEPRECATED))
-                    .findFirst()
-                    .isPresent();
+                .filter(docTree -> docTree.getKind().equals(DocTree.Kind.DEPRECATED))
+                .findFirst()
+                .isPresent();
             if (isDeprecated) {
                 return DocTree.Kind.DEPRECATED.name().toLowerCase();
             }
@@ -194,9 +193,9 @@ public abstract class BaseLookup<T extends Element> {
         Optional<DocCommentTree> docCommentTree = getDocCommentTree(element);
         if (docCommentTree.isPresent()) {
             String comment = docCommentTree
-                    .map(DocCommentTree::getFullBody)
-                    .map(this::replaceLinksAndCodes)
-                    .orElse(null);
+                .map(DocCommentTree::getFullBody)
+                .map(this::replaceLinksAndCodes)
+                .orElse(null);
             return replaceBlockTags(docCommentTree.get(), comment);
         }
         return null;
@@ -233,19 +232,19 @@ public abstract class BaseLookup<T extends Element> {
      */
     String replaceLinksAndCodes(List<? extends DocTree> items) {
         return YamlUtil.cleanupHtml(items.stream().map(
-                bodyItem -> {
-                    switch (bodyItem.getKind()) {
-                        case LINK:
-                        case LINK_PLAIN:
-                            return buildXrefTag((LinkTree) bodyItem);
-                        case CODE:
-                            return buildCodeTag((LiteralTree) bodyItem);
-                        case LITERAL:
-                            return expandLiteralBody((LiteralTree) bodyItem);
-                        default:
-                            return String.valueOf(bodyItem);
-                    }
+            bodyItem -> {
+                switch (bodyItem.getKind()) {
+                    case LINK:
+                    case LINK_PLAIN:
+                        return buildXrefTag((LinkTree) bodyItem);
+                    case CODE:
+                        return buildCodeTag((LiteralTree) bodyItem);
+                    case LITERAL:
+                        return expandLiteralBody((LiteralTree) bodyItem);
+                    default:
+                        return String.valueOf(bodyItem);
                 }
+            }
         ).collect(Collectors.joining()));
     }
 
@@ -281,8 +280,8 @@ public abstract class BaseLookup<T extends Element> {
             return value;
         }
         return Stream.of(StringUtils.split(value, "<"))
-                .map(s -> RegExUtils.removeAll(s, "\\b[a-z0-9_.]+\\."))
-                .collect(Collectors.joining("<"));
+            .map(s -> RegExUtils.removeAll(s, "\\b[a-z0-9_.]+\\."))
+            .collect(Collectors.joining("<"));
     }
 
     private String getSeeAlsoSummary(Set<String> seeItems) {
@@ -291,12 +290,12 @@ public abstract class BaseLookup<T extends Element> {
 
     private String getDeprecatedSummary(DeprecatedTree deprecatedTree) {
         return String.format("\n<strong>Deprecated.</strong> <em>%s</em>\n\n",
-                replaceLinksAndCodes(deprecatedTree.getBody()));
+            replaceLinksAndCodes(deprecatedTree.getBody()));
     }
 
     private String getSeeTagRef(SeeTree seeTree) {
         String ref = seeTree.getReference().stream()
-                .map(r -> String.valueOf(r)).collect(Collectors.joining(""));
+            .map(r -> String.valueOf(r)).collect(Collectors.joining(""));
         // if it's already a tag, use that otherwise build xref tag
         if (ref.matches("^<.+>(.|\n)*")) {
             return ref.replaceAll("\n", "").replaceAll("(  )+", " ");
