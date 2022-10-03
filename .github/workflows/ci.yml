@@ -27,6 +27,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           java-version: 11
+          distribution: temurin
       - name: build project
         working-directory: ./third_party/docfx-doclet-143274
         run: mvn clean install -DskipTests
@@ -41,6 +42,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           java-version: 11
+          distribution: temurin
       - name: pass tests
         working-directory: ./third_party/docfx-doclet-143274
         run: mvn clean test
