@@ -13,14 +13,13 @@ import com.sun.source.doctree.DocTree;
 import com.sun.source.doctree.LinkTree;
 import com.sun.source.doctree.LiteralTree;
 import com.sun.source.doctree.SeeTree;
-import java.util.concurrent.ConcurrentHashMap;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.StringEscapeUtils;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -242,7 +241,7 @@ public abstract class BaseLookup<T extends Element> {
                     case LITERAL:
                         return expandLiteralBody((LiteralTree) bodyItem);
                     default:
-                        return String.valueOf(bodyItem);
+                        return String.valueOf(StringEscapeUtils.unescapeJava(bodyItem.toString()));
                 }
             }
         ).collect(Collectors.joining()));
