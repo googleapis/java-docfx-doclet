@@ -260,11 +260,11 @@ public abstract class BaseLookup<T extends Element> {
     }
 
     String buildCodeTag(LiteralTree literalTree) {
-        return String.format("<code>%s</code>", literalTree.getBody());
+        return String.format("<code>%s</code>", StringEscapeUtils.unescapeJava(literalTree.getBody().toString()));
     }
 
     String expandLiteralBody(LiteralTree bodyItem) {
-        return String.valueOf(bodyItem.getBody());
+        return String.valueOf(StringEscapeUtils.unescapeJava(bodyItem.getBody().toString()));
     }
 
     protected Optional<DocCommentTree> getDocCommentTree(T element) {
