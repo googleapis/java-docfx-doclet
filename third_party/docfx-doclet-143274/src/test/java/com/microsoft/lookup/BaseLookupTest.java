@@ -134,7 +134,7 @@ public class BaseLookupTest {
 
     @Test
     public void buildCodeTag() {
-        String tagContent = "Some text";
+        String tagContent = "Some text ≤";
         when(literalTree.getBody()).thenReturn(textTree);
         when(textTree.toString()).thenReturn(tagContent);
 
@@ -145,13 +145,14 @@ public class BaseLookupTest {
 
     @Test
     public void expandLiteralBody() {
-        String tagContent = "Some text";
+        String tagContent = "Some text ≤ \u2264";
         when(literalTree.getBody()).thenReturn(textTree);
         when(textTree.toString()).thenReturn(tagContent);
 
         String result = baseLookup.expandLiteralBody(literalTree);
+        String expected = "Some text ≤ ≤";
 
-        assertEquals("Wrong result", result, tagContent);
+        assertEquals("Wrong result", result, expected);
     }
 
     @Test
@@ -159,7 +160,7 @@ public class BaseLookupTest {
         when(linkTree.getReference()).thenReturn(referenceTree);
         when(referenceTree.getSignature()).thenReturn("Some#signature");
         when(linkTree.getLabel()).thenReturn(Collections.emptyList());
-        String textTreeContent = "Some text content";
+        String textTreeContent = "Some text content ≤ \u2264";
         when(literalTree.getBody()).thenReturn(textTree);
         when(textTree.toString()).thenReturn(textTreeContent);
         when(linkTree.getKind()).thenReturn(Kind.LINK);
@@ -169,7 +170,7 @@ public class BaseLookupTest {
         String result = baseLookup.replaceLinksAndCodes(Arrays.asList(linkTree, literalTree, textTree));
 
         assertEquals("Wrong result", result, "<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\">"
-                + "Some#signature</xref><code>Some text content</code>" + textTreeContent);
+                + "Some#signature</xref><code>Some text content ≤ ≤</code>" + textTreeContent);
     }
 
     @Test
