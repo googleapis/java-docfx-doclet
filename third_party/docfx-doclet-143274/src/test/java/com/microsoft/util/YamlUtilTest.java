@@ -121,7 +121,7 @@ public class YamlUtilTest {
     @Test
     public void cleanupHtmlEqualTitlesTest() {
         String expectedActual = "======================= SpeechClient =======================";
-        String expectedResult = "<h2> SpeechClient </h2>";
+        String expectedResult = "<h3> SpeechClient </h3>";
         String random = UUID.randomUUID().toString();
 
         assertEquals(expectedResult, YamlUtil.cleanupHtml(expectedActual));
