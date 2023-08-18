@@ -15,41 +15,43 @@
  */
 package com.microsoft.build;
 
+import static com.microsoft.build.BuilderUtil.LANGS;
+
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.microsoft.build.BuilderUtil.LANGS;
-
 class ProjectBuilder {
-    private final String projectName;
+  private final String projectName;
 
-    ProjectBuilder(String projectName) {
-        this.projectName = projectName;
-    }
+  ProjectBuilder(String projectName) {
+    this.projectName = projectName;
+  }
 
-    void buildProjectMetadataFile(List<MetadataFileItem> packageItems, MetadataFile projectMetadataFile) {
-        MetadataFileItem projectItem = new MetadataFileItem(LANGS, projectName);
-        projectItem.setNameWithType(projectName);
-        projectItem.setFullName(projectName);
-        projectItem.setType("Namespace");
-        projectItem.setJavaType("overview");
+  void buildProjectMetadataFile(
+      List<MetadataFileItem> packageItems, MetadataFile projectMetadataFile) {
+    MetadataFileItem projectItem = new MetadataFileItem(LANGS, projectName);
+    projectItem.setNameWithType(projectName);
+    projectItem.setFullName(projectName);
+    projectItem.setType("Namespace");
+    projectItem.setJavaType("overview");
 
-        List<String> children = new ArrayList<>();
-        List<MetadataFileItem> references = new ArrayList<>();
-        packageItems.stream().forEach(i -> {
-            children.add(i.getUid());
-            MetadataFileItem refItem = new MetadataFileItem(i.getUid());
-            refItem.setName(i.getName());
-            refItem.setNameWithType(i.getNameWithType());
-            refItem.setFullName(i.getFullName());
-            references.add(refItem);
-        });
+    List<String> children = new ArrayList<>();
+    List<MetadataFileItem> references = new ArrayList<>();
+    packageItems.stream()
+        .forEach(
+            i -> {
+              children.add(i.getUid());
+              MetadataFileItem refItem = new MetadataFileItem(i.getUid());
+              refItem.setName(i.getName());
+              refItem.setNameWithType(i.getNameWithType());
+              refItem.setFullName(i.getFullName());
+              references.add(refItem);
+            });
 
-        projectItem.getChildren().addAll(children);
-        projectMetadataFile.getReferences().addAll(references);
-        projectMetadataFile.getItems().add(projectItem);
-    }
+    projectItem.getChildren().addAll(children);
+    projectMetadataFile.getReferences().addAll(references);
+    projectMetadataFile.getItems().add(projectItem);
+  }
 }

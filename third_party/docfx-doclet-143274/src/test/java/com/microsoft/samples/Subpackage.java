@@ -1,5 +1,3 @@
 package com.microsoft.samples;
 
-public class Subpackage {
-
-}
+public class Subpackage {}

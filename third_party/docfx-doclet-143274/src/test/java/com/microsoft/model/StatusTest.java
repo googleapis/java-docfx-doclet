@@ -16,15 +16,15 @@
 
 package com.microsoft.model;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 public class StatusTest {
 
-    @Test
-    public void statusName() {
-        String name = Status.DEPRECATED.toString();
-        assertEquals("Status should be deprecated", name, "deprecated");
-    }
+  @Test
+  public void statusName() {
+    String name = Status.DEPRECATED.toString();
+    assertEquals("Status should be deprecated", name, "deprecated");
+  }
 }

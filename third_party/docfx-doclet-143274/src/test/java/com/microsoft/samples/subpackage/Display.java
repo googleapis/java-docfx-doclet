@@ -5,12 +5,12 @@ import java.util.List;
 
 /**
  * Do you see some <code>First</code> code block?
- * <p>
- * Or this {@code Second} code block?
+ *
+ * <p>Or this {@code Second} code block?
  */
 public interface Display<T, R> extends Serializable, List<Person<T>> {
 
-    void show();
+  void show();
 
-    void hide();
+  void hide();
 }

@@ -22,16 +22,15 @@ import com.google.api.gax.longrunning.OperationFuture;
 import com.google.api.gax.rpc.BidiStreamingCallable;
 import com.google.api.gax.rpc.OperationCallable;
 import com.google.api.gax.rpc.UnaryCallable;
-import com.google.cloud.speech.v1p1beta1.RecognitionAudio;
 import com.google.cloud.speech.v1p1beta1.*;
+import com.google.cloud.speech.v1p1beta1.RecognitionAudio;
 import com.google.cloud.speech.v1p1beta1.stub.SpeechStub;
 import com.google.cloud.speech.v1p1beta1.stub.SpeechStubSettings;
 import com.google.longrunning.Operation;
 import com.google.longrunning.OperationsClient;
-
-import javax.annotation.Generated;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+import javax.annotation.Generated;
 
 // AUTO-GENERATED DOCUMENTATION AND CLASS.
 
@@ -177,7 +176,8 @@ public class SpeechClient implements BackgroundResource {
    * @param audio Required. The audio data to be recognized.
    * @throws com.google.api.gax.rpc.ApiException if the remote call fails
    */
-  public final RecognizeResponse recognize(RecognitionConfig config, com.google.cloud.speech.v1p1beta1.RecognitionAudio audio) {
+  public final RecognizeResponse recognize(
+      RecognitionConfig config, com.google.cloud.speech.v1p1beta1.RecognitionAudio audio) {
     RecognizeRequest request =
         RecognizeRequest.newBuilder().setConfig(config).setAudio(audio).build();
     return recognize(request);

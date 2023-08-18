@@ -158,12 +158,12 @@ items:
   overridden: "com.microsoft.samples.subpackage.Person.getLastName()"
   type: "Method"
   package: "com.microsoft.samples"
-  summary: "Get capitalized last name. But it's not the end,\n because of multiline comment"
+  summary: "Get capitalized last name. But it's not the end, because we add a lot of text to make this a\n multiline comment"
   syntax:
     content: "public String getLastName()"
     return:
       type: "java.lang.String"
-      description: "lastName in uppercase. But it's not the end,\n because of multiline comment"
+      description: "lastName in uppercase. But it's not the end, because we add a lot of text to make this\n     a multiline comment"
 - uid: "com.microsoft.samples.SuperHero.getUniquePower()"
   id: "getUniquePower()"
   parent: "com.microsoft.samples.SuperHero"
@@ -254,7 +254,7 @@ items:
   overload: "com.microsoft.samples.SuperHero.successfullyAttacked*"
   type: "Method"
   package: "com.microsoft.samples"
-  summary: "\n<strong>Deprecated.</strong> <em>As of version 1.1, use . . . instead</em>\n\n<p>This is a simple description of the method. . .\n <a href=\"http://www.supermanisthegreatest.com\">Superman!</a>\n </p>\nSee Also: <a href=\"http://www.link_to_jira/HERO-402\">HERO-402</a>\n"
+  summary: "\n<strong>Deprecated.</strong> <em>As of version 1.1, use . . . instead</em>\n\nThis is a simple description of the method. . . <a href=\"http://www.supermanisthegreatest.com\">Superman!</a>\nSee Also: <a href=\"http://www.link_to_jira/HERO-402\">HERO-402</a>\n"
   syntax:
     content: "public int successfullyAttacked(int incomingDamage, String damageType)"
     parameters:

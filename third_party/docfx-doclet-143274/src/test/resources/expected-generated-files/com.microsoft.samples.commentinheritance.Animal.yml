@@ -87,7 +87,7 @@ items:
   overload: "com.microsoft.samples.commentinheritance.Animal.getKind*"
   type: "Method"
   package: "com.microsoft.samples.commentinheritance"
-  summary: "Get kind from Organism.\n Get kind from Animal."
+  summary: "Get kind from Organism. Get kind from Animal."
   syntax:
     content: "public abstract String getKind()"
     return:

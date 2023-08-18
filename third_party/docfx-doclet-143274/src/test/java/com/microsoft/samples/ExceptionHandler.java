@@ -16,6 +16,8 @@
 
 package com.microsoft.samples;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.api.core.BetaApi;
 import com.google.api.gax.retrying.ResultRetryAlgorithm;
 import com.google.api.gax.retrying.TimedAttemptSettings;
@@ -24,14 +26,11 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
-
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.Callable;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /** Exception retry algorithm implementation used by {@link RetryHelper}. */
 @BetaApi

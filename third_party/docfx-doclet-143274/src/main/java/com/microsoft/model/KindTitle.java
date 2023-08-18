@@ -16,13 +16,19 @@
 package com.microsoft.model;
 
 public class KindTitle {
-    private final String elementKind;
-    private final String title;
+  private final String elementKind;
+  private final String title;
 
-    public KindTitle(String elementKind, String title) {
-        this.elementKind = elementKind;
-        this.title = title;
-    }
-    public String getElementKind() { return elementKind; }
-    public String getTitle() { return title; }
+  public KindTitle(String elementKind, String title) {
+    this.elementKind = elementKind;
+    this.title = title;
+  }
+
+  public String getElementKind() {
+    return elementKind;
+  }
+
+  public String getTitle() {
+    return title;
+  }
 }

@@ -23,13 +23,18 @@ mvn package
 
 This will produce two JAR files that you can use - one with dependencies, and another one without.
 
+To run the linter:
+```bash
+mvn fmt:format
+```
+
 ## Usage 
 
 ### With `maven-javadoc-plugin`
 
 When there is an existing java project where Maven is used as a build tool, one could add `maven-javadoc-plugin` to the root `pom.xml`:
 
-```java
+```xml
 <plugin>
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-javadoc-plugin</artifactId>
@@ -121,7 +126,7 @@ You can take a look at an [example documentation generation script](https://gith
 
 ## Development
 
-When making changes, it is important to ensure that you are using `DocletRunner` class - it is responsible for makeing the `javadoc` call and takes params from an external configuration file.
+When making changes, it is important to ensure that you are using `DocletRunner` class - it is responsible for making the `javadoc` call and takes params from an external configuration file.
 
 To use it:  
 

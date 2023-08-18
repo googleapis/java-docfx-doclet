@@ -16,6 +16,8 @@
 
 package com.microsoft.samples.google;
 
+import static com.google.cloud.vision.v1.ProductSearchClient.*;
+
 import com.google.api.core.ApiFunction;
 import com.google.api.core.BetaApi;
 import com.google.api.gax.core.GoogleCredentialsProvider;
@@ -26,12 +28,9 @@ import com.google.cloud.vision.v1.*;
 import com.google.cloud.vision.v1.stub.ProductSearchStubSettings;
 import com.google.longrunning.Operation;
 import com.google.protobuf.Empty;
-
-import javax.annotation.Generated;
 import java.io.IOException;
 import java.util.List;
-
-import static com.google.cloud.vision.v1.ProductSearchClient.*;
+import javax.annotation.Generated;
 
 // AUTO-GENERATED DOCUMENTATION AND CLASS.
 

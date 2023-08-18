@@ -14,7 +14,7 @@ items:
   fullName: "com.microsoft.samples.BasePartnerComponent<TContext>"
   type: "Class"
   package: "com.microsoft.samples"
-  summary: "Holds common partner component properties and behavior. All components should inherit from this class. The context\n object type."
+  summary: "Holds common partner component properties and behavior. All components should inherit from this\n class. The context object type."
   syntax:
     content: "public abstract class BasePartnerComponent<TContext>"
     typeParameters:
