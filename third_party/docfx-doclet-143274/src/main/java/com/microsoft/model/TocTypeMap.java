@@ -15,29 +15,27 @@
  */
 package com.microsoft.model;
 
-import org.apache.commons.lang3.tuple.Pair;
-
-import javax.lang.model.element.ElementKind;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import javax.lang.model.element.ElementKind;
 
 public class TocTypeMap extends HashMap<String, ArrayList<TocItem>> {
 
-    public TocTypeMap() {
-        this.put(ElementKind.CLASS.name(), new ArrayList<>());
-        this.put(ElementKind.INTERFACE.name(), new ArrayList<>());
-        this.put(ElementKind.ENUM.name(), new ArrayList<>());
-        this.put(ElementKind.ANNOTATION_TYPE.name(), new ArrayList<>());
-        this.put("EXCEPTION", new ArrayList<>());
-    }
+  public TocTypeMap() {
+    this.put(ElementKind.CLASS.name(), new ArrayList<>());
+    this.put(ElementKind.INTERFACE.name(), new ArrayList<>());
+    this.put(ElementKind.ENUM.name(), new ArrayList<>());
+    this.put(ElementKind.ANNOTATION_TYPE.name(), new ArrayList<>());
+    this.put("EXCEPTION", new ArrayList<>());
+  }
 
-    public List<KindTitle> getTitleList() {
-        return List.of(
-                new KindTitle(ElementKind.INTERFACE.name(), "Interfaces"),
-                new KindTitle(ElementKind.CLASS.name(), "Classes"),
-                new KindTitle(ElementKind.ENUM.name(), "Enums"),
-                new KindTitle(ElementKind.ANNOTATION_TYPE.name(),"Annotation Types"),
-                new KindTitle("EXCEPTION", "Exceptions"));
-    }
+  public List<KindTitle> getTitleList() {
+    return List.of(
+        new KindTitle(ElementKind.INTERFACE.name(), "Interfaces"),
+        new KindTitle(ElementKind.CLASS.name(), "Classes"),
+        new KindTitle(ElementKind.ENUM.name(), "Enums"),
+        new KindTitle(ElementKind.ANNOTATION_TYPE.name(), "Annotation Types"),
+        new KindTitle("EXCEPTION", "Exceptions"));
+  }
 }

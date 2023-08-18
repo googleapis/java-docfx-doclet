@@ -17,10 +17,12 @@
 package com.microsoft.model;
 
 public enum Status {
-    DEPRECATED, ALPHA, BETA;
+  DEPRECATED,
+  ALPHA,
+  BETA;
 
-    @Override
-    public String toString() {
-        return name().toLowerCase();
-    }
+  @Override
+  public String toString() {
+    return name().toLowerCase();
+  }
 }
