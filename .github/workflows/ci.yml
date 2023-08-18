@@ -7,8 +7,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
-env:
-  working-directory: ./third_party/docfx-doclet-143274
+defaults:
+  run:
+    working-directory: ./third_party/docfx-doclet-143274
 
 jobs:
   build:
