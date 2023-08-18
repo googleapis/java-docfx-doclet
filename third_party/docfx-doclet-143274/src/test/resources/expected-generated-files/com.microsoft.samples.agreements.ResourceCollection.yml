@@ -12,7 +12,7 @@ items:
   fullName: "com.microsoft.samples.agreements.ResourceCollection<TResource>"
   type: "Class"
   package: "com.microsoft.samples.agreements"
-  summary: "Contains a collection of resources with JSON properties to represent the output Type of objects in collection"
+  summary: "Contains a collection of resources with JSON properties to represent the output Type of objects\n in collection"
   syntax:
     content: "public class ResourceCollection<TResource>"
     typeParameters:

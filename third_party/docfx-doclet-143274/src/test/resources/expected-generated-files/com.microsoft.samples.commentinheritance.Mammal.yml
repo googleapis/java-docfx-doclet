@@ -60,7 +60,7 @@ items:
   overridden: "com.microsoft.samples.commentinheritance.Animal.getKind()"
   type: "Method"
   package: "com.microsoft.samples.commentinheritance"
-  summary: "Get kind from Organism.\n Get kind from Animal.\n Get kind from Mammal."
+  summary: "Get kind from Organism. Get kind from Animal. Get kind from Mammal."
   syntax:
     content: "public abstract String getKind()"
     return:

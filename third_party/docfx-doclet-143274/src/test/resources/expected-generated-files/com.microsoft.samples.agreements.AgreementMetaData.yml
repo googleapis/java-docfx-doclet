@@ -18,7 +18,7 @@ items:
   fullName: "com.microsoft.samples.agreements.AgreementMetaData"
   type: "Class"
   package: "com.microsoft.samples.agreements"
-  summary: "The AgreementMetaData provides metadata about the agreement type\n that partner can provide confirmation of customer acceptance."
+  summary: "The AgreementMetaData provides metadata about the agreement type that partner can provide\n confirmation of customer acceptance."
   syntax:
     content: "public class AgreementMetaData"
   inheritance:

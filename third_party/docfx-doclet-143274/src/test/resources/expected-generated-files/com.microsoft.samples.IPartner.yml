@@ -12,7 +12,7 @@ items:
   fullName: "com.microsoft.samples.IPartner"
   type: "Interface"
   package: "com.microsoft.samples"
-  summary: "The main entry point into using the partner SDK functionality. Represents a partner and encapsulates all the behavior\n attached to partners. Use this interface to get to the partner's customers, profiles, and customer orders, profiles\n and subscriptions and more."
+  summary: "The main entry point into using the partner SDK functionality. Represents a partner and\n encapsulates all the behavior attached to partners. Use this interface to get to the partner's\n customers, profiles, and customer orders, profiles and subscriptions and more."
   syntax:
     content: "public interface IPartner"
 - uid: "com.microsoft.samples.IPartner.getCredentials()"

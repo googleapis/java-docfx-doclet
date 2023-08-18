@@ -170,7 +170,7 @@ items:
   overload: "com.microsoft.samples.google.v1p1alpha.SpeechClient.create*"
   type: "Method"
   package: "com.microsoft.samples.google.v1p1alpha"
-  summary: "Constructs an instance of SpeechClient, using the given settings. The channels are created\n based on the settings passed in, or defaults for any settings that are not set.\n Example broken links: <a href=\"http://tools.ietf.org/html/rfc2616#section-3.7\">http://tools.ietf.org/html/rfc2616#section-3.7</a>\n <xref uid=\"\" data-throw-if-not-resolved=\"false\">ApiFutures#immediateFuture(null)</xref>."
+  summary: "Constructs an instance of SpeechClient, using the given settings. The channels are created\n based on the settings passed in, or defaults for any settings that are not set. Example broken\n links: <a href=\"http://tools.ietf.org/html/rfc2616#section-3.7\">http://tools.ietf.org/html/rfc2616#section-3.7</a> <xref uid=\"\n ApiFutures#immediateFuture(null)\" data-throw-if-not-resolved=\"false\">\n ApiFutures#immediateFuture(null)</xref>."
   syntax:
     content: "public static final SpeechClient create(SpeechSettings settings)"
     parameters:
