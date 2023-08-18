@@ -24,19 +24,19 @@ package com.microsoft.model;
 //          name: name,
 //          uid: package.name,...]]
 public class Guide {
-    private final String name;
-    private final String href;
+  private final String name;
+  private final String href;
 
-    public Guide(String name, String href) {
-        this.name = name;
-        this.href = href;
-    }
+  public Guide(String name, String href) {
+    this.name = name;
+    this.href = href;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public String getHref() {
-        return href;
-    }
+  public String getHref() {
+    return href;
+  }
 }

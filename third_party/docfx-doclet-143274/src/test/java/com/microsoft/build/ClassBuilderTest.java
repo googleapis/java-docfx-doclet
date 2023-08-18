@@ -15,6 +15,9 @@
  */
 package com.microsoft.build;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
 import com.google.testing.compile.CompilationRule;
 import com.microsoft.lookup.ClassItemsLookup;
 import com.microsoft.lookup.ClassLookup;
@@ -22,66 +25,65 @@ import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.util.ElementUtil;
 import com.sun.source.util.DocTrees;
+import java.io.File;
+import java.util.Collection;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.util.Elements;
 import jdk.javadoc.doclet.DocletEnvironment;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.util.Elements;
-import java.io.File;
-import java.util.Collection;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
-
 public class ClassBuilderTest {
-    @Rule
-    public CompilationRule rule = new CompilationRule();
-    private Elements elements;
-    private ClassBuilder classBuilder;
-    private DocletEnvironment environment;
-    private DocTrees docTrees;
+  @Rule public CompilationRule rule = new CompilationRule();
+  private Elements elements;
+  private ClassBuilder classBuilder;
+  private DocletEnvironment environment;
+  private DocTrees docTrees;
 
-    @Before
-    public void setup() {
-        elements = rule.getElements();
-        environment = Mockito.mock(DocletEnvironment.class);
-        docTrees = Mockito.mock(DocTrees.class);
-        ElementUtil elementUtil = new ElementUtil(new String[0], new String[0]);
-        ClassLookup classLookup = new ClassLookup(environment, elementUtil);
-        classBuilder = new ClassBuilder(
+  @Before
+  public void setup() {
+    elements = rule.getElements();
+    environment = Mockito.mock(DocletEnvironment.class);
+    docTrees = Mockito.mock(DocTrees.class);
+    ElementUtil elementUtil = new ElementUtil(new String[0], new String[0]);
+    ClassLookup classLookup = new ClassLookup(environment, elementUtil);
+    classBuilder =
+        new ClassBuilder(
             elementUtil,
             classLookup,
             new ClassItemsLookup(environment, elementUtil),
             "./target",
             new ReferenceBuilder(environment, classLookup, elementUtil));
-    }
-    @Test
-    public void addConstructorsInfoWhenOnlyDefaultConstructor() {
-        TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person");
-        MetadataFile container = new MetadataFile("output", "name");
-        when(environment.getElementUtils()).thenReturn(elements);
-        when(environment.getDocTrees()).thenReturn(docTrees);
+  }
 
-        classBuilder.addConstructorsInfo(element, container);
+  @Test
+  public void addConstructorsInfoWhenOnlyDefaultConstructor() {
+    TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person");
+    MetadataFile container = new MetadataFile("output", "name");
+    when(environment.getElementUtils()).thenReturn(elements);
+    when(environment.getDocTrees()).thenReturn(docTrees);
 
-        assertEquals("Wrong file name", container.getFileNameWithPath(), "output" + File.separator + "name");
-        assertEquals("Container should contain constructor item", container.getItems().size(), 1);
-    }
+    classBuilder.addConstructorsInfo(element, container);
 
-    @Test
-    public void addConstructorsInfo() {
-        TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
-        MetadataFile container = new MetadataFile("output", "name");
-        when(environment.getElementUtils()).thenReturn(elements);
-        when(environment.getDocTrees()).thenReturn(docTrees);
+    assertEquals(
+        "Wrong file name", container.getFileNameWithPath(), "output" + File.separator + "name");
+    assertEquals("Container should contain constructor item", container.getItems().size(), 1);
+  }
 
-        classBuilder.addConstructorsInfo(element, container);
+  @Test
+  public void addConstructorsInfo() {
+    TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
+    MetadataFile container = new MetadataFile("output", "name");
+    when(environment.getElementUtils()).thenReturn(elements);
+    when(environment.getDocTrees()).thenReturn(docTrees);
 
-        assertEquals("Wrong file name", container.getFileNameWithPath(), "output" + File.separator + "name");
-        Collection<MetadataFileItem> constructorItems = container.getItems();
-        assertEquals("Container should contain 2 constructor items", constructorItems.size(), 2);
-    }
+    classBuilder.addConstructorsInfo(element, container);
+
+    assertEquals(
+        "Wrong file name", container.getFileNameWithPath(), "output" + File.separator + "name");
+    Collection<MetadataFileItem> constructorItems = container.getItems();
+    assertEquals("Container should contain 2 constructor items", constructorItems.size(), 2);
+  }
 }

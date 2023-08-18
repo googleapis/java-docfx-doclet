@@ -27,10 +27,9 @@ import com.google.cloud.speech.v1p1beta1.stub.SpeechStub;
 import com.google.cloud.speech.v1p1beta1.stub.SpeechStubSettings;
 import com.google.longrunning.Operation;
 import com.google.longrunning.OperationsClient;
-
-import javax.annotation.Generated;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+import javax.annotation.Generated;
 
 // AUTO-GENERATED DOCUMENTATION AND CLASS.
 
@@ -109,7 +108,8 @@ public class SpeechClient implements BackgroundResource {
    * Constructs an instance of SpeechClient, using the given settings. The channels are created
    * based on the settings passed in, or defaults for any settings that are not set.
    */
-  public static final SpeechClient create(com.microsoft.samples.google.SpeechSettings settings) throws IOException {
+  public static final SpeechClient create(com.microsoft.samples.google.SpeechSettings settings)
+      throws IOException {
     return new SpeechClient(settings);
   }
 

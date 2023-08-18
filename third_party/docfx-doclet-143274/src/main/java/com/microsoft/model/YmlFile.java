@@ -2,7 +2,7 @@ package com.microsoft.model;
 
 public interface YmlFile {
 
-    String getFileContent();
+  String getFileContent();
 
-    String getFileNameWithPath();
+  String getFileNameWithPath();
 }

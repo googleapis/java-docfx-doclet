@@ -15,26 +15,29 @@
  */
 package com.microsoft.model;
 
+import static org.junit.Assert.*;
+
+import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.List;
-
-import static org.junit.Assert.*;
-
 @RunWith(MockitoJUnitRunner.class)
 public class TocTypeMapTest {
-    @Test
-    public void elementKindsExistInMap() {
-        TocTypeMap tocTypeMap = new TocTypeMap();
-        List<KindTitle> titleList = tocTypeMap.getTitleList();
+  @Test
+  public void elementKindsExistInMap() {
+    TocTypeMap tocTypeMap = new TocTypeMap();
+    List<KindTitle> titleList = tocTypeMap.getTitleList();
 
-        assertEquals("Should include 5 items in list", 5, titleList.size());
+    assertEquals("Should include 5 items in list", 5, titleList.size());
 
-        titleList.stream().forEach(kindtitle -> assertNotNull("Element kind should exist in map",
-                tocTypeMap.get(kindtitle.getElementKind())));
+    titleList.stream()
+        .forEach(
+            kindtitle ->
+                assertNotNull(
+                    "Element kind should exist in map",
+                    tocTypeMap.get(kindtitle.getElementKind())));
 
-        assertNull("Should not include provided key", tocTypeMap.get("FAKE_VALUE"));
-    }
+    assertNull("Should not include provided key", tocTypeMap.get("FAKE_VALUE"));
+  }
 }

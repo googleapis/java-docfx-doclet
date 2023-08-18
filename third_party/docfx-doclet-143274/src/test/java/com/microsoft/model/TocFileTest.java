@@ -16,31 +16,31 @@
 
 package com.microsoft.model;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 public class TocFileTest {
 
-    @Test
-    public void sortsByUid() {
-        TocFile tocFile = new TocFile("outputPath", "google-cloud-project", false);
-        TocItem tocItemA = new TocItem("A.uid.package.class", "name");
-        TocItem tocItemB = new TocItem("B.uid.package.class", "name");
-        TocItem tocItemC = new TocItem("C.uid.package.class", "name");
+  @Test
+  public void sortsByUid() {
+    TocFile tocFile = new TocFile("outputPath", "google-cloud-project", false);
+    TocItem tocItemA = new TocItem("A.uid.package.class", "name");
+    TocItem tocItemB = new TocItem("B.uid.package.class", "name");
+    TocItem tocItemC = new TocItem("C.uid.package.class", "name");
 
-        tocFile.addTocItem(tocItemC);
-        tocFile.addTocItem(tocItemA);
-        tocFile.addTocItem(tocItemB);
+    tocFile.addTocItem(tocItemC);
+    tocFile.addTocItem(tocItemA);
+    tocFile.addTocItem(tocItemB);
 
-        assertEquals("Should be out of uid order", tocFile.get(0), tocItemC);
-        assertEquals("Should be out of uid order", tocFile.get(1), tocItemA);
-        assertEquals("Should be out of uid order", tocFile.get(2), tocItemB);
+    assertEquals("Should be out of uid order", tocFile.get(0), tocItemC);
+    assertEquals("Should be out of uid order", tocFile.get(1), tocItemA);
+    assertEquals("Should be out of uid order", tocFile.get(2), tocItemB);
 
-        tocFile.sortByUid();
+    tocFile.sortByUid();
 
-        assertEquals("Should sort toc by uid", tocFile.get(0), tocItemA);
-        assertEquals("Should sort toc by uid", tocFile.get(1), tocItemB);
-        assertEquals("Should sort toc by uid", tocFile.get(2), tocItemC);
-    }
+    assertEquals("Should sort toc by uid", tocFile.get(0), tocItemA);
+    assertEquals("Should sort toc by uid", tocFile.get(1), tocItemB);
+    assertEquals("Should sort toc by uid", tocFile.get(2), tocItemC);
+  }
 }

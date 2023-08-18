@@ -52,9 +52,9 @@ import com.google.protobuf.Message;
  * Protobuf type {@code google.cloud.speech.v1.RecognitionAudio}
  */
 public final class RecognitionAudio extends com.google.protobuf.GeneratedMessageV3
-        implements
-        // @@protoc_insertion_point(message_implements:google.cloud.speech.v1.RecognitionAudio)
-        RecognitionAudioOrBuilder {
+    implements
+    // @@protoc_insertion_point(message_implements:google.cloud.speech.v1.RecognitionAudio)
+    RecognitionAudioOrBuilder {
   private static final long serialVersionUID = 0L;
 
   // Use RecognitionAudio.newBuilder() to construct.
@@ -67,8 +67,7 @@ public final class RecognitionAudio extends com.google.protobuf.GeneratedMessage
     return null;
   }
 
-  private RecognitionAudio() {
-  }
+  private RecognitionAudio() {}
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
@@ -92,15 +91,15 @@ public final class RecognitionAudio extends com.google.protobuf.GeneratedMessage
   }
 
   private RecognitionAudio(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
+      com.google.protobuf.CodedInputStream input,
+      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+      throws com.google.protobuf.InvalidProtocolBufferException {
     this();
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-            com.google.protobuf.UnknownFieldSet.newBuilder();
+        com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
       boolean done = false;
       while (!done) {
@@ -109,23 +108,26 @@ public final class RecognitionAudio extends com.google.protobuf.GeneratedMessage
           case 0:
             done = true;
             break;
-          case 10: {
-            audioSourceCase_ = 1;
-            audioSource_ = input.readBytes();
-            break;
-          }
-          case 18: {
-            java.lang.String s = input.readStringRequireUtf8();
-            audioSourceCase_ = 2;
-            audioSource_ = s;
-            break;
-          }
-          default: {
-            if (!parseUnknownField(input, unknownFields, extensionRegistry, tag)) {
-              done = true;
+          case 10:
+            {
+              audioSourceCase_ = 1;
+              audioSource_ = input.readBytes();
+              break;
             }
-            break;
-          }
+          case 18:
+            {
+              java.lang.String s = input.readStringRequireUtf8();
+              audioSourceCase_ = 2;
+              audioSource_ = s;
+              break;
+            }
+          default:
+            {
+              if (!parseUnknownField(input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
         }
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -152,7 +154,7 @@ public final class RecognitionAudio extends com.google.protobuf.GeneratedMessage
   }
 
   public enum AudioSourceCase
-          implements
+      implements
           com.google.protobuf.Internal.EnumLite,
           com.google.protobuf.AbstractMessage.InternalOneOfEnum {
     CONTENT(1),
@@ -190,9 +192,7 @@ public final class RecognitionAudio extends com.google.protobuf.GeneratedMessage
     public int getNumber() {
       return this.value;
     }
-  }
-
-  ;
+  };
 
   public com.google.cloud.speech.v1.RecognitionAudio.AudioSourceCase getAudioSourceCase() {
     return com.google.cloud.speech.v1.RecognitionAudio.AudioSourceCase.forNumber(audioSourceCase_);
@@ -201,6 +201,8 @@ public final class RecognitionAudio extends com.google.protobuf.GeneratedMessage
   public static final int CONTENT_FIELD_NUMBER = 1;
 
   /**
+   *
+   *
    * <pre>
    * The audio data bytes encoded as specified in
    * `RecognitionConfig`. Note: as with all bytes fields, proto buffers use a
@@ -217,6 +219,8 @@ public final class RecognitionAudio extends com.google.protobuf.GeneratedMessage
   }
 
   /**
+   *
+   *
    * <pre>
    * The audio data bytes encoded as specified in
    * `RecognitionConfig`. Note: as with all bytes fields, proto buffers use a
@@ -238,6 +242,8 @@ public final class RecognitionAudio extends com.google.protobuf.GeneratedMessage
   public static final int URI_FIELD_NUMBER = 2;
 
   /**
+   *
+   *
    * <pre>
    * URI that points to a file that contains audio data bytes as specified in
    * `RecognitionConfig`. The file must not be compressed (for example, gzip).
@@ -257,6 +263,8 @@ public final class RecognitionAudio extends com.google.protobuf.GeneratedMessage
   }
 
   /**
+   *
+   *
    * <pre>
    * URI that points to a file that contains audio data bytes as specified in
    * `RecognitionConfig`. The file must not be compressed (for example, gzip).
@@ -289,6 +297,8 @@ public final class RecognitionAudio extends com.google.protobuf.GeneratedMessage
   }
 
   /**
+   *
+   *
    * <pre>
    * URI that points to a file that contains audio data bytes as specified in
    * `RecognitionConfig`. The file must not be compressed (for example, gzip).
@@ -310,7 +320,7 @@ public final class RecognitionAudio extends com.google.protobuf.GeneratedMessage
     }
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b =
-              com.google.protobuf.ByteString.copyFromUtf8((java.lang.String) ref);
+          com.google.protobuf.ByteString.copyFromUtf8((java.lang.String) ref);
       if (audioSourceCase_ == 2) {
         audioSource_ = b;
       }
@@ -351,8 +361,8 @@ public final class RecognitionAudio extends com.google.protobuf.GeneratedMessage
     size = 0;
     if (audioSourceCase_ == 1) {
       size +=
-              com.google.protobuf.CodedOutputStream.computeBytesSize(
-                      1, (com.google.protobuf.ByteString) audioSource_);
+          com.google.protobuf.CodedOutputStream.computeBytesSize(
+              1, (com.google.protobuf.ByteString) audioSource_);
     }
     if (audioSourceCase_ == 2) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, audioSource_);
@@ -362,4 +372,3 @@ public final class RecognitionAudio extends com.google.protobuf.GeneratedMessage
     return size;
   }
 }
-
