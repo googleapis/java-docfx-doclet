@@ -2,9 +2,12 @@ package com.microsoft.util;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
+import com.google.common.collect.ImmutableList;
 import com.google.docfx.doclet.ApiVersion;
+import java.util.Collections;
 import org.junit.Test;
 
 public class ApiVersionTest {
@@ -69,5 +72,38 @@ public class ApiVersionTest {
 
   private ApiVersion parse(String s) {
     return ApiVersion.parse(s).orElseThrow(() -> new IllegalStateException("Unable to parse " + s));
+  }
+
+  @Test
+  public void testRecommendation_PrioritizesReleaseVersions() {
+    ImmutableList<ApiVersion> versions =
+        ImmutableList.of(parse("v101beta"), parse("v2p1"), parse("v1p14alpha15"));
+
+    ApiVersion recommended = ApiVersion.getRecommended(versions);
+    assertThat(recommended).isEqualTo(parse("v2p1"));
+  }
+
+  @Test
+  public void testRecommendation_ChoosesLatestPrerelease_WhenNoReleaseVersionsAvailable() {
+    ImmutableList<ApiVersion> versions =
+        ImmutableList.of(
+            parse("v101beta"), parse("v1p14alpha15"), parse("v102alpha"), parse("v1p2beta3"));
+
+    ApiVersion recommended = ApiVersion.getRecommended(versions);
+    assertThat(recommended).isEqualTo(parse("v102alpha"));
+  }
+
+  @Test
+  public void testRecommendation_SingleOption() {
+    ImmutableList<ApiVersion> versions = ImmutableList.of(parse("v1p14alpha15"));
+
+    ApiVersion recommended = ApiVersion.getRecommended(versions);
+    assertThat(recommended).isEqualTo(parse("v1p14alpha15"));
+  }
+
+  @Test
+  public void testRecommendation_doesNotAllowEmptyInput() {
+    assertThrows(
+        IllegalArgumentException.class, () -> ApiVersion.getRecommended(Collections.emptyList()));
   }
 }

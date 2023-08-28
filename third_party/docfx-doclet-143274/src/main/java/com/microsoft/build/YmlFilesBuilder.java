@@ -2,9 +2,12 @@ package com.microsoft.build;
 
 import static com.microsoft.build.BuilderUtil.populateUidValues;
 
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.ImmutableListMultimap;
 import com.microsoft.lookup.ClassItemsLookup;
 import com.microsoft.lookup.ClassLookup;
 import com.microsoft.lookup.PackageLookup;
+import com.microsoft.lookup.PackageLookup.PackageGroup;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.TocFile;
@@ -19,16 +22,18 @@ import javax.lang.model.element.PackageElement;
 import jdk.javadoc.doclet.DocletEnvironment;
 
 public class YmlFilesBuilder {
-  private DocletEnvironment environment;
-  private String outputPath;
-  private ElementUtil elementUtil;
-  private PackageLookup packageLookup;
-  private String projectName;
-  private boolean disableChangelog;
-  private ProjectBuilder projectBuilder;
-  private PackageBuilder packageBuilder;
-  private ClassBuilder classBuilder;
-  private ReferenceBuilder referenceBuilder;
+  private static final String OLDER_AND_PRERELEASE = "Older and prerelease packages";
+
+  private final DocletEnvironment environment;
+  private final String outputPath;
+  private final ElementUtil elementUtil;
+  private final PackageLookup packageLookup;
+  private final String projectName;
+  private final boolean disableChangelog;
+  private final ProjectBuilder projectBuilder;
+  private final PackageBuilder packageBuilder;
+  private final ClassBuilder classBuilder;
+  private final ReferenceBuilder referenceBuilder;
 
   public YmlFilesBuilder(
       DocletEnvironment environment,
@@ -57,60 +62,84 @@ public class YmlFilesBuilder {
   }
 
   public boolean build() {
-    //  table of contents
-    TocFile tocFile = new TocFile(outputPath, projectName, disableChangelog);
-    //  overview page
-    MetadataFile projectMetadataFile = new MetadataFile(outputPath, "overview.yml");
-    //  package summary pages
-    List<MetadataFile> packageMetadataFiles = new ArrayList<>();
-    //  packages
-    List<MetadataFileItem> packageItems = new ArrayList<>();
-    //  class/enum/interface/etc. pages
-    List<MetadataFile> classMetadataFiles = new ArrayList<>();
+    Processor processor = new Processor();
+    processor.process();
 
-    for (PackageElement packageElement :
-        elementUtil.extractPackageElements(environment.getIncludedElements())) {
-      String packageUid = packageLookup.extractUid(packageElement);
-      String packageStatus = packageLookup.extractStatus(packageElement);
+    //  write to yaml files
+    FileUtil.dumpToFile(processor.projectMetadataFile);
+    processor.packageMetadataFiles.forEach(FileUtil::dumpToFile);
+    processor.classMetadataFiles.forEach(FileUtil::dumpToFile);
+    FileUtil.dumpToFile(processor.tocFile);
+
+    return true;
+  }
+
+  @VisibleForTesting
+  class Processor {
+    //  table of contents
+    final TocFile tocFile = new TocFile(outputPath, projectName, disableChangelog);
+    //  overview page
+    final MetadataFile projectMetadataFile = new MetadataFile(outputPath, "overview.yml");
+    //  package summary pages
+    final List<MetadataFile> packageMetadataFiles = new ArrayList<>();
+    //  packages
+    final List<MetadataFileItem> packageItems = new ArrayList<>();
+    //  class/enum/interface/etc. pages
+    final List<MetadataFile> classMetadataFiles = new ArrayList<>();
+
+    @VisibleForTesting
+    void process() {
+      ImmutableListMultimap<PackageGroup, PackageElement> organizedPackages =
+          packageLookup.organize(
+              elementUtil.extractPackageElements(environment.getIncludedElements()));
+
+      for (PackageElement element : organizedPackages.get(PackageGroup.VISIBLE)) {
+        tocFile.addTocItem(buildPackage(element));
+      }
+
+      TocItem older = new TocItem(OLDER_AND_PRERELEASE, OLDER_AND_PRERELEASE, null);
+      for (PackageElement element : organizedPackages.get(PackageGroup.OLDER_AND_PRERELEASE)) {
+        older.getItems().add(buildPackage(element));
+      }
+      tocFile.addTocItem(older);
+
+      for (MetadataFile packageFile : packageMetadataFiles) {
+        packageItems.addAll(packageFile.getItems());
+        String packageFileName = packageFile.getFileName();
+        for (MetadataFile classFile : classMetadataFiles) {
+          String classFileName = classFile.getFileName();
+          if (packageFileName.equalsIgnoreCase(classFileName)) {
+            packageFile.setFileName(packageFileName.replaceAll("\\.yml$", "(package).yml"));
+            classFile.setFileName(classFileName.replaceAll("\\.yml$", "(class).yml"));
+            break;
+          }
+        }
+      }
+      // build project summary page
+      projectBuilder.buildProjectMetadataFile(packageItems, projectMetadataFile);
+
+      // post-processing
+      populateUidValues(packageMetadataFiles, classMetadataFiles);
+      referenceBuilder.updateExternalReferences(classMetadataFiles);
+    }
+
+    private TocItem buildPackage(PackageElement element) {
+      String packageUid = packageLookup.extractUid(element);
+      String packageStatus = packageLookup.extractStatus(element);
+
       TocItem packageTocItem = new TocItem(packageUid, packageUid, packageStatus);
-      //  build package summary
-      packageMetadataFiles.add(packageBuilder.buildPackageMetadataFile(packageElement));
-      // add package summary to toc
       packageTocItem.getItems().add(new TocItem(packageUid, "Package summary"));
-      tocFile.addTocItem(packageTocItem);
+
+      //  build package summary
+      packageMetadataFiles.add(packageBuilder.buildPackageMetadataFile(element));
 
       // build classes/interfaces/enums/exceptions/annotations
       TocTypeMap typeMap = new TocTypeMap();
-      classBuilder.buildFilesForInnerClasses(packageElement, typeMap, classMetadataFiles);
+      classBuilder.buildFilesForInnerClasses(element, typeMap, classMetadataFiles);
       packageTocItem.getItems().addAll(joinTocTypeItems(typeMap));
+
+      return packageTocItem;
     }
-
-    for (MetadataFile packageFile : packageMetadataFiles) {
-      packageItems.addAll(packageFile.getItems());
-      String packageFileName = packageFile.getFileName();
-      for (MetadataFile classFile : classMetadataFiles) {
-        String classFileName = classFile.getFileName();
-        if (packageFileName.equalsIgnoreCase(classFileName)) {
-          packageFile.setFileName(packageFileName.replaceAll("\\.yml$", "(package).yml"));
-          classFile.setFileName(classFileName.replaceAll("\\.yml$", "(class).yml"));
-          break;
-        }
-      }
-    }
-    // build project summary page
-    projectBuilder.buildProjectMetadataFile(packageItems, projectMetadataFile);
-
-    // post-processing
-    populateUidValues(packageMetadataFiles, classMetadataFiles);
-    referenceBuilder.updateExternalReferences(classMetadataFiles);
-
-    //  write to yaml files
-    FileUtil.dumpToFile(projectMetadataFile);
-    packageMetadataFiles.forEach(FileUtil::dumpToFile);
-    classMetadataFiles.forEach(FileUtil::dumpToFile);
-    FileUtil.dumpToFile(tocFile);
-
-    return true;
   }
 
   List<TocItem> joinTocTypeItems(TocTypeMap tocTypeMap) {

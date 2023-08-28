@@ -4,7 +4,6 @@ import com.microsoft.util.YamlUtil;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class TocFile extends ArrayList<TocItem> implements YmlFile {
@@ -26,7 +25,7 @@ public class TocFile extends ArrayList<TocItem> implements YmlFile {
   }
 
   protected void sortByUid() {
-    Collections.sort(this, Comparator.comparing(TocItem::getUid));
+    Collections.sort(this, (a, b) -> a.getUid().compareToIgnoreCase(b.getUid()));
   }
 
   @Override

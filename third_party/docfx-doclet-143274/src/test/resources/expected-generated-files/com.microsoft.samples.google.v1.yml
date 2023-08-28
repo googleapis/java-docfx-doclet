@@ -1,0 +1,20 @@
+### YamlMime:ManagedReference
+items:
+- uid: "com.microsoft.samples.google.v1"
+  id: "v1"
+  children:
+  - "com.microsoft.samples.google.v1.SpeechClient"
+  langs:
+  - "java"
+  name: "com.microsoft.samples.google.v1"
+  nameWithType: "com.microsoft.samples.google.v1"
+  fullName: "com.microsoft.samples.google.v1"
+  type: "Namespace"
+  syntax:
+    content: "package com.microsoft.samples.google.v1"
+  javaType: "package"
+references:
+- uid: "com.microsoft.samples.google.v1.SpeechClient"
+  name: "SpeechClient"
+  nameWithType: "SpeechClient"
+  fullName: "com.microsoft.samples.google.v1.SpeechClient"
