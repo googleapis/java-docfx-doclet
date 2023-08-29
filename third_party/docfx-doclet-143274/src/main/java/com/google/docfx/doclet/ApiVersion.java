@@ -89,6 +89,26 @@ public class ApiVersion implements Comparable<ApiVersion> {
   }
 
   @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    ApiVersion other = (ApiVersion) o;
+    return major == other.major
+        && minor == other.minor
+        && prerelease == other.prerelease
+        && Objects.equals(stability, other.stability);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(major, minor, stability, prerelease);
+  }
+
+  @Override
   public String toString() {
     return MoreObjects.toStringHelper(ApiVersion.class)
         .add("major", major)

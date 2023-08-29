@@ -51,16 +51,23 @@ public class ApiVersionTest {
     }
   }
 
-  private ApiVersion parse(String s) {
-    return ApiVersion.parse(s).orElseThrow(() -> new IllegalStateException("Unable to parse " + s));
+  @Test
+  public void stability() {
+    assertTrue(parse("v12").isStable());
+    assertTrue(parse("v1p3").isStable());
+
+    assertFalse(parse("v1alpha").isStable());
+    assertFalse(parse("v1p1beta1").isStable());
   }
 
   @Test
-  public void stability() {
-    assertTrue(ApiVersion.parse("v12").orElseThrow().isStable());
-    assertTrue(ApiVersion.parse("v1p3").orElseThrow().isStable());
+  public void equals() {
+    assertThat(parse("v1")).isEqualTo(parse("v1p0"));
+    assertThat(parse("v1p0")).isEqualTo(parse("v1"));
+    assertThat(parse("v2p1beta")).isEqualTo(parse("v2p1beta0"));
+  }
 
-    assertFalse(ApiVersion.parse("v1alpha").orElseThrow().isStable());
-    assertFalse(ApiVersion.parse("v1p1beta1").orElseThrow().isStable());
+  private ApiVersion parse(String s) {
+    return ApiVersion.parse(s).orElseThrow(() -> new IllegalStateException("Unable to parse " + s));
   }
 }
