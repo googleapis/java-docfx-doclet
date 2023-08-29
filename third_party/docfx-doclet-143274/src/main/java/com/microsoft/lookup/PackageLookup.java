@@ -99,7 +99,7 @@ public class PackageLookup extends BaseLookup<PackageElement> {
 
       // All others are added to "Older and prerelease versions"
       versions.stream()
-          .filter(version -> version != recommendedVersion)
+          .filter(version -> !version.equals(recommendedVersion))
           .sorted(byComparingApiVersion)
           .forEach(
               version -> {
@@ -135,6 +135,7 @@ public class PackageLookup extends BaseLookup<PackageElement> {
             // For package a.b.c.v1, the value of packageWithoutVersion is a.b.c
             return packageWithoutVersion + ".v#"; // Use "v#" package to group all versions
           }
+          // Using 'name' ensures this package is placed in a group of size 1.
           return name;
         });
   }
