@@ -2,6 +2,7 @@ package com.microsoft.lookup;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableListMultimap;
@@ -106,6 +107,26 @@ public class PackageLookupTest {
 
     assertThat(String.valueOf(recommended.getQualifiedName()))
         .isEqualTo("com.microsoft.samples.google.v1beta");
+  }
+
+  @Test
+  public void testRecommendation_WithUnversionedPackageCollection() {
+    ImmutableList<PackageElement> packages =
+        ImmutableList.of(
+            elements.getPackageElement("com.microsoft.samples.google"),
+            elements.getPackageElement("com.microsoft.samples"));
+
+    assertThrows(IllegalStateException.class, () -> packageLookup.getRecommended(packages));
+  }
+
+  @Test
+  public void testRecommendation_WithDuplicates() {
+    ImmutableList<PackageElement> packages =
+        ImmutableList.of(
+            elements.getPackageElement("com.microsoft.samples.google.v1beta"),
+            elements.getPackageElement("com.microsoft.samples.google.v1beta"));
+
+    assertThrows(IllegalArgumentException.class, () -> packageLookup.getRecommended(packages));
   }
 
   @Test

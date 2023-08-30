@@ -4,7 +4,9 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableListMultimap;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import com.google.common.collect.Multimaps;
@@ -13,9 +15,7 @@ import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.Status;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import javax.lang.model.element.PackageElement;
 import jdk.javadoc.doclet.DocletEnvironment;
@@ -70,6 +70,13 @@ public class PackageLookup extends BaseLookup<PackageElement> {
   /** Compare PackageElements by their parsed ApiVersion */
   private final Comparator<PackageElement> byComparingApiVersion =
       Comparator.comparing(pkg -> extractApiVersion(pkg).orElse(ApiVersion.NONE));
+
+  public Optional<ApiVersion> extractApiVersion(PackageElement pkg) {
+    String name = String.valueOf(pkg.getQualifiedName());
+    int lastPackageIndex = name.lastIndexOf('.');
+    String leafPackage = name.substring(lastPackageIndex + 1);
+    return ApiVersion.parse(leafPackage);
+  }
 
   public enum PackageGroup {
     VISIBLE,
@@ -140,26 +147,31 @@ public class PackageLookup extends BaseLookup<PackageElement> {
         });
   }
 
-  public PackageElement getRecommended(Collection<PackageElement> packages) {
+  /**
+   * @throws java.lang.IllegalStateException if the collections has multiple entries, and any of the
+   *     packages are not versioned.
+   * @throws java.lang.IllegalArgumentException if the collection is empty or contains entries with
+   *     duplicate API versions.
+   */
+  @VisibleForTesting
+  PackageElement getRecommended(Collection<PackageElement> packages) {
     Preconditions.checkArgument(!packages.isEmpty(), "Packages must not be empty.");
 
     if (packages.size() == 1) {
       return packages.iterator().next();
     }
 
-    Map<ApiVersion, PackageElement> versions = new HashMap<>();
-    for (PackageElement pkg : packages) {
-      extractApiVersion(pkg).ifPresent(v -> versions.put(v, pkg));
-    }
+    ImmutableMap<ApiVersion, PackageElement> versions =
+        Maps.uniqueIndex(
+            packages,
+            (pkg) ->
+                extractApiVersion(pkg)
+                    .orElseThrow(
+                        () ->
+                            new IllegalStateException(
+                                "Unable to parse version from package " + pkg)));
 
     ApiVersion recommended = ApiVersion.getRecommended(versions.keySet());
     return versions.get(recommended);
-  }
-
-  public Optional<ApiVersion> extractApiVersion(PackageElement pkg) {
-    String name = String.valueOf(pkg.getQualifiedName());
-    int lastPackageIndex = name.lastIndexOf('.');
-    String leafPackage = name.substring(lastPackageIndex + 1);
-    return ApiVersion.parse(leafPackage);
   }
 }
