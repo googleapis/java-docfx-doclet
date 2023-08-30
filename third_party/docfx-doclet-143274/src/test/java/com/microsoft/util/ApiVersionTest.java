@@ -77,7 +77,7 @@ public class ApiVersionTest {
   @Test
   public void testRecommendation_PrioritizesReleaseVersions() {
     ImmutableList<ApiVersion> versions =
-        ImmutableList.of(parse("v101beta"), parse("v2p1"), parse("v1p14alpha15"));
+        ImmutableList.of(parse("v101beta"), parse("v2p1"), parse("v1p14alpha15"), parse("v1"));
 
     ApiVersion recommended = ApiVersion.getRecommended(versions);
     assertThat(recommended).isEqualTo(parse("v2p1"));
