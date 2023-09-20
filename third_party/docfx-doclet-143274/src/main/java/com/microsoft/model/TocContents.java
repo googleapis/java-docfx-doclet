@@ -23,7 +23,11 @@ public class TocContents {
   private final String projectName;
   private final List<Object> contents = new ArrayList<>();
 
-  public TocContents(String projectName, boolean disableChangelog, boolean disableLibraryOverview, List<TocItem> items) {
+  public TocContents(
+      String projectName,
+      boolean disableChangelog,
+      boolean disableLibraryOverview,
+      List<TocItem> items) {
     this.projectName = projectName;
 
     if (projectName == null || projectName.equals("")) {
@@ -35,7 +39,10 @@ public class TocContents {
   }
 
   private void createTocContents(
-      String projectName, boolean disableChangelog, boolean disableLibraryOverview, List<TocItem> items) {
+      String projectName,
+      boolean disableChangelog,
+      boolean disableLibraryOverview,
+      List<TocItem> items) {
     List<Object> tocItems = new ArrayList<>();
     // combine guides and tocItems
     tocItems.add(new Guide("Overview", "overview.html"));

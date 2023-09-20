@@ -16,7 +16,10 @@ public class TocFile extends ArrayList<TocItem> implements YmlFile {
 
   private final boolean disableLibraryOverview;
 
-  public TocFile(String outputPath, String projectName, boolean disableChangelog,
+  public TocFile(
+      String outputPath,
+      String projectName,
+      boolean disableChangelog,
       boolean disableLibraryOverview) {
     this.outputPath = outputPath;
     this.projectName = projectName;
@@ -35,8 +38,8 @@ public class TocFile extends ArrayList<TocItem> implements YmlFile {
   @Override
   public String getFileContent() {
     sortByUid();
-    List<Object> tocContents = new TocContents(projectName, disableChangelog,
-        disableLibraryOverview, this).getContents();
+    List<Object> tocContents =
+        new TocContents(projectName, disableChangelog, disableLibraryOverview, this).getContents();
     return TOC_FILE_HEADER + YamlUtil.objectToYamlString(tocContents);
   }
 

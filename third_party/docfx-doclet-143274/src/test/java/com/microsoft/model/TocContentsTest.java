@@ -17,7 +17,6 @@
 package com.microsoft.model;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +50,8 @@ public class TocContentsTest {
   public void getContentsWithProjectName() {
     //  should include ProjectContents and Guides
     List<Object> tocContents =
-        new TocContents(projectName, disableChangelog, disableLibraryOverview, tocItems).getContents();
+        new TocContents(projectName, disableChangelog, disableLibraryOverview, tocItems)
+            .getContents();
 
     assertEquals("Should only include 1 item", tocContents.size(), 1);
     assertEquals(
@@ -73,7 +73,8 @@ public class TocContentsTest {
 
     assertEquals("Guide should be third", items.get(2).getClass(), Guide.class);
     Guide libraryOverview = (Guide) items.get(2);
-    assertEquals("Second guide should be Library Overview", libraryOverview.getName(), "Library overview");
+    assertEquals(
+        "Second guide should be Library Overview", libraryOverview.getName(), "Library overview");
 
     assertEquals("Item A should be fourth", items.get(3), tocItemA);
     assertEquals("Item B should be fifth", items.get(4), tocItemB);
@@ -82,7 +83,8 @@ public class TocContentsTest {
 
   @Test
   public void getContentsNoProjectName() {
-    List<Object> tocContents = new TocContents("", disableChangelog, disableLibraryOverview, tocItems).getContents();
+    List<Object> tocContents =
+        new TocContents("", disableChangelog, disableLibraryOverview, tocItems).getContents();
 
     //  should not include ProjectContents or Guides
     assertEquals("Should be 3 items", tocContents.size(), 3);
@@ -95,7 +97,8 @@ public class TocContentsTest {
   public void getContentsWithDisabledChangelog() {
     disableChangelog = true;
     List<Object> tocContents =
-        new TocContents(projectName, disableChangelog, disableLibraryOverview, tocItems).getContents();
+        new TocContents(projectName, disableChangelog, disableLibraryOverview, tocItems)
+            .getContents();
 
     ProjectContents contents = (ProjectContents) tocContents.get(0);
     List<Object> items = contents.getItems();
@@ -105,7 +108,9 @@ public class TocContentsTest {
     assertEquals("First guide should be Overview", overview.getName(), "Overview");
     Guide libraryOverview = (Guide) items.get(1);
     assertEquals(
-        "Second item should be Library Overview guide", libraryOverview.getName(), "Library overview");
+        "Second item should be Library Overview guide",
+        libraryOverview.getName(),
+        "Library overview");
     assertEquals("Item A should be third", items.get(2), tocItemA);
     assertEquals("Item B should be fourth", items.get(3), tocItemB);
     assertEquals("Item C should be fifth", items.get(4), tocItemC);
@@ -115,7 +120,8 @@ public class TocContentsTest {
   public void getContentsWithDisabledLibraryOverview() {
     disableLibraryOverview = true;
     List<Object> tocContents =
-        new TocContents(projectName, disableChangelog, disableLibraryOverview, tocItems).getContents();
+        new TocContents(projectName, disableChangelog, disableLibraryOverview, tocItems)
+            .getContents();
 
     ProjectContents contents = (ProjectContents) tocContents.get(0);
     List<Object> items = contents.getItems();

@@ -77,9 +77,11 @@ public class YmlFilesBuilder {
     FileUtil.dumpToFile(processor.tocFile);
 
     // New library overview page
-    // TODO: @alicejli may make sense to create a super filesBuilder class to combines Yml files with the new overview.md files since those are not technically yml files
-    if(!disableLibraryOverview){
-      LibraryOverviewFile libraryOverviewFile = new LibraryOverviewFile(outputPath, "libraryOverview.md");
+    // TODO: @alicejli may make sense to create a super filesBuilder class to combines Yml files
+    // with the new overview.md files since those are not technically yml files
+    if (!disableLibraryOverview) {
+      LibraryOverviewFile libraryOverviewFile =
+          new LibraryOverviewFile(outputPath, "libraryOverview.md");
       FileUtil.dumpToFile(libraryOverviewFile);
     }
 
@@ -89,7 +91,8 @@ public class YmlFilesBuilder {
   @VisibleForTesting
   class Processor {
     //  table of contents
-    final TocFile tocFile = new TocFile(outputPath, projectName, disableChangelog, disableLibraryOverview);
+    final TocFile tocFile =
+        new TocFile(outputPath, projectName, disableChangelog, disableLibraryOverview);
     //  overview page
     // TODO: @alicejli eventually look to replace this with the new library overview
     final MetadataFile projectMetadataFile = new MetadataFile(outputPath, "overview.yml");

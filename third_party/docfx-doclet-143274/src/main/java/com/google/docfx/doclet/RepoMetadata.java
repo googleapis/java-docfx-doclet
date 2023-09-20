@@ -30,9 +30,11 @@ public class RepoMetadata {
   public static void setNamePretty(String namePretty) {
     RepoMetadata.namePretty = namePretty;
   }
-  public String getApiShortName(){
+
+  public String getApiShortName() {
     return apiShortName;
   }
+
   public static void setApiShortName(String apiShortName) {
     RepoMetadata.apiShortName = apiShortName;
   }
@@ -96,14 +98,15 @@ public class RepoMetadata {
   // artifactId is parsed from distributionName
   public static String getArtifactId() {
     String substrings[] = distributionName.split(":");
-    return substrings[substrings.length -1];
+    return substrings[substrings.length - 1];
   }
 
   // GithubLink is created from repo and repoShort
   public static String getGithubLink() {
     String githubRootUri = "https://github.com/";
     String githubLink = githubRootUri + repo;
-    if (Objects.equals(repo, "googleapis/google-cloud-java") || Objects.equals(repo, "googleapis/sdk-platform-java")){
+    if (Objects.equals(repo, "googleapis/google-cloud-java")
+        || Objects.equals(repo, "googleapis/sdk-platform-java")) {
       githubLink = githubLink + "/tree/main/" + repoShort;
     }
     return githubLink;
@@ -114,18 +117,19 @@ public class RepoMetadata {
     String mavenRootUri = "https://central.sonatype.com/artifact/";
     String substrings[] = distributionName.split(":");
     String groupName = substrings[0];
-    String artifactId = substrings[substrings.length -1];
+    String artifactId = substrings[substrings.length - 1];
     String mavenLink = mavenRootUri + groupName + "/" + artifactId;
     return mavenLink;
   }
+
   public static RepoMetadata parseRepoMetadata(String fileName) {
     RepoMetadata repoMetadata = new RepoMetadata();
     Gson gson = new Gson();
-    try(BufferedReader reader = new BufferedReader(new FileReader(fileName))){
+    try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
       // convert .repo-metadata.json to a Map of values
       Map<?, ?> map = gson.fromJson(reader, Map.class);
       for (Map.Entry<?, ?> entry : map.entrySet()) {
-        switch (entry.getKey().toString()){
+        switch (entry.getKey().toString()) {
           case "api_shortname":
             repoMetadata.setApiShortName(entry.getValue().toString());
             break;
