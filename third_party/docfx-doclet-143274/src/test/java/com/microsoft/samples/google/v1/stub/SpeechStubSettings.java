@@ -95,6 +95,7 @@ import org.threeten.bp.Duration;
  */
 @BetaApi
 @Generated("by gapic-generator-java")
+@SuppressWarnings("unchecked")
 public class SpeechStubSettings extends StubSettings<SpeechStubSettings> {
   /** The default scopes of the service. */
   private static final ImmutableList<String> DEFAULT_SERVICE_SCOPES =

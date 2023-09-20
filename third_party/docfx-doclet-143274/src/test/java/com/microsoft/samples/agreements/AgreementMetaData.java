@@ -26,6 +26,7 @@ public class AgreementMetaData {
    *
    * @deprecated
    */
+  @Deprecated
   @JsonProperty("agreementLink")
   private String agreementLink;
 

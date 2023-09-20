@@ -60,6 +60,7 @@ import javax.annotation.Generated;
  */
 @BetaApi
 @Generated("by gapic-generator-java")
+@SuppressWarnings("unchecked")
 public class HttpJsonSpeechStub extends SpeechStub {
   private static final TypeRegistry typeRegistry =
       TypeRegistry.newBuilder()
