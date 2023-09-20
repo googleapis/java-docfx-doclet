@@ -5,6 +5,7 @@ import static com.microsoft.build.BuilderUtil.populateUidValues;
 import com.microsoft.lookup.ClassItemsLookup;
 import com.microsoft.lookup.ClassLookup;
 import com.microsoft.lookup.PackageLookup;
+import com.microsoft.model.LibraryOverviewFile;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.TocFile;
@@ -25,6 +26,8 @@ public class YmlFilesBuilder {
   private PackageLookup packageLookup;
   private String projectName;
   private boolean disableChangelog;
+
+  private boolean disableLibraryOverview;
   private ProjectBuilder projectBuilder;
   private PackageBuilder packageBuilder;
   private ClassBuilder classBuilder;
@@ -36,13 +39,15 @@ public class YmlFilesBuilder {
       String[] excludePackages,
       String[] excludeClasses,
       String projectName,
-      boolean disableChangelog) {
+      boolean disableChangelog,
+      boolean disableLibraryOverview) {
     this.environment = environment;
     this.outputPath = outputPath;
     this.elementUtil = new ElementUtil(excludePackages, excludeClasses);
     this.packageLookup = new PackageLookup(environment);
     this.projectName = projectName;
     this.disableChangelog = disableChangelog;
+    this.disableLibraryOverview = disableLibraryOverview;
     this.projectBuilder = new ProjectBuilder(projectName);
     ClassLookup classLookup = new ClassLookup(environment, elementUtil);
     this.referenceBuilder = new ReferenceBuilder(environment, classLookup, elementUtil);
@@ -58,7 +63,13 @@ public class YmlFilesBuilder {
 
   public boolean build() {
     //  table of contents
-    TocFile tocFile = new TocFile(outputPath, projectName, disableChangelog);
+    TocFile tocFile = new TocFile(outputPath, projectName, disableChangelog, disableLibraryOverview);
+    // New library overview page
+    // TODO: @alicejli may make sense to create a super filesBuilder class to combines Yml files with the new overview.md files since those are not technically yml files
+    if(!disableLibraryOverview){
+      LibraryOverviewFile libraryOverviewFile = new LibraryOverviewFile(outputPath, "libraryOverview.md");
+      FileUtil.dumpToFile(libraryOverviewFile);
+    }
     //  overview page
     MetadataFile projectMetadataFile = new MetadataFile(outputPath, "overview.yml");
     //  package summary pages
@@ -67,6 +78,9 @@ public class YmlFilesBuilder {
     List<MetadataFileItem> packageItems = new ArrayList<>();
     //  class/enum/interface/etc. pages
     List<MetadataFile> classMetadataFiles = new ArrayList<>();
+
+    // Find .repo-metadata.json file if it exists
+    // environment.
 
     for (PackageElement packageElement :
         elementUtil.extractPackageElements(environment.getIncludedElements())) {

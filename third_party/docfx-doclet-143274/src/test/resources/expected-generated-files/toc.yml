@@ -5,6 +5,8 @@
     href: "overview.html"
   - name: "Version history"
     href: "history.md"
+  - name: "Library overview"
+    href: "libraryOverview.md"
   - uid: "com.microsoft.samples"
     name: "com.microsoft.samples"
     items:

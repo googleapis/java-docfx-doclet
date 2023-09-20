@@ -33,6 +33,8 @@ public class TocContentsTest {
   private String projectName = "google-cloud-project";
   private boolean disableChangelog = false;
 
+  private boolean disableLibraryOverview = false;
+
   @Before
   public void setup() {
     tocItemA = new TocItem("A.uid.package.class", "nameA");
@@ -49,7 +51,7 @@ public class TocContentsTest {
   public void getContentsWithProjectName() {
     //  should include ProjectContents and Guides
     List<Object> tocContents =
-        new TocContents(projectName, disableChangelog, tocItems).getContents();
+        new TocContents(projectName, disableChangelog, disableLibraryOverview, tocItems).getContents();
 
     assertEquals("Should only include 1 item", tocContents.size(), 1);
     assertEquals(
@@ -59,7 +61,7 @@ public class TocContentsTest {
     assertEquals(contents.getName(), "google-cloud-project");
 
     List<Object> items = contents.getItems();
-    assertEquals("Should be 5 items", items.size(), 5);
+    assertEquals("Should be 6 items", items.size(), 6);
 
     assertEquals("Guide should be first", items.get(0).getClass(), Guide.class);
     Guide overview = (Guide) items.get(0);
@@ -69,14 +71,18 @@ public class TocContentsTest {
     Guide history = (Guide) items.get(1);
     assertEquals("Second guide should be Version History", history.getName(), "Version history");
 
-    assertEquals("Item A should be third", items.get(2), tocItemA);
-    assertEquals("Item B should be fourth", items.get(3), tocItemB);
-    assertEquals("Item C should be fifth", items.get(4), tocItemC);
+    assertEquals("Guide should be third", items.get(2).getClass(), Guide.class);
+    Guide libraryOverview = (Guide) items.get(2);
+    assertEquals("Second guide should be Library Overview", libraryOverview.getName(), "Library overview");
+
+    assertEquals("Item A should be fourth", items.get(3), tocItemA);
+    assertEquals("Item B should be fifth", items.get(4), tocItemB);
+    assertEquals("Item C should be sixth", items.get(5), tocItemC);
   }
 
   @Test
   public void getContentsNoProjectName() {
-    List<Object> tocContents = new TocContents("", disableChangelog, tocItems).getContents();
+    List<Object> tocContents = new TocContents("", disableChangelog, disableLibraryOverview, tocItems).getContents();
 
     //  should not include ProjectContents or Guides
     assertEquals("Should be 3 items", tocContents.size(), 3);
@@ -89,18 +95,38 @@ public class TocContentsTest {
   public void getContentsWithDisabledChangelog() {
     disableChangelog = true;
     List<Object> tocContents =
-        new TocContents(projectName, disableChangelog, tocItems).getContents();
+        new TocContents(projectName, disableChangelog, disableLibraryOverview, tocItems).getContents();
 
     ProjectContents contents = (ProjectContents) tocContents.get(0);
     List<Object> items = contents.getItems();
-    assertEquals("Should be 4 items", items.size(), 4);
+    assertEquals("Should be 5 items", items.size(), 5);
 
     Guide overview = (Guide) items.get(0);
     assertEquals("First guide should be Overview", overview.getName(), "Overview");
-    assertNotEquals(
-        "Second item should not be Version History guide", items.get(1).getClass(), Guide.class);
-    assertEquals("Item A should be second", items.get(1), tocItemA);
-    assertEquals("Item B should be third", items.get(2), tocItemB);
-    assertEquals("Item C should be fourth", items.get(3), tocItemC);
+    Guide libraryOverview = (Guide) items.get(1);
+    assertEquals(
+        "Second item should be Library Overview guide", libraryOverview.getName(), "Library overview");
+    assertEquals("Item A should be third", items.get(2), tocItemA);
+    assertEquals("Item B should be fourth", items.get(3), tocItemB);
+    assertEquals("Item C should be fifth", items.get(4), tocItemC);
+  }
+
+  @Test
+  public void getContentsWithDisabledLibraryOverview() {
+    disableLibraryOverview = true;
+    List<Object> tocContents =
+        new TocContents(projectName, disableChangelog, disableLibraryOverview, tocItems).getContents();
+
+    ProjectContents contents = (ProjectContents) tocContents.get(0);
+    List<Object> items = contents.getItems();
+    assertEquals("Should be 5 items", items.size(), 5);
+
+    Guide overview = (Guide) items.get(0);
+    assertEquals("First guide should be Overview", overview.getName(), "Overview");
+    Guide history = (Guide) items.get(1);
+    assertEquals("Second guide should be Version History", history.getName(), "Version history");
+    assertEquals("Item A should be third", items.get(2), tocItemA);
+    assertEquals("Item B should be fourth", items.get(3), tocItemB);
+    assertEquals("Item C should be fifth", items.get(4), tocItemC);
   }
 }

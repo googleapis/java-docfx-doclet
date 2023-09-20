@@ -29,6 +29,7 @@ public class YmlFilesBuilderTest {
             new String[] {},
             new String[] {},
             "google-cloud-product",
+            false,
             false);
   }
 

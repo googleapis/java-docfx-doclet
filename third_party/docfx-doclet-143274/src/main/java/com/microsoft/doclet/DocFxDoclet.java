@@ -26,6 +26,7 @@ public class DocFxDoclet implements Doclet {
     reporter.print(Kind.NOTE, "Excluded classes: " + Arrays.toString(excludeClasses));
     reporter.print(Kind.NOTE, "Project name: " + projectName);
     reporter.print(Kind.NOTE, "Disable changelog: " + disableChangelog);
+    reporter.print(Kind.NOTE, "Disable libraryOverview: " + disableLibraryOverview);
 
     return (new YmlFilesBuilder(
             environment,
@@ -33,7 +34,8 @@ public class DocFxDoclet implements Doclet {
             excludePackages,
             excludeClasses,
             projectName,
-            disableChangelog))
+            disableChangelog,
+            disableLibraryOverview))
         .build();
   }
 
@@ -47,6 +49,7 @@ public class DocFxDoclet implements Doclet {
   private String[] excludeClasses = {};
   private String projectName;
   private boolean disableChangelog;
+  private boolean disableLibraryOverview;
 
   @Override
   public Set<? extends Option> getSupportedOptions() {
@@ -102,6 +105,21 @@ public class DocFxDoclet implements Doclet {
           return true;
         }
       },
+      new CustomOption(
+          "Disable libraryOverview",
+          Arrays.asList("-disable-libraryOverview", "--disable-libraryOverview"),
+          "disablelibraryOverview") {
+        @Override
+        public boolean process(String option, List<String> arguments) {
+          if (arguments.get(0).equalsIgnoreCase("false")) {
+            disableLibraryOverview = false;
+          } else {
+            disableLibraryOverview = true;
+          }
+          return true;
+        }
+      },
+
       // Support next properties for compatibility with Gradle javadoc task.
       // According to javadoc spec - these properties used by StandardDoclet and used only when
       // 'doclet' parameter not populated. But Gradle javadoc not align with this rule and
