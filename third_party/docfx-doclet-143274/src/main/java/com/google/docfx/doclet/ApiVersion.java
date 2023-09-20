@@ -1,6 +1,8 @@
 package com.google.docfx.doclet;
 
 import com.google.common.base.MoreObjects;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -50,6 +52,21 @@ public class ApiVersion implements Comparable<ApiVersion> {
       return 0;
     }
     return Integer.parseInt(input);
+  }
+
+  public static ApiVersion getRecommended(Collection<ApiVersion> versions) {
+    if (versions.size() == 1) {
+      return versions.iterator().next();
+    }
+
+    Optional<ApiVersion> latestReleaseVersion =
+        versions.stream().filter(ApiVersion::isStable).max(Comparator.naturalOrder());
+
+    return latestReleaseVersion.orElseGet(
+        () -> // No (stable) release version found
+        versions.stream()
+                .max(Comparator.naturalOrder()) // Select latest prerelease version
+                .orElseThrow(() -> new IllegalArgumentException("Versions must not be empty.")));
   }
 
   private final int major;
