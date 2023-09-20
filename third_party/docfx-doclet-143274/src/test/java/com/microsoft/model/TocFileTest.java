@@ -16,7 +16,7 @@
 
 package com.microsoft.model;
 
-import static org.junit.Assert.assertEquals;
+import static com.google.common.truth.Truth.assertThat;
 
 import org.junit.Test;
 
@@ -25,22 +25,20 @@ public class TocFileTest {
   @Test
   public void sortsByUid() {
     TocFile tocFile = new TocFile("outputPath", "google-cloud-project", false, false);
-    TocItem tocItemA = new TocItem("A.uid.package.class", "name");
+    TocItem tocItemA = new TocItem("a.uid.package.class", "name");
     TocItem tocItemB = new TocItem("B.uid.package.class", "name");
-    TocItem tocItemC = new TocItem("C.uid.package.class", "name");
+    TocItem tocItemC = new TocItem("c.uid.package.class", "name");
+    TocItem olderItem = new TocItem("Older and prerelease packages", "name");
 
     tocFile.addTocItem(tocItemC);
     tocFile.addTocItem(tocItemA);
+    tocFile.addTocItem(olderItem);
     tocFile.addTocItem(tocItemB);
 
-    assertEquals("Should be out of uid order", tocFile.get(0), tocItemC);
-    assertEquals("Should be out of uid order", tocFile.get(1), tocItemA);
-    assertEquals("Should be out of uid order", tocFile.get(2), tocItemB);
+    assertThat(tocFile).containsExactly(tocItemC, tocItemA, olderItem, tocItemB).inOrder();
 
     tocFile.sortByUid();
 
-    assertEquals("Should sort toc by uid", tocFile.get(0), tocItemA);
-    assertEquals("Should sort toc by uid", tocFile.get(1), tocItemB);
-    assertEquals("Should sort toc by uid", tocFile.get(2), tocItemC);
+    assertThat(tocFile).containsExactly(tocItemA, tocItemB, tocItemC, olderItem).inOrder();
   }
 }

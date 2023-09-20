@@ -1,5 +1,6 @@
 package com.microsoft.model;
 
+import com.google.common.base.MoreObjects;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,5 +45,10 @@ public class TocItem {
 
   public String getHeading() {
     return heading;
+  }
+
+  @Override
+  public String toString() {
+    return MoreObjects.toStringHelper(TocItem.class).add("uid", uid).toString();
   }
 }

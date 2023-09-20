@@ -1,5 +1,7 @@
 package com.microsoft.doclet;
 
+import static com.google.common.truth.Truth.assertThat;
+import static com.google.common.truth.Truth.assertWithMessage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -68,9 +70,11 @@ public class DocletRunnerTest {
     DocletRunner.main(new String[] {PARAMS_DIR});
 
     List<Path> expectedFilePaths =
-        Files.list(Path.of(EXPECTED_GENERATED_FILES_DIR)).collect(Collectors.toList());
-    List<Path> generatedFilePaths = Files.list(Path.of(OUTPUT_DIR)).collect(Collectors.toList());
-    assertEquals("Wrong files count", generatedFilePaths.size(), expectedFilePaths.size());
+        Files.list(Path.of(EXPECTED_GENERATED_FILES_DIR)).sorted().collect(Collectors.toList());
+    List<Path> generatedFilePaths =
+        Files.list(Path.of(OUTPUT_DIR)).sorted().collect(Collectors.toList());
+
+    assertSameFileNames(expectedFilePaths, generatedFilePaths);
 
     for (Path expectedFilePath : expectedFilePaths) {
       Path generatedFilePath = Path.of(OUTPUT_DIR, expectedFilePath.getFileName().toString());
@@ -93,5 +97,28 @@ public class DocletRunnerTest {
             expectedFileLines[i]);
       }
     }
+  }
+
+  public void assertSameFileNames(List<Path> expected, List<Path> generated) {
+    List<String> expectedFilenames =
+        expected.stream().map(Path::getFileName).map(Path::toString).collect(Collectors.toList());
+    List<String> generatedFilenames =
+        generated.stream().map(Path::getFileName).map(Path::toString).collect(Collectors.toList());
+
+    assertWithMessage("Expected files were not generated.")
+        .that(
+            expectedFilenames.stream()
+                .filter(file -> !generatedFilenames.contains(file))
+                .collect(Collectors.toList()))
+        .isEmpty();
+
+    assertWithMessage("Files were generated that should not have been.")
+        .that(
+            generatedFilenames.stream()
+                .filter(file -> !expectedFilenames.contains(file))
+                .collect(Collectors.toList()))
+        .isEmpty();
+
+    assertThat(expected.size()).isEqualTo(generated.size());
   }
 }
