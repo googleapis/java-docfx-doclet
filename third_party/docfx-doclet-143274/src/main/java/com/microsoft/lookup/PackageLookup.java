@@ -77,9 +77,18 @@ public class PackageLookup extends BaseLookup<PackageElement> {
   /**
    * @return true, if the package ends with 'stub' and its parent package is an API version
    */
-  private boolean isApiVersionStubPackageName(String name) {
+  @VisibleForTesting
+  boolean isApiVersionStubPackageName(String name) {
     return getLeafPackage(name).equals("stub")
         && extractApiVersion(withoutLeafPackage(name)).isPresent();
+  }
+
+  public Optional<PackageElement> findStubPackage(
+      PackageElement pkg, Collection<PackageElement> packages) {
+    String expectedStubPackage = pkg.getQualifiedName() + ".stub";
+    return packages.stream()
+        .filter(p -> String.valueOf(p.getQualifiedName()).equals(expectedStubPackage))
+        .findFirst();
   }
 
   /** Compare PackageElements by their parsed ApiVersion */

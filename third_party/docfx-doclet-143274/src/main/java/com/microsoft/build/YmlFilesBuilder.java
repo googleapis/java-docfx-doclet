@@ -77,28 +77,34 @@ public class YmlFilesBuilder {
   @VisibleForTesting
   class Processor {
     //  table of contents
-    final TocFile tocFile = new TocFile(outputPath, projectName, disableChangelog);
+    private final TocFile tocFile = new TocFile(outputPath, projectName, disableChangelog);
     //  overview page
-    final MetadataFile projectMetadataFile = new MetadataFile(outputPath, "overview.yml");
+    private final MetadataFile projectMetadataFile = new MetadataFile(outputPath, "overview.yml");
     //  package summary pages
-    final List<MetadataFile> packageMetadataFiles = new ArrayList<>();
+    private final List<MetadataFile> packageMetadataFiles = new ArrayList<>();
     //  packages
-    final List<MetadataFileItem> packageItems = new ArrayList<>();
+    private final List<MetadataFileItem> packageItems = new ArrayList<>();
     //  class/enum/interface/etc. pages
-    final List<MetadataFile> classMetadataFiles = new ArrayList<>();
+    private final List<MetadataFile> classMetadataFiles = new ArrayList<>();
+
+    private final List<PackageElement> allPackages =
+        elementUtil.extractPackageElements(environment.getIncludedElements());
 
     @VisibleForTesting
     void process() {
-      ImmutableListMultimap<PackageGroup, PackageElement> organizedPackages =
+      ImmutableListMultimap<PackageGroup, PackageElement> organizedPackagesWithoutStubs =
           packageLookup.organize(
-              elementUtil.extractPackageElements(environment.getIncludedElements()));
+              allPackages.stream()
+                  .filter(pkg -> !packageLookup.isApiVersionStubPackage(pkg))
+                  .collect(Collectors.toList()));
 
-      for (PackageElement element : organizedPackages.get(PackageGroup.VISIBLE)) {
+      for (PackageElement element : organizedPackagesWithoutStubs.get(PackageGroup.VISIBLE)) {
         tocFile.addTocItem(buildPackage(element));
       }
 
       TocItem older = new TocItem(OLDER_AND_PRERELEASE, OLDER_AND_PRERELEASE, null);
-      for (PackageElement element : organizedPackages.get(PackageGroup.OLDER_AND_PRERELEASE)) {
+      for (PackageElement element :
+          organizedPackagesWithoutStubs.get(PackageGroup.OLDER_AND_PRERELEASE)) {
         older.getItems().add(buildPackage(element));
       }
       tocFile.addTocItem(older);
@@ -137,6 +143,11 @@ public class YmlFilesBuilder {
       TocTypeMap typeMap = new TocTypeMap();
       classBuilder.buildFilesForInnerClasses(element, typeMap, classMetadataFiles);
       packageTocItem.getItems().addAll(joinTocTypeItems(typeMap));
+
+      // build stubs
+      packageLookup
+          .findStubPackage(element, allPackages)
+          .ifPresent((PackageElement stub) -> packageTocItem.getItems().add(buildPackage(stub)));
 
       return packageTocItem;
     }
