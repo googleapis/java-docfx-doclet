@@ -18,8 +18,10 @@ package com.microsoft.build;
 import static com.microsoft.build.BuilderUtil.LANGS;
 import static com.microsoft.build.BuilderUtil.populateItemFields;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.microsoft.lookup.ClassItemsLookup;
 import com.microsoft.lookup.ClassLookup;
+import com.microsoft.lookup.PackageLookup;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.TocItem;
@@ -32,31 +34,50 @@ import java.util.stream.Collectors;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.ElementFilter;
 
 class ClassBuilder {
-  private ElementUtil elementUtil;
-  private ClassLookup classLookup;
-  private ClassItemsLookup classItemsLookup;
-  private String outputPath;
-  private ReferenceBuilder referenceBuilder;
+  private final ElementUtil elementUtil;
+  private final ClassLookup classLookup;
+  private final ClassItemsLookup classItemsLookup;
+  private final String outputPath;
+  private final PackageLookup packageLookup;
+  private final ReferenceBuilder referenceBuilder;
 
   ClassBuilder(
       ElementUtil elementUtil,
       ClassLookup classLookup,
       ClassItemsLookup classItemsLookup,
       String outputPath,
+      PackageLookup packageLookup,
       ReferenceBuilder referenceBuilder) {
     this.elementUtil = elementUtil;
     this.classLookup = classLookup;
     this.classItemsLookup = classItemsLookup;
     this.outputPath = outputPath;
+    this.packageLookup = packageLookup;
     this.referenceBuilder = referenceBuilder;
   }
 
+  List<TocItem> buildFilesForPackage(PackageElement pkg, List<MetadataFile> classMetadataFiles) {
+    TocTypeMap typeMap = new TocTypeMap();
+    if (packageLookup.isApiVersionPackage(pkg)) {
+      buildFilesForApiVersionPackage(pkg, typeMap, classMetadataFiles);
+    } else {
+      buildFilesForInnerClasses(pkg, typeMap, classMetadataFiles);
+    }
+    return joinTocTypeItems(typeMap);
+  }
+
+  private void buildFilesForApiVersionPackage(
+      PackageElement pkg, TocTypeMap tocTypeMap, List<MetadataFile> classMetadataFiles) {
+    buildFilesForInnerClasses(pkg, tocTypeMap, classMetadataFiles);
+  }
+
   void buildFilesForInnerClasses(
-      Element element, TocTypeMap tocTypeMap, List<MetadataFile> container) {
+      Element element, TocTypeMap tocTypeMap, List<MetadataFile> classMetadataFiles) {
     for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
       String uid = classLookup.extractUid(classElement);
       String name = classLookup.extractTocName(classElement);
@@ -73,8 +94,8 @@ class ClassBuilder {
         tocTypeMap.get(ElementKind.CLASS.name()).add(new TocItem(uid, name, status));
       }
 
-      container.add(buildClassYmlFile(classElement));
-      buildFilesForInnerClasses(classElement, tocTypeMap, container);
+      classMetadataFiles.add(buildClassYmlFile(classElement));
+      buildFilesForInnerClasses(classElement, tocTypeMap, classMetadataFiles);
     }
   }
 
@@ -198,6 +219,18 @@ class ClassBuilder {
   private List<? extends Element> filterPrivateElements(List<? extends Element> elements) {
     return elements.stream()
         .filter(element -> !Utils.isPrivateOrPackagePrivate(element))
+        .collect(Collectors.toList());
+  }
+
+  @VisibleForTesting
+  static List<TocItem> joinTocTypeItems(TocTypeMap tocTypeMap) {
+    return tocTypeMap.getTitleList().stream()
+        .filter(kindTitle -> tocTypeMap.get(kindTitle.getElementKind()).size() > 0)
+        .flatMap(
+            kindTitle -> {
+              tocTypeMap.get(kindTitle.getElementKind()).add(0, new TocItem(kindTitle.getTitle()));
+              return tocTypeMap.get(kindTitle.getElementKind()).stream();
+            })
         .collect(Collectors.toList());
   }
 }
