@@ -2,11 +2,9 @@
 - name: "google-cloud-project"
   items:
   - name: "Overview"
-    href: "overview.html"
+    href: "overview.md"
   - name: "Version history"
     href: "history.md"
-  - name: "Library overview"
-    href: "libraryOverview.md"
   - uid: "com.microsoft.samples"
     name: "com.microsoft.samples"
     items:

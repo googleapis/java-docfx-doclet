@@ -21,6 +21,12 @@ public class DocFxDoclet implements Doclet {
 
   @Override
   public boolean run(DocletEnvironment environment) {
+    String artifactVersion = System.getenv("artifactVersion");
+    String librariesBomVersion = System.getenv("librariesBomVersion");
+    String repoMetadataFilePath = System.getenv("repoMetadataFilePath");
+    reporter.print(Kind.NOTE, "Environment variable artifactVersion: " + artifactVersion);
+    reporter.print(Kind.NOTE, "Environment variable librariesBomVersion: " + librariesBomVersion);
+    reporter.print(Kind.NOTE, "Environment variable repoMetadataFilePath: " + repoMetadataFilePath);
     reporter.print(Kind.NOTE, "Output path: " + outputPath);
     reporter.print(Kind.NOTE, "Excluded packages: " + Arrays.toString(excludePackages));
     reporter.print(Kind.NOTE, "Excluded classes: " + Arrays.toString(excludeClasses));
@@ -35,7 +41,11 @@ public class DocFxDoclet implements Doclet {
             excludeClasses,
             projectName,
             disableChangelog,
-            disableLibraryOverview))
+            disableLibraryOverview,
+            artifactVersion,
+            librariesBomVersion,
+            repoMetadataFilePath
+        ))
         .build();
   }
 

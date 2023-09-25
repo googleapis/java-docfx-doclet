@@ -45,12 +45,15 @@ public class TocContents {
       List<TocItem> items) {
     List<Object> tocItems = new ArrayList<>();
     // combine guides and tocItems
-    tocItems.add(new Guide("Overview", "overview.html"));
+    // If disableLibraryOverview is enabled, then generate old overview. Otherwise generate the new library overview.
+    if (!disableLibraryOverview) {
+      tocItems.add(new Guide("Overview", "overview.md"));
+    }
+    else{
+      tocItems.add(new Guide("Overview", "overview.html"));
+    }
     if (!disableChangelog) {
       tocItems.add(new Guide("Version history", "history.md"));
-    }
-    if (!disableLibraryOverview) {
-      tocItems.add(new Guide("Library overview", "libraryOverview.md"));
     }
     tocItems.addAll(items);
     // wrap guides + tocItems with product hierarchy

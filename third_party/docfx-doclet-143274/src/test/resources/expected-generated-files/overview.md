@@ -1,4 +1,4 @@
-# google-cloud-apikeys overview
+# google-cloud-apikeys overview (0.18.0)
 
 ## Key Reference Links
 API Keys lets you create and manage your API keys for your projects.
@@ -43,7 +43,7 @@ artifact.</p>
    &lt;dependency&gt;
       &lt;groupId&gt;com.google.cloud&lt;/groupId&gt;
       &lt;artifactId&gt;libraries-bom&lt;/artifactId&gt;
-      &lt;version&gt;26.18.0&lt;/version&gt;
+      &lt;version&gt;26.19.0&lt;/version&gt;
       &lt;type&gt;pom&lt;/type&gt;
       &lt;scope&gt;import&lt;/scope&gt;
    &lt;/dependency&gt;
@@ -67,7 +67,7 @@ dependency declarations in the artifact's <code>build.gradle</code> file.</p>
 <p>The example below demonstrates how you would import the BOM and include the <code>google-cloud-apikeys</code>
 artifact.</p>
 <pre class="prettyprint lang-Groovy devsite-click-to-copy">
-implementation platform(&#39;com.google.cloud:libraries-bom:26.18.0&#39;)
+implementation platform(&#39;com.google.cloud:libraries-bom:26.19.0&#39;)
 implementation &#39;com.google.cloud:google-cloud-apikeys&#39;
 </pre>
 <p>The <code>platform</code> and <code>enforcedPlatform</code> keywords supply dependency versions

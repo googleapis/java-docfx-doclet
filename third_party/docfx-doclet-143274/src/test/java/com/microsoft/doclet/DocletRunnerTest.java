@@ -3,8 +3,12 @@ package com.microsoft.doclet;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
+import org.junit.Rule;
+import org.junit.contrib.java.lang.system.EnvironmentVariables;
+import com.microsoft.model.LibraryOverviewFile;
 import com.microsoft.util.FileUtilTest;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -65,8 +69,19 @@ public class DocletRunnerTest {
     }
   }
 
+    @Rule
+    public final EnvironmentVariables environmentVariables
+        = new EnvironmentVariables();
+
   @Test
   public void testFilesGeneration() throws IOException {
+    environmentVariables.set("artifactVersion", "0.18.0");
+    environmentVariables.set("librariesBomVersion", "26.19.0");
+    environmentVariables.set("repoMetadataFilePath", "/home/alicejli/java-docfx-doclet/third_party/docfx-doclet-143274/src/test/java/com/microsoft/samples/.repo-metadata.json");
+    assertEquals("0.18.0", System.getenv("artifactVersion"));
+    assertEquals("26.19.0", System.getenv("librariesBomVersion"));
+    assertEquals("/home/alicejli/java-docfx-doclet/third_party/docfx-doclet-143274/src/test/java/com/microsoft/samples/.repo-metadata.json", System.getenv("repoMetadataFilePath"));
+
     DocletRunner.main(new String[] {PARAMS_DIR});
 
     List<Path> expectedFilePaths =
@@ -93,10 +108,16 @@ public class DocletRunnerTest {
       for (int i = 0; i < generatedFileLines.length; i++) {
         assertEquals(
             "Wrong file content for file " + generatedFilePath,
-            generatedFileLines[i],
-            expectedFileLines[i]);
+            expectedFileLines[i],
+            generatedFileLines[i]);
       }
     }
+    environmentVariables.clear("artifactVersion");
+    environmentVariables.clear("librariesBomVersion");
+    environmentVariables.clear("repoMetadataFilePath");
+    assertNull(System.getenv("artifactVersion"));
+    assertNull(System.getenv("librariesBomVersion"));
+    assertNull(System.getenv("repoMetadataFilePath"));
   }
 
   public void assertSameFileNames(List<Path> expected, List<Path> generated) {

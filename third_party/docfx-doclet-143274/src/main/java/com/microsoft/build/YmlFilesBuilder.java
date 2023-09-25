@@ -33,6 +33,12 @@ public class YmlFilesBuilder {
   private final boolean disableChangelog;
 
   private final boolean disableLibraryOverview;
+
+  private final String artifactVersion;
+
+  private final String librariesBomVersion;
+
+  private final String repoMetadataFilePath;
   private final ProjectBuilder projectBuilder;
   private final PackageBuilder packageBuilder;
   private final ClassBuilder classBuilder;
@@ -45,9 +51,16 @@ public class YmlFilesBuilder {
       String[] excludeClasses,
       String projectName,
       boolean disableChangelog,
-      boolean disableLibraryOverview) {
+      boolean disableLibraryOverview,
+      String artifactVersion,
+      String librariesBomVersion,
+      String repoMetadataFilePath
+      ) {
     this.environment = environment;
     this.outputPath = outputPath;
+    this.artifactVersion = artifactVersion;
+    this.librariesBomVersion = librariesBomVersion;
+    this.repoMetadataFilePath = repoMetadataFilePath;
     this.elementUtil = new ElementUtil(excludePackages, excludeClasses);
     this.packageLookup = new PackageLookup(environment);
     this.projectName = projectName;
@@ -71,20 +84,19 @@ public class YmlFilesBuilder {
     processor.process();
 
     //  write to yaml files
-    FileUtil.dumpToFile(processor.projectMetadataFile);
+    if (disableLibraryOverview){
+      FileUtil.dumpToFile(processor.projectMetadataFile);
+    }
     processor.packageMetadataFiles.forEach(FileUtil::dumpToFile);
     processor.classMetadataFiles.forEach(FileUtil::dumpToFile);
     FileUtil.dumpToFile(processor.tocFile);
 
-    // New library overview page
-    // TODO: @alicejli may make sense to create a super filesBuilder class to combines Yml files
-    // with the new overview.md files since those are not technically yml files
+    // Generate new library overview page
     if (!disableLibraryOverview) {
       LibraryOverviewFile libraryOverviewFile =
-          new LibraryOverviewFile(outputPath, "libraryOverview.md");
+          new LibraryOverviewFile(outputPath, "overview.md", artifactVersion, librariesBomVersion, repoMetadataFilePath);
       FileUtil.dumpToFile(libraryOverviewFile);
     }
-
     return true;
   }
 
@@ -93,8 +105,6 @@ public class YmlFilesBuilder {
     //  table of contents
     final TocFile tocFile =
         new TocFile(outputPath, projectName, disableChangelog, disableLibraryOverview);
-    //  overview page
-    // TODO: @alicejli eventually look to replace this with the new library overview
     final MetadataFile projectMetadataFile = new MetadataFile(outputPath, "overview.yml");
     //  package summary pages
     final List<MetadataFile> packageMetadataFiles = new ArrayList<>();
@@ -131,8 +141,10 @@ public class YmlFilesBuilder {
           }
         }
       }
-      // build project summary page
-      projectBuilder.buildProjectMetadataFile(packageItems, projectMetadataFile);
+      // build project summary page if disableLibraryOverview=true
+      if(disableLibraryOverview){
+        projectBuilder.buildProjectMetadataFile(packageItems, projectMetadataFile);
+      }
 
       // post-processing
       populateUidValues(packageMetadataFiles, classMetadataFiles);

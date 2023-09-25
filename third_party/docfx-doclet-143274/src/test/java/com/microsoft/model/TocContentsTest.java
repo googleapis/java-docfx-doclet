@@ -61,7 +61,7 @@ public class TocContentsTest {
     assertEquals(contents.getName(), "google-cloud-project");
 
     List<Object> items = contents.getItems();
-    assertEquals("Should be 6 items", items.size(), 6);
+    assertEquals("Should be 5 items", 5, items.size());
 
     assertEquals("Guide should be first", items.get(0).getClass(), Guide.class);
     Guide overview = (Guide) items.get(0);
@@ -71,14 +71,9 @@ public class TocContentsTest {
     Guide history = (Guide) items.get(1);
     assertEquals("Second guide should be Version History", history.getName(), "Version history");
 
-    assertEquals("Guide should be third", items.get(2).getClass(), Guide.class);
-    Guide libraryOverview = (Guide) items.get(2);
-    assertEquals(
-        "Second guide should be Library Overview", libraryOverview.getName(), "Library overview");
-
-    assertEquals("Item A should be fourth", items.get(3), tocItemA);
-    assertEquals("Item B should be fifth", items.get(4), tocItemB);
-    assertEquals("Item C should be sixth", items.get(5), tocItemC);
+    assertEquals("Item A should be third", items.get(2), tocItemA);
+    assertEquals("Item B should be fourth", items.get(3), tocItemB);
+    assertEquals("Item C should be fifth", items.get(4), tocItemC);
   }
 
   @Test
@@ -102,18 +97,13 @@ public class TocContentsTest {
 
     ProjectContents contents = (ProjectContents) tocContents.get(0);
     List<Object> items = contents.getItems();
-    assertEquals("Should be 5 items", items.size(), 5);
+    assertEquals("Should be 4 items", 4, items.size());
 
     Guide overview = (Guide) items.get(0);
     assertEquals("First guide should be Overview", overview.getName(), "Overview");
-    Guide libraryOverview = (Guide) items.get(1);
-    assertEquals(
-        "Second item should be Library Overview guide",
-        libraryOverview.getName(),
-        "Library overview");
-    assertEquals("Item A should be third", items.get(2), tocItemA);
-    assertEquals("Item B should be fourth", items.get(3), tocItemB);
-    assertEquals("Item C should be fifth", items.get(4), tocItemC);
+    assertEquals("Item A should be second", items.get(1), tocItemA);
+    assertEquals("Item B should be third", items.get(2), tocItemB);
+    assertEquals("Item C should be fourth", items.get(3), tocItemC);
   }
 
   @Test

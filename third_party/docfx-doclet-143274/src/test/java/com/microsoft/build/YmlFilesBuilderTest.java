@@ -30,7 +30,11 @@ public class YmlFilesBuilderTest {
             new String[] {},
             "google-cloud-product",
             false,
-            false);
+            false,
+            "0.18.0",
+            "26.19.0",
+            "./src/test/java/com/microsoft/samples/.repo-metadata.json"
+            );
   }
 
   @Test
