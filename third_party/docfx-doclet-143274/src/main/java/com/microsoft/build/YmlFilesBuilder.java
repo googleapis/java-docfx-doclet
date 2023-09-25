@@ -146,8 +146,8 @@ public class YmlFilesBuilder {
 
       // build stubs
       packageLookup
-          .findStubPackage(element, allPackages)
-          .ifPresent((PackageElement stub) -> packageTocItem.getItems().add(buildPackage(stub)));
+          .findStubPackages(element, allPackages)
+          .forEach((PackageElement stub) -> packageTocItem.getItems().add(buildPackage(stub)));
 
       return packageTocItem;
     }

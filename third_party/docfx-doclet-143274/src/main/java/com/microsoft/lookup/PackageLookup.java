@@ -13,10 +13,12 @@ import com.google.common.collect.Multimaps;
 import com.google.docfx.doclet.ApiVersion;
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.Status;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.lang.model.element.PackageElement;
 import jdk.javadoc.doclet.DocletEnvironment;
 
@@ -79,16 +81,20 @@ public class PackageLookup extends BaseLookup<PackageElement> {
    */
   @VisibleForTesting
   boolean isApiVersionStubPackageName(String name) {
-    return getLeafPackage(name).equals("stub")
-        && extractApiVersion(withoutLeafPackage(name)).isPresent();
+    List<String> packagePath = Arrays.asList(name.split("\\."));
+    int stubIndex = packagePath.indexOf("stub");
+    if (stubIndex < 1) {
+      return false;
+    }
+    return ApiVersion.parse(packagePath.get(stubIndex - 1)).isPresent();
   }
 
-  public Optional<PackageElement> findStubPackage(
+  public List<PackageElement> findStubPackages(
       PackageElement pkg, Collection<PackageElement> packages) {
-    String expectedStubPackage = pkg.getQualifiedName() + ".stub";
+    String expectedStubPackageBase = pkg.getQualifiedName() + ".stub";
     return packages.stream()
-        .filter(p -> String.valueOf(p.getQualifiedName()).equals(expectedStubPackage))
-        .findFirst();
+        .filter(p -> String.valueOf(p.getQualifiedName()).startsWith(expectedStubPackageBase))
+        .collect(Collectors.toList());
   }
 
   /** Compare PackageElements by their parsed ApiVersion */

@@ -11,7 +11,6 @@ import com.google.testing.compile.CompilationRule;
 import com.microsoft.lookup.PackageLookup.PackageGroup;
 import com.microsoft.model.Status;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.util.Elements;
@@ -188,22 +187,23 @@ public class PackageLookupTest {
             elements.getPackageElement("com.microsoft.samples.google.v1beta"),
             elements.getPackageElement("com.microsoft.samples.google"));
 
-    Optional<PackageElement> foundStubPackage =
-        packageLookup.findStubPackage(
+    List<PackageElement> foundStubPackages =
+        packageLookup.findStubPackages(
             elements.getPackageElement("com.microsoft.samples.google.v1"), packages);
-    assertThat(foundStubPackage.isPresent()).isTrue();
-    assertThat(toPackageName(foundStubPackage.get()))
+    assertThat(foundStubPackages).isNotEmpty();
+    assertThat(foundStubPackages).hasSize(1);
+    assertThat(toPackageName(foundStubPackages.get(0)))
         .isEqualTo("com.microsoft.samples.google.v1.stub");
 
-    Optional<PackageElement> notFoundStubPackageOfStubPackage =
-        packageLookup.findStubPackage(
+    List<PackageElement> notFoundStubPackageOfStubPackage =
+        packageLookup.findStubPackages(
             elements.getPackageElement("com.microsoft.samples.google.v1.stub"), packages);
-    assertThat(notFoundStubPackageOfStubPackage.isPresent()).isFalse();
+    assertThat(notFoundStubPackageOfStubPackage).isEmpty();
 
-    Optional<PackageElement> notFoundStubPackage =
-        packageLookup.findStubPackage(
+    List<PackageElement> notFoundStubPackage =
+        packageLookup.findStubPackages(
             elements.getPackageElement("com.microsoft.samples.google"), packages);
-    assertThat(notFoundStubPackage.isPresent()).isFalse();
+    assertThat(notFoundStubPackage).isEmpty();
   }
 
   @Test
@@ -216,10 +216,13 @@ public class PackageLookupTest {
             packageLookup.isApiVersionStubPackage(
                 elements.getPackageElement("com.microsoft.samples.google.v1.stub")))
         .isTrue();
+    assertThat(
+            packageLookup.isApiVersionStubPackageName("com.microsoft.samples.google.v1.stub.child"))
+        .isTrue();
 
+    assertThat(packageLookup.isApiVersionStubPackageName("a")).isFalse();
     // False due to not being an API version package, even though it ends in .stub
-    assertThat(packageLookup.isApiVersionStubPackageName("com.microsoft.samples.google.stub"))
-        .isFalse();
+    assertThat(packageLookup.isApiVersionStubPackageName("a.stub")).isFalse();
   }
 
   private List<String> toPackageNames(List<PackageElement> packages) {
