@@ -94,6 +94,7 @@ public class PackageLookup extends BaseLookup<PackageElement> {
     String expectedStubPackageBase = pkg.getQualifiedName() + ".stub";
     return packages.stream()
         .filter(p -> String.valueOf(p.getQualifiedName()).startsWith(expectedStubPackageBase))
+        .sorted()
         .collect(Collectors.toList());
   }
 
