@@ -75,8 +75,7 @@ public class DocletRunnerTest {
     environmentVariables.set("artifactVersion", "0.18.0");
     environmentVariables.set("librariesBomVersion", "26.19.0");
     environmentVariables.set(
-        "repoMetadataFilePath",
-        "./src/test/java/com/microsoft/samples/.repo-metadata.json");
+        "repoMetadataFilePath", "./src/test/java/com/microsoft/samples/.repo-metadata.json");
     assertEquals("0.18.0", System.getenv("artifactVersion"));
     assertEquals("26.19.0", System.getenv("librariesBomVersion"));
     assertEquals(
