@@ -103,9 +103,9 @@ public class YmlFilesBuilder {
         tocFile.addTocItem(buildPackage(element));
       }
 
-      ImmutableList<PackageElement> olderPackages = organizedPackagesWithoutStubs.get(
-          PackageGroup.OLDER_AND_PRERELEASE);
-      if (! olderPackages.isEmpty()) {
+      ImmutableList<PackageElement> olderPackages =
+          organizedPackagesWithoutStubs.get(PackageGroup.OLDER_AND_PRERELEASE);
+      if (!olderPackages.isEmpty()) {
         TocItem older = new TocItem(OLDER_AND_PRERELEASE, OLDER_AND_PRERELEASE, null);
         for (PackageElement element : olderPackages) {
           older.getItems().add(buildPackage(element));
