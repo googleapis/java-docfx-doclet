@@ -76,11 +76,11 @@ public class DocletRunnerTest {
     environmentVariables.set("librariesBomVersion", "26.19.0");
     environmentVariables.set(
         "repoMetadataFilePath",
-        "/home/alicejli/java-docfx-doclet/third_party/docfx-doclet-143274/src/test/java/com/microsoft/samples/.repo-metadata.json");
+        "./src/test/java/com/microsoft/samples/.repo-metadata.json");
     assertEquals("0.18.0", System.getenv("artifactVersion"));
     assertEquals("26.19.0", System.getenv("librariesBomVersion"));
     assertEquals(
-        "/home/alicejli/java-docfx-doclet/third_party/docfx-doclet-143274/src/test/java/com/microsoft/samples/.repo-metadata.json",
+        "./src/test/java/com/microsoft/samples/.repo-metadata.json",
         System.getenv("repoMetadataFilePath"));
 
     DocletRunner.main(new String[] {PARAMS_DIR});
