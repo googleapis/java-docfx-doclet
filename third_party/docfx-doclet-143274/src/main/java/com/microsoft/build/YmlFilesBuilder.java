@@ -3,6 +3,7 @@ package com.microsoft.build;
 import static com.microsoft.build.BuilderUtil.populateUidValues;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableListMultimap;
 import com.microsoft.lookup.ClassItemsLookup;
 import com.microsoft.lookup.ClassLookup;
@@ -102,12 +103,15 @@ public class YmlFilesBuilder {
         tocFile.addTocItem(buildPackage(element));
       }
 
-      TocItem older = new TocItem(OLDER_AND_PRERELEASE, OLDER_AND_PRERELEASE, null);
-      for (PackageElement element :
-          organizedPackagesWithoutStubs.get(PackageGroup.OLDER_AND_PRERELEASE)) {
-        older.getItems().add(buildPackage(element));
+      ImmutableList<PackageElement> olderPackages = organizedPackagesWithoutStubs.get(
+          PackageGroup.OLDER_AND_PRERELEASE);
+      if (! olderPackages.isEmpty()) {
+        TocItem older = new TocItem(OLDER_AND_PRERELEASE, OLDER_AND_PRERELEASE, null);
+        for (PackageElement element : olderPackages) {
+          older.getItems().add(buildPackage(element));
+        }
+        tocFile.addTocItem(older);
       }
-      tocFile.addTocItem(older);
 
       for (MetadataFile packageFile : packageMetadataFiles) {
         packageItems.addAll(packageFile.getItems());
