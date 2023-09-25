@@ -54,8 +54,7 @@ public class YmlFilesBuilder {
       boolean disableLibraryOverview,
       String artifactVersion,
       String librariesBomVersion,
-      String repoMetadataFilePath
-      ) {
+      String repoMetadataFilePath) {
     this.environment = environment;
     this.outputPath = outputPath;
     this.artifactVersion = artifactVersion;
@@ -84,7 +83,7 @@ public class YmlFilesBuilder {
     processor.process();
 
     //  write to yaml files
-    if (disableLibraryOverview){
+    if (disableLibraryOverview) {
       FileUtil.dumpToFile(processor.projectMetadataFile);
     }
     processor.packageMetadataFiles.forEach(FileUtil::dumpToFile);
@@ -94,7 +93,12 @@ public class YmlFilesBuilder {
     // Generate new library overview page
     if (!disableLibraryOverview) {
       LibraryOverviewFile libraryOverviewFile =
-          new LibraryOverviewFile(outputPath, "overview.md", artifactVersion, librariesBomVersion, repoMetadataFilePath);
+          new LibraryOverviewFile(
+              outputPath,
+              "overview.md",
+              artifactVersion,
+              librariesBomVersion,
+              repoMetadataFilePath);
       FileUtil.dumpToFile(libraryOverviewFile);
     }
     return true;
@@ -142,7 +146,7 @@ public class YmlFilesBuilder {
         }
       }
       // build project summary page if disableLibraryOverview=true
-      if(disableLibraryOverview){
+      if (disableLibraryOverview) {
         projectBuilder.buildProjectMetadataFile(packageItems, projectMetadataFile);
       }
 

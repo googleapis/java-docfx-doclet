@@ -44,8 +44,7 @@ public class DocFxDoclet implements Doclet {
             disableLibraryOverview,
             artifactVersion,
             librariesBomVersion,
-            repoMetadataFilePath
-        ))
+            repoMetadataFilePath))
         .build();
   }
 

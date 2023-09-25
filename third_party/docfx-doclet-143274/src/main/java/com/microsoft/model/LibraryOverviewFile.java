@@ -31,7 +31,12 @@ public class LibraryOverviewFile {
 
   private String LIBRARY_OVERVIEW_PACKAGE_SELECTION_SECTION;
 
-  public LibraryOverviewFile(String outputPath, String fileName, String artifactVersion, String librariesBomVersion, String repoMetadataFilePath) {
+  public LibraryOverviewFile(
+      String outputPath,
+      String fileName,
+      String artifactVersion,
+      String librariesBomVersion,
+      String repoMetadataFilePath) {
     this.outputPath = outputPath;
     this.fileName = fileName;
     this.artifactVersion = artifactVersion;
@@ -67,7 +72,7 @@ public class LibraryOverviewFile {
     // For non-service libraries, these steps are not necessary
     String[] runtimeLibraries = {"gax", "api-common", "common-protos", "google-cloud-core"};
 
-    if(Arrays.asList(runtimeLibraries).contains(repoMetadata.getApiShortName())){
+    if (Arrays.asList(runtimeLibraries).contains(repoMetadata.getApiShortName())) {
       this.LIBRARY_OVERVIEW_GETTING_STARTED_SECTION =
           "## Getting Started\n"
               + "In order to use this library, you first need to go through the following steps:"

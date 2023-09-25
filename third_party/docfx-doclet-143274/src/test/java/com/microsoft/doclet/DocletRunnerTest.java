@@ -6,9 +6,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
-import org.junit.Rule;
-import org.junit.contrib.java.lang.system.EnvironmentVariables;
-import com.microsoft.model.LibraryOverviewFile;
 import com.microsoft.util.FileUtilTest;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -19,7 +16,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.EnvironmentVariables;
 
 public class DocletRunnerTest {
 
@@ -69,18 +68,20 @@ public class DocletRunnerTest {
     }
   }
 
-    @Rule
-    public final EnvironmentVariables environmentVariables
-        = new EnvironmentVariables();
+  @Rule public final EnvironmentVariables environmentVariables = new EnvironmentVariables();
 
   @Test
   public void testFilesGeneration() throws IOException {
     environmentVariables.set("artifactVersion", "0.18.0");
     environmentVariables.set("librariesBomVersion", "26.19.0");
-    environmentVariables.set("repoMetadataFilePath", "/home/alicejli/java-docfx-doclet/third_party/docfx-doclet-143274/src/test/java/com/microsoft/samples/.repo-metadata.json");
+    environmentVariables.set(
+        "repoMetadataFilePath",
+        "/home/alicejli/java-docfx-doclet/third_party/docfx-doclet-143274/src/test/java/com/microsoft/samples/.repo-metadata.json");
     assertEquals("0.18.0", System.getenv("artifactVersion"));
     assertEquals("26.19.0", System.getenv("librariesBomVersion"));
-    assertEquals("/home/alicejli/java-docfx-doclet/third_party/docfx-doclet-143274/src/test/java/com/microsoft/samples/.repo-metadata.json", System.getenv("repoMetadataFilePath"));
+    assertEquals(
+        "/home/alicejli/java-docfx-doclet/third_party/docfx-doclet-143274/src/test/java/com/microsoft/samples/.repo-metadata.json",
+        System.getenv("repoMetadataFilePath"));
 
     DocletRunner.main(new String[] {PARAMS_DIR});
 

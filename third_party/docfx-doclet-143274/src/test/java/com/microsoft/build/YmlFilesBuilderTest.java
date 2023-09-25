@@ -33,8 +33,7 @@ public class YmlFilesBuilderTest {
             false,
             "0.18.0",
             "26.19.0",
-            "./src/test/java/com/microsoft/samples/.repo-metadata.json"
-            );
+            "./src/test/java/com/microsoft/samples/.repo-metadata.json");
   }
 
   @Test

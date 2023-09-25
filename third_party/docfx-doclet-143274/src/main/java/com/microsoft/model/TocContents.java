@@ -45,11 +45,11 @@ public class TocContents {
       List<TocItem> items) {
     List<Object> tocItems = new ArrayList<>();
     // combine guides and tocItems
-    // If disableLibraryOverview is enabled, then generate old overview. Otherwise generate the new library overview.
+    // If disableLibraryOverview is enabled, then generate old overview. Otherwise generate the new
+    // library overview.
     if (!disableLibraryOverview) {
       tocItems.add(new Guide("Overview", "overview.md"));
-    }
-    else{
+    } else {
       tocItems.add(new Guide("Overview", "overview.html"));
     }
     if (!disableChangelog) {
