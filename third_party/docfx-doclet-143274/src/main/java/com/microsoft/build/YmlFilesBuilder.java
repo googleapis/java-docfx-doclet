@@ -110,10 +110,8 @@ public class YmlFilesBuilder {
     //  table of contents
     final TocFile tocFile =
         new TocFile(outputPath, projectName, disableChangelog, disableLibraryOverview);
+    //  overview page if not using new libraryOverview
     final MetadataFile projectMetadataFile = new MetadataFile(outputPath, "overview.yml");
-    private final TocFile tocFile = new TocFile(outputPath, projectName, disableChangelog);
-    //  overview page
-    private final MetadataFile projectMetadataFile = new MetadataFile(outputPath, "overview.yml");
     //  package summary pages
     private final List<MetadataFile> packageMetadataFiles = new ArrayList<>();
     //  packages

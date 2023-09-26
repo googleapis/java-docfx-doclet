@@ -43,7 +43,8 @@ public class LibraryOverviewFile {
     this.librariesBomVersion = librariesBomVersion;
     this.repoMetadataFilePath = repoMetadataFilePath;
 
-    RepoMetadata repoMetadata = RepoMetadata.parseRepoMetadata(repoMetadataFilePath);
+    RepoMetadata repoMetadata = new RepoMetadata();
+    repoMetadata = repoMetadata.parseRepoMetadata(this.repoMetadataFilePath);
 
     this.LIBRARY_OVERVIEW_FILE_HEADER =
         "# " + repoMetadata.getArtifactId() + " overview (" + artifactVersion + ")\n\n";
