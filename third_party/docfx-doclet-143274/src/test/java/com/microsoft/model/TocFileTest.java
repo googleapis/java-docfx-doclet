@@ -24,7 +24,7 @@ public class TocFileTest {
 
   @Test
   public void sortsByUid() {
-    TocFile tocFile = new TocFile("outputPath", "google-cloud-project", false);
+    TocFile tocFile = new TocFile("outputPath", "google-cloud-project", false, false);
     TocItem tocItemA = new TocItem("a.uid.package.class", "name");
     TocItem tocItemB = new TocItem("B.uid.package.class", "name");
     TocItem tocItemC = new TocItem("c.uid.package.class", "name");

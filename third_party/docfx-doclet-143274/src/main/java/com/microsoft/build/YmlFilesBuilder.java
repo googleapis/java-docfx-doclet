@@ -5,10 +5,12 @@ import static com.microsoft.build.BuilderUtil.populateUidValues;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableListMultimap;
+import com.google.docfx.doclet.ApiVersion;
 import com.microsoft.lookup.ClassItemsLookup;
 import com.microsoft.lookup.ClassLookup;
 import com.microsoft.lookup.PackageLookup;
 import com.microsoft.lookup.PackageLookup.PackageGroup;
+import com.microsoft.model.LibraryOverviewFile;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.TocFile;
@@ -17,6 +19,7 @@ import com.microsoft.model.TocTypeMap;
 import com.microsoft.util.ElementUtil;
 import com.microsoft.util.FileUtil;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.lang.model.element.PackageElement;
@@ -31,6 +34,14 @@ public class YmlFilesBuilder {
   private final PackageLookup packageLookup;
   private final String projectName;
   private final boolean disableChangelog;
+
+  private final boolean disableLibraryOverview;
+
+  private final String artifactVersion;
+
+  private final String librariesBomVersion;
+
+  private final String repoMetadataFilePath;
   private final ProjectBuilder projectBuilder;
   private final PackageBuilder packageBuilder;
   private final ClassBuilder classBuilder;
@@ -42,13 +53,21 @@ public class YmlFilesBuilder {
       String[] excludePackages,
       String[] excludeClasses,
       String projectName,
-      boolean disableChangelog) {
+      boolean disableChangelog,
+      boolean disableLibraryOverview,
+      String artifactVersion,
+      String librariesBomVersion,
+      String repoMetadataFilePath) {
     this.environment = environment;
     this.outputPath = outputPath;
+    this.artifactVersion = artifactVersion;
+    this.librariesBomVersion = librariesBomVersion;
+    this.repoMetadataFilePath = repoMetadataFilePath;
     this.elementUtil = new ElementUtil(excludePackages, excludeClasses);
     this.packageLookup = new PackageLookup(environment);
     this.projectName = projectName;
     this.disableChangelog = disableChangelog;
+    this.disableLibraryOverview = disableLibraryOverview;
     this.projectBuilder = new ProjectBuilder(projectName);
     ClassLookup classLookup = new ClassLookup(environment, elementUtil);
     this.referenceBuilder = new ReferenceBuilder(environment, classLookup, elementUtil);
@@ -67,20 +86,35 @@ public class YmlFilesBuilder {
     processor.process();
 
     //  write to yaml files
-    FileUtil.dumpToFile(processor.projectMetadataFile);
+    if (disableLibraryOverview) {
+      FileUtil.dumpToFile(processor.projectMetadataFile);
+    }
     processor.packageMetadataFiles.forEach(FileUtil::dumpToFile);
     processor.classMetadataFiles.forEach(FileUtil::dumpToFile);
     FileUtil.dumpToFile(processor.tocFile);
 
+    // Generate new library overview page
+    if (!disableLibraryOverview) {
+      LibraryOverviewFile libraryOverviewFile =
+          new LibraryOverviewFile(
+              outputPath,
+              "overview.md",
+              artifactVersion,
+              librariesBomVersion,
+              repoMetadataFilePath,
+              processor.recommendedApiVersion);
+      FileUtil.dumpToFile(libraryOverviewFile);
+    }
     return true;
   }
 
   @VisibleForTesting
   class Processor {
     //  table of contents
-    private final TocFile tocFile = new TocFile(outputPath, projectName, disableChangelog);
-    //  overview page
-    private final MetadataFile projectMetadataFile = new MetadataFile(outputPath, "overview.yml");
+    final TocFile tocFile =
+        new TocFile(outputPath, projectName, disableChangelog, disableLibraryOverview);
+    //  overview page if not using new libraryOverview
+    final MetadataFile projectMetadataFile = new MetadataFile(outputPath, "overview.yml");
     //  package summary pages
     private final List<MetadataFile> packageMetadataFiles = new ArrayList<>();
     //  packages
@@ -91,6 +125,8 @@ public class YmlFilesBuilder {
     private final List<PackageElement> allPackages =
         elementUtil.extractPackageElements(environment.getIncludedElements());
 
+    private String recommendedApiVersion = "";
+
     @VisibleForTesting
     void process() {
       ImmutableListMultimap<PackageGroup, PackageElement> organizedPackagesWithoutStubs =
@@ -98,6 +134,13 @@ public class YmlFilesBuilder {
               allPackages.stream()
                   .filter(pkg -> !packageLookup.isApiVersionStubPackage(pkg))
                   .collect(Collectors.toList()));
+
+      // Get recommended ApiVersion for new Library Overview
+      HashSet<ApiVersion> versions = new HashSet<>();
+      for (PackageElement pkg : allPackages) {
+        packageLookup.extractApiVersion(pkg).ifPresent(versions::add);
+      }
+      recommendedApiVersion = ApiVersion.getRecommended(versions).toString();
 
       for (PackageElement element : organizedPackagesWithoutStubs.get(PackageGroup.VISIBLE)) {
         tocFile.addTocItem(buildPackage(element));
@@ -125,8 +168,10 @@ public class YmlFilesBuilder {
           }
         }
       }
-      // build project summary page
-      projectBuilder.buildProjectMetadataFile(packageItems, projectMetadataFile);
+      // build project summary page if disableLibraryOverview=true
+      if (disableLibraryOverview) {
+        projectBuilder.buildProjectMetadataFile(packageItems, projectMetadataFile);
+      }
 
       // post-processing
       populateUidValues(packageMetadataFiles, classMetadataFiles);

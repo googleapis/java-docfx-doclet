@@ -154,6 +154,11 @@
       <artifactId>guava</artifactId>
       <version>32.1.2-jre</version>
     </dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.10.1</version>
+    </dependency>
 
     <!-- Test dependencies -->
     <dependency>
@@ -184,6 +189,12 @@
       <groupId>com.google.cloud</groupId>
       <artifactId>google-cloud-speech</artifactId>
       <version>4.18.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.stefanbirkner</groupId>
+      <artifactId>system-rules</artifactId>
+      <version>1.19.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

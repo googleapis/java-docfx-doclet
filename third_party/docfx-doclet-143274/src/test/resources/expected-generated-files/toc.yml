@@ -2,7 +2,7 @@
 - name: "google-cloud-project"
   items:
   - name: "Overview"
-    href: "overview.html"
+    href: "overview.md"
   - name: "Version history"
     href: "history.md"
   - uid: "com.microsoft.samples"
