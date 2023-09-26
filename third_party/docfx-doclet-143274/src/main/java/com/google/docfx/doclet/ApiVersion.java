@@ -1,6 +1,5 @@
 package com.google.docfx.doclet;
 
-import com.google.common.base.MoreObjects;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Objects;
@@ -10,7 +9,7 @@ import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 
 public class ApiVersion implements Comparable<ApiVersion> {
-  public static ApiVersion NONE = new ApiVersion(0, 0, null, 0);
+  public static ApiVersion NONE = new ApiVersion("", 0, 0, null, 0);
 
   private static final Pattern VALID_VERSION_REGEX =
       Pattern.compile("^v(\\d+)p?(\\d+)?(alpha|beta)?(\\d+)?");
@@ -38,6 +37,7 @@ public class ApiVersion implements Comparable<ApiVersion> {
       if (matcher.matches()) {
         return Optional.of(
             new ApiVersion(
+                input,
                 safeParseInt(matcher.group(1)),
                 safeParseInt(matcher.group(2)),
                 matcher.group(3),
@@ -69,12 +69,14 @@ public class ApiVersion implements Comparable<ApiVersion> {
                 .orElseThrow(() -> new IllegalArgumentException("Versions must not be empty.")));
   }
 
+  private final String original;
   private final int major;
   private final int minor;
   private final String stability;
   private final int prerelease;
 
-  private ApiVersion(int major, int minor, String stability, int prerelease) {
+  private ApiVersion(String original, int major, int minor, String stability, int prerelease) {
+    this.original = original;
     this.major = major;
     this.minor = minor;
     this.stability = stability;
@@ -127,11 +129,6 @@ public class ApiVersion implements Comparable<ApiVersion> {
 
   @Override
   public String toString() {
-    return MoreObjects.toStringHelper(ApiVersion.class)
-        .add("major", major)
-        .add("minor", minor)
-        .add("stability", stability)
-        .add("prerelease", prerelease)
-        .toString();
+    return original;
   }
 }
