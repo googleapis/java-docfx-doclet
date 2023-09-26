@@ -64,6 +64,7 @@ import javax.annotation.Generated;
  */
 @BetaApi
 @Generated("by gapic-generator-java")
+@SuppressWarnings("unchecked")
 public class SpeechSettings extends ClientSettings<SpeechSettings> {
 
   /** Returns the object with the settings used for calls to recognize. */

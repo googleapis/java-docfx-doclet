@@ -65,6 +65,7 @@ import javax.annotation.Generated;
  * }</pre>
  */
 @Generated("by gapic-generator-java")
+@SuppressWarnings("unchecked")
 public class ProductSearchSettings extends ClientSettings<ProductSearchSettings> {
 
   /** Returns the object with the settings used for calls to createProductSet. */
