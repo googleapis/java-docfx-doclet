@@ -1,7 +1,6 @@
 package com.microsoft.doclet;
 
 import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
@@ -126,20 +125,6 @@ public class DocletRunnerTest {
     List<String> generatedFilenames =
         generated.stream().map(Path::getFileName).map(Path::toString).collect(Collectors.toList());
 
-    assertWithMessage("Expected files were not generated.")
-        .that(
-            expectedFilenames.stream()
-                .filter(file -> !generatedFilenames.contains(file))
-                .collect(Collectors.toList()))
-        .isEmpty();
-
-    assertWithMessage("Files were generated that should not have been.")
-        .that(
-            generatedFilenames.stream()
-                .filter(file -> !expectedFilenames.contains(file))
-                .collect(Collectors.toList()))
-        .isEmpty();
-
-    assertThat(expected.size()).isEqualTo(generated.size());
+    assertThat(generatedFilenames).containsExactlyElementsIn(expectedFilenames);
   }
 }

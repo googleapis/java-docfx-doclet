@@ -178,9 +178,58 @@ public class PackageLookupTest {
         .containsExactly("com.microsoft.samples.google.v1beta");
   }
 
+  @Test
+  public void testFindStubPackage() {
+    ImmutableList<PackageElement> packages =
+        ImmutableList.of(
+            elements.getPackageElement("com.microsoft.samples.google.v1"),
+            elements.getPackageElement("com.microsoft.samples.google.v1.stub"),
+            elements.getPackageElement("com.microsoft.samples.google.v1beta"),
+            elements.getPackageElement("com.microsoft.samples.google"));
+
+    List<PackageElement> foundStubPackages =
+        packageLookup.findStubPackages(
+            elements.getPackageElement("com.microsoft.samples.google.v1"), packages);
+    assertThat(foundStubPackages).isNotEmpty();
+    assertThat(foundStubPackages).hasSize(1);
+    assertThat(toPackageName(foundStubPackages.get(0)))
+        .isEqualTo("com.microsoft.samples.google.v1.stub");
+
+    List<PackageElement> notFoundStubPackageOfStubPackage =
+        packageLookup.findStubPackages(
+            elements.getPackageElement("com.microsoft.samples.google.v1.stub"), packages);
+    assertThat(notFoundStubPackageOfStubPackage).isEmpty();
+
+    List<PackageElement> notFoundStubPackage =
+        packageLookup.findStubPackages(
+            elements.getPackageElement("com.microsoft.samples.google"), packages);
+    assertThat(notFoundStubPackage).isEmpty();
+  }
+
+  @Test
+  public void testIsApiStubPackage() {
+    assertThat(
+            packageLookup.isApiVersionStubPackage(
+                elements.getPackageElement("com.microsoft.samples.google.v1")))
+        .isFalse();
+    assertThat(
+            packageLookup.isApiVersionStubPackage(
+                elements.getPackageElement("com.microsoft.samples.google.v1.stub")))
+        .isTrue();
+    assertThat(
+            packageLookup.isApiVersionStubPackageName("com.microsoft.samples.google.v1.stub.child"))
+        .isTrue();
+
+    assertThat(packageLookup.isApiVersionStubPackageName("a")).isFalse();
+    // False due to not being an API version package, even though it ends in .stub
+    assertThat(packageLookup.isApiVersionStubPackageName("a.stub")).isFalse();
+  }
+
   private List<String> toPackageNames(List<PackageElement> packages) {
-    return packages.stream()
-        .map(pkg -> String.valueOf(pkg.getQualifiedName()))
-        .collect(Collectors.toList());
+    return packages.stream().map(this::toPackageName).collect(Collectors.toList());
+  }
+
+  private String toPackageName(PackageElement pkg) {
+    return String.valueOf(pkg.getQualifiedName());
   }
 }

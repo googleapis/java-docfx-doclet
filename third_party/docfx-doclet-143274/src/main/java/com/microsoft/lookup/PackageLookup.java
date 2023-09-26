@@ -13,10 +13,12 @@ import com.google.common.collect.Multimaps;
 import com.google.docfx.doclet.ApiVersion;
 import com.microsoft.lookup.model.ExtendedMetadataFileItem;
 import com.microsoft.model.Status;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.lang.model.element.PackageElement;
 import jdk.javadoc.doclet.DocletEnvironment;
 
@@ -67,15 +69,45 @@ public class PackageLookup extends BaseLookup<PackageElement> {
     return null;
   }
 
+  /**
+   * @return true, if the package ends with 'stub' and its parent package is an API version
+   */
+  public boolean isApiVersionStubPackage(PackageElement pkg) {
+    return isApiVersionStubPackageName(String.valueOf(pkg.getQualifiedName()));
+  }
+
+  /**
+   * @return true, if the package ends with 'stub' and its parent package is an API version
+   */
+  @VisibleForTesting
+  boolean isApiVersionStubPackageName(String name) {
+    List<String> packagePath = Arrays.asList(name.split("\\."));
+    int stubIndex = packagePath.indexOf("stub");
+    if (stubIndex < 1) {
+      return false;
+    }
+    return ApiVersion.parse(packagePath.get(stubIndex - 1)).isPresent();
+  }
+
+  public List<PackageElement> findStubPackages(
+      PackageElement pkg, Collection<PackageElement> packages) {
+    String expectedStubPackageBase = pkg.getQualifiedName() + ".stub";
+    return packages.stream()
+        .filter(p -> String.valueOf(p.getQualifiedName()).startsWith(expectedStubPackageBase))
+        .sorted()
+        .collect(Collectors.toList());
+  }
+
   /** Compare PackageElements by their parsed ApiVersion */
   private final Comparator<PackageElement> byComparingApiVersion =
       Comparator.comparing(pkg -> extractApiVersion(pkg).orElse(ApiVersion.NONE));
 
   public Optional<ApiVersion> extractApiVersion(PackageElement pkg) {
-    String name = String.valueOf(pkg.getQualifiedName());
-    int lastPackageIndex = name.lastIndexOf('.');
-    String leafPackage = name.substring(lastPackageIndex + 1);
-    return ApiVersion.parse(leafPackage);
+    return extractApiVersion(String.valueOf(pkg.getQualifiedName()));
+  }
+
+  public Optional<ApiVersion> extractApiVersion(String name) {
+    return ApiVersion.parse(getLeafPackage(name));
   }
 
   public enum PackageGroup {
@@ -132,17 +164,14 @@ public class PackageLookup extends BaseLookup<PackageElement> {
         packages,
         (pkg) -> {
           String name = String.valueOf(pkg.getQualifiedName());
-          int lastPackageIndex = name.lastIndexOf('.');
-          String leafPackage = name.substring(lastPackageIndex + 1);
-          // For package a.b.c.d, the value of leafPackage is 'd'.
 
-          boolean packageIsApiVersion = ApiVersion.parse(leafPackage).isPresent();
+          // Group all API version packages into a single .v# group
+          boolean packageIsApiVersion = ApiVersion.parse(getLeafPackage(name)).isPresent();
           if (packageIsApiVersion) {
-            String packageWithoutVersion = name.substring(0, lastPackageIndex);
-            // For package a.b.c.v1, the value of packageWithoutVersion is a.b.c
-            return packageWithoutVersion + ".v#"; // Use "v#" package to group all versions
+            return withoutLeafPackage(name) + ".v#"; // withoutLeafPackage("a.b.c.v1") --> "a.b.c"
           }
-          // Using 'name' ensures this package is placed in a group of size 1.
+
+          // When not an API version package, use 'name' to ensure a unique group of size 1.
           return name;
         });
   }
@@ -173,5 +202,17 @@ public class PackageLookup extends BaseLookup<PackageElement> {
 
     ApiVersion recommended = ApiVersion.getRecommended(versions.keySet());
     return versions.get(recommended);
+  }
+
+  /** withoutLeafPackage("a.b.c.d") --> "a.b.c" */
+  private String withoutLeafPackage(String name) {
+    int lastPackageIndex = name.lastIndexOf('.');
+    return name.substring(0, lastPackageIndex);
+  }
+
+  /** getLeafPackage("a.b.c.d") --> "d" */
+  private String getLeafPackage(String name) {
+    int lastPackageIndex = name.lastIndexOf('.');
+    return name.substring(lastPackageIndex + 1);
   }
 }
