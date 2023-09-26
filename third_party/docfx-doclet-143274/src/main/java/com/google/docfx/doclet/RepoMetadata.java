@@ -4,26 +4,40 @@ package com.google.docfx.doclet;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Map;
 import java.util.Objects;
 
 public class RepoMetadata {
 
-  @SerializedName("api_shortname") private String apiShortName;
-  @SerializedName("name_pretty") private String namePretty;
-  @SerializedName("product_documentation") private String productDocumentationUri;
-  @SerializedName("api_description") private String apiDescription;
-  @SerializedName("client_documentation") private String clientDocumentationUri;
-  @SerializedName("repo") private String repo;
-  @SerializedName("repo_short") private String repoShort;
-  @SerializedName("distribution_name") private String distributionName;
+  @SerializedName("api_shortname")
+  private String apiShortName;
 
-  @SerializedName("api_id") private String apiId;
+  @SerializedName("name_pretty")
+  private String namePretty;
+
+  @SerializedName("product_documentation")
+  private String productDocumentationUri;
+
+  @SerializedName("api_description")
+  private String apiDescription;
+
+  @SerializedName("client_documentation")
+  private String clientDocumentationUri;
+
+  @SerializedName("repo")
+  private String repo;
+
+  @SerializedName("repo_short")
+  private String repoShort;
+
+  @SerializedName("distribution_name")
+  private String distributionName;
+
+  @SerializedName("api_id")
+  private String apiId;
+
   private String artifactId;
-
 
   public String getNamePretty() {
     return this.namePretty;
@@ -128,8 +142,7 @@ public class RepoMetadata {
     Gson gson = new Gson();
     try (FileReader reader = new FileReader(fileName)) {
       return gson.fromJson(reader, RepoMetadata.class);
-    }
-    catch (IOException e) {
+    } catch (IOException e) {
       throw new RuntimeException(".repo-metadata.json is not found");
     }
   }
