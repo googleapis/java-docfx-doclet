@@ -106,4 +106,10 @@ public class ApiVersionTest {
     assertThrows(
         IllegalArgumentException.class, () -> ApiVersion.getRecommended(Collections.emptyList()));
   }
+
+  @Test
+  public void testToString() {
+    assertThat(parse("v1").toString()).isEqualTo("v1");
+    assertThat(parse("v1p0").toString()).isEqualTo("v1p0");
+  }
 }
