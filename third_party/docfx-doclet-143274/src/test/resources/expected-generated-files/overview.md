@@ -96,8 +96,8 @@ libraryDependencies += &quot;com.google.cloud&quot; % &quot;google-cloud-apikeys
 </devsite-selector>
 </div>
 
-## Which package should I use?
-The recommended package for new applications is [com.google.api.apikeys.v2](https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.google.api.apikeys.v2).
+## Which version should I use?
+For this library, we recommend using API version v1 for new applications.
 
 Each Cloud Java client library may contain multiple packages. Each package corresponds to a published version of the service.
 We recommend using the latest stable version for new production applications, which can be identified by the largest numeric version that does not contain a suffix.

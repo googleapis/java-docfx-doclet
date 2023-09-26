@@ -5,6 +5,7 @@ import static com.microsoft.build.BuilderUtil.populateUidValues;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableListMultimap;
+import com.google.docfx.doclet.ApiVersion;
 import com.microsoft.lookup.ClassItemsLookup;
 import com.microsoft.lookup.ClassLookup;
 import com.microsoft.lookup.PackageLookup;
@@ -18,6 +19,7 @@ import com.microsoft.model.TocTypeMap;
 import com.microsoft.util.ElementUtil;
 import com.microsoft.util.FileUtil;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.lang.model.element.PackageElement;
@@ -99,7 +101,8 @@ public class YmlFilesBuilder {
               "overview.md",
               artifactVersion,
               librariesBomVersion,
-              repoMetadataFilePath);
+              repoMetadataFilePath,
+              processor.recommendedApiVersion);
       FileUtil.dumpToFile(libraryOverviewFile);
     }
     return true;
@@ -122,6 +125,8 @@ public class YmlFilesBuilder {
     private final List<PackageElement> allPackages =
         elementUtil.extractPackageElements(environment.getIncludedElements());
 
+    private String recommendedApiVersion = "";
+
     @VisibleForTesting
     void process() {
       ImmutableListMultimap<PackageGroup, PackageElement> organizedPackagesWithoutStubs =
@@ -129,6 +134,13 @@ public class YmlFilesBuilder {
               allPackages.stream()
                   .filter(pkg -> !packageLookup.isApiVersionStubPackage(pkg))
                   .collect(Collectors.toList()));
+
+      // Get recommended ApiVersion for new Library Overview
+      HashSet<ApiVersion> versions = new HashSet<>();
+      for (PackageElement pkg : allPackages) {
+        packageLookup.extractApiVersion(pkg).ifPresent(versions::add);
+      }
+      recommendedApiVersion = ApiVersion.getRecommended(versions).toString();
 
       for (PackageElement element : organizedPackagesWithoutStubs.get(PackageGroup.VISIBLE)) {
         tocFile.addTocItem(buildPackage(element));

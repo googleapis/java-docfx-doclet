@@ -17,6 +17,9 @@ public class LibraryOverviewFile {
   // This is passed in as an environment variable
   private String librariesBomVersion;
 
+  // This is parsed from the packages
+  private String recommendedApiVersion;
+
   private String LIBRARY_OVERVIEW_FILE_HEADER;
 
   private String LIBRARY_OVERVIEW_KEY_REFERENCE_HEADER;
@@ -36,12 +39,14 @@ public class LibraryOverviewFile {
       String fileName,
       String artifactVersion,
       String librariesBomVersion,
-      String repoMetadataFilePath) {
+      String repoMetadataFilePath,
+      String recommendedApiVersion) {
     this.outputPath = outputPath;
     this.fileName = fileName;
     this.artifactVersion = artifactVersion;
     this.librariesBomVersion = librariesBomVersion;
     this.repoMetadataFilePath = repoMetadataFilePath;
+    this.recommendedApiVersion = recommendedApiVersion;
 
     RepoMetadata repoMetadata = new RepoMetadata();
     repoMetadata = repoMetadata.parseRepoMetadata(this.repoMetadataFilePath);
@@ -185,11 +190,11 @@ public class LibraryOverviewFile {
             + "</div>\n\n";
 
     this.LIBRARY_OVERVIEW_PACKAGE_SELECTION_SECTION =
-        "## Which package should I use?\n"
-            + "The recommended package for new applications is ["
+        "## Which version should I use?\n"
+            + "For this library, we recommend using API version "
             // TODO: @alicejli determine best way to pull in the link to the package for this
-            + "com.google.api.apikeys.v2"
-            + "](https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.google.api.apikeys.v2).\n"
+            + this.recommendedApiVersion
+            + " for new applications.\n"
             + "\n"
             + "Each Cloud Java client library may contain multiple packages. Each package corresponds to a published version of the service.\n"
             + "We recommend using the latest stable version for new production applications, which can be identified by the largest numeric version that does not contain a suffix.\n"
