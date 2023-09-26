@@ -143,7 +143,7 @@ public class RepoMetadata {
     try (FileReader reader = new FileReader(fileName)) {
       return gson.fromJson(reader, RepoMetadata.class);
     } catch (IOException e) {
-      throw new RuntimeException(".repo-metadata.json is not found");
+      throw new RuntimeException(".repo-metadata.json is not found", e);
     }
   }
 }
