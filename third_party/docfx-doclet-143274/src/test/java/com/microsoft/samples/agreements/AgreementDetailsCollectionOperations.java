@@ -8,6 +8,7 @@ import com.microsoft.samples.IPartner;
  *
  * @deprecated Use {@link AgreementMetaData} instead.
  */
+@Deprecated
 public class AgreementDetailsCollectionOperations extends BasePartnerComponentString
     implements IAgreementDetailsCollection {
   /**
@@ -25,6 +26,7 @@ public class AgreementDetailsCollectionOperations extends BasePartnerComponentSt
    * @return A list of agreement details.
    * @deprecated Some text
    */
+  @Deprecated
   public ResourceCollection<AgreementMetaData> get() {
     return null;
   }

@@ -5,6 +5,7 @@ package com.microsoft.samples.agreements;
  *
  * @deprecated This one is deprecated :(
  */
+@Deprecated
 public interface IAgreementDetailsCollection {
   /**
    * Retrieves all current agreement metadata.
