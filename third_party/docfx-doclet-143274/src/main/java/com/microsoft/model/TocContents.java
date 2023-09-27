@@ -23,22 +23,35 @@ public class TocContents {
   private final String projectName;
   private final List<Object> contents = new ArrayList<>();
 
-  public TocContents(String projectName, boolean disableChangelog, List<TocItem> items) {
+  public TocContents(
+      String projectName,
+      boolean disableChangelog,
+      boolean disableLibraryOverview,
+      List<TocItem> items) {
     this.projectName = projectName;
 
     if (projectName == null || projectName.equals("")) {
       contents.addAll(items);
     } else {
       //  only include product hierarchy and guides if projectName included
-      createTocContents(projectName, disableChangelog, items);
+      createTocContents(projectName, disableChangelog, disableLibraryOverview, items);
     }
   }
 
   private void createTocContents(
-      String projectName, boolean disableChangelog, List<TocItem> items) {
+      String projectName,
+      boolean disableChangelog,
+      boolean disableLibraryOverview,
+      List<TocItem> items) {
     List<Object> tocItems = new ArrayList<>();
     // combine guides and tocItems
-    tocItems.add(new Guide("Overview", "overview.html"));
+    // If disableLibraryOverview is enabled, then generate old overview. Otherwise generate the new
+    // library overview.
+    if (!disableLibraryOverview) {
+      tocItems.add(new Guide("Overview", "overview.md"));
+    } else {
+      tocItems.add(new Guide("Overview", "overview.html"));
+    }
     if (!disableChangelog) {
       tocItems.add(new Guide("Version history", "history.md"));
     }
