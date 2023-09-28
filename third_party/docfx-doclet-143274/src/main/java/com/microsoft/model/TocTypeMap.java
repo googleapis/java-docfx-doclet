@@ -18,6 +18,7 @@ package com.microsoft.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.lang.model.element.ElementKind;
 
 public class TocTypeMap extends HashMap<String, ArrayList<TocItem>> {
@@ -37,5 +38,16 @@ public class TocTypeMap extends HashMap<String, ArrayList<TocItem>> {
         new KindTitle(ElementKind.ENUM.name(), "Enums"),
         new KindTitle(ElementKind.ANNOTATION_TYPE.name(), "Annotation Types"),
         new KindTitle("EXCEPTION", "Exceptions"));
+  }
+
+  public List<TocItem> toList() {
+    return getTitleList().stream()
+        .filter(kindTitle -> get(kindTitle.getElementKind()).size() > 0)
+        .flatMap(
+            kindTitle -> {
+              get(kindTitle.getElementKind()).add(0, new TocItem(kindTitle.getTitle()));
+              return get(kindTitle.getElementKind()).stream();
+            })
+        .collect(Collectors.toList());
   }
 }

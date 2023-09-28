@@ -30,6 +30,8 @@ public class DocletRunnerTest {
   private final PrintStream originalOut = System.out;
   private final PrintStream originalErr = System.err;
 
+  @Rule public final EnvironmentVariables environmentVariables = new EnvironmentVariables();
+
   @Before
   public void cleanup() throws IOException {
     FileUtilTest.deleteDirectory(OUTPUT_DIR);
@@ -66,8 +68,6 @@ public class DocletRunnerTest {
           "File 'some-name.txt' does not exist");
     }
   }
-
-  @Rule public final EnvironmentVariables environmentVariables = new EnvironmentVariables();
 
   @Test
   public void testFilesGeneration() throws IOException {

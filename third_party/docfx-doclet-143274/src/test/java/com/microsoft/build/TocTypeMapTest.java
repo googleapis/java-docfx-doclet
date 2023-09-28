@@ -11,10 +11,10 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ClassBuilderJoinTocTypeItemsTest {
+public class TocTypeMapTest {
 
   @Test
-  public void joinTocTypeItems() {
+  public void testToList() {
     TocTypeMap typeMap = new TocTypeMap();
     TocItem classToc = new TocItem("uid1", "name1");
     TocItem interfaceToc = new TocItem("uid2", "name2");
@@ -28,7 +28,7 @@ public class ClassBuilderJoinTocTypeItemsTest {
     typeMap.get(ElementKind.ANNOTATION_TYPE.name()).add(annotationToc);
     typeMap.get("EXCEPTION").add(exceptionToc);
 
-    List<TocItem> tocItems = ClassBuilder.joinTocTypeItems(typeMap);
+    List<TocItem> tocItems = typeMap.toList();
 
     assertEquals("Interfaces", tocItems.get(0).getHeading());
     assertEquals(interfaceToc, tocItems.get(1));

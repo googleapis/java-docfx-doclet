@@ -113,9 +113,11 @@
     items:
     - uid: "com.microsoft.samples.google.v1"
       name: "Package summary"
-    - heading: "Classes"
-    - uid: "com.microsoft.samples.google.v1.SpeechClient"
-      name: "SpeechClient"
+    - uid: "Clients"
+      name: "Clients"
+      items:
+      - uid: "com.microsoft.samples.google.v1.SpeechClient"
+        name: "SpeechClient"
     - uid: "com.microsoft.samples.google.v1.stub"
       name: "com.microsoft.samples.google.v1.stub"
       items:
@@ -170,15 +172,19 @@
       items:
       - uid: "com.microsoft.samples.google.v1beta"
         name: "Package summary"
-      - heading: "Classes"
-      - uid: "com.microsoft.samples.google.v1beta.SpeechClient"
-        name: "SpeechClient"
+      - uid: "Clients"
+        name: "Clients"
+        items:
+        - uid: "com.microsoft.samples.google.v1beta.SpeechClient"
+          name: "SpeechClient"
     - uid: "com.microsoft.samples.google.v1p1alpha"
       name: "com.microsoft.samples.google.v1p1alpha"
       status: "alpha"
       items:
       - uid: "com.microsoft.samples.google.v1p1alpha"
         name: "Package summary"
-      - heading: "Classes"
-      - uid: "com.microsoft.samples.google.v1p1alpha.SpeechClient"
-        name: "SpeechClient"
+      - uid: "Clients"
+        name: "Clients"
+        items:
+        - uid: "com.microsoft.samples.google.v1p1alpha.SpeechClient"
+          name: "SpeechClient"
