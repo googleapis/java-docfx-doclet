@@ -39,6 +39,7 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.ElementFilter;
 
 class ClassBuilder {
+
   private final ElementUtil elementUtil;
   private final ClassLookup classLookup;
   private final ClassItemsLookup classItemsLookup;
@@ -83,7 +84,9 @@ class ClassBuilder {
       String status = classLookup.extractStatus(classElement);
       TocItem tocItem = new TocItem(uid, name, status);
 
-      if (name.endsWith("Client")) {
+      if (classElement.getKind() == ElementKind.INTERFACE) {
+        apiVersionPackageToc.addInterface(tocItem);
+      } else if (name.endsWith("Client")) {
         apiVersionPackageToc.addClient(tocItem);
       } else if (name.endsWith("Response") || name.endsWith("Request")) {
         apiVersionPackageToc.addRequestOrResponse(tocItem);
@@ -95,10 +98,12 @@ class ClassBuilder {
         apiVersionPackageToc.addEnum(tocItem);
       } else if (name.endsWith("Exception")) {
         apiVersionPackageToc.addException(tocItem);
-      } else if (String.valueOf(classElement.getSuperclass()).contains("GeneratedMessage")) {
+      } else if (isGeneratedMessage(classElement)) {
         apiVersionPackageToc.addMessage(tocItem);
-      } else if (classElement.getKind() == ElementKind.INTERFACE) {
-        apiVersionPackageToc.addInterface(tocItem);
+      } else if (isPagingClass(classElement)) {
+        apiVersionPackageToc.addPaging(tocItem);
+      } else if (isResourceName(classElement)) {
+        apiVersionPackageToc.addResourceName(tocItem);
       } else {
         apiVersionPackageToc.addUncategorized(tocItem);
       }
@@ -106,6 +111,19 @@ class ClassBuilder {
       classMetadataFiles.add(buildClassYmlFile(classElement));
       buildFilesForApiVersionPackage(classElement, apiVersionPackageToc, classMetadataFiles);
     }
+  }
+
+  boolean isResourceName(TypeElement classElement) {
+    return classElement.getInterfaces().stream().map(String::valueOf)
+        .anyMatch(i -> i.contains("ResourceName"));
+  }
+
+  boolean isGeneratedMessage(TypeElement classElement) {
+    return String.valueOf(classElement.getSuperclass()).contains("GeneratedMessage");
+  }
+
+  boolean isPagingClass(TypeElement classElement) {
+    return String.valueOf(classElement.getSuperclass()).contains(".paging.");
   }
 
   void buildFilesForInnerClasses(

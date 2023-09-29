@@ -14,6 +14,9 @@ public class ApiVersionPackageToc {
   static final String INTERFACES = "Interfaces";
   static final String MESSAGES = "Messages";
   static final String EXCEPTIONS = "Exceptions";
+  static final String PAGING = "Paging";
+  static final String RESOURCE_NAMES = "Resource Names";
+  static final String UNCATEGORIZED = "Other";
 
   private final List<TocItem> clients = new ArrayList<>();
   private final List<TocItem> requestsAndResponses = new ArrayList<>();
@@ -23,6 +26,8 @@ public class ApiVersionPackageToc {
   private final List<TocItem> exceptions = new ArrayList<>();
   private final List<TocItem> interfaces = new ArrayList<>();
   private final List<TocItem> messages = new ArrayList<>();
+  private final List<TocItem> paging = new ArrayList<>();
+  private final List<TocItem> resourceNames = new ArrayList<>();
   private final List<TocItem> uncategorized = new ArrayList<>();
 
   public void addClient(TocItem tocItem) {
@@ -61,6 +66,14 @@ public class ApiVersionPackageToc {
     uncategorized.add(tocItem);
   }
 
+  public void addPaging(TocItem tocItem) {
+    paging.add(tocItem);
+  }
+
+  public void addResourceName(TocItem tocItem) {
+    resourceNames.add(tocItem);
+  }
+
   /** Build a list of TocItems for inclusion in the library's table of contents */
   public List<TocItem> toList() {
     List<TocItem> toc = new ArrayList<>();
@@ -78,6 +91,8 @@ public class ApiVersionPackageToc {
         || !exceptions.isEmpty()
         || !interfaces.isEmpty()
         || !messages.isEmpty()
+        || !paging.isEmpty()
+        || !resourceNames.isEmpty()
         || !uncategorized.isEmpty()) {
       TocItem allOthers = new TocItem(ALL_OTHERS, ALL_OTHERS, null);
       if (!builders.isEmpty()) {
@@ -95,8 +110,15 @@ public class ApiVersionPackageToc {
       if (!messages.isEmpty()) {
         allOthers.getItems().add(createCategory(MESSAGES, messages));
       }
-      uncategorized.sort(Comparator.comparing(TocItem::getName));
-      allOthers.getItems().addAll(uncategorized);
+      if (!paging.isEmpty()) {
+        allOthers.getItems().add(createCategory(PAGING, paging));
+      }
+      if (!resourceNames.isEmpty()) {
+        allOthers.getItems().add(createCategory(RESOURCE_NAMES, resourceNames));
+      }
+      if (!uncategorized.isEmpty()) {
+        allOthers.getItems().add(createCategory(UNCATEGORIZED, uncategorized));
+      }
       toc.add(allOthers);
     }
     return toc;
