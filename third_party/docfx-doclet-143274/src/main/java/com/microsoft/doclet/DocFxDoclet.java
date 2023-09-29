@@ -24,6 +24,7 @@ public class DocFxDoclet implements Doclet {
     String artifactVersion = System.getenv("artifactVersion");
     String librariesBomVersion = System.getenv("librariesBomVersion");
     String repoMetadataFilePath = System.getenv("repoMetadataFilePath");
+    Objects.requireNonNull(repoMetadataFilePath, "Environment variable 'repoMetadataFilePath' must not be null.");
     reporter.print(Kind.NOTE, "Environment variable artifactVersion: " + artifactVersion);
     reporter.print(Kind.NOTE, "Environment variable librariesBomVersion: " + librariesBomVersion);
     reporter.print(Kind.NOTE, "Environment variable repoMetadataFilePath: " + repoMetadataFilePath);

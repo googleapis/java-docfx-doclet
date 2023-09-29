@@ -2,6 +2,7 @@ package com.google.docfx.doclet;
 
 // This parses .repo-metadata.json files to create a new library overview
 
+import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import java.io.FileReader;
@@ -146,7 +147,7 @@ public class RepoMetadata {
     try (FileReader reader = new FileReader(path.toFile())) {
       return gson.fromJson(reader, RepoMetadata.class);
     } catch (IOException e) {
-      throw new RuntimeException(".repo-metadata.json is not found @ " + path.toAbsolutePath(), e);
+      throw new RuntimeException(".repo-metadata.json is not found @ " + path.toAbsolutePath().normalize() + ". Modify environment variable 'repoMetadataFilePath'", e);
     }
   }
 }
