@@ -15,7 +15,7 @@ public class ApiVersionPackageToc {
   static final String MESSAGES = "Messages";
   static final String EXCEPTIONS = "Exceptions";
   static final String PAGING = "Paging";
-  static final String RESOURCE_NAMES = "Resource Names";
+  static final String RESOURCE_NAMES = "Resource names";
   static final String UNCATEGORIZED = "Other";
 
   private final List<TocItem> clients = new ArrayList<>();
@@ -104,9 +104,6 @@ public class ApiVersionPackageToc {
       if (!exceptions.isEmpty()) {
         allOthers.getItems().add(createCategory(EXCEPTIONS, exceptions));
       }
-      if (!interfaces.isEmpty()) {
-        allOthers.getItems().add(createCategory(INTERFACES, interfaces));
-      }
       if (!messages.isEmpty()) {
         allOthers.getItems().add(createCategory(MESSAGES, messages));
       }
@@ -115,6 +112,9 @@ public class ApiVersionPackageToc {
       }
       if (!resourceNames.isEmpty()) {
         allOthers.getItems().add(createCategory(RESOURCE_NAMES, resourceNames));
+      }
+      if (!interfaces.isEmpty()) {
+        allOthers.getItems().add(createCategory(INTERFACES, interfaces));
       }
       if (!uncategorized.isEmpty()) {
         allOthers.getItems().add(createCategory(UNCATEGORIZED, uncategorized));
