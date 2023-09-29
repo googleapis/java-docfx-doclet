@@ -63,13 +63,16 @@ class ClassBuilder {
   }
 
   List<TocItem> buildFilesForPackage(PackageElement pkg, List<MetadataFile> classMetadataFiles) {
-    if (packageLookup.isApiVersionPackage(pkg)) {
+    if (packageLookup.isApiVersionPackage(pkg) && containsAtLeastOneClient(pkg)) {
+      // API Version package organization is a nested list organized by GAPIC concepts
       ApiVersionPackageToc apiVersionPackageToc = new ApiVersionPackageToc();
       buildFilesForApiVersionPackage(pkg, apiVersionPackageToc, classMetadataFiles);
       return apiVersionPackageToc.toList();
+
     } else {
+      // Standard package organization is a flat list organized by Java type
       TocTypeMap typeMap = new TocTypeMap();
-      buildFilesForInnerClasses(pkg, typeMap, classMetadataFiles);
+      buildFilesForStandardPackage(pkg, typeMap, classMetadataFiles);
       return typeMap.toList();
     }
   }
@@ -84,9 +87,11 @@ class ClassBuilder {
       String status = classLookup.extractStatus(classElement);
       TocItem tocItem = new TocItem(uid, name, status);
 
+      // The order of these checks matter!
+      // Ex: a paging response class would change its category if "isPagingClass" is checked first.
       if (classElement.getKind() == ElementKind.INTERFACE) {
         apiVersionPackageToc.addInterface(tocItem);
-      } else if (name.endsWith("Client")) {
+      } else if (isClient(classElement)) {
         apiVersionPackageToc.addClient(tocItem);
       } else if (name.endsWith("Response") || name.endsWith("Request")) {
         apiVersionPackageToc.addRequestOrResponse(tocItem);
@@ -113,9 +118,17 @@ class ClassBuilder {
     }
   }
 
+  boolean containsAtLeastOneClient(PackageElement pkg) {
+    return elementUtil.extractSortedElements(pkg).stream().anyMatch(this::isClient);
+  }
+
+  boolean isClient(TypeElement classElement) {
+    return classLookup.extractTocName(classElement).endsWith("Client");
+  }
+
   boolean isResourceName(TypeElement classElement) {
-    return classElement.getInterfaces().stream().map(String::valueOf)
-        .anyMatch(i -> i.contains("ResourceName"));
+    return classElement.getInterfaces().stream()
+        .anyMatch(i -> String.valueOf(i).contains("ResourceName"));
   }
 
   boolean isGeneratedMessage(TypeElement classElement) {
@@ -126,7 +139,7 @@ class ClassBuilder {
     return String.valueOf(classElement.getSuperclass()).contains(".paging.");
   }
 
-  void buildFilesForInnerClasses(
+  void buildFilesForStandardPackage(
       Element element, TocTypeMap tocTypeMap, List<MetadataFile> classMetadataFiles) {
     for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
       String uid = classLookup.extractUid(classElement);
@@ -145,7 +158,7 @@ class ClassBuilder {
       }
 
       classMetadataFiles.add(buildClassYmlFile(classElement));
-      buildFilesForInnerClasses(classElement, tocTypeMap, classMetadataFiles);
+      buildFilesForStandardPackage(classElement, tocTypeMap, classMetadataFiles);
     }
   }
 
