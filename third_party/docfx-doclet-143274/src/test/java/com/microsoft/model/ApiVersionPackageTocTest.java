@@ -40,7 +40,6 @@ public class ApiVersionPackageTocTest {
     assertThat(clients.getItems().get(0)).isEqualTo(TOC_ITEM);
   }
 
-
   @Test
   public void testVisibleAndHidden() {
     toc.addRequestOrResponse(TOC_ITEM);

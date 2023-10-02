@@ -21,7 +21,7 @@ public class ApiVersionPackageToc {
 
   private final LinkedHashMap<String, List<TocItem>> visibleCategories = new LinkedHashMap<>();
   private final LinkedHashMap<String, List<TocItem>> hiddenCategories = new LinkedHashMap<>();
-  
+
   public ApiVersionPackageToc() {
     // Order here determines final organization order.
     visibleCategories.put(CLIENTS, new ArrayList<>());
@@ -37,7 +37,7 @@ public class ApiVersionPackageToc {
     hiddenCategories.put(INTERFACES, new ArrayList<>());
     hiddenCategories.put(UNCATEGORIZED, new ArrayList<>());
   }
-  
+
   public void addClient(TocItem tocItem) {
     visibleCategories.get(CLIENTS).add(tocItem);
   }
@@ -85,19 +85,21 @@ public class ApiVersionPackageToc {
   /** Build a list of TocItems for inclusion in the library's table of contents */
   public List<TocItem> toList() {
     List<TocItem> toc = new ArrayList<>();
-    
-    visibleCategories.forEach((name, category) -> {
-      if (! category.isEmpty()) {
-        toc.add(createCategory(name, category));
-      }
-    });
+
+    visibleCategories.forEach(
+        (name, category) -> {
+          if (!category.isEmpty()) {
+            toc.add(createCategory(name, category));
+          }
+        });
 
     TocItem allOthers = new TocItem(ALL_OTHERS, ALL_OTHERS, null);
-    hiddenCategories.forEach((name, category) -> {
-      if (! category.isEmpty()) {
-        allOthers.getItems().add(createCategory(name, category));
-      }
-    });
+    hiddenCategories.forEach(
+        (name, category) -> {
+          if (!category.isEmpty()) {
+            allOthers.getItems().add(createCategory(name, category));
+          }
+        });
     if (allOthers.getItems().size() > 0) {
       toc.add(allOthers);
     }
