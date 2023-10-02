@@ -141,8 +141,7 @@ public class YmlFilesBuilder {
         packageLookup.extractApiVersion(pkg).ifPresent(versions::add);
       }
 
-      if(!versions.isEmpty())
-      {
+      if (!versions.isEmpty()) {
         recommendedApiVersion = ApiVersion.getRecommended(versions).toString();
       }
 

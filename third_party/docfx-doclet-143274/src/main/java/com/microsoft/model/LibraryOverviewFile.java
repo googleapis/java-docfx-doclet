@@ -189,11 +189,12 @@ public class LibraryOverviewFile {
             + "</devsite-selector>\n"
             + "</div>\n\n";
 
-    // Some client libraries do not have an underlying API service (e.g. google-cloud-logging-logback, google-cloud-storage-nio, google-cloud-spanner-jdbc), hence there is no recommended API version.
-    if(this.recommendedApiVersion.isEmpty()){
+    // Some client libraries do not have an underlying API service (e.g.
+    // google-cloud-logging-logback, google-cloud-storage-nio, google-cloud-spanner-jdbc), hence
+    // there is no recommended API version.
+    if (this.recommendedApiVersion.isEmpty()) {
       this.LIBRARY_OVERVIEW_PACKAGE_SELECTION_SECTION = "";
-    }
-    else {
+    } else {
       this.LIBRARY_OVERVIEW_PACKAGE_SELECTION_SECTION =
           "## Which version should I use?\n"
               + "For this library, we recommend using API version "
