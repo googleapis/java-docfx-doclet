@@ -140,7 +140,10 @@ public class YmlFilesBuilder {
       for (PackageElement pkg : allPackages) {
         packageLookup.extractApiVersion(pkg).ifPresent(versions::add);
       }
-      recommendedApiVersion = ApiVersion.getRecommended(versions).toString();
+
+      if (!versions.isEmpty()) {
+        recommendedApiVersion = ApiVersion.getRecommended(versions).toString();
+      }
 
       for (PackageElement element : organizedPackagesWithoutStubs.get(PackageGroup.VISIBLE)) {
         tocFile.addTocItem(buildPackage(element));
