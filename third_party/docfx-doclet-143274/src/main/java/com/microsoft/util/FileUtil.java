@@ -1,5 +1,6 @@
 package com.microsoft.util;
 
+import com.microsoft.build.PackageOverviewFile;
 import com.microsoft.model.LibraryOverviewFile;
 import com.microsoft.model.YmlFile;
 import java.io.IOException;
@@ -27,5 +28,9 @@ public class FileUtil {
 
   public static void dumpToFile(LibraryOverviewFile libraryOverviewFile) {
     dumpToFile(libraryOverviewFile.getFileContent(), libraryOverviewFile.getFileNameWithPath());
+  }
+
+  public static void dumpToFile(PackageOverviewFile packageOverviewFile) {
+    dumpToFile(packageOverviewFile.getFileContent(), packageOverviewFile.getFileNameWithPath());
   }
 }

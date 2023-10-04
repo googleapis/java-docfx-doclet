@@ -75,11 +75,13 @@ public class Lookup {
               .forEach(
                   item -> {
                     String uid = item.getUid();
+                    String href = item.getHref();
                     String nameWithType = item.getNameWithType();
                     String nameWithTypeWithoutGenerics = removeAll(nameWithType, "<.*?>");
 
                     map.put(nameWithTypeWithoutGenerics, uid); // This item should go first
                     map.put(uid, uid);
+                    map.put(href, href);
                     map.put(removeAll(uid, PARAM_PACKAGE_NAME_REGEXP), uid);
                     map.put(removeAll(uid, UID_PACKAGE_NAME_REGEXP), uid);
                     map.put(removeAll(nameWithTypeWithoutGenerics, METHOD_PARAMS_REGEXP), uid);

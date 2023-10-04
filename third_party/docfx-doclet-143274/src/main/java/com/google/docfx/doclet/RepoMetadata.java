@@ -25,6 +25,12 @@ public class RepoMetadata {
   @SerializedName("client_documentation")
   private String clientDocumentationUri;
 
+  @SerializedName("rest_documentation")
+  private String restDocumentationUri;
+
+  @SerializedName("rpc_documentation")
+  private String rpcDocumentationUri;
+
   @SerializedName("repo")
   private String repo;
 
@@ -57,6 +63,16 @@ public class RepoMetadata {
 
   public String getProductDocumentationUri() {
     return this.productDocumentationUri;
+  }
+
+  // This link may not always exist
+  public String getRestDocumentationUri() {
+    return this.restDocumentationUri;
+  }
+
+  // This link may not always exist
+  public String getRpcDocumentationUri() {
+    return this.rpcDocumentationUri;
   }
 
   public void setProductDocumentationUri(String productDocumentationUri) {

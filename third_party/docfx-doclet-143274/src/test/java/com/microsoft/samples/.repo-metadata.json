@@ -4,6 +4,8 @@
   "product_documentation": "https://cloud.google.com/api-keys/",
   "api_description": "API Keys lets you create and manage your API keys for your projects.",
   "client_documentation": "https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/overview",
+  "rest_documentation": "https://cloud.google.com/api-keys/docs/reference/rest",
+  "rpc_documentation": "https://cloud.google.com/api-keys/docs/reference/rpc",
   "release_level": "preview",
   "transport": "grpc",
   "language": "java",

@@ -16,6 +16,12 @@ public class RepoMetadataTest {
     assertEquals(
         "https://cloud.google.com/translate/docs/", testRepoMetadata.getProductDocumentationUri());
     assertEquals(
+        "https://cloud.google.com/translate/docs/reference/rest",
+        testRepoMetadata.getRestDocumentationUri());
+    assertEquals(
+        "https://cloud.google.com/translate/docs/reference/rpc",
+        testRepoMetadata.getRpcDocumentationUri());
+    assertEquals(
         "can dynamically translate text between thousands of language pairs. Translation lets websites and programs programmatically integrate with the translation service.",
         testRepoMetadata.getApiDescription());
     assertEquals(

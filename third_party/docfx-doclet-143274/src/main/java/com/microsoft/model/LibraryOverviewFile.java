@@ -192,7 +192,6 @@ public class LibraryOverviewFile {
     this.LIBRARY_OVERVIEW_PACKAGE_SELECTION_SECTION =
         "## Which version should I use?\n"
             + "For this library, we recommend using API version "
-            // TODO: @alicejli determine best way to pull in the link to the package for this
             + this.recommendedApiVersion
             + " for new applications.\n"
             + "\n"
