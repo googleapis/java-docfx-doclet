@@ -15,7 +15,6 @@
  */
 package com.microsoft.build;
 
-
 import com.google.docfx.doclet.RepoMetadata;
 import com.microsoft.lookup.PackageLookup;
 import javax.lang.model.element.PackageElement;
