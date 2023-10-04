@@ -189,16 +189,23 @@ public class LibraryOverviewFile {
             + "</devsite-selector>\n"
             + "</div>\n\n";
 
-    this.LIBRARY_OVERVIEW_PACKAGE_SELECTION_SECTION =
-        "## Which version should I use?\n"
-            + "For this library, we recommend using API version "
-            + this.recommendedApiVersion
-            + " for new applications.\n"
-            + "\n"
-            + "Each Cloud Java client library may contain multiple packages. Each package corresponds to a published version of the service.\n"
-            + "We recommend using the latest stable version for new production applications, which can be identified by the largest numeric version that does not contain a suffix.\n"
-            + "For example, if a client library has two packages: `v1` and `v2alpha`, then the latest stable version is `v1`.\n"
-            + "If you use an unstable release, breaking changes may be introduced when upgrading.\n\n";
+    // Some client libraries do not have an underlying API service (e.g.
+    // google-cloud-logging-logback, google-cloud-storage-nio, google-cloud-spanner-jdbc), hence
+    // there is no recommended API version.
+    if (this.recommendedApiVersion.isEmpty()) {
+      this.LIBRARY_OVERVIEW_PACKAGE_SELECTION_SECTION = "";
+    } else {
+      this.LIBRARY_OVERVIEW_PACKAGE_SELECTION_SECTION =
+          "## Which version should I use?\n"
+              + "For this library, we recommend using API version "
+              + this.recommendedApiVersion
+              + " for new applications.\n"
+              + "\n"
+              + "Each Cloud Java client library may contain multiple packages. Each package corresponds to a published version of the service.\n"
+              + "We recommend using the latest stable version for new production applications, which can be identified by the largest numeric version that does not contain a suffix.\n"
+              + "For example, if a client library has two packages: `v1` and `v2alpha`, then the latest stable version is `v1`.\n"
+              + "If you use an unstable release, breaking changes may be introduced when upgrading.\n\n";
+    }
   }
 
   @JsonIgnore
