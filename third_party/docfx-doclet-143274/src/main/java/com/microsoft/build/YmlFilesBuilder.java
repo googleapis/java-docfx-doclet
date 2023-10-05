@@ -197,9 +197,13 @@ public class YmlFilesBuilder {
           .addAll(classBuilder.buildFilesForPackage(element, classMetadataFiles));
 
       // build stubs
+      TocItem stubPackagesItem = new TocItem("Stub packages", "Stub packages", "");
       packageLookup
           .findStubPackages(element, allPackages)
-          .forEach((PackageElement stub) -> packageTocItem.getItems().add(buildPackage(stub)));
+          .forEach((PackageElement stub) -> stubPackagesItem.getItems().add(buildPackage(stub)));
+      if (!stubPackagesItem.getItems().isEmpty()) {
+        packageTocItem.getItems().add(stubPackagesItem);
+      }
 
       return packageTocItem;
     }
