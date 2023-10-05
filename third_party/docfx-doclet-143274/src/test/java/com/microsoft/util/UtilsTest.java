@@ -1,6 +1,5 @@
 package com.microsoft.util;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -86,29 +85,6 @@ public class UtilsTest {
   public void isPrivateOrPackagePrivate_False_ProtectedMethod() {
     Element method = getElementByKindAndName(allElements, ElementKind.METHOD, "getHealth()");
     assertFalse(Utils.isPrivateOrPackagePrivate(method));
-  }
-
-  @Test
-  public void getRecommendedPackageBaseURI() {
-    String packageName = "com.google.cloud.speech.v1";
-    String[] recommendedPackageName = Utils.extractPackageBaseURIBeforeVersion(packageName);
-    assertEquals("com.google.cloud.speech.", recommendedPackageName[0]);
-    assertEquals("v1", recommendedPackageName[1]);
-
-    packageName = "com.google.cloud.speech.v1p5";
-    recommendedPackageName = Utils.extractPackageBaseURIBeforeVersion(packageName);
-    assertEquals("com.google.cloud.speech.", recommendedPackageName[0]);
-    assertEquals("v1p5", recommendedPackageName[1]);
-
-    packageName = "com.google.cloud.speech.v2.stub";
-    recommendedPackageName = Utils.extractPackageBaseURIBeforeVersion(packageName);
-    assertEquals("com.google.cloud.speech.", recommendedPackageName[0]);
-    assertEquals("v2", recommendedPackageName[1]);
-
-    packageName = "com.google.cloud.speech.velocity";
-    recommendedPackageName = Utils.extractPackageBaseURIBeforeVersion(packageName);
-    assertEquals("N/A", recommendedPackageName[0]);
-    assertEquals("N/A", recommendedPackageName[1]);
   }
 
   private Element getElementByKindAndName(

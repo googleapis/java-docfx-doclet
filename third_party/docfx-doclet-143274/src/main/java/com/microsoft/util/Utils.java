@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javax.lang.model.element.*;
 import javax.lang.model.type.TypeKind;
@@ -251,20 +249,5 @@ public class Utils {
    */
   public List<TypeElement> getImplementedInterfaces(TypeElement element) {
     return element.getInterfaces().stream().map(e -> asTypeElement(e)).collect(Collectors.toList());
-  }
-
-  // Use to get the recommended package URL for Package Overview
-  public static String[] extractPackageBaseURIBeforeVersion(String input) {
-    // This regex captures the package path before the version (if it exists) and the version
-    Pattern pattern = Pattern.compile("(.*?)(v\\d+.*?)(?:\\.|$)");
-    Matcher matcher = pattern.matcher(input);
-    boolean isVersioned = matcher.find();
-    if (isVersioned) {
-      String[] packageInfo = {matcher.group(1), matcher.group(2)};
-      return packageInfo;
-    } else {
-      String[] packageInfo = {"N/A", "N/A"};
-      return packageInfo;
-    }
   }
 }

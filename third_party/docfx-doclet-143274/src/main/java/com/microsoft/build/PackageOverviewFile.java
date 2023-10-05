@@ -3,14 +3,16 @@ package com.microsoft.build;
 import static com.microsoft.build.BuilderUtil.LANGS;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.collect.ImmutableList;
 import com.google.docfx.doclet.RepoMetadata;
 import com.microsoft.lookup.PackageLookup;
 import com.microsoft.model.MetadataFileItem;
-import com.microsoft.util.Utils;
 import java.io.File;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javax.lang.model.element.PackageElement;
 
@@ -95,8 +97,13 @@ public class PackageOverviewFile {
               + "If you use an unstable release, breaking changes may be introduced when upgrading.\n\n";
     }
 
-    String basePackageURI = Utils.extractPackageBaseURIBeforeVersion(packageURIPath)[0];
-    String packageVersion = Utils.extractPackageBaseURIBeforeVersion(packageURIPath)[1];
+    // This regex captures the package path before the version (if it exists) and the version
+    Pattern pattern = Pattern.compile("(.*?)(v\\d+.*?)(?:\\.|$)");
+    ImmutableList<Object> packageVersionURIInfo =
+        extractPackageBaseURIBeforeVersion(packageURIPath, pattern);
+    String basePackageURI = packageVersionURIInfo.get(0).toString();
+    String packageVersion = packageVersionURIInfo.get(1).toString();
+    // Build link to the Cloud RAD link for the recommended package
     String recommendedPackageVersionLink =
         cloudRADChildElementLinkPrefix + basePackageURI + recommendedApiVersion;
 
@@ -383,6 +390,22 @@ public class PackageOverviewFile {
         + ENUM_TABLE
         + EXCEPTION_TABLE_HEADER
         + EXCEPTION_TABLE;
+  }
+
+  /** Use to get the recommended package URL for Package Overview */
+  public static ImmutableList<Object> extractPackageBaseURIBeforeVersion(
+      String input, Pattern pattern) {
+    Matcher matcher = pattern.matcher(input);
+    boolean isVersioned = matcher.find();
+    if (isVersioned) {
+      ImmutableList<Object> packageBaseURIVersion =
+          new ImmutableList.Builder<>().add(matcher.group(1)).add(matcher.group(2)).build();
+      return packageBaseURIVersion;
+    } else {
+      ImmutableList<Object> packageBaseURIVersion =
+          new ImmutableList.Builder<>().add("N/A").add("N/A").build();
+      return packageBaseURIVersion;
+    }
   }
 
   @JsonIgnore
