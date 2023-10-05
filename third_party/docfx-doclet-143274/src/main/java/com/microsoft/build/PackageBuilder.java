@@ -37,7 +37,7 @@ class PackageBuilder {
       String artifactVersion,
       String recommendedApiVersion) {
     String status = packageLookup.extractStatus(packageElement);
-    String fileName = packageLookup.extractHref(packageElement).replace(".yml", ".md");
+    String fileName = packageElement.getQualifiedName() + ".md";
     PackageOverviewFile packageOverviewFile =
         new PackageOverviewFile(
             outputPath,
