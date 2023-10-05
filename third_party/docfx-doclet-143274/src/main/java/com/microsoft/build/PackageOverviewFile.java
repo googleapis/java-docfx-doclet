@@ -147,17 +147,17 @@ public class PackageOverviewFile {
         .append("\">Github repository</a></td>\n");
 
     // If RPC documentation URI exists, add to the package overview table
-    if (repoMetadata.getRpcDocumentationUri() != null) {
+    if (repoMetadata.getRpcDocumentationUri().isPresent()) {
       githubSourceTableBuilder
           .append("     <td><a href=\"")
-          .append(repoMetadata.getRpcDocumentationUri())
+          .append(repoMetadata.getRpcDocumentationUri().get())
           .append("\">RPC Documentation</a></td>\n");
     }
     // If REST documentation URI exists, add to the package overview table
-    if (repoMetadata.getRestDocumentationUri() != null) {
+    if (repoMetadata.getRestDocumentationUri().isPresent()) {
       githubSourceTableBuilder
           .append("     <td><a href=\"")
-          .append(repoMetadata.getRestDocumentationUri())
+          .append(repoMetadata.getRestDocumentationUri().get())
           .append("\">REST Documentation</a></td>\n");
     }
     githubSourceTableBuilder.append("   </tr>\n").append(" </table>").append("\n\n");

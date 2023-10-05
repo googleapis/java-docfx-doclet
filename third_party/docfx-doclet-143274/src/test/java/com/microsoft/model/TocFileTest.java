@@ -50,7 +50,7 @@ public class TocFileTest {
     TocItem tocItemC = new TocItem("c.uid.package.class", "name");
     TocItem olderItem = new TocItem("Older and prerelease packages", "name");
     TocItem packageOverview =
-        new TocItem("1.uid.package.class", "Package Overview", "a.uid.package.class.md", true);
+        new TocItem("1.uid.package.class", "Package summary", "a.uid.package.class.md", true);
 
     tocFile.addTocItem(tocItemC);
     tocFile.addTocItem(tocItemA);

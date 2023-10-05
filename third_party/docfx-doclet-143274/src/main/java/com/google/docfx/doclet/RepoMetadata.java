@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 
 public class RepoMetadata {
 
@@ -65,14 +66,12 @@ public class RepoMetadata {
     return this.productDocumentationUri;
   }
 
-  // This link may not always exist
-  public String getRestDocumentationUri() {
-    return this.restDocumentationUri;
+  public Optional<String> getRestDocumentationUri() {
+    return Optional.ofNullable(this.restDocumentationUri);
   }
 
-  // This link may not always exist
-  public String getRpcDocumentationUri() {
-    return this.rpcDocumentationUri;
+  public Optional<String> getRpcDocumentationUri() {
+    return Optional.ofNullable(this.rpcDocumentationUri);
   }
 
   public void setProductDocumentationUri(String productDocumentationUri) {

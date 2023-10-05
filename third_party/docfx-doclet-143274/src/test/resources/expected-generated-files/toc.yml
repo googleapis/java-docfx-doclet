@@ -9,7 +9,7 @@
     name: "com.microsoft.samples"
     items:
     - uid: "com.microsoft.samples"
-      name: "Package Overview"
+      name: "Package summary"
       href: "com.microsoft.samples.md"
     - heading: "Interfaces"
     - uid: "com.microsoft.samples.ExceptionHandler.Interceptor"
@@ -41,7 +41,7 @@
     name: "com.microsoft.samples.agreements"
     items:
     - uid: "com.microsoft.samples.agreements"
-      name: "Package Overview"
+      name: "Package summary"
       href: "com.microsoft.samples.agreements.md"
     - heading: "Interfaces"
     - uid: "com.microsoft.samples.agreements.IAgreementDetailsCollection"
@@ -59,7 +59,7 @@
     name: "com.microsoft.samples.commentinheritance"
     items:
     - uid: "com.microsoft.samples.commentinheritance"
-      name: "Package Overview"
+      name: "Package summary"
       href: "com.microsoft.samples.commentinheritance.md"
     - heading: "Interfaces"
     - uid: "com.microsoft.samples.commentinheritance.Carnivorous"
@@ -85,7 +85,7 @@
     name: "com.microsoft.samples.google"
     items:
     - uid: "com.microsoft.samples.google"
-      name: "Package Overview"
+      name: "Package summary"
       href: "com.microsoft.samples.google.md"
     - heading: "Interfaces"
     - uid: "com.microsoft.samples.google.ValidationException.Supplier"
@@ -116,7 +116,7 @@
     name: "com.microsoft.samples.google.v1"
     items:
     - uid: "com.microsoft.samples.google.v1"
-      name: "Package Overview"
+      name: "Package summary"
       href: "com.microsoft.samples.google.v1.md"
     - heading: "Classes"
     - uid: "com.microsoft.samples.google.v1.SpeechClient"
@@ -125,7 +125,7 @@
       name: "com.microsoft.samples.google.v1.stub"
       items:
       - uid: "com.microsoft.samples.google.v1.stub"
-        name: "Package Overview"
+        name: "Package summary"
         href: "com.microsoft.samples.google.v1.stub.md"
       - heading: "Classes"
       - uid: "com.microsoft.samples.google.v1.stub.GrpcSpeechStub"
@@ -142,7 +142,7 @@
     name: "com.microsoft.samples.offers"
     items:
     - uid: "com.microsoft.samples.offers"
-      name: "Package Overview"
+      name: "Package summary"
       href: "com.microsoft.samples.offers.md"
     - heading: "Classes"
     - uid: "com.microsoft.samples.offers.Offer"
@@ -151,7 +151,7 @@
     name: "com.microsoft.samples.subpackage"
     items:
     - uid: "com.microsoft.samples.subpackage"
-      name: "Package Overview"
+      name: "Package summary"
       href: "com.microsoft.samples.subpackage.md"
     - heading: "Interfaces"
     - uid: "com.microsoft.samples.subpackage.Display"
@@ -177,7 +177,7 @@
       status: "beta"
       items:
       - uid: "com.microsoft.samples.google.v1beta"
-        name: "Package Overview"
+        name: "Package summary"
         href: "com.microsoft.samples.google.v1beta.md"
       - heading: "Classes"
       - uid: "com.microsoft.samples.google.v1beta.SpeechClient"
@@ -187,7 +187,7 @@
       status: "alpha"
       items:
       - uid: "com.microsoft.samples.google.v1p1alpha"
-        name: "Package Overview"
+        name: "Package summary"
         href: "com.microsoft.samples.google.v1p1alpha.md"
       - heading: "Classes"
       - uid: "com.microsoft.samples.google.v1p1alpha.SpeechClient"

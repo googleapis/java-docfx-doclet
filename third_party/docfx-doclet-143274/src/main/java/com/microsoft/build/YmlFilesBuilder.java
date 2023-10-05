@@ -196,8 +196,7 @@ public class YmlFilesBuilder {
       TocItem packageTocItem = new TocItem(packageUid, packageUid, packageStatus);
 
       // New package overview
-      TocItem packageSummary =
-          new TocItem(packageUid, "Package Overview", packageUid + ".md", true);
+      TocItem packageSummary = new TocItem(packageUid, "Package summary", packageUid + ".md", true);
       packageTocItem.getItems().add(packageSummary);
       packageOverviewFiles.add(
           packageBuilder.buildPackageOverviewFile(
