@@ -6,6 +6,8 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -155,10 +157,12 @@ public class RepoMetadata {
 
   public RepoMetadata parseRepoMetadata(String fileName) {
     Gson gson = new Gson();
-    try (FileReader reader = new FileReader(fileName)) {
+    Path path = Paths.get(fileName);
+    try (FileReader reader = new FileReader(path.toFile())) {
       return gson.fromJson(reader, RepoMetadata.class);
     } catch (IOException e) {
-      throw new RuntimeException(".repo-metadata.json is not found", e);
+      throw new RuntimeException(
+          ".repo-metadata.json is not found @ " + path.toAbsolutePath().normalize(), e);
     }
   }
 }

@@ -110,6 +110,10 @@ public class PackageLookup extends BaseLookup<PackageElement> {
     return ApiVersion.parse(getLeafPackage(name));
   }
 
+  public boolean isApiVersionPackage(PackageElement pkg) {
+    return extractApiVersion(pkg).isPresent();
+  }
+
   public enum PackageGroup {
     VISIBLE,
     OLDER_AND_PRERELEASE

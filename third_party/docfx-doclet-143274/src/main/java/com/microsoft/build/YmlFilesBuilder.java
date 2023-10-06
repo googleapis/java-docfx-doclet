@@ -16,7 +16,6 @@ import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.model.TocFile;
 import com.microsoft.model.TocItem;
-import com.microsoft.model.TocTypeMap;
 import com.microsoft.util.ElementUtil;
 import com.microsoft.util.FileUtil;
 import java.util.ArrayList;
@@ -79,6 +78,7 @@ public class YmlFilesBuilder {
             classLookup,
             new ClassItemsLookup(environment, elementUtil),
             outputPath,
+            packageLookup,
             referenceBuilder);
   }
 
@@ -203,27 +203,20 @@ public class YmlFilesBuilder {
               element, repoMetadata, artifactVersion, recommendedApiVersion));
 
       // build classes/interfaces/enums/exceptions/annotations
-      TocTypeMap typeMap = new TocTypeMap();
-      classBuilder.buildFilesForInnerClasses(element, typeMap, classMetadataFiles);
-      packageTocItem.getItems().addAll(joinTocTypeItems(typeMap));
+      packageTocItem
+          .getItems()
+          .addAll(classBuilder.buildFilesForPackage(element, classMetadataFiles));
 
       // build stubs
+      TocItem stubPackagesItem = new TocItem("Stub packages", "Stub packages", "");
       packageLookup
           .findStubPackages(element, allPackages)
-          .forEach((PackageElement stub) -> packageTocItem.getItems().add(buildPackage(stub)));
+          .forEach((PackageElement stub) -> stubPackagesItem.getItems().add(buildPackage(stub)));
+      if (!stubPackagesItem.getItems().isEmpty()) {
+        packageTocItem.getItems().add(stubPackagesItem);
+      }
 
       return packageTocItem;
     }
-  }
-
-  List<TocItem> joinTocTypeItems(TocTypeMap tocTypeMap) {
-    return tocTypeMap.getTitleList().stream()
-        .filter(kindTitle -> tocTypeMap.get(kindTitle.getElementKind()).size() > 0)
-        .flatMap(
-            kindTitle -> {
-              tocTypeMap.get(kindTitle.getElementKind()).add(0, new TocItem(kindTitle.getTitle()));
-              return tocTypeMap.get(kindTitle.getElementKind()).stream();
-            })
-        .collect(Collectors.toList());
   }
 }
