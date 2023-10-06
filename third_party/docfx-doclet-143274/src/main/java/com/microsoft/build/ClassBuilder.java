@@ -24,6 +24,7 @@ import com.microsoft.lookup.PackageLookup;
 import com.microsoft.model.ApiVersionPackageToc;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
+import com.microsoft.model.StubPackageToc;
 import com.microsoft.model.TocItem;
 import com.microsoft.model.TocTypeMap;
 import com.microsoft.util.ElementUtil;
@@ -68,6 +69,11 @@ class ClassBuilder {
       ApiVersionPackageToc apiVersionPackageToc = new ApiVersionPackageToc();
       buildFilesForApiVersionPackage(pkg, apiVersionPackageToc, classMetadataFiles);
       return apiVersionPackageToc.toList();
+
+    } else if (packageLookup.isApiVersionStubPackage(pkg)) {
+      StubPackageToc stubPackageToc = new StubPackageToc();
+      buildFilesForStubPackage(pkg, stubPackageToc, classMetadataFiles);
+      return stubPackageToc.toList();
 
     } else {
       // Standard package organization is a flat list organized by Java type
@@ -115,6 +121,29 @@ class ClassBuilder {
 
       classMetadataFiles.add(buildClassYmlFile(classElement));
       buildFilesForApiVersionPackage(classElement, apiVersionPackageToc, classMetadataFiles);
+    }
+  }
+
+  private void buildFilesForStubPackage(
+      Element element, StubPackageToc packageToc, List<MetadataFile> classMetadataFiles) {
+    for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
+      String uid = classLookup.extractUid(classElement);
+      String name = classLookup.extractTocName(classElement);
+      String status = classLookup.extractStatus(classElement);
+      TocItem tocItem = new TocItem(uid, name, status);
+
+      if (name.endsWith("Stub")) {
+        packageToc.addStub(tocItem);
+      } else if (name.contains("Settings")) {
+        packageToc.addSettings(tocItem);
+      } else if (name.endsWith("CallableFactory")) {
+        packageToc.addCallableFactory(tocItem);
+      } else {
+        packageToc.addUncategorized(tocItem);
+      }
+
+      classMetadataFiles.add(buildClassYmlFile(classElement));
+      buildFilesForStubPackage(classElement, packageToc, classMetadataFiles);
     }
   }
 
