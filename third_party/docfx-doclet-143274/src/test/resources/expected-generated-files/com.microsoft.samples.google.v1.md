@@ -7,11 +7,13 @@
    </tr>
  </table>
 
-## Clients and Settings Classes
+## Client Classes
+Client classes are the main entry point to using a package.
+They contain several variations of Java methods for each of the API's methods.
 <table>
    <tr>
      <th>
-Client or Settings Class</th>
+Client</th>
      <th>
 Description</th>
 <tr>

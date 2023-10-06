@@ -39,6 +39,22 @@ Class that describes person's identification</td>
    </tr>
  </table>
 
+## Interfaces
+<table>
+   <tr>
+     <th>
+Interface</th>
+     <th>
+Description</th>
+<tr>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.subpackage.Display">com.microsoft.samples.subpackage.Display</a></td>
+<td>
+Do you see some <code>First</code> code block?
+
+ <p>Or this <code>Second</code> code block?</td>
+   </tr>
+ </table>
+
 ## Enums
 <table>
    <tr>

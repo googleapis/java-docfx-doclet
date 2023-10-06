@@ -36,3 +36,37 @@ Mammal.</td>
    </tr>
  </table>
 
+## Interfaces
+<table>
+   <tr>
+     <th>
+Interface</th>
+     <th>
+Description</th>
+<tr>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.commentinheritance.Carnivorous">com.microsoft.samples.commentinheritance.Carnivorous</a></td>
+<td>
+Marks an Animal that eats other animals.</td>
+   </tr>
+<tr>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.commentinheritance.Herbivorous">com.microsoft.samples.commentinheritance.Herbivorous</a></td>
+<td>
+Marks animals that eat plants.</td>
+   </tr>
+<tr>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.commentinheritance.Omnivorous">com.microsoft.samples.commentinheritance.Omnivorous</a></td>
+<td>
+Eats plants and animals.</td>
+   </tr>
+<tr>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.commentinheritance.Organism">com.microsoft.samples.commentinheritance.Organism</a></td>
+<td>
+</td>
+   </tr>
+<tr>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.commentinheritance.Viviparous">com.microsoft.samples.commentinheritance.Viviparous</a></td>
+<td>
+Mammals that give birth to young that develop within the mother's body.</td>
+   </tr>
+ </table>
+

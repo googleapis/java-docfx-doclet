@@ -7,11 +7,31 @@
    </tr>
  </table>
 
-## Clients and Settings Classes
+## Client Classes
+Client classes are the main entry point to using a package.
+They contain several variations of Java methods for each of the API's methods.
 <table>
    <tr>
      <th>
-Client or Settings Class</th>
+Client</th>
+     <th>
+Description</th>
+<tr>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.SpeechClient">com.microsoft.samples.google.SpeechClient</a></td>
+<td>
+Service Description: Service that implements Google Cloud Speech API.
+
+ <p>This class provides the ability to make remote calls to the backing service through method
+ calls that map to API methods. Sample code to get started:</td>
+   </tr>
+ </table>
+
+## Settings Classes
+Settings classes can be used to configure credentials, endpoints, and retry settings for a Client.
+<table>
+   <tr>
+     <th>
+Settings</th>
      <th>
 Description</th>
 <tr>
@@ -21,14 +41,6 @@ Settings class to configure an instance of <xref uid="ProductSearchClient" data-
 
  <p>The default instance has everything set to sensible defaults:
 </td>
-   </tr>
-<tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.SpeechClient">com.microsoft.samples.google.SpeechClient</a></td>
-<td>
-Service Description: Service that implements Google Cloud Speech API.
-
- <p>This class provides the ability to make remote calls to the backing service through method
- calls that map to API methods. Sample code to get started:</td>
    </tr>
 <tr>
 <td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.SpeechSettings">com.microsoft.samples.google.SpeechSettings</a></td>
@@ -72,6 +84,28 @@ Exception thrown if there is a validation problem with a path template, http con
  framework methods. Comes as an illegal argument exception subclass. Allows to globally set a
  thread-local validation context description which each exception inherits.
 See Also: <a href="https://cloud.google.com/storage/docs/json_api/v1/status-codes">Google Cloud  Storage error codes</a>
+</td>
+   </tr>
+ </table>
+
+## Interfaces
+<table>
+   <tr>
+     <th>
+Interface</th>
+     <th>
+Description</th>
+<tr>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.BetaApi">com.microsoft.samples.google.BetaApi</a></td>
+<td>
+Indicates a public API that can change at any time, and has no guarantee of API stability and
+ backward-compatibility.
+
+ <p>Usage guidelines:</td>
+   </tr>
+<tr>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.ValidationException.Supplier">com.microsoft.samples.google.ValidationException.Supplier</a></td>
+<td>
 </td>
    </tr>
  </table>

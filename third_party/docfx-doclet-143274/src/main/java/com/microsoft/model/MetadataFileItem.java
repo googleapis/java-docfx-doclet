@@ -2,6 +2,7 @@ package com.microsoft.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.microsoft.build.PackageOverviewFile.PackageChildSummary;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -41,6 +42,8 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
   private List<String> children = new ArrayList<>();
 
   private HashMap<String, String[]> childrenSummaries = new HashMap<>();
+
+  private List<PackageChildSummary> packageChildrenSummaries = new ArrayList<>();
   private String href;
   private String[] langs;
   private String name;
@@ -126,6 +129,10 @@ public class MetadataFileItem implements Comparable<MetadataFileItem> {
 
   public HashMap<String, String[]> getChildrenSummaries() {
     return childrenSummaries;
+  }
+
+  public List<PackageChildSummary> getPackageChildrenSummaries() {
+    return packageChildrenSummaries;
   }
 
   public String getHref() {

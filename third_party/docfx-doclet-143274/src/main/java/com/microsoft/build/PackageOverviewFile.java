@@ -9,24 +9,42 @@ import com.microsoft.lookup.PackageLookup;
 import com.microsoft.model.MetadataFileItem;
 import java.io.File;
 import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import javax.lang.model.element.PackageElement;
 
 public class PackageOverviewFile {
-
   private String CLIENT_TABLE_HEADER = "";
+  private String SETTINGS_TABLE_HEADER = "";
   private String CLASSES_TABLE_HEADER = "";
   private String INTERFACES_TABLE_HEADER = "";
-  private String ENUM_TABLE_HEADER = "";
 
+  private String STUB_TABLE_HEADER = "";
+  private String CALLABLE_FACTORY_TABLE_HEADER = "";
+
+  private String ENUM_TABLE_HEADER = "";
   private String EXCEPTION_TABLE_HEADER = "";
+
+  private String CLIENT_TABLE_BLURB = "";
+
+  private String SETTINGS_TABLE_BLURB = "";
+  private String CLASSES_TABLE_BLURB = "";
+  private String INTERFACES_TABLE_BLURB = "";
+
+  private String STUB_TABLE_BLURB = "";
+  private String CALLABLE_FACTORY_TABLE_BLURB = "";
+
+  private String ENUM_TABLE_BLURB = "";
+  private String EXCEPTION_TABLE_BLURB = "";
   private String CLIENT_TABLE = "";
 
+  private String SETTINGS_TABLE = "";
+
   private String CLASSES_TABLE = "";
+
+  private String STUB_TABLE = "";
+  private String CALLABLE_FACTORY_TABLE = "";
 
   private String INTERFACES_TABLE = "";
 
@@ -91,7 +109,8 @@ public class PackageOverviewFile {
       this.PRERELEASE_IMPLICATIONS =
           "## Prerelease Implications\n\n"
               + "This package is a prerelease version! Use with caution.\n"
-              + "Each Cloud Java client library may contain multiple packages. Each package corresponds to a published version of the service.\n"
+              + "Prerelease versions are considered unstable as they may be shut down. You can read more about [Cloud API versioning strategy here](https://cloud.google.com/apis/design/versioning).\n"
+              + "Each Cloud Java client library may contain multiple packages. Each package containing a version number in its name corresponds to a published version of the service.\n"
               + "We recommend using the latest stable version for new production applications, which can be identified by the largest numeric version that does not contain a suffix.\n"
               + "For example, if a client library has two packages: `v1` and `v2alpha`, then the latest stable version is `v1`.\n"
               + "If you use an unstable release, breaking changes may be introduced when upgrading.\n\n";
@@ -171,205 +190,106 @@ public class PackageOverviewFile {
 
     this.GITHUB_SOURCE_TABLE = githubSourceTableBuilder.toString();
 
+    // Prepare to build tables of different types of package children elements
     MetadataFileItem packageItem =
         new MetadataFileItem(LANGS, packageLookup.extractUid(packageElement));
-    referenceBuilder.addChildrenSummaries(packageElement, packageItem.getChildrenSummaries());
+    referenceBuilder.addPackageChildrenSummaries(
+        packageElement, packageItem.getPackageChildrenSummaries());
+    List<PackageChildSummary> listOfPackageChildrenSummaries =
+        packageItem.getPackageChildrenSummaries();
+    listOfPackageChildrenSummaries.sort(
+        Comparator.comparing(PackageChildSummary::getType)
+            .thenComparing(PackageChildSummary::getUid));
 
-    // Sort child by type and then by UID
-    LinkedHashMap<String, String[]> sortedMap =
-        packageItem.getChildrenSummaries().entrySet().stream()
-            .sorted(
-                Comparator.comparing(
-                        (Map.Entry<String, String[]> e) -> e.getValue()[1]) // sort by type
-                    .thenComparing(e -> e.getKey())) // then sort by UID
-            .collect(
-                Collectors.toMap(
-                    Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-
-    // Check if Client/Settings classes exist in this package
+    // If Clients exist in this package, create a table of them
     boolean containsClientSettingsClasses =
-        sortedMap.values().stream().anyMatch(values -> "Client/Settings".equals(values[1]));
-
+        listOfPackageChildrenSummaries.stream()
+            .anyMatch(packageChildSummary -> "Client".equals(packageChildSummary.getType()));
     if (containsClientSettingsClasses) {
-      this.CLIENT_TABLE_HEADER = "## Clients and Settings Classes\n";
-      // Build table that contains Client and Settings classes
-      StringBuilder clientTableBuilder = new StringBuilder();
-      clientTableBuilder
-          .append("<table>\n")
-          .append("   <tr>\n")
-          .append("     <th>\n")
-          .append("Client or Settings Class")
-          .append("</th>\n")
-          .append("     <th>\n")
-          .append("Description")
-          .append("</th>\n");
-
-      for (Map.Entry<String, String[]> entry : sortedMap.entrySet()) {
-        if (entry.getValue()[1] == "Client/Settings") {
-          clientTableBuilder
-              .append("<tr>\n")
-              .append("<td><a href=\"")
-              .append(cloudRADChildElementLinkPrefix + entry.getKey()) // Link to class
-              .append("\">")
-              .append(entry.getKey()) // class name
-              .append("</a></td>\n")
-              .append("<td>\n")
-              .append(entry.getValue()[0] != null ? entry.getValue()[0] : "") // Description
-              .append("</td>\n")
-              .append("   </tr>\n");
-        }
-      }
-
-      clientTableBuilder.append(" </table>\n\n");
-      this.CLIENT_TABLE = clientTableBuilder.toString();
+      this.CLIENT_TABLE_HEADER = "## Client Classes\n";
+      this.CLIENT_TABLE_BLURB =
+          "Client classes are the main entry point to using a package.\nThey contain several variations of Java methods for each of the API's methods.\n";
+      this.CLIENT_TABLE =
+          createHtmlTable("Client", cloudRADChildElementLinkPrefix, listOfPackageChildrenSummaries);
     }
 
-    // Check if Classes exist in this package
-    boolean containsClasses =
-        sortedMap.values().stream().anyMatch(values -> "Class".equals(values[1]));
+    // If Settings exist in this package, create a table of them
+    boolean containsSettingsClasses =
+        listOfPackageChildrenSummaries.stream()
+            .anyMatch(packageChildSummary -> "Settings".equals(packageChildSummary.getType()));
+    if (containsSettingsClasses) {
+      this.SETTINGS_TABLE_HEADER = "## Settings Classes\n";
+      this.SETTINGS_TABLE_BLURB =
+          "Settings classes can be used to configure credentials, endpoints, and retry settings for a Client.\n";
+      this.SETTINGS_TABLE =
+          createHtmlTable(
+              "Settings", cloudRADChildElementLinkPrefix, listOfPackageChildrenSummaries);
+    }
 
+    // If Stubs exist in this package, create a table of them
+    boolean containsStubClasses =
+        listOfPackageChildrenSummaries.stream()
+            .anyMatch(packageChildSummary -> "Stub".equals(packageChildSummary.getType()));
+    if (containsStubClasses) {
+      this.STUB_TABLE_HEADER = "## Stub Classes\n";
+      this.STUB_TABLE_BLURB = "";
+      this.STUB_TABLE =
+          createHtmlTable("Stub", cloudRADChildElementLinkPrefix, listOfPackageChildrenSummaries);
+    }
+
+    // If Callable Factory classes exist in this package, create a table of them
+    boolean containsCallableFactoryClasses =
+        listOfPackageChildrenSummaries.stream()
+            .anyMatch(
+                packageChildSummary -> "CallableFactory".equals(packageChildSummary.getType()));
+    if (containsCallableFactoryClasses) {
+      this.CALLABLE_FACTORY_TABLE_HEADER = "## Callable Factory Classes\n";
+      this.CALLABLE_FACTORY_TABLE_BLURB = "";
+      this.CALLABLE_FACTORY_TABLE =
+          createHtmlTable(
+              "CallableFactory", cloudRADChildElementLinkPrefix, listOfPackageChildrenSummaries);
+    }
+
+    // If Classes exist in this package, create a table of them
+    boolean containsClasses =
+        listOfPackageChildrenSummaries.stream()
+            .anyMatch(packageChildSummary -> "Class".equals(packageChildSummary.getType()));
     if (containsClasses) {
       this.CLASSES_TABLE_HEADER = "## Classes\n";
-      // Build table containing Classes
-      StringBuilder classesTableBuilder = new StringBuilder();
-      classesTableBuilder
-          .append("<table>\n")
-          .append("   <tr>\n")
-          .append("     <th>\n")
-          .append("Class")
-          .append("</th>\n")
-          .append("     <th>\n")
-          .append("Description")
-          .append("</th>\n");
-
-      for (Map.Entry<String, String[]> entry : sortedMap.entrySet()) {
-        if (entry.getValue()[1] == "Class") {
-          classesTableBuilder
-              .append("<tr>\n")
-              .append("<td><a href=\"")
-              .append(cloudRADChildElementLinkPrefix + entry.getKey()) // Link to class
-              .append("\">")
-              .append(entry.getKey()) // class name
-              .append("</a></td>\n")
-              .append("<td>\n")
-              .append(entry.getValue()[0] != null ? entry.getValue()[0] : "") // Description
-              .append("</td>\n")
-              .append("   </tr>\n");
-        }
-      }
-      classesTableBuilder.append(" </table>\n\n");
-      this.CLASSES_TABLE = classesTableBuilder.toString();
+      this.CLASSES_TABLE =
+          createHtmlTable("Class", cloudRADChildElementLinkPrefix, listOfPackageChildrenSummaries);
     }
-    // Check if Interfaces exist in this package
-    boolean containsInterfaces =
-        sortedMap.values().stream().anyMatch(values -> "Interface".equals(values[0]));
 
+    //  If Interfaces exist in this package, create a table of them
+    boolean containsInterfaces =
+        listOfPackageChildrenSummaries.stream()
+            .anyMatch(packageChildSummary -> "Interface".equals(packageChildSummary.getType()));
     if (containsInterfaces) {
       this.INTERFACES_TABLE_HEADER = "## Interfaces\n";
-      // Build table containing Interfaces
-      StringBuilder interfacesTableBuilder = new StringBuilder();
-      interfacesTableBuilder
-          .append("<table>\n")
-          .append("   <tr>\n")
-          .append("     <th>\n")
-          .append("Interface")
-          .append("</th>\n")
-          .append("     <th>\n")
-          .append("Description")
-          .append("</th>\n");
-
-      for (Map.Entry<String, String[]> entry : sortedMap.entrySet()) {
-        if (entry.getValue()[1] == "Interface") {
-          interfacesTableBuilder
-              .append("<tr>\n")
-              .append("<td><a href=\"")
-              .append(cloudRADChildElementLinkPrefix + entry.getKey()) // Link to class
-              .append("\">")
-              .append(entry.getKey()) // class name
-              .append("</a></td>\n")
-              .append("<td>\n")
-              .append(entry.getValue()[0] != null ? entry.getValue()[0] : "") // Description
-              .append("</td>\n")
-              .append("   </tr>\n");
-        }
-      }
-      interfacesTableBuilder.append(" </table>\n\n");
-      this.INTERFACES_TABLE = interfacesTableBuilder.toString();
+      this.INTERFACES_TABLE =
+          createHtmlTable(
+              "Interface", cloudRADChildElementLinkPrefix, listOfPackageChildrenSummaries);
     }
 
-    // Check if Enums exist in this package
+    // If Enums exist in this package, create a table of them
     boolean containsEnums =
-        sortedMap.values().stream().anyMatch(values -> "Enum".equals(values[1]));
-
+        listOfPackageChildrenSummaries.stream()
+            .anyMatch(packageChildSummary -> "Enum".equals(packageChildSummary.getType()));
     if (containsEnums) {
       this.ENUM_TABLE_HEADER = "## Enums\n";
-      // Build table containing Enums
-      StringBuilder enumsTableBuilder = new StringBuilder();
-      enumsTableBuilder
-          .append("<table>\n")
-          .append("   <tr>\n")
-          .append("     <th>\n")
-          .append("Enum")
-          .append("</th>\n")
-          .append("     <th>\n")
-          .append("Description")
-          .append("</th>\n");
-
-      for (Map.Entry<String, String[]> entry : sortedMap.entrySet()) {
-        if (entry.getValue()[1] == "Enum") {
-          enumsTableBuilder
-              .append("<tr>\n")
-              .append("<td><a href=\"")
-              .append(cloudRADChildElementLinkPrefix + entry.getKey()) // Link to class
-              .append("\">")
-              .append(entry.getKey()) // class name
-              .append("</a></td>\n")
-              .append("<td>\n")
-              .append(entry.getValue()[0] != null ? entry.getValue()[0] : "") // Description
-              .append("</td>\n")
-              .append("   </tr>\n");
-        }
-      }
-      enumsTableBuilder.append(" </table>\n\n");
-      this.ENUM_TABLE = enumsTableBuilder.toString();
+      this.ENUM_TABLE =
+          createHtmlTable("Enum", cloudRADChildElementLinkPrefix, listOfPackageChildrenSummaries);
     }
 
-    // Check if Exceptions exist in this package
+    //  If Exceptions exist in this package, create a table of them
     boolean containsExceptions =
-        sortedMap.values().stream().anyMatch(values -> "Exception".equals(values[1]));
-
+        listOfPackageChildrenSummaries.stream()
+            .anyMatch(packageChildSummary -> "Exception".equals(packageChildSummary.getType()));
     if (containsExceptions) {
       this.EXCEPTION_TABLE_HEADER = "## Exceptions\n";
-      // Build table that contains Client and Settings classes
-      StringBuilder exceptionTableBuilder = new StringBuilder();
-      exceptionTableBuilder
-          .append("<table>\n")
-          .append("   <tr>\n")
-          .append("     <th>\n")
-          .append("Exceptions")
-          .append("</th>\n")
-          .append("     <th>\n")
-          .append("Description")
-          .append("</th>\n");
-
-      for (Map.Entry<String, String[]> entry : sortedMap.entrySet()) {
-        if (entry.getValue()[1] == "Exception") {
-          exceptionTableBuilder
-              .append("<tr>\n")
-              .append("<td><a href=\"")
-              .append(cloudRADChildElementLinkPrefix + entry.getKey()) // Link to class
-              .append("\">")
-              .append(entry.getKey()) // class name
-              .append("</a></td>\n")
-              .append("<td>\n")
-              .append(entry.getValue()[0] != null ? entry.getValue()[0] : "") // Description
-              .append("</td>\n")
-              .append("   </tr>\n");
-        }
-      }
-
-      exceptionTableBuilder.append(" </table>\n\n");
-      this.EXCEPTION_TABLE = exceptionTableBuilder.toString();
+      this.EXCEPTION_TABLE =
+          createHtmlTable(
+              "Exception", cloudRADChildElementLinkPrefix, listOfPackageChildrenSummaries);
     }
   }
 
@@ -381,15 +301,94 @@ public class PackageOverviewFile {
         + PRERELEASE_IMPLICATIONS
         + STUB_IMPLICATIONS
         + CLIENT_TABLE_HEADER
+        + CLIENT_TABLE_BLURB
         + CLIENT_TABLE
+        + STUB_TABLE_HEADER
+        + STUB_TABLE_BLURB
+        + STUB_TABLE
+        + SETTINGS_TABLE_HEADER
+        + SETTINGS_TABLE_BLURB
+        + SETTINGS_TABLE
+        + CALLABLE_FACTORY_TABLE_HEADER
+        + CALLABLE_FACTORY_TABLE_BLURB
+        + CALLABLE_FACTORY_TABLE
         + CLASSES_TABLE_HEADER
+        + CLASSES_TABLE_BLURB
         + CLASSES_TABLE
         + INTERFACES_TABLE_HEADER
+        + INTERFACES_TABLE_BLURB
         + INTERFACES_TABLE
         + ENUM_TABLE_HEADER
+        + ENUM_TABLE_BLURB
         + ENUM_TABLE
         + EXCEPTION_TABLE_HEADER
+        + EXCEPTION_TABLE_BLURB
         + EXCEPTION_TABLE;
+  }
+
+  /**
+   * Class that contains the information about an element of a class used to populate the tables in
+   * the Package Overview file
+   */
+  public static class PackageChildSummary {
+    String uid;
+    String type;
+    String summary;
+
+    public PackageChildSummary(String uid, String type, String summary) {
+      this.uid = uid;
+      this.type = type;
+      this.summary = summary;
+    }
+
+    private String getSummary() {
+      return summary;
+    }
+
+    private String getType() {
+      return type;
+    }
+
+    private String getUid() {
+      return uid;
+    }
+  }
+
+  /** Use to get the recommended package URL for Package Overview */
+  private static String createHtmlTable(
+      String type, String linkPrefix, List<PackageChildSummary> listOfPackageChildrenSummaries) {
+    String tableHeader = type;
+    if (type == "Client/Settings") {
+      tableHeader = "Clients or Settings Class";
+    }
+    StringBuilder tableBuilder = new StringBuilder();
+    tableBuilder
+        .append("<table>\n")
+        .append("   <tr>\n")
+        .append("     <th>\n")
+        .append(tableHeader)
+        .append("</th>\n")
+        .append("     <th>\n")
+        .append("Description")
+        .append("</th>\n");
+
+    for (PackageChildSummary packageChildSummary : listOfPackageChildrenSummaries) {
+      if (packageChildSummary.type == type) {
+        tableBuilder
+            .append("<tr>\n")
+            .append("<td><a href=\"")
+            .append(linkPrefix + packageChildSummary.uid)
+            .append("\">")
+            .append(packageChildSummary.uid)
+            .append("</a></td>\n")
+            .append("<td>\n")
+            .append(packageChildSummary.summary != null ? packageChildSummary.summary : "")
+            .append("</td>\n")
+            .append("   </tr>\n");
+      }
+    }
+    tableBuilder.append(" </table>\n\n");
+    return tableBuilder.toString();
   }
 
   /** Use to get the recommended package URL for Package Overview */

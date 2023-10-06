@@ -36,3 +36,20 @@ Contains a collection of resources with JSON properties to represent the output 
    </tr>
  </table>
 
+## Interfaces
+<table>
+   <tr>
+     <th>
+Interface</th>
+     <th>
+Description</th>
+<tr>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.agreements.IAgreementDetailsCollection">com.microsoft.samples.agreements.IAgreementDetailsCollection</a></td>
+<td>
+
+<strong>Deprecated.</strong> <em>This one is deprecated :(</em>
+
+Encapsulates the operations on the agreement metadata collection.</td>
+   </tr>
+ </table>
+

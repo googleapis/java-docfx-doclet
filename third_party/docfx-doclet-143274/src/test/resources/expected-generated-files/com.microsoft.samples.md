@@ -57,6 +57,27 @@ Hero is the main entity we will be using to something</td>
    </tr>
  </table>
 
+## Interfaces
+<table>
+   <tr>
+     <th>
+Interface</th>
+     <th>
+Description</th>
+<tr>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.ExceptionHandler.Interceptor">com.microsoft.samples.ExceptionHandler.Interceptor</a></td>
+<td>
+</td>
+   </tr>
+<tr>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.IPartner">com.microsoft.samples.IPartner</a></td>
+<td>
+The main entry point into using the partner SDK functionality. Represents a partner and
+ encapsulates all the behavior attached to partners. Use this interface to get to the partner's
+ customers, profiles, and customer orders, profiles and subscriptions and more.</td>
+   </tr>
+ </table>
+
 ## Enums
 <table>
    <tr>

@@ -20,6 +20,7 @@ import static com.microsoft.build.BuilderUtil.populateItemFields;
 import static com.microsoft.build.BuilderUtil.replaceUidAndSplit;
 import static com.microsoft.build.BuilderUtil.splitUidWithGenericsIntoClassNames;
 
+import com.microsoft.build.PackageOverviewFile.PackageChildSummary;
 import com.microsoft.lookup.ClassLookup;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
@@ -27,7 +28,6 @@ import com.microsoft.model.SpecViewModel;
 import com.microsoft.util.ElementUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -82,38 +82,45 @@ class ReferenceBuilder {
     addInnerClassesReferences(classElement, classMetadataFile);
   }
 
-  void addChildrenReferences(
-      Element element, List<String> packageChildren, Set<MetadataFileItem> referencesCollector) {
+  void addPackageChildrenSummaries(
+      Element element, List<PackageChildSummary> packageChildrenSummaries) {
     for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
-      referencesCollector.add(buildClassReference(classElement));
-      packageChildren.add(classLookup.extractUid(classElement));
-      addChildrenReferences(classElement, packageChildren, referencesCollector);
-    }
-  }
-
-  // This is used to build the new package overviews
-  void addChildrenSummaries(Element element, HashMap<String, String[]> packageChildrenSummaries) {
-    for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
-      String[] valueArray = new String[2];
-      valueArray[0] = classLookup.extractSummary(classElement);
-      valueArray[1] = classLookup.extractType(classElement);
+      String summary = classLookup.extractSummary(classElement);
+      String type = classLookup.extractType(classElement);
+      String uid = classLookup.extractUid(classElement);
       // Only take the first 4 lines as the summary to keep the table tidy
-      if (valueArray[0] != null) {
-        String[] summary = valueArray[0].split("\n");
-        if (summary.length > 4) {
-          valueArray[0] = summary[0] + "\n" + summary[1] + "\n" + summary[2] + "\n" + summary[3];
+      if (summary != null) {
+        String[] summaryStrings = summary.split("\n");
+        if (summaryStrings.length > 4) {
+          summary =
+              summaryStrings[0]
+                  + "\n"
+                  + summaryStrings[1]
+                  + "\n"
+                  + summaryStrings[2]
+                  + "\n"
+                  + summaryStrings[3];
         }
       }
-      // If a Class is a Client (for Stub packages, Client classes are Base Stub Classes) or
-      // Settings class, highlight it
-      if (valueArray[0] != null
-          && (valueArray[0].contains("Service Description: ")
-              || valueArray[0].contains("Settings class")
-              || valueArray[0].contains("Base stub class"))) {
-        valueArray[1] = "Client/Settings";
+      // If a Class is a Client, call it out separately in the Package Overview
+      if (uid.endsWith("Client")) {
+        type = "Client";
       }
-      packageChildrenSummaries.put(classLookup.extractUid(classElement), valueArray);
-      addChildrenSummaries(classElement, packageChildrenSummaries);
+      // If a Class is a Settings class, call it out separately in the Package Overview
+      if (uid.endsWith("Settings")) {
+        type = "Settings";
+      }
+      // If a Class is a Stub class, call it out separately in the Package Overview
+      if (uid.endsWith("Stub")) {
+        type = "Stub";
+      }
+      // If a Class is a CallableFactory class (in Stub Packages only), call it out separately in
+      // the Package Overview
+      if (uid.endsWith("CallableFactory")) {
+        type = "CallableFactory";
+      }
+      packageChildrenSummaries.add(new PackageChildSummary(uid, type, summary));
+      addPackageChildrenSummaries(classElement, packageChildrenSummaries);
     }
   }
 

@@ -61,7 +61,7 @@ public class LibraryOverviewFile {
         "<table>\n"
             + "   <tr>\n"
             + "     <td><a href=\""
-            + repoMetadata.getClientDocumentationUri()
+            + repoMetadata.getProductDocumentationUri()
             + "\">"
             + repoMetadata.getNamePretty()
             + " product reference</a></td>\n"
@@ -201,10 +201,11 @@ public class LibraryOverviewFile {
               + this.recommendedApiVersion
               + " for new applications.\n"
               + "\n"
-              + "Each Cloud Java client library may contain multiple packages. Each package corresponds to a published version of the service.\n"
+              + "Each Cloud Java client library may contain multiple packages. Each package containing a version number in its name corresponds to a published version of the service.\n"
               + "We recommend using the latest stable version for new production applications, which can be identified by the largest numeric version that does not contain a suffix.\n"
               + "For example, if a client library has two packages: `v1` and `v2alpha`, then the latest stable version is `v1`.\n"
-              + "If you use an unstable release, breaking changes may be introduced when upgrading.\n\n";
+              + "If you use an unstable release, breaking changes may be introduced when upgrading.\n"
+              + "You can read more about [Cloud API versioning strategy here](https://cloud.google.com/apis/design/versioning).\n\n";
     }
   }
 
