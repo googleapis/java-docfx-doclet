@@ -188,7 +188,7 @@
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>google-cloud-speech</artifactId>
-      <version>4.19.0</version>
+      <version>4.22.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
