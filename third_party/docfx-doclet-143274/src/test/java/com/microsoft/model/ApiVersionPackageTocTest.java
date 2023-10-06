@@ -50,15 +50,15 @@ public class ApiVersionPackageTocTest {
 
     assertThat(tocItems).hasSize(3);
 
-    TocItem reqsAndResponses = tocItems.get(0);
-    assertThat(reqsAndResponses.getName()).isEqualTo(ApiVersionPackageToc.REQUESTS_AND_RESPONSES);
-    assertThat(reqsAndResponses.getItems()).hasSize(1);
-    assertThat(reqsAndResponses.getItems().get(0)).isEqualTo(TOC_ITEM);
-
-    TocItem settings = tocItems.get(1);
+    TocItem settings = tocItems.get(0);
     assertThat(settings.getName()).isEqualTo(ApiVersionPackageToc.SETTINGS);
     assertThat(settings.getItems()).hasSize(1);
     assertThat(settings.getItems().get(0).getName()).isEqualTo("TestSettings");
+
+    TocItem reqsAndResponses = tocItems.get(1);
+    assertThat(reqsAndResponses.getName()).isEqualTo(ApiVersionPackageToc.REQUESTS_AND_RESPONSES);
+    assertThat(reqsAndResponses.getItems()).hasSize(1);
+    assertThat(reqsAndResponses.getItems().get(0)).isEqualTo(TOC_ITEM);
 
     TocItem allOthers = tocItems.get(2);
     assertThat(allOthers.getName()).isEqualTo(ApiVersionPackageToc.ALL_OTHERS);
