@@ -25,8 +25,8 @@ public class ApiVersionPackageToc {
   public ApiVersionPackageToc() {
     // Order here determines final organization order.
     visibleCategories.put(CLIENTS, new ArrayList<>());
-    visibleCategories.put(REQUESTS_AND_RESPONSES, new ArrayList<>());
     visibleCategories.put(SETTINGS, new ArrayList<>());
+    visibleCategories.put(REQUESTS_AND_RESPONSES, new ArrayList<>());
 
     hiddenCategories.put(BUILDERS, new ArrayList<>());
     hiddenCategories.put(ENUMS, new ArrayList<>());
