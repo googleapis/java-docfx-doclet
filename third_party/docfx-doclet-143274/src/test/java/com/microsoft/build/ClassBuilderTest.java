@@ -21,6 +21,7 @@ import static org.mockito.Mockito.when;
 import com.google.testing.compile.CompilationRule;
 import com.microsoft.lookup.ClassItemsLookup;
 import com.microsoft.lookup.ClassLookup;
+import com.microsoft.lookup.PackageLookup;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
 import com.microsoft.util.ElementUtil;
@@ -49,12 +50,14 @@ public class ClassBuilderTest {
     docTrees = Mockito.mock(DocTrees.class);
     ElementUtil elementUtil = new ElementUtil(new String[0], new String[0]);
     ClassLookup classLookup = new ClassLookup(environment, elementUtil);
+    PackageLookup packageLookup = new PackageLookup(environment);
     classBuilder =
         new ClassBuilder(
             elementUtil,
             classLookup,
             new ClassItemsLookup(environment, elementUtil),
             "./target",
+            packageLookup,
             new ReferenceBuilder(environment, classLookup, elementUtil));
   }
 

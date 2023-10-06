@@ -20,8 +20,11 @@ import static com.microsoft.build.BuilderUtil.populateItemFields;
 
 import com.microsoft.lookup.ClassItemsLookup;
 import com.microsoft.lookup.ClassLookup;
+import com.microsoft.lookup.PackageLookup;
+import com.microsoft.model.ApiVersionPackageToc;
 import com.microsoft.model.MetadataFile;
 import com.microsoft.model.MetadataFileItem;
+import com.microsoft.model.StubPackageToc;
 import com.microsoft.model.TocItem;
 import com.microsoft.model.TocTypeMap;
 import com.microsoft.util.ElementUtil;
@@ -32,31 +35,141 @@ import java.util.stream.Collectors;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.ElementFilter;
 
 class ClassBuilder {
-  private ElementUtil elementUtil;
-  private ClassLookup classLookup;
-  private ClassItemsLookup classItemsLookup;
-  private String outputPath;
-  private ReferenceBuilder referenceBuilder;
+
+  private final ElementUtil elementUtil;
+  private final ClassLookup classLookup;
+  private final ClassItemsLookup classItemsLookup;
+  private final String outputPath;
+  private final PackageLookup packageLookup;
+  private final ReferenceBuilder referenceBuilder;
 
   ClassBuilder(
       ElementUtil elementUtil,
       ClassLookup classLookup,
       ClassItemsLookup classItemsLookup,
       String outputPath,
+      PackageLookup packageLookup,
       ReferenceBuilder referenceBuilder) {
     this.elementUtil = elementUtil;
     this.classLookup = classLookup;
     this.classItemsLookup = classItemsLookup;
     this.outputPath = outputPath;
+    this.packageLookup = packageLookup;
     this.referenceBuilder = referenceBuilder;
   }
 
-  void buildFilesForInnerClasses(
-      Element element, TocTypeMap tocTypeMap, List<MetadataFile> container) {
+  List<TocItem> buildFilesForPackage(PackageElement pkg, List<MetadataFile> classMetadataFiles) {
+    if (packageLookup.isApiVersionPackage(pkg) && containsAtLeastOneClient(pkg)) {
+      // API Version package organization is a nested list organized by GAPIC concepts
+      ApiVersionPackageToc apiVersionPackageToc = new ApiVersionPackageToc();
+      buildFilesForApiVersionPackage(pkg, apiVersionPackageToc, classMetadataFiles);
+      return apiVersionPackageToc.toList();
+
+    } else if (packageLookup.isApiVersionStubPackage(pkg)) {
+      StubPackageToc stubPackageToc = new StubPackageToc();
+      buildFilesForStubPackage(pkg, stubPackageToc, classMetadataFiles);
+      return stubPackageToc.toList();
+
+    } else {
+      // Standard package organization is a flat list organized by Java type
+      TocTypeMap typeMap = new TocTypeMap();
+      buildFilesForStandardPackage(pkg, typeMap, classMetadataFiles);
+      return typeMap.toList();
+    }
+  }
+
+  private void buildFilesForApiVersionPackage(
+      Element element,
+      ApiVersionPackageToc apiVersionPackageToc,
+      List<MetadataFile> classMetadataFiles) {
+    for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
+      String uid = classLookup.extractUid(classElement);
+      String name = classLookup.extractTocName(classElement);
+      String status = classLookup.extractStatus(classElement);
+      TocItem tocItem = new TocItem(uid, name, status);
+
+      // The order of these checks matter!
+      // Ex: a paging response class would change its category if "isPagingClass" is checked first.
+      if (classElement.getKind() == ElementKind.INTERFACE) {
+        apiVersionPackageToc.addInterface(tocItem);
+      } else if (isClient(classElement)) {
+        apiVersionPackageToc.addClient(tocItem);
+      } else if (name.endsWith("Response") || name.endsWith("Request")) {
+        apiVersionPackageToc.addRequestOrResponse(tocItem);
+      } else if (name.endsWith("Settings")) {
+        apiVersionPackageToc.addSettings(tocItem);
+      } else if (name.endsWith("Builder")) {
+        apiVersionPackageToc.addBuilder(tocItem);
+      } else if (classElement.getKind() == ElementKind.ENUM) {
+        apiVersionPackageToc.addEnum(tocItem);
+      } else if (name.endsWith("Exception")) {
+        apiVersionPackageToc.addException(tocItem);
+      } else if (isGeneratedMessage(classElement)) {
+        apiVersionPackageToc.addMessage(tocItem);
+      } else if (isPagingClass(classElement)) {
+        apiVersionPackageToc.addPaging(tocItem);
+      } else if (isResourceName(classElement)) {
+        apiVersionPackageToc.addResourceName(tocItem);
+      } else {
+        apiVersionPackageToc.addUncategorized(tocItem);
+      }
+
+      classMetadataFiles.add(buildClassYmlFile(classElement));
+      buildFilesForApiVersionPackage(classElement, apiVersionPackageToc, classMetadataFiles);
+    }
+  }
+
+  private void buildFilesForStubPackage(
+      Element element, StubPackageToc packageToc, List<MetadataFile> classMetadataFiles) {
+    for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
+      String uid = classLookup.extractUid(classElement);
+      String name = classLookup.extractTocName(classElement);
+      String status = classLookup.extractStatus(classElement);
+      TocItem tocItem = new TocItem(uid, name, status);
+
+      if (name.endsWith("Stub")) {
+        packageToc.addStub(tocItem);
+      } else if (name.contains("Settings")) {
+        packageToc.addSettings(tocItem);
+      } else if (name.endsWith("CallableFactory")) {
+        packageToc.addCallableFactory(tocItem);
+      } else {
+        packageToc.addUncategorized(tocItem);
+      }
+
+      classMetadataFiles.add(buildClassYmlFile(classElement));
+      buildFilesForStubPackage(classElement, packageToc, classMetadataFiles);
+    }
+  }
+
+  boolean containsAtLeastOneClient(PackageElement pkg) {
+    return elementUtil.extractSortedElements(pkg).stream().anyMatch(this::isClient);
+  }
+
+  boolean isClient(TypeElement classElement) {
+    return classLookup.extractTocName(classElement).endsWith("Client");
+  }
+
+  boolean isResourceName(TypeElement classElement) {
+    return classElement.getInterfaces().stream()
+        .anyMatch(i -> String.valueOf(i).contains("ResourceName"));
+  }
+
+  boolean isGeneratedMessage(TypeElement classElement) {
+    return String.valueOf(classElement.getSuperclass()).contains("GeneratedMessage");
+  }
+
+  boolean isPagingClass(TypeElement classElement) {
+    return String.valueOf(classElement.getSuperclass()).contains(".paging.");
+  }
+
+  void buildFilesForStandardPackage(
+      Element element, TocTypeMap tocTypeMap, List<MetadataFile> classMetadataFiles) {
     for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
       String uid = classLookup.extractUid(classElement);
       String name = classLookup.extractTocName(classElement);
@@ -73,8 +186,8 @@ class ClassBuilder {
         tocTypeMap.get(ElementKind.CLASS.name()).add(new TocItem(uid, name, status));
       }
 
-      container.add(buildClassYmlFile(classElement));
-      buildFilesForInnerClasses(classElement, tocTypeMap, container);
+      classMetadataFiles.add(buildClassYmlFile(classElement));
+      buildFilesForStandardPackage(classElement, tocTypeMap, classMetadataFiles);
     }
   }
 
