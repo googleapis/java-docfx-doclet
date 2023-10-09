@@ -17,7 +17,9 @@ package com.microsoft.build;
 
 import static com.microsoft.build.BuilderUtil.LANGS;
 import static com.microsoft.build.BuilderUtil.populateItemFields;
+import static com.microsoft.build.BuilderUtil.populateItemFieldsForClients;
 
+import com.google.docfx.doclet.RepoMetadata;
 import com.microsoft.lookup.ClassItemsLookup;
 import com.microsoft.lookup.ClassLookup;
 import com.microsoft.lookup.PackageLookup;
@@ -63,11 +65,12 @@ class ClassBuilder {
     this.referenceBuilder = referenceBuilder;
   }
 
-  List<TocItem> buildFilesForPackage(PackageElement pkg, List<MetadataFile> classMetadataFiles) {
+  List<TocItem> buildFilesForPackage(
+      PackageElement pkg, List<MetadataFile> classMetadataFiles, RepoMetadata repoMetadata) {
     if (packageLookup.isApiVersionPackage(pkg) && containsAtLeastOneClient(pkg)) {
       // API Version package organization is a nested list organized by GAPIC concepts
       ApiVersionPackageToc apiVersionPackageToc = new ApiVersionPackageToc();
-      buildFilesForApiVersionPackage(pkg, apiVersionPackageToc, classMetadataFiles);
+      buildFilesForApiVersionPackage(pkg, apiVersionPackageToc, classMetadataFiles, repoMetadata);
       return apiVersionPackageToc.toList();
 
     } else if (packageLookup.isApiVersionStubPackage(pkg)) {
@@ -86,7 +89,8 @@ class ClassBuilder {
   private void buildFilesForApiVersionPackage(
       Element element,
       ApiVersionPackageToc apiVersionPackageToc,
-      List<MetadataFile> classMetadataFiles) {
+      List<MetadataFile> classMetadataFiles,
+      RepoMetadata repoMetadata) {
     for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
       String uid = classLookup.extractUid(classElement);
       String name = classLookup.extractTocName(classElement);
@@ -119,8 +123,14 @@ class ClassBuilder {
         apiVersionPackageToc.addUncategorized(tocItem);
       }
 
-      classMetadataFiles.add(buildClassYmlFile(classElement));
-      buildFilesForApiVersionPackage(classElement, apiVersionPackageToc, classMetadataFiles);
+      // Client classes have custom overview
+      if (isClient(classElement)) {
+        classMetadataFiles.add(buildClientClassYmlFile(classElement, repoMetadata));
+      } else {
+        classMetadataFiles.add(buildClassYmlFile(classElement));
+      }
+      buildFilesForApiVersionPackage(
+          classElement, apiVersionPackageToc, classMetadataFiles, repoMetadata);
     }
   }
 
@@ -191,6 +201,19 @@ class ClassBuilder {
     }
   }
 
+  private MetadataFile buildClientClassYmlFile(
+      TypeElement classElement, RepoMetadata repoMetadata) {
+    String fileName = classLookup.extractHref(classElement);
+    MetadataFile classMetadataFile = new MetadataFile(outputPath, fileName);
+    addClientClassInfo(classElement, classMetadataFile, repoMetadata);
+    addConstructorsInfo(classElement, classMetadataFile);
+    addMethodsInfo(classElement, classMetadataFile);
+    addFieldsInfo(classElement, classMetadataFile);
+    referenceBuilder.addReferencesInfo(classElement, classMetadataFile);
+    applyPostProcessing(classMetadataFile);
+    return classMetadataFile;
+  }
+
   private MetadataFile buildClassYmlFile(TypeElement classElement) {
     String fileName = classLookup.extractHref(classElement);
     MetadataFile classMetadataFile = new MetadataFile(outputPath, fileName);
@@ -201,6 +224,61 @@ class ClassBuilder {
     referenceBuilder.addReferencesInfo(classElement, classMetadataFile);
     applyPostProcessing(classMetadataFile);
     return classMetadataFile;
+  }
+
+  // Does not set Inherited Methods or Inheritance as that information for Client classes is
+  // superfluous
+  // Sets updated Client summary with table of links
+  private void addClientClassInfo(
+      TypeElement classElement, MetadataFile classMetadataFile, RepoMetadata repoMetadata) {
+    MetadataFileItem classItem = new MetadataFileItem(LANGS, classLookup.extractUid(classElement));
+    classItem.setId(classLookup.extractId(classElement));
+    classItem.setParent(classLookup.extractParent(classElement));
+    addChildren(classElement, classItem.getChildren());
+    populateItemFieldsForClients(classItem, classLookup, classElement);
+    classItem.setPackageName(classLookup.extractPackageName(classElement));
+    classItem.setTypeParameters(classLookup.extractTypeParameters(classElement));
+    classItem.setInheritance(classLookup.extractSuperclass(classElement));
+    String summary = classLookup.extractSummary(classElement);
+    String summaryTable = createClientOverviewTable(classElement, repoMetadata);
+    classItem.setSummary(summaryTable + summary);
+    classItem.setStatus(classLookup.extractStatus(classElement));
+    classMetadataFile.getItems().add(classItem);
+  }
+
+  private String createClientOverviewTable(TypeElement classElement, RepoMetadata repoMetadata) {
+    String clientURI = classLookup.extractUid(classElement).replaceAll("\\.", "/");
+    String githubSourceLink =
+        repoMetadata.getGithubLink()
+            + "/"
+            + repoMetadata.getArtifactId()
+            + "/src/main/java/"
+            + clientURI
+            + ".java";
+    StringBuilder tableBuilder = new StringBuilder();
+    tableBuilder
+        .append("<table>")
+        .append("<tr>")
+        .append("<td><a href=\"")
+        .append(githubSourceLink)
+        .append("\">GitHub Repository</a></td>")
+        .append("<td><a href=\"")
+        .append(repoMetadata.getProductDocumentationUri())
+        .append("\">Product Reference</a></td>");
+    if (repoMetadata.getRestDocumentationUri().isPresent()) {
+      tableBuilder
+          .append("<td><a href=\"")
+          .append(repoMetadata.getRestDocumentationUri().get())
+          .append("\">REST Documentation</a></td>");
+    }
+    if (repoMetadata.getRpcDocumentationUri().isPresent()) {
+      tableBuilder
+          .append("<td><a href=\"")
+          .append(repoMetadata.getRpcDocumentationUri().get())
+          .append("\">RPC Documentation</a></td>");
+    }
+    tableBuilder.append("</tr></table>\n\n");
+    return tableBuilder.toString();
   }
 
   private void addClassInfo(TypeElement classElement, MetadataFile classMetadataFile) {

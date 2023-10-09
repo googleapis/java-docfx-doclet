@@ -1,7 +1,7 @@
 # Package com.microsoft.samples (0.18.0)
 <table>
    <tr>
-     <td><a href="https://github.com/googleapis/google-cloud-java/tree/main/java-apikeys/google-cloud-apikeys/src/main/java/com/microsoft/samples">Github repository</a></td>
+     <td><a href="https://github.com/googleapis/google-cloud-java/tree/main/java-apikeys/google-cloud-apikeys/src/main/java/com/microsoft/samples">GitHub Repository</a></td>
      <td><a href="https://cloud.google.com/api-keys/docs/reference/rpc">RPC Documentation</a></td>
      <td><a href="https://cloud.google.com/api-keys/docs/reference/rest">REST Documentation</a></td>
    </tr>

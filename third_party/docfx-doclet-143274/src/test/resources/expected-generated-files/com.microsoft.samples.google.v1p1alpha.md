@@ -1,7 +1,7 @@
 # Package com.microsoft.samples.google.v1p1alpha (0.18.0)
 <table>
    <tr>
-     <td><a href="https://github.com/googleapis/google-cloud-java/tree/main/java-apikeys/google-cloud-apikeys/src/main/java/com/microsoft/samples/google/v1p1alpha">Github repository</a></td>
+     <td><a href="https://github.com/googleapis/google-cloud-java/tree/main/java-apikeys/google-cloud-apikeys/src/main/java/com/microsoft/samples/google/v1p1alpha">GitHub Repository</a></td>
      <td><a href="https://cloud.google.com/api-keys/docs/reference/rpc">RPC Documentation</a></td>
      <td><a href="https://cloud.google.com/api-keys/docs/reference/rest">REST Documentation</a></td>
    </tr>

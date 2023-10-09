@@ -1,7 +1,7 @@
 # Package com.microsoft.samples.google.v1.stub (0.18.0)
 <table>
    <tr>
-     <td><a href="https://github.com/googleapis/google-cloud-java/tree/main/java-apikeys/google-cloud-apikeys/src/main/java/com/microsoft/samples/google/v1/stub">Github repository</a></td>
+     <td><a href="https://github.com/googleapis/google-cloud-java/tree/main/java-apikeys/google-cloud-apikeys/src/main/java/com/microsoft/samples/google/v1/stub">GitHub Repository</a></td>
      <td><a href="https://cloud.google.com/api-keys/docs/reference/rpc">RPC Documentation</a></td>
      <td><a href="https://cloud.google.com/api-keys/docs/reference/rest">REST Documentation</a></td>
    </tr>
@@ -42,7 +42,7 @@ Base stub class for the Speech service API.
  </table>
 
 ## Settings Classes
-Settings classes can be used to configure credentials, endpoints, and retry settings for a Client.
+Settings classes can be used to configure credentials, endpoints, and retry settings for a Stub.
 <table>
    <tr>
      <th>

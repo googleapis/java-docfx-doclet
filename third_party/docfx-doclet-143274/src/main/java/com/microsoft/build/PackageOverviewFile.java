@@ -170,7 +170,7 @@ public class PackageOverviewFile {
         .append("   <tr>\n")
         .append("     <td><a href=\"")
         .append(githubSourcePackageLink)
-        .append("\">Github repository</a></td>\n");
+        .append("\">GitHub Repository</a></td>\n");
 
     // If RPC documentation URI exists, add to the package overview table
     if (repoMetadata.getRpcDocumentationUri().isPresent()) {
@@ -219,30 +219,38 @@ public class PackageOverviewFile {
             .anyMatch(packageChildSummary -> "Settings".equals(packageChildSummary.getType()));
     if (containsSettingsClasses) {
       this.SETTINGS_TABLE_HEADER = "## Settings Classes\n";
-      this.SETTINGS_TABLE_BLURB =
-          "Settings classes can be used to configure credentials, endpoints, and retry settings for a Client.\n";
+      if (packageLookup.isApiVersionStubPackage(this.packageElement)) {
+        this.SETTINGS_TABLE_BLURB =
+            "Settings classes can be used to configure credentials, endpoints, and retry settings for a Stub.\n";
+      } else {
+        this.SETTINGS_TABLE_BLURB =
+            "Settings classes can be used to configure credentials, endpoints, and retry settings for a Client.\n";
+      }
+
       this.SETTINGS_TABLE =
           createHtmlTable(
               "Settings", cloudRADChildElementLinkPrefix, listOfPackageChildrenSummaries);
     }
 
-    // If Stubs exist in this package, create a table of them
+    // If package is a Stub package, create a table of Stub classes
     boolean containsStubClasses =
         listOfPackageChildrenSummaries.stream()
             .anyMatch(packageChildSummary -> "Stub".equals(packageChildSummary.getType()));
-    if (containsStubClasses) {
+    if (containsStubClasses && (packageLookup.isApiVersionStubPackage(this.packageElement))) {
       this.STUB_TABLE_HEADER = "## Stub Classes\n";
       this.STUB_TABLE_BLURB = "";
       this.STUB_TABLE =
           createHtmlTable("Stub", cloudRADChildElementLinkPrefix, listOfPackageChildrenSummaries);
     }
 
-    // If Callable Factory classes exist in this package, create a table of them
+    // If package is a Stub package and Callable Factory classes exist in this package, create a
+    // table of them
     boolean containsCallableFactoryClasses =
         listOfPackageChildrenSummaries.stream()
             .anyMatch(
                 packageChildSummary -> "CallableFactory".equals(packageChildSummary.getType()));
-    if (containsCallableFactoryClasses) {
+    if (containsCallableFactoryClasses
+        && (packageLookup.isApiVersionStubPackage(this.packageElement))) {
       this.CALLABLE_FACTORY_TABLE_HEADER = "## Callable Factory Classes\n";
       this.CALLABLE_FACTORY_TABLE_BLURB = "";
       this.CALLABLE_FACTORY_TABLE =
