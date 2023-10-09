@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
+import java.util.Optional;
 
 public class RepoMetadata {
 
@@ -26,6 +27,12 @@ public class RepoMetadata {
 
   @SerializedName("client_documentation")
   private String clientDocumentationUri;
+
+  @SerializedName("rest_documentation")
+  private String restDocumentationUri;
+
+  @SerializedName("rpc_documentation")
+  private String rpcDocumentationUri;
 
   @SerializedName("repo")
   private String repo;
@@ -59,6 +66,14 @@ public class RepoMetadata {
 
   public String getProductDocumentationUri() {
     return this.productDocumentationUri;
+  }
+
+  public Optional<String> getRestDocumentationUri() {
+    return Optional.ofNullable(this.restDocumentationUri);
+  }
+
+  public Optional<String> getRpcDocumentationUri() {
+    return Optional.ofNullable(this.rpcDocumentationUri);
   }
 
   public void setProductDocumentationUri(String productDocumentationUri) {

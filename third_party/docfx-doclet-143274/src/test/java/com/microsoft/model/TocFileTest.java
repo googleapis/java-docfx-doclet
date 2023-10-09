@@ -41,4 +41,31 @@ public class TocFileTest {
 
     assertThat(tocFile).containsExactly(tocItemA, tocItemB, tocItemC, olderItem).inOrder();
   }
+
+  @Test
+  public void addsPackageOverviews() {
+    TocFile tocFile = new TocFile("outputPath", "google-cloud-project", false, false);
+    TocItem tocItemA = new TocItem("a.uid.package.class", "name");
+    TocItem tocItemB = new TocItem("B.uid.package.class", "name");
+    TocItem tocItemC = new TocItem("c.uid.package.class", "name");
+    TocItem olderItem = new TocItem("Older and prerelease packages", "name");
+    TocItem packageOverview =
+        new TocItem("1.uid.package.class", "Package summary", "a.uid.package.class.md", true);
+
+    tocFile.addTocItem(tocItemC);
+    tocFile.addTocItem(tocItemA);
+    tocFile.addTocItem(olderItem);
+    tocFile.addTocItem(tocItemB);
+    tocFile.addTocItem(packageOverview);
+
+    assertThat(tocFile)
+        .containsExactly(tocItemC, tocItemA, olderItem, tocItemB, packageOverview)
+        .inOrder();
+
+    tocFile.sortByUid();
+
+    assertThat(tocFile)
+        .containsExactly(packageOverview, tocItemA, tocItemB, tocItemC, olderItem)
+        .inOrder();
+  }
 }

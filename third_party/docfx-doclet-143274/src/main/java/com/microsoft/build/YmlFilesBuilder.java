@@ -6,6 +6,7 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableListMultimap;
 import com.google.docfx.doclet.ApiVersion;
+import com.google.docfx.doclet.RepoMetadata;
 import com.microsoft.lookup.ClassItemsLookup;
 import com.microsoft.lookup.ClassLookup;
 import com.microsoft.lookup.PackageLookup;
@@ -83,6 +84,7 @@ public class YmlFilesBuilder {
 
   public boolean build() {
     Processor processor = new Processor();
+    processor.repoMetadata = processor.repoMetadata.parseRepoMetadata(this.repoMetadataFilePath);
     processor.process();
 
     //  write to yaml files
@@ -91,6 +93,7 @@ public class YmlFilesBuilder {
     }
     processor.packageMetadataFiles.forEach(FileUtil::dumpToFile);
     processor.classMetadataFiles.forEach(FileUtil::dumpToFile);
+    processor.packageOverviewFiles.forEach(FileUtil::dumpToFile);
     FileUtil.dumpToFile(processor.tocFile);
 
     // Generate new library overview page
@@ -114,9 +117,12 @@ public class YmlFilesBuilder {
     final TocFile tocFile =
         new TocFile(outputPath, projectName, disableChangelog, disableLibraryOverview);
     //  overview page if not using new libraryOverview
+
     final MetadataFile projectMetadataFile = new MetadataFile(outputPath, "overview.yml");
     //  package summary pages
     private final List<MetadataFile> packageMetadataFiles = new ArrayList<>();
+
+    private final List<PackageOverviewFile> packageOverviewFiles = new ArrayList<>();
     //  packages
     private final List<MetadataFileItem> packageItems = new ArrayList<>();
     //  class/enum/interface/etc. pages
@@ -126,6 +132,8 @@ public class YmlFilesBuilder {
         elementUtil.extractPackageElements(environment.getIncludedElements());
 
     private String recommendedApiVersion = "";
+
+    private RepoMetadata repoMetadata = new RepoMetadata();
 
     @VisibleForTesting
     void process() {
@@ -186,10 +194,13 @@ public class YmlFilesBuilder {
       String packageStatus = packageLookup.extractStatus(element);
 
       TocItem packageTocItem = new TocItem(packageUid, packageUid, packageStatus);
-      packageTocItem.getItems().add(new TocItem(packageUid, "Package summary"));
 
-      //  build package summary
-      packageMetadataFiles.add(packageBuilder.buildPackageMetadataFile(element));
+      // New package overview
+      TocItem packageSummary = new TocItem(packageUid, "Package summary", packageUid + ".md", true);
+      packageTocItem.getItems().add(packageSummary);
+      packageOverviewFiles.add(
+          packageBuilder.buildPackageOverviewFile(
+              element, repoMetadata, artifactVersion, recommendedApiVersion));
 
       // build classes/interfaces/enums/exceptions/annotations
       packageTocItem

@@ -10,6 +10,7 @@
     items:
     - uid: "com.microsoft.samples"
       name: "Package summary"
+      href: "com.microsoft.samples.md"
     - heading: "Interfaces"
     - uid: "com.microsoft.samples.ExceptionHandler.Interceptor"
       name: "ExceptionHandler.Interceptor"
@@ -41,6 +42,7 @@
     items:
     - uid: "com.microsoft.samples.agreements"
       name: "Package summary"
+      href: "com.microsoft.samples.agreements.md"
     - heading: "Interfaces"
     - uid: "com.microsoft.samples.agreements.IAgreementDetailsCollection"
       name: "IAgreementDetailsCollection"
@@ -58,6 +60,7 @@
     items:
     - uid: "com.microsoft.samples.commentinheritance"
       name: "Package summary"
+      href: "com.microsoft.samples.commentinheritance.md"
     - heading: "Interfaces"
     - uid: "com.microsoft.samples.commentinheritance.Carnivorous"
       name: "Carnivorous"
@@ -83,6 +86,7 @@
     items:
     - uid: "com.microsoft.samples.google"
       name: "Package summary"
+      href: "com.microsoft.samples.google.md"
     - heading: "Interfaces"
     - uid: "com.microsoft.samples.google.ValidationException.Supplier"
       name: "ValidationException.Supplier"
@@ -113,6 +117,7 @@
     items:
     - uid: "com.microsoft.samples.google.v1"
       name: "Package summary"
+      href: "com.microsoft.samples.google.v1.md"
     - uid: "Clients"
       name: "Clients"
       items:
@@ -126,6 +131,7 @@
         items:
         - uid: "com.microsoft.samples.google.v1.stub"
           name: "Package summary"
+          href: "com.microsoft.samples.google.v1.stub.md"
         - uid: "Stubs"
           name: "Stubs"
           items:
@@ -147,6 +153,7 @@
     items:
     - uid: "com.microsoft.samples.offers"
       name: "Package summary"
+      href: "com.microsoft.samples.offers.md"
     - heading: "Classes"
     - uid: "com.microsoft.samples.offers.Offer"
       name: "Offer"
@@ -155,6 +162,7 @@
     items:
     - uid: "com.microsoft.samples.subpackage"
       name: "Package summary"
+      href: "com.microsoft.samples.subpackage.md"
     - heading: "Interfaces"
     - uid: "com.microsoft.samples.subpackage.Display"
       name: "Display"
@@ -180,6 +188,7 @@
       items:
       - uid: "com.microsoft.samples.google.v1beta"
         name: "Package summary"
+        href: "com.microsoft.samples.google.v1beta.md"
       - uid: "Clients"
         name: "Clients"
         items:
@@ -191,6 +200,7 @@
       items:
       - uid: "com.microsoft.samples.google.v1p1alpha"
         name: "Package summary"
+        href: "com.microsoft.samples.google.v1p1alpha.md"
       - uid: "Clients"
         name: "Clients"
         items:
