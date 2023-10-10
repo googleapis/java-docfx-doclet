@@ -197,4 +197,17 @@ final class BuilderUtil {
     item.setStatus(lookup.extractStatus(element));
     item.setContent(lookup.extractContent(element));
   }
+
+  /** Does not include syntax contents for Client classes as they are not useful */
+  static <T extends Element> void populateItemFieldsForClients(
+      MetadataFileItem item, BaseLookup<T> lookup, T element) {
+    String name = lookup.extractName(element);
+    item.setName(name);
+    item.setNameWithType(lookup.extractNameWithType(element));
+    item.setFullName(lookup.extractFullName(element));
+    item.setType(lookup.extractType(element));
+    item.setJavaType(lookup.extractJavaType(element));
+    item.setSummary(lookup.extractSummary(element));
+    item.setStatus(lookup.extractStatus(element));
+  }
 }

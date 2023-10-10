@@ -64,10 +64,10 @@ public class LibraryOverviewFile {
             + repoMetadata.getProductDocumentationUri()
             + "\">"
             + repoMetadata.getNamePretty()
-            + " product reference</a></td>\n"
+            + " Product Reference</a></td>\n"
             + "     <td><a href=\""
             + repoMetadata.getGithubLink()
-            + "\">Github repository (includes samples)</a></td>\n"
+            + "\">GitHub Repository (includes samples)</a></td>\n"
             + "     <td><a href=\""
             + repoMetadata.getMavenLink()
             + "\">Maven artifact</a></td>\n"

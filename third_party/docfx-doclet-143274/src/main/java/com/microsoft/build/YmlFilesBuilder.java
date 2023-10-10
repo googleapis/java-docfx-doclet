@@ -205,7 +205,7 @@ public class YmlFilesBuilder {
       // build classes/interfaces/enums/exceptions/annotations
       packageTocItem
           .getItems()
-          .addAll(classBuilder.buildFilesForPackage(element, classMetadataFiles));
+          .addAll(classBuilder.buildFilesForPackage(element, classMetadataFiles, repoMetadata));
 
       // build stubs
       TocItem stubPackagesItem = new TocItem("Stub packages", "Stub packages", "");
