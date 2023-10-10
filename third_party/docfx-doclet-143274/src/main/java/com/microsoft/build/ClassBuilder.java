@@ -265,16 +265,22 @@ class ClassBuilder {
         .append("<td><a href=\"")
         .append(repoMetadata.getProductDocumentationUri())
         .append("\">Product Reference</a></td>");
-    repoMetadata.getRestDocumentationUri().ifPresent(restDocumentationURI ->
-        tableBuilder
-            .append("<td><a href=\"")
-            .append(restDocumentationURI)
-            .append("\">REST Documentation</a></td>"));
-    repoMetadata.getRpcDocumentationUri().ifPresent(rpcDocumentationURI ->
-        tableBuilder
-            .append("<td><a href=\"")
-            .append(rpcDocumentationURI)
-            .append("\">RPC Documentation</a></td>"));
+    repoMetadata
+        .getRestDocumentationUri()
+        .ifPresent(
+            restDocumentationURI ->
+                tableBuilder
+                    .append("<td><a href=\"")
+                    .append(restDocumentationURI)
+                    .append("\">REST Documentation</a></td>"));
+    repoMetadata
+        .getRpcDocumentationUri()
+        .ifPresent(
+            rpcDocumentationURI ->
+                tableBuilder
+                    .append("<td><a href=\"")
+                    .append(rpcDocumentationURI)
+                    .append("\">RPC Documentation</a></td>"));
     tableBuilder.append("</tr></table>\n\n");
     return tableBuilder.toString();
   }
