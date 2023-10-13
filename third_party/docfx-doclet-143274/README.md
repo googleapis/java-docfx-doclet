@@ -27,6 +27,18 @@ To run the linter:
 ```bash
 mvn fmt:format
 ```
+## Release Guide
+
+To cut a new release of the doclet for updated Cloud RAD content, do the following steps:
+
+1) Manually update the [version of the doclet in the pom.xml](https://github.com/googleapis/java-docfx-doclet/blob/main/third_party/docfx-doclet-143274/pom.xml#L9) to the next minor or patch version.
+2) Commit that version update to the `main` branch, and then add a git tag to that version (minus the `-SNAPSHOT`). You can use the below commands as a template:
+
+` git tag -a v1.<minor>.<patch> -m "<What the new release includes>"`
+
+`git push origin v1.<minor>.<patch>`
+
+3) Update the `publish_javadoc11.sh` script within g3 to use the latest version of the doclet.
 
 ## Usage 
 
