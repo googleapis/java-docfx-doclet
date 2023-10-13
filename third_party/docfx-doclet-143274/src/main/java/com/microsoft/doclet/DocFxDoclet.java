@@ -21,14 +21,11 @@ public class DocFxDoclet implements Doclet {
 
   @Override
   public boolean run(DocletEnvironment environment) {
-    String artifactVersion = System.getenv("artifactVersion");
-    String librariesBomVersion = System.getenv("librariesBomVersion");
-    String repoMetadataFilePath = System.getenv("repoMetadataFilePath");
-    Objects.requireNonNull(
-        repoMetadataFilePath, "Environment variable 'repoMetadataFilePath' must not be null.");
-    reporter.print(Kind.NOTE, "Environment variable artifactVersion: " + artifactVersion);
-    reporter.print(Kind.NOTE, "Environment variable librariesBomVersion: " + librariesBomVersion);
-    reporter.print(Kind.NOTE, "Environment variable repoMetadataFilePath: " + repoMetadataFilePath);
+    Objects.requireNonNull(repoMetadataFilePath, "repoMetadataFilePath must not be null.");
+
+    reporter.print(Kind.NOTE, "artifactVersion: " + artifactVersion);
+    reporter.print(Kind.NOTE, "librariesBomVersion: " + librariesBomVersion);
+    reporter.print(Kind.NOTE, "repoMetadataFilePath: " + repoMetadataFilePath);
     reporter.print(Kind.NOTE, "Output path: " + outputPath);
     reporter.print(Kind.NOTE, "Excluded packages: " + Arrays.toString(excludePackages));
     reporter.print(Kind.NOTE, "Excluded classes: " + Arrays.toString(excludeClasses));
@@ -61,6 +58,9 @@ public class DocFxDoclet implements Doclet {
   private String projectName;
   private boolean disableChangelog;
   private boolean disableLibraryOverview;
+  private String artifactVersion;
+  private String librariesBomVersion;
+  private String repoMetadataFilePath;
 
   @Override
   public Set<? extends Option> getSupportedOptions() {
@@ -127,6 +127,36 @@ public class DocFxDoclet implements Doclet {
           } else {
             disableLibraryOverview = true;
           }
+          return true;
+        }
+      },
+      new CustomOption(
+          "Artifact Version",
+          Arrays.asList("-artifactVersion", "--artifactVersion"),
+          "artifactVersion") {
+        @Override
+        public boolean process(String option, List<String> arguments) {
+          artifactVersion = arguments.get(0);
+          return true;
+        }
+      },
+      new CustomOption(
+          "libraries-bom Version",
+          Arrays.asList("-librariesBomVersion", "--librariesBomVersion"),
+          "librariesBomVersion") {
+        @Override
+        public boolean process(String option, List<String> arguments) {
+          librariesBomVersion = arguments.get(0);
+          return true;
+        }
+      },
+      new CustomOption(
+          "repo-metadata.json File Path",
+          Arrays.asList("-repoMetadataFilePath", "--repoMetadataFilePath"),
+          "repoMetadataFilePath") {
+        @Override
+        public boolean process(String option, List<String> arguments) {
+          repoMetadataFilePath = arguments.get(0);
           return true;
         }
       },

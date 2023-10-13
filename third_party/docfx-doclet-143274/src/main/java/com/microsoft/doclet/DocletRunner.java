@@ -1,5 +1,7 @@
 package com.microsoft.doclet;
 
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.ImmutableList;
 import com.microsoft.util.OptionsFileUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,18 @@ public class DocletRunner {
       return;
     }
 
-    List<String> combined = new ArrayList<>();
+    run(
+        args,
+        new EnvironmentToArgumentsBuilder()
+            .addIfExists("artifactVersion")
+            .addIfExists("librariesBomVersion")
+            .addIfExists("repoMetadataFilePath")
+            .build());
+  }
+
+  @VisibleForTesting
+  static void run(final String[] args, List<String> env) {
+    List<String> combined = new ArrayList<>(env);
     for (String arg : args) {
       if (!(new java.io.File(arg)).isFile()) {
         System.err.println(String.format("File '%s' does not exist", args[0]));
@@ -29,5 +42,28 @@ public class DocletRunner {
     }
     ToolProvider.getSystemDocumentationTool()
         .run(null, null, null, combined.toArray(new String[0]));
+  }
+
+  @VisibleForTesting
+  static class EnvironmentToArgumentsBuilder {
+    private final ImmutableList.Builder<String> env = new ImmutableList.Builder<>();
+
+    public EnvironmentToArgumentsBuilder addIfExists(String name) {
+      String value = System.getenv(name);
+      if (value != null) {
+        return add(name, value);
+      }
+      return this;
+    }
+
+    @VisibleForTesting
+    EnvironmentToArgumentsBuilder add(String name, String value) {
+      env.add("-" + name, value);
+      return this;
+    }
+
+    public ImmutableList<String> build() {
+      return env.build();
+    }
   }
 }
