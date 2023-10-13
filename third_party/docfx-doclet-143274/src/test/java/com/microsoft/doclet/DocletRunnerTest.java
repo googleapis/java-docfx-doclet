@@ -2,7 +2,6 @@ package com.microsoft.doclet;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
 import com.microsoft.util.FileUtilTest;
@@ -15,9 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.contrib.java.lang.system.EnvironmentVariables;
 
 public class DocletRunnerTest {
 
@@ -29,8 +26,6 @@ public class DocletRunnerTest {
   private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
   private final PrintStream originalOut = System.out;
   private final PrintStream originalErr = System.err;
-
-  @Rule public final EnvironmentVariables environmentVariables = new EnvironmentVariables();
 
   @Before
   public void cleanup() throws IOException {
@@ -71,17 +66,14 @@ public class DocletRunnerTest {
 
   @Test
   public void testFilesGeneration() throws IOException {
-    environmentVariables.set("artifactVersion", "0.18.0");
-    environmentVariables.set("librariesBomVersion", "26.19.0");
-    environmentVariables.set(
-        "repoMetadataFilePath", "./src/test/java/com/microsoft/samples/.repo-metadata.json");
-    assertEquals("0.18.0", System.getenv("artifactVersion"));
-    assertEquals("26.19.0", System.getenv("librariesBomVersion"));
-    assertEquals(
-        "./src/test/java/com/microsoft/samples/.repo-metadata.json",
-        System.getenv("repoMetadataFilePath"));
-
-    DocletRunner.main(new String[] {PARAMS_DIR});
+    DocletRunner.run(
+        new String[] {PARAMS_DIR},
+        new DocletRunner.EnvironmentToArgumentsBuilder()
+            .add("artifactVersion", "0.18.0")
+            .add("librariesBomVersion", "26.19.0")
+            .add(
+                "repoMetadataFilePath", "./src/test/java/com/microsoft/samples/.repo-metadata.json")
+            .build());
 
     List<Path> expectedFilePaths =
         Files.list(Path.of(EXPECTED_GENERATED_FILES_DIR)).sorted().collect(Collectors.toList());
@@ -111,12 +103,6 @@ public class DocletRunnerTest {
             generatedFileLines[i]);
       }
     }
-    environmentVariables.clear("artifactVersion");
-    environmentVariables.clear("librariesBomVersion");
-    environmentVariables.clear("repoMetadataFilePath");
-    assertNull(System.getenv("artifactVersion"));
-    assertNull(System.getenv("librariesBomVersion"));
-    assertNull(System.getenv("repoMetadataFilePath"));
   }
 
   public void assertSameFileNames(List<Path> expected, List<Path> generated) {
