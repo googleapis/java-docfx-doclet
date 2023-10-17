@@ -193,6 +193,7 @@ items:
     content: "public static ApiClientHeaderProvider.Builder defaultApiClientHeaderProviderBuilder()"
     return:
       type: "com.google.api.gax.rpc.ApiClientHeaderProvider.Builder"
+  status: "beta"
   javaType: "static method"
 - uid: "com.microsoft.samples.google.ProductSearchSettings.defaultCredentialsProviderBuilder()"
   id: "defaultCredentialsProviderBuilder()"

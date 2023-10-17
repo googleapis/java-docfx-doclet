@@ -17,7 +17,6 @@
 package com.microsoft.samples.google.v1p1alpha;
 
 import com.google.api.core.BetaApi;
-import com.google.api.core.ObsoleteApi;
 import com.google.api.gax.core.BackgroundResource;
 import com.google.api.gax.longrunning.OperationFuture;
 import com.google.api.gax.rpc.BidiStreamingCallable;
@@ -94,7 +93,6 @@ import javax.annotation.Generated;
  * <p>Please refer to the GitHub repository's samples for more quickstart code snippets.
  */
 @BetaApi
-@ObsoleteApi("Example obsolete annotation. Use a different version because.")
 @Generated("by gapic-generator-java")
 public class SpeechClient implements BackgroundResource {
   private final com.microsoft.samples.google.SpeechSettings settings;

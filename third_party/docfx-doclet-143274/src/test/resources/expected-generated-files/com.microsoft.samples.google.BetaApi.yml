@@ -12,11 +12,12 @@ items:
   fullName: "com.microsoft.samples.google.BetaApi"
   type: "Interface"
   package: "com.microsoft.samples.google"
-  summary: "Indicates a public API that can change at any time, and has no guarantee of API stability and\n backward-compatibility.\n\n <p>Usage guidelines:\n\n <ol>\n   <li>This annotation is used only on APIs with public visibility. Internal interfaces should not\n       use it.\n   <li>This annotation should only be added to new APIs. Adding it to an existing API is\n       considered API-breaking.\n   <li>Removing this annotation from an API gives it stable status, assuming the API doesn't have\n       other annotations denoting instability.\n </ol>"
+  summary: "<strong>Beta.</strong> <em>Not stable. This component may change between minor and patch releases in incompatible ways. </em>\nIndicates a public API that can change at any time, and has no guarantee of API stability and\n backward-compatibility.\n\n <p>Usage guidelines:\n\n <ol>\n   <li>This annotation is used only on APIs with public visibility. Internal interfaces should not\n       use it.\n   <li>This annotation should only be added to new APIs. Adding it to an existing API is\n       considered API-breaking.\n   <li>Removing this annotation from an API gives it stable status, assuming the API doesn't have\n       other annotations denoting instability.\n </ol>"
   syntax:
     content: "public interface BetaApi implements Annotation"
   implements:
   - "java.lang.annotation.Annotation"
+  status: "beta"
   javaType: "annotationtype"
 - uid: "com.microsoft.samples.google.BetaApi.value()"
   id: "value()"

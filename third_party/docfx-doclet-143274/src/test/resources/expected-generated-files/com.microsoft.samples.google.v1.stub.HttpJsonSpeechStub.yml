@@ -28,7 +28,7 @@ items:
   fullName: "com.microsoft.samples.google.v1.stub.HttpJsonSpeechStub"
   type: "Class"
   package: "com.microsoft.samples.google.v1.stub"
-  summary: "REST stub implementation for the Speech service API.\n\n <p>This class is for advanced usage and reflects the underlying API directly."
+  summary: "<strong>Beta.</strong> <em>Not stable. This component may change between minor and patch releases in incompatible ways. </em>\nREST stub implementation for the Speech service API.\n\n <p>This class is for advanced usage and reflects the underlying API directly."
   syntax:
     content: "public class HttpJsonSpeechStub extends SpeechStub"
   inheritance:
@@ -53,6 +53,7 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
+  status: "beta"
 - uid: "com.microsoft.samples.google.v1.stub.HttpJsonSpeechStub.HttpJsonSpeechStub(com.microsoft.samples.google.v1.stub.SpeechStubSettings,com.google.api.gax.rpc.ClientContext)"
   id: "HttpJsonSpeechStub(com.microsoft.samples.google.v1.stub.SpeechStubSettings,com.google.api.gax.rpc.ClientContext)"
   parent: "com.microsoft.samples.google.v1.stub.HttpJsonSpeechStub"
@@ -225,6 +226,7 @@ items:
     content: "public static List<ApiMethodDescriptor> getMethodDescriptors()"
     return:
       type: "java.util.List<com.google.api.gax.httpjson.ApiMethodDescriptor>"
+  status: "internal"
   javaType: "static method"
 - uid: "com.microsoft.samples.google.v1.stub.HttpJsonSpeechStub.isShutdown()"
   id: "isShutdown()"

@@ -1,9 +1,9 @@
 package com.microsoft.lookup;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.google.testing.compile.CompilationRule;
@@ -16,8 +16,8 @@ import com.sun.source.doctree.DocCommentTree;
 import com.sun.source.doctree.DocTree;
 import com.sun.source.doctree.TextTree;
 import com.sun.source.util.DocTrees;
-import java.util.Arrays;
 import java.util.List;
+import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
@@ -42,6 +42,7 @@ public class ClassLookupTest {
   private DeprecatedTree deprecatedTree;
   private TextTree textTree;
   private TypeMirror typeMirror;
+  private ClassItemsLookup classItemsLookup;
 
   @Before
   public void setup() {
@@ -54,6 +55,9 @@ public class ClassLookupTest {
     deprecatedTree = Mockito.mock(DeprecatedTree.class);
     textTree = Mockito.mock(TextTree.class);
     typeMirror = Mockito.mock(TypeMirror.class);
+    classItemsLookup = new ClassItemsLookup(environment, Mockito.mock(ElementUtil.class));
+
+    when(environment.getDocTrees()).thenReturn(docTrees);
   }
 
   @Test
@@ -189,41 +193,24 @@ public class ClassLookupTest {
   }
 
   @Test
-  public void extractStatusDeprecated() {
+  public void extractStatus_deprecated() {
     TypeElement element =
         elements.getTypeElement(
             "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations");
 
-    when(environment.getDocTrees()).thenReturn(docTrees);
-    when(docTrees.getDocCommentTree(element)).thenReturn(docCommentTree);
-    doReturn(Arrays.asList(deprecatedTree)).when(docCommentTree).getBlockTags();
-    when(deprecatedTree.getKind()).thenReturn(DocTree.Kind.DEPRECATED);
-
     String result = classLookup.extractStatus(element);
 
-    verify(environment).getDocTrees();
-    verify(docTrees).getDocCommentTree(element);
-    verify(docCommentTree).getBlockTags();
-    verify(deprecatedTree).getKind();
     assertEquals("Wrong description", result, Status.DEPRECATED.toString());
   }
 
   @Test
-  public void extractStatusNotDeprecated() {
+  public void extractStatus_notDeprecated() {
     TypeElement element =
-        elements.getTypeElement(
-            "com.microsoft.samples.agreements.AgreementDetailsCollectionOperations");
-
-    when(environment.getDocTrees()).thenReturn(docTrees);
-    when(docTrees.getDocCommentTree(element)).thenReturn(docCommentTree);
-    doReturn(Arrays.asList()).when(docCommentTree).getBlockTags();
+        elements.getTypeElement("com.microsoft.samples.agreements.AgreementMetaData");
 
     String result = classLookup.extractStatus(element);
 
-    verify(environment).getDocTrees();
-    verify(docTrees).getDocCommentTree(element);
-    verify(docCommentTree).getBlockTags();
-    assertEquals("Wrong description", result, null);
+    assertNull("Wrong description", result);
   }
 
   @Test
@@ -233,12 +220,45 @@ public class ClassLookupTest {
     assertEquals("Wrong javaType", classLookup.extractJavaType(typeElement), "exception");
 
     typeElement = elements.getTypeElement("com.microsoft.samples.google.RecognitionAudio");
-    assertEquals("Wrong javaType", classLookup.extractJavaType(typeElement), null);
+    assertNull("Wrong javaType", classLookup.extractJavaType(typeElement));
 
     typeElement = elements.getTypeElement("com.microsoft.samples.google.BetaApi");
     assertEquals("Wrong javaType", classLookup.extractJavaType(typeElement), "annotationtype");
 
     typeElement = elements.getTypeElement("com.microsoft.samples.IPartner");
-    assertEquals("Wrong javaType", classLookup.extractJavaType(typeElement), null);
+    assertNull("Wrong javaType", classLookup.extractJavaType(typeElement));
+  }
+
+  @Test
+  public void testExtractStatus_class_beta() {
+    TypeElement betaApi = elements.getTypeElement("com.microsoft.samples.google.BetaApi");
+    assertThat(classLookup.extractStatus(betaApi)).isEqualTo("beta");
+  }
+
+  @Test
+  public void testExtractStatus_method_internal() {
+    TypeElement stub =
+        elements.getTypeElement("com.microsoft.samples.google.v1.stub.HttpJsonSpeechStub");
+
+    Element getMethodDescriptors =
+        stub.getEnclosedElements().stream()
+            .filter(element -> element.getSimpleName().toString().equals("getMethodDescriptors"))
+            .findFirst()
+            .orElseThrow(() -> new IllegalStateException("Unable to find getMethodDescriptors()"));
+
+    assertThat(classItemsLookup.extractStatus(getMethodDescriptors)).isEqualTo("internal");
+  }
+
+  @Test
+  public void testExtractStatus_class_obsolete() {
+    TypeElement client =
+        elements.getTypeElement("com.microsoft.samples.google.v1beta.SpeechClient");
+    assertThat(classLookup.extractStatus(client)).isEqualTo("obsolete");
+  }
+
+  @Test
+  public void testExtractStatus_class_internalExtensionOnly() {
+    TypeElement settings = elements.getTypeElement("com.microsoft.samples.google.SpeechSettings");
+    assertThat(classLookup.extractStatus(settings)).isEqualTo("internal");
   }
 }

@@ -19,7 +19,7 @@ items:
   fullName: "com.microsoft.samples.ExceptionHandler"
   type: "Class"
   package: "com.microsoft.samples"
-  summary: "Exception retry algorithm implementation used by <xref uid=\"\" data-throw-if-not-resolved=\"false\">RetryHelper</xref>."
+  summary: "<strong>Beta.</strong> <em>Not stable. This component may change between minor and patch releases in incompatible ways. </em>\nException retry algorithm implementation used by <xref uid=\"\" data-throw-if-not-resolved=\"false\">RetryHelper</xref>."
   syntax:
     content: "public final class ExceptionHandler implements ResultRetryAlgorithm<Object>, Serializable"
   inheritance:
@@ -39,6 +39,7 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
+  status: "beta"
 - uid: "com.microsoft.samples.ExceptionHandler.ExceptionHandler(com.microsoft.samples.ExceptionHandler.Builder)"
   id: "ExceptionHandler(com.microsoft.samples.ExceptionHandler.Builder)"
   parent: "com.microsoft.samples.ExceptionHandler"

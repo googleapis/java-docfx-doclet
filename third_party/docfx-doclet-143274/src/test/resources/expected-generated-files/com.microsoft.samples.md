@@ -28,6 +28,7 @@ Holds common partner component properties and behavior. The context is string ty
 <tr>
 <td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.ExceptionHandler">com.microsoft.samples.ExceptionHandler</a></td>
 <td>
+<strong>Beta.</strong> <em>Not stable. This component may change between minor and patch releases in incompatible ways. </em>
 Exception retry algorithm implementation used by <xref uid="RetryHelper" data-throw-if-not-resolved="false">RetryHelper</xref>.</td>
    </tr>
 <tr>

@@ -13,6 +13,7 @@ import com.sun.source.doctree.DocTree;
 import com.sun.source.doctree.LinkTree;
 import com.sun.source.doctree.LiteralTree;
 import com.sun.source.doctree.SeeTree;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -22,6 +23,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.annotation.Nullable;
+import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import jdk.javadoc.doclet.DocletEnvironment;
@@ -170,19 +173,17 @@ public abstract class BaseLookup<T extends Element> {
     return resolve(key).getOverridden();
   }
 
-  public String extractStatus(T element) {
-    Optional<DocCommentTree> docCommentTree = getDocCommentTree(element);
-    if (docCommentTree.isPresent()) {
-      boolean isDeprecated =
-          docCommentTree.get().getBlockTags().stream()
-              .filter(docTree -> docTree.getKind().equals(DocTree.Kind.DEPRECATED))
-              .findFirst()
-              .isPresent();
-      if (isDeprecated) {
-        return DocTree.Kind.DEPRECATED.name().toLowerCase();
-      }
-    }
-    return null;
+  protected Optional<DocCommentTree> getDocCommentTree(T element) {
+    return Optional.ofNullable(environment.getDocTrees().getDocCommentTree(element));
+  }
+
+  private boolean hasDeprecatedJavadocTag(T element) {
+    List<? extends DocTree> javadocTags =
+        getDocCommentTree(element)
+            .map(DocCommentTree::getBlockTags)
+            .orElse(Collections.emptyList());
+
+    return javadocTags.stream().map(DocTree::getKind).anyMatch(DocTree.Kind.DEPRECATED::equals);
   }
 
   protected String determineType(T element) {
@@ -194,16 +195,30 @@ public abstract class BaseLookup<T extends Element> {
   }
 
   protected String determineComment(T element) {
-    Optional<DocCommentTree> docCommentTree = getDocCommentTree(element);
-    if (docCommentTree.isPresent()) {
-      String comment =
-          docCommentTree
-              .map(DocCommentTree::getFullBody)
-              .map(this::replaceLinksAndCodes)
-              .orElse(null);
-      return replaceBlockTags(docCommentTree.get(), comment);
+    String statusComment = getStatusComment(element);
+    String javadocComment = getJavadocComment(element);
+    return joinNullable(statusComment, javadocComment);
+  }
+
+  private String getJavadocComment(T element) {
+    return getDocCommentTree(element)
+        .map(
+            tree -> {
+              String commentWithBlockTags = replaceLinksAndCodes(tree.getFullBody());
+              return replaceBlockTags(tree, commentWithBlockTags);
+            })
+        .orElse(null);
+  }
+
+  /** Safely combine two nullable strings with a newline delimiter */
+  private String joinNullable(@Nullable String top, @Nullable String bottom) {
+    if (top != null && bottom != null) {
+      return top + "\n" + bottom;
+    } else if (top != null) {
+      return top;
+    } else {
+      return bottom;
     }
-    return null;
   }
 
   /** Provides support for deprecated and see tags */
@@ -277,10 +292,6 @@ public abstract class BaseLookup<T extends Element> {
     return String.valueOf(StringEscapeUtils.unescapeJava(bodyItem.getBody().toString()));
   }
 
-  protected Optional<DocCommentTree> getDocCommentTree(T element) {
-    return Optional.ofNullable(environment.getDocTrees().getDocCommentTree(element));
-  }
-
   /**
    * We make type shortening in assumption that package name doesn't contain uppercase characters
    */
@@ -312,5 +323,100 @@ public abstract class BaseLookup<T extends Element> {
     }
     return String.format(
         "<xref uid=\"%1$s\" data-throw-if-not-resolved=\"false\">%1$s</xref>", ref);
+  }
+
+  public String extractStatus(T element) {
+    List<String> annotationNames =
+        element.getAnnotationMirrors().stream()
+            .map(mirror -> mirror.getAnnotationType().asElement().getSimpleName().toString())
+            .collect(Collectors.toList());
+
+    getStatusComment(element);
+
+    if (annotationNames.stream().anyMatch("InternalApi"::equals)
+        || annotationNames.stream().anyMatch("InternalExtensionOnly"::equals)) {
+      return "internal";
+    }
+    if (annotationNames.stream().anyMatch("Deprecated"::equals)
+        || hasDeprecatedJavadocTag(element)) {
+      return "deprecated";
+    }
+    if (annotationNames.stream().anyMatch("ObsoleteApi"::equals)) {
+      return "obsolete";
+    }
+    if (annotationNames.stream().anyMatch("BetaApi"::equals)) {
+      return "beta";
+    }
+    return null;
+  }
+
+  public String getStatusComment(T element) {
+    Map<String, Optional<String>> annotationComments = getAnnotationComments(element);
+
+    // Deprecated comments are determined by the Javadoc @deprecated block tag.
+    // See this#replaceBlockTags
+
+    List<String> comments = new ArrayList<>();
+    if (annotationComments.containsKey("InternalApi")) {
+      comments.add(
+          String.format(
+              "<strong>Internal only.</strong> <em>%s</em>",
+              annotationComments
+                  .get("InternalApi")
+                  .orElse(
+                      "Not intended for public use. This component may change without warning.")));
+    }
+    if (annotationComments.containsKey("InternalExtensionOnly")) {
+      comments.add(
+          String.format(
+              "<strong>Internal extension only.</strong> <em>%s</em>",
+              annotationComments
+                  .get("InternalExtensionOnly")
+                  .orElse("This component is stable for usage, but not for extension.")));
+    }
+    if (annotationComments.containsKey("ObsoleteApi")) {
+      comments.add(
+          String.format(
+              "<strong>Obsolete.</strong> <em>%s</em>",
+              annotationComments
+                  .get("ObsoleteApi")
+                  .orElse(
+                      "Stable for usage in this major version, but may be deprecated in a future release.")));
+    }
+    if (annotationComments.containsKey("BetaApi")) {
+      comments.add(
+          String.format(
+              "<strong>Beta.</strong> <em>%s</em>",
+              annotationComments
+                  .get("BetaApi")
+                  .orElse(
+                      "Not stable. This component may change between minor and patch releases in incompatible ways. ")));
+    }
+
+    if (comments.isEmpty()) {
+      return null;
+    }
+    return String.join("\n\n", comments);
+  }
+
+  /**
+   * @return all annotations on the element and their associated comment, if it exists
+   */
+  public Map<String, Optional<String>> getAnnotationComments(T element) {
+    Map<String, Optional<String>> annotationComments = new HashMap<>();
+
+    for (AnnotationMirror annotation : element.getAnnotationMirrors()) {
+      String name = annotation.getAnnotationType().asElement().getSimpleName().toString();
+      Optional<String> value =
+          annotation.getElementValues().entrySet().stream()
+              .filter(entry -> entry.getKey().getSimpleName().toString().equals("value"))
+              .map(Map.Entry::getValue)
+              .map(annotationValue -> annotationValue.getValue().toString())
+              .findFirst();
+
+      annotationComments.put(name, value);
+    }
+
+    return annotationComments;
   }
 }

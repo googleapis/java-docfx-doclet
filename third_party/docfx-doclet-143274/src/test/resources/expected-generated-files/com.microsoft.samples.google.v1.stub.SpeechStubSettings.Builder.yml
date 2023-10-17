@@ -169,6 +169,7 @@ items:
     content: "public OperationCallSettings.Builder<LongRunningRecognizeRequest,LongRunningRecognizeResponse,LongRunningRecognizeMetadata> longRunningRecognizeOperationSettings()"
     return:
       type: "com.google.api.gax.rpc.OperationCallSettings.Builder<com.google.cloud.speech.v1p1beta1.LongRunningRecognizeRequest,com.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse,com.google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata>"
+  status: "beta"
 - uid: "com.microsoft.samples.google.v1.stub.SpeechStubSettings.Builder.longRunningRecognizeSettings()"
   id: "longRunningRecognizeSettings()"
   parent: "com.microsoft.samples.google.v1.stub.SpeechStubSettings.Builder"

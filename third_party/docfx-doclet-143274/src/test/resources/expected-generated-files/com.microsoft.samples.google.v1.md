@@ -19,10 +19,10 @@ Description</th>
 <tr>
 <td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1.SpeechClient">com.microsoft.samples.google.v1.SpeechClient</a></td>
 <td>
+<strong>Beta.</strong> <em>Not stable. This component may change between minor and patch releases in incompatible ways. </em>
 Service Description: Service that implements Google Cloud Speech API.
 
- <p>This class provides the ability to make remote calls to the backing service through method
- calls that map to API methods. Sample code to get started:</td>
+ <p>This class provides the ability to make remote calls to the backing service through method</td>
    </tr>
  </table>
 

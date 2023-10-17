@@ -27,7 +27,7 @@ items:
   fullName: "com.microsoft.samples.google.v1.stub.GrpcSpeechStub"
   type: "Class"
   package: "com.microsoft.samples.google.v1.stub"
-  summary: "gRPC stub implementation for the Speech service API.\n\n <p>This class is for advanced usage and reflects the underlying API directly."
+  summary: "<strong>Beta.</strong> <em>Not stable. This component may change between minor and patch releases in incompatible ways. </em>\ngRPC stub implementation for the Speech service API.\n\n <p>This class is for advanced usage and reflects the underlying API directly."
   syntax:
     content: "public class GrpcSpeechStub extends SpeechStub"
   inheritance:
@@ -52,6 +52,7 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
+  status: "beta"
 - uid: "com.microsoft.samples.google.v1.stub.GrpcSpeechStub.GrpcSpeechStub(com.microsoft.samples.google.v1.stub.SpeechStubSettings,com.google.api.gax.rpc.ClientContext)"
   id: "GrpcSpeechStub(com.microsoft.samples.google.v1.stub.SpeechStubSettings,com.google.api.gax.rpc.ClientContext)"
   parent: "com.microsoft.samples.google.v1.stub.GrpcSpeechStub"

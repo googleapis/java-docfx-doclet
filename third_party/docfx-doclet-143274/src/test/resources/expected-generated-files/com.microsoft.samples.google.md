@@ -19,10 +19,10 @@ Description</th>
 <tr>
 <td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.SpeechClient">com.microsoft.samples.google.SpeechClient</a></td>
 <td>
+<strong>Beta.</strong> <em>Not stable. This component may change between minor and patch releases in incompatible ways. </em>
 Service Description: Service that implements Google Cloud Speech API.
 
- <p>This class provides the ability to make remote calls to the backing service through method
- calls that map to API methods. Sample code to get started:</td>
+ <p>This class provides the ability to make remote calls to the backing service through method</td>
    </tr>
  </table>
 
@@ -45,10 +45,10 @@ Settings class to configure an instance of <xref uid="ProductSearchClient" data-
 <tr>
 <td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.SpeechSettings">com.microsoft.samples.google.SpeechSettings</a></td>
 <td>
-Settings class to configure an instance of <xref uid="SpeechClient" data-throw-if-not-resolved="false">SpeechClient</xref>.
+<strong>Internal extension only.</strong> <em>This component is stable for usage, but not for extension.</em>
 
- <p>The default instance has everything set to sensible defaults:
-</td>
+<strong>Beta.</strong> <em>Not stable. This component may change between minor and patch releases in incompatible ways. </em>
+Settings class to configure an instance of <xref uid="SpeechClient" data-throw-if-not-resolved="false">SpeechClient</xref>.</td>
    </tr>
  </table>
 
@@ -98,10 +98,10 @@ Description</th>
 <tr>
 <td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.BetaApi">com.microsoft.samples.google.BetaApi</a></td>
 <td>
+<strong>Beta.</strong> <em>Not stable. This component may change between minor and patch releases in incompatible ways. </em>
 Indicates a public API that can change at any time, and has no guarantee of API stability and
  backward-compatibility.
-
- <p>Usage guidelines:</td>
+</td>
    </tr>
 <tr>
 <td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.ValidationException.Supplier">com.microsoft.samples.google.ValidationException.Supplier</a></td>

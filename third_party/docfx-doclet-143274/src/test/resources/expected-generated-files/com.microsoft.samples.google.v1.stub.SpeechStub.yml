@@ -19,7 +19,7 @@ items:
   fullName: "com.microsoft.samples.google.v1.stub.SpeechStub"
   type: "Class"
   package: "com.microsoft.samples.google.v1.stub"
-  summary: "Base stub class for the Speech service API.\n\n <p>This class is for advanced usage and reflects the underlying API directly."
+  summary: "<strong>Beta.</strong> <em>Not stable. This component may change between minor and patch releases in incompatible ways. </em>\nBase stub class for the Speech service API.\n\n <p>This class is for advanced usage and reflects the underlying API directly."
   syntax:
     content: "public abstract class SpeechStub implements BackgroundResource"
   inheritance:
@@ -38,6 +38,7 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
+  status: "beta"
 - uid: "com.microsoft.samples.google.v1.stub.SpeechStub.SpeechStub()"
   id: "SpeechStub()"
   parent: "com.microsoft.samples.google.v1.stub.SpeechStub"

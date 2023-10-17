@@ -18,6 +18,7 @@ package com.microsoft.samples.google;
 
 import com.google.api.core.ApiFunction;
 import com.google.api.core.BetaApi;
+import com.google.api.core.InternalExtensionOnly;
 import com.google.api.gax.core.GoogleCredentialsProvider;
 import com.google.api.gax.core.InstantiatingExecutorProvider;
 import com.google.api.gax.grpc.InstantiatingGrpcChannelProvider;
@@ -63,6 +64,7 @@ import javax.annotation.Generated;
  * }</pre>
  */
 @BetaApi
+@InternalExtensionOnly
 @Generated("by gapic-generator-java")
 @SuppressWarnings("unchecked")
 public class SpeechSettings extends ClientSettings<SpeechSettings> {
