@@ -45,6 +45,7 @@ items:
   - "com.google.api.gax.rpc.StubSettings.getCredentialsProvider()"
   - "com.google.api.gax.rpc.StubSettings.getEndpoint()"
   - "com.google.api.gax.rpc.StubSettings.getExecutorProvider()"
+  - "com.google.api.gax.rpc.StubSettings.getGdchApiAudience()"
   - "com.google.api.gax.rpc.StubSettings.getHeaderProvider()"
   - "com.google.api.gax.rpc.StubSettings.getInternalHeaderProvider()"
   - "com.google.api.gax.rpc.StubSettings.getMtlsEndpoint()"
@@ -737,6 +738,11 @@ references:
   name: "Object.finalize()"
   nameWithType: "Object.finalize()"
   fullName: "java.lang.Object.finalize()"
+- uid: "com.google.api.gax.rpc.StubSettings.getGdchApiAudience()"
+  isExternal: true
+  name: "StubSettings.getGdchApiAudience()"
+  nameWithType: "StubSettings.getGdchApiAudience()"
+  fullName: "com.google.api.gax.rpc.StubSettings.getGdchApiAudience()"
 - uid: "com.google.api.gax.rpc.StubSettings.getTransportChannelProvider()"
   isExternal: true
   name: "StubSettings.getTransportChannelProvider()"
