@@ -91,7 +91,7 @@ public class LibraryOverviewFile {
               + "\n\n"
               + "- [Install a JDK (Java Development Kit)](https://cloud.google.com/java/docs/setup#install_a_jdk_java_development_kit)\n"
               + "- [Select or create a Cloud Platform project](https://console.cloud.google.com/project)\n"
-              + "- [Enable billing for your project](\"https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)\n"
+              + "- [Enable billing for your project](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)\n"
               + "- [Enable the API](https://console.cloud.google.com/apis/library/"
               + repoMetadata.getApiShortName()
               + ".googleapis.com)\n"

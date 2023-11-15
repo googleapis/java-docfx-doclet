@@ -16,7 +16,7 @@ In order to use this library, you first need to go through the following steps:
 
 - [Install a JDK (Java Development Kit)](https://cloud.google.com/java/docs/setup#install_a_jdk_java_development_kit)
 - [Select or create a Cloud Platform project](https://console.cloud.google.com/project)
-- [Enable billing for your project]("https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+- [Enable billing for your project](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
 - [Enable the API](https://console.cloud.google.com/apis/library/apikeys.googleapis.com)
 - [Set up authentication](https://cloud.google.com/docs/authentication/client-libraries)
 
