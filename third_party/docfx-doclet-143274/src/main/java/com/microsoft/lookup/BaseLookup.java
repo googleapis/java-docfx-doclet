@@ -210,18 +210,25 @@ public abstract class BaseLookup<T extends Element> {
         .orElse(null);
   }
 
-  /** Safely combine two nullable strings with a newline delimiter */
-  private String joinNullable(@Nullable String top, @Nullable String bottom) {
-    if (top != null && bottom != null) {
-      return top + "\n" + bottom;
-    } else if (top != null) {
-      return top;
+  /**
+   * Safely combine two nullable strings with a newline delimiter
+   */
+  String joinNullable(@Nullable String top, @Nullable String bottom) {
+    String a = top == null || top.isEmpty() ? null : top;
+    String b = bottom == null || bottom.isEmpty() ? null : bottom;
+
+    if (a != null && b != null) {
+      return a + "\n\n" + b;
+    } else if (a != null) {
+      return a;
     } else {
-      return bottom;
+      return b;
     }
   }
 
-  /** Provides support for deprecated and see tags */
+  /**
+   * Provides support for deprecated and see tags
+   */
   String replaceBlockTags(DocCommentTree docCommentTree, String comment) {
     Set<String> seeItems = new HashSet<>();
     String commentWithBlockTags = comment;
@@ -331,8 +338,6 @@ public abstract class BaseLookup<T extends Element> {
             .map(mirror -> mirror.getAnnotationType().asElement().getSimpleName().toString())
             .collect(Collectors.toList());
 
-    getStatusComment(element);
-
     if (annotationNames.stream().anyMatch("InternalApi"::equals)
         || annotationNames.stream().anyMatch("InternalExtensionOnly"::equals)) {
       return "internal";
@@ -358,45 +363,53 @@ public abstract class BaseLookup<T extends Element> {
 
     List<String> comments = new ArrayList<>();
     if (annotationComments.containsKey("InternalApi")) {
-      comments.add(
-          String.format(
-              "<strong>Internal only.</strong> <em>%s</em>",
-              annotationComments
-                  .get("InternalApi")
-                  .orElse(
-                      "Not intended for public use. This component may change without warning.")));
+      comments.add(createInternalOnlyNotice(annotationComments.get("InternalApi")));
     }
     if (annotationComments.containsKey("InternalExtensionOnly")) {
-      comments.add(
-          String.format(
-              "<strong>Internal extension only.</strong> <em>%s</em>",
-              annotationComments
-                  .get("InternalExtensionOnly")
-                  .orElse("This component is stable for usage, but not for extension.")));
+      comments.add(createInternalExtensionOnlyNotice(annotationComments.get("InternalExtensionOnly")));
     }
     if (annotationComments.containsKey("ObsoleteApi")) {
-      comments.add(
-          String.format(
-              "<strong>Obsolete.</strong> <em>%s</em>",
-              annotationComments
-                  .get("ObsoleteApi")
-                  .orElse(
-                      "Stable for usage in this major version, but may be deprecated in a future release.")));
+      comments.add(createObsoleteNotice(annotationComments.get("ObsoleteApi")));
     }
     if (annotationComments.containsKey("BetaApi")) {
-      comments.add(
-          String.format(
-              "<strong>Beta.</strong> <em>%s</em>",
-              annotationComments
-                  .get("BetaApi")
-                  .orElse(
-                      "Not stable. This component may change between minor and patch releases in incompatible ways. ")));
+      comments.add(createBetaNotice(annotationComments.get("BetaApi")));
     }
 
     if (comments.isEmpty()) {
       return null;
     }
     return String.join("\n\n", comments);
+  }
+  private String createBetaNotice(Optional<String> customComment) {
+    return "<aside class=\"beta\">\n"
+        + "<p><strong>Beta</strong></p>\n"
+        + customComment.map(comment -> "<p><em>" + comment + "</em></p>\n").orElse("")
+        + "<p>This feature is covered by the <a href=\"/terms/service-terms#1\">Pre-GA Offerings "
+        + "Terms</a> of the Terms of Service. Pre-GA libraries might have limited support, and "
+        + "changes to pre-GA libraries might not be compatible with other pre-GA versions. For "
+        + "more information, see the launch stage descriptions.</p>\n"
+        + "</aside>\n";
+  }
+  private String createObsoleteNotice(Optional<String> customComment) {
+    return "<aside class=\"deprecated\">\n"
+        + "<p><strong>Obsolete</strong></p>\n"
+        + customComment.map(comment -> "<p><em>" + comment + "</em></p>\n").orElse("")
+        + "<p>This feature is stable for usage in this major version, but may be deprecated in a "
+        + "future release.</p>\n"
+        + "</aside>\n";
+  }
+  private String createInternalExtensionOnlyNotice(Optional<String> customComment) {
+    return "<aside class=\"special\">\n"
+        + "<p><strong>Internal Extension Only</strong>: This feature is stable for usage, but is "
+        + "not intended for extension or implementation.</p>\n"
+        + customComment.map(comment -> "<p><em>" + comment + "</em></p>\n").orElse("")
+        + "</aside>\n";
+  }
+  private String createInternalOnlyNotice(Optional<String> customComment) {
+    return "<aside class=\"warning\">\n"
+        + "<p><strong>Internal Only</strong>: This feature is not stable for application use.</p>\n"
+        + customComment.map(comment -> "<p><em>" + comment + "</em></p>\n").orElse("")
+        + "</aside>\n";
   }
 
   /**

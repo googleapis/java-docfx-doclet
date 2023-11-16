@@ -21,7 +21,6 @@ Description</th>
 <tr>
 <td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1.stub.GrpcSpeechStub">com.microsoft.samples.google.v1.stub.GrpcSpeechStub</a></td>
 <td>
-<strong>Beta.</strong> <em>Not stable. This component may change between minor and patch releases in incompatible ways. </em>
 gRPC stub implementation for the Speech service API.
 
  <p>This class is for advanced usage and reflects the underlying API directly.</td>
@@ -29,7 +28,6 @@ gRPC stub implementation for the Speech service API.
 <tr>
 <td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1.stub.HttpJsonSpeechStub">com.microsoft.samples.google.v1.stub.HttpJsonSpeechStub</a></td>
 <td>
-<strong>Beta.</strong> <em>Not stable. This component may change between minor and patch releases in incompatible ways. </em>
 REST stub implementation for the Speech service API.
 
  <p>This class is for advanced usage and reflects the underlying API directly.</td>
@@ -37,7 +35,6 @@ REST stub implementation for the Speech service API.
 <tr>
 <td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1.stub.SpeechStub">com.microsoft.samples.google.v1.stub.SpeechStub</a></td>
 <td>
-<strong>Beta.</strong> <em>Not stable. This component may change between minor and patch releases in incompatible ways. </em>
 Base stub class for the Speech service API.
 
  <p>This class is for advanced usage and reflects the underlying API directly.</td>
@@ -55,10 +52,10 @@ Description</th>
 <tr>
 <td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1.stub.SpeechStubSettings">com.microsoft.samples.google.v1.stub.SpeechStubSettings</a></td>
 <td>
-<strong>Beta.</strong> <em>Not stable. This component may change between minor and patch releases in incompatible ways. </em>
 Settings class to configure an instance of <xref uid="com.google.cloud.speech.v1p1beta1.stub.SpeechStub" data-throw-if-not-resolved="false">com.google.cloud.speech.v1p1beta1.stub.SpeechStub</xref>.
 
- <p>The default instance has everything set to sensible defaults:</td>
+ <p>The default instance has everything set to sensible defaults:
+</td>
    </tr>
  </table>
 

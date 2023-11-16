@@ -27,7 +27,7 @@ items:
   fullName: "com.microsoft.samples.google.v1.stub.GrpcSpeechStub"
   type: "Class"
   package: "com.microsoft.samples.google.v1.stub"
-  summary: "<strong>Beta.</strong> <em>Not stable. This component may change between minor and patch releases in incompatible ways. </em>\ngRPC stub implementation for the Speech service API.\n\n <p>This class is for advanced usage and reflects the underlying API directly."
+  summary: "gRPC stub implementation for the Speech service API.\n\n <p>This class is for advanced usage and reflects the underlying API directly."
   syntax:
     content: "public class GrpcSpeechStub extends SpeechStub"
   inheritance:

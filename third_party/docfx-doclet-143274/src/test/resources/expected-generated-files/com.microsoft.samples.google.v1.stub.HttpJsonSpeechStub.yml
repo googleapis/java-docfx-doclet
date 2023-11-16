@@ -28,7 +28,7 @@ items:
   fullName: "com.microsoft.samples.google.v1.stub.HttpJsonSpeechStub"
   type: "Class"
   package: "com.microsoft.samples.google.v1.stub"
-  summary: "<strong>Beta.</strong> <em>Not stable. This component may change between minor and patch releases in incompatible ways. </em>\nREST stub implementation for the Speech service API.\n\n <p>This class is for advanced usage and reflects the underlying API directly."
+  summary: "REST stub implementation for the Speech service API.\n\n <p>This class is for advanced usage and reflects the underlying API directly."
   syntax:
     content: "public class HttpJsonSpeechStub extends SpeechStub"
   inheritance:
@@ -222,6 +222,7 @@ items:
   overload: "com.microsoft.samples.google.v1.stub.HttpJsonSpeechStub.getMethodDescriptors*"
   type: "Method"
   package: "com.microsoft.samples.google.v1.stub"
+  summary: "<aside class=\"warning\">\n<p><strong>Internal Only</strong>: This feature is not stable for application use.</p>\n</aside>\n"
   syntax:
     content: "public static List<ApiMethodDescriptor> getMethodDescriptors()"
     return:

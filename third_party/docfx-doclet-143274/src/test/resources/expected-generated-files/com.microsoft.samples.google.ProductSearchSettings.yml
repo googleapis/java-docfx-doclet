@@ -189,6 +189,7 @@ items:
   overload: "com.microsoft.samples.google.ProductSearchSettings.defaultApiClientHeaderProviderBuilder*"
   type: "Method"
   package: "com.microsoft.samples.google"
+  summary: "<aside class=\"beta\">\n<p><strong>Beta</strong></p>\n<p><em>The surface for customizing headers is not stable yet and may change in the future.</em></p>\n<p>This feature is covered by the <a href=\"/terms/service-terms#1\">Pre-GA Offerings Terms</a> of the Terms of Service. Pre-GA libraries might have limited support, and changes to pre-GA libraries might not be compatible with other pre-GA versions. For more information, see the launch stage descriptions.</p>\n</aside>\n"
   syntax:
     content: "public static ApiClientHeaderProvider.Builder defaultApiClientHeaderProviderBuilder()"
     return:

@@ -19,7 +19,7 @@ items:
   fullName: "com.microsoft.samples.ExceptionHandler"
   type: "Class"
   package: "com.microsoft.samples"
-  summary: "<strong>Beta.</strong> <em>Not stable. This component may change between minor and patch releases in incompatible ways. </em>\nException retry algorithm implementation used by <xref uid=\"\" data-throw-if-not-resolved=\"false\">RetryHelper</xref>."
+  summary: "Exception retry algorithm implementation used by <xref uid=\"\" data-throw-if-not-resolved=\"false\">RetryHelper</xref>."
   syntax:
     content: "public final class ExceptionHandler implements ResultRetryAlgorithm<Object>, Serializable"
   inheritance:

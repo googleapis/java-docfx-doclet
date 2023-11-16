@@ -164,7 +164,7 @@ items:
   overload: "com.microsoft.samples.google.v1.stub.SpeechStubSettings.Builder.longRunningRecognizeOperationSettings*"
   type: "Method"
   package: "com.microsoft.samples.google.v1.stub"
-  summary: "Returns the builder for the settings used for calls to longRunningRecognize."
+  summary: "<aside class=\"beta\">\n<p><strong>Beta</strong></p>\n<p><em>The surface for use by generated code is not stable yet and may change in the future.</em></p>\n<p>This feature is covered by the <a href=\"/terms/service-terms#1\">Pre-GA Offerings Terms</a> of the Terms of Service. Pre-GA libraries might have limited support, and changes to pre-GA libraries might not be compatible with other pre-GA versions. For more information, see the launch stage descriptions.</p>\n</aside>\n\n\nReturns the builder for the settings used for calls to longRunningRecognize."
   syntax:
     content: "public OperationCallSettings.Builder<LongRunningRecognizeRequest,LongRunningRecognizeResponse,LongRunningRecognizeMetadata> longRunningRecognizeOperationSettings()"
     return:
