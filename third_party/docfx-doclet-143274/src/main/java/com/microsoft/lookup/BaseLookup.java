@@ -210,9 +210,7 @@ public abstract class BaseLookup<T extends Element> {
         .orElse(null);
   }
 
-  /**
-   * Safely combine two nullable strings with a newline delimiter
-   */
+  /** Safely combine two nullable strings with a newline delimiter */
   String joinNullable(@Nullable String top, @Nullable String bottom) {
     String a = top == null || top.isEmpty() ? null : top;
     String b = bottom == null || bottom.isEmpty() ? null : bottom;
@@ -226,9 +224,7 @@ public abstract class BaseLookup<T extends Element> {
     }
   }
 
-  /**
-   * Provides support for deprecated and see tags
-   */
+  /** Provides support for deprecated and see tags */
   String replaceBlockTags(DocCommentTree docCommentTree, String comment) {
     Set<String> seeItems = new HashSet<>();
     String commentWithBlockTags = comment;
@@ -366,7 +362,8 @@ public abstract class BaseLookup<T extends Element> {
       comments.add(createInternalOnlyNotice(annotationComments.get("InternalApi")));
     }
     if (annotationComments.containsKey("InternalExtensionOnly")) {
-      comments.add(createInternalExtensionOnlyNotice(annotationComments.get("InternalExtensionOnly")));
+      comments.add(
+          createInternalExtensionOnlyNotice(annotationComments.get("InternalExtensionOnly")));
     }
     if (annotationComments.containsKey("ObsoleteApi")) {
       comments.add(createObsoleteNotice(annotationComments.get("ObsoleteApi")));
@@ -380,6 +377,7 @@ public abstract class BaseLookup<T extends Element> {
     }
     return String.join("\n\n", comments);
   }
+
   private String createBetaNotice(Optional<String> customComment) {
     return "<aside class=\"beta\">\n"
         + "<p><strong>Beta</strong></p>\n"
@@ -390,6 +388,7 @@ public abstract class BaseLookup<T extends Element> {
         + "more information, see the launch stage descriptions.</p>\n"
         + "</aside>\n";
   }
+
   private String createObsoleteNotice(Optional<String> customComment) {
     return "<aside class=\"deprecated\">\n"
         + "<p><strong>Obsolete</strong></p>\n"
@@ -398,6 +397,7 @@ public abstract class BaseLookup<T extends Element> {
         + "future release.</p>\n"
         + "</aside>\n";
   }
+
   private String createInternalExtensionOnlyNotice(Optional<String> customComment) {
     return "<aside class=\"special\">\n"
         + "<p><strong>Internal Extension Only</strong>: This feature is stable for usage, but is "
@@ -405,6 +405,7 @@ public abstract class BaseLookup<T extends Element> {
         + customComment.map(comment -> "<p><em>" + comment + "</em></p>\n").orElse("")
         + "</aside>\n";
   }
+
   private String createInternalOnlyNotice(Optional<String> customComment) {
     return "<aside class=\"warning\">\n"
         + "<p><strong>Internal Only</strong>: This feature is not stable for application use.</p>\n"
