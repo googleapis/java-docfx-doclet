@@ -334,16 +334,9 @@ public abstract class BaseLookup<T extends Element> {
             .map(mirror -> mirror.getAnnotationType().asElement().getSimpleName().toString())
             .collect(Collectors.toList());
 
-    if (annotationNames.stream().anyMatch("InternalApi"::equals)
-        || annotationNames.stream().anyMatch("InternalExtensionOnly"::equals)) {
-      return "internal";
-    }
     if (annotationNames.stream().anyMatch("Deprecated"::equals)
         || hasDeprecatedJavadocTag(element)) {
       return "deprecated";
-    }
-    if (annotationNames.stream().anyMatch("ObsoleteApi"::equals)) {
-      return "obsolete";
     }
     if (annotationNames.stream().anyMatch("BetaApi"::equals)) {
       return "beta";
