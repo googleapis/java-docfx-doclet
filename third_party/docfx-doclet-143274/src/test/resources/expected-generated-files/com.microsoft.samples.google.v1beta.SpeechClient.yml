@@ -37,7 +37,7 @@ items:
   syntax: {}
   inheritance:
   - "java.lang.Object"
-  status: "obsolete"
+  status: "beta"
 - uid: "com.microsoft.samples.google.v1beta.SpeechClient.SpeechClient(com.google.cloud.speech.v1p1beta1.stub.SpeechStub)"
   id: "SpeechClient(com.google.cloud.speech.v1p1beta1.stub.SpeechStub)"
   parent: "com.microsoft.samples.google.v1beta.SpeechClient"

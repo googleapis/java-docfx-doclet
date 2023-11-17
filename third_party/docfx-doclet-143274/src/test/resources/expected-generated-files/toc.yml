@@ -103,7 +103,7 @@
       status: "beta"
     - uid: "com.microsoft.samples.google.SpeechSettings"
       name: "SpeechSettings"
-      status: "internal"
+      status: "beta"
     - uid: "com.microsoft.samples.google.SpeechSettings.Builder"
       name: "SpeechSettings.Builder"
     - heading: "Enums"
@@ -203,7 +203,7 @@
         items:
         - uid: "com.microsoft.samples.google.v1beta.SpeechClient"
           name: "SpeechClient"
-          status: "obsolete"
+          status: "beta"
     - uid: "com.microsoft.samples.google.v1p1alpha"
       name: "com.microsoft.samples.google.v1p1alpha"
       status: "alpha"

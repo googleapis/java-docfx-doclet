@@ -60,7 +60,7 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
-  status: "internal"
+  status: "beta"
 - uid: "com.microsoft.samples.google.SpeechSettings.SpeechSettings(com.microsoft.samples.google.SpeechSettings.Builder)"
   id: "SpeechSettings(com.microsoft.samples.google.SpeechSettings.Builder)"
   parent: "com.microsoft.samples.google.SpeechSettings"

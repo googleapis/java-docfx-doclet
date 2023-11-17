@@ -227,7 +227,6 @@ items:
     content: "public static List<ApiMethodDescriptor> getMethodDescriptors()"
     return:
       type: "java.util.List<com.google.api.gax.httpjson.ApiMethodDescriptor>"
-  status: "internal"
   javaType: "static method"
 - uid: "com.microsoft.samples.google.v1.stub.HttpJsonSpeechStub.isShutdown()"
   id: "isShutdown()"
