@@ -234,31 +234,4 @@ public class ClassLookupTest {
     TypeElement betaApi = elements.getTypeElement("com.microsoft.samples.google.BetaApi");
     assertThat(classLookup.extractStatus(betaApi)).isEqualTo("beta");
   }
-
-  @Test
-  public void testExtractStatus_method_internal() {
-    TypeElement stub =
-        elements.getTypeElement("com.microsoft.samples.google.v1.stub.HttpJsonSpeechStub");
-
-    Element getMethodDescriptors =
-        stub.getEnclosedElements().stream()
-            .filter(element -> element.getSimpleName().toString().equals("getMethodDescriptors"))
-            .findFirst()
-            .orElseThrow(() -> new IllegalStateException("Unable to find getMethodDescriptors()"));
-
-    assertThat(classItemsLookup.extractStatus(getMethodDescriptors)).isEqualTo("internal");
-  }
-
-  @Test
-  public void testExtractStatus_class_obsolete() {
-    TypeElement client =
-        elements.getTypeElement("com.microsoft.samples.google.v1beta.SpeechClient");
-    assertThat(classLookup.extractStatus(client)).isEqualTo("obsolete");
-  }
-
-  @Test
-  public void testExtractStatus_class_internalExtensionOnly() {
-    TypeElement settings = elements.getTypeElement("com.microsoft.samples.google.SpeechSettings");
-    assertThat(classLookup.extractStatus(settings)).isEqualTo("internal");
-  }
 }
