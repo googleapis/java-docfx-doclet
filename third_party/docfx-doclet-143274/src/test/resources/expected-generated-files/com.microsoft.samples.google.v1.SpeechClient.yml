@@ -37,6 +37,7 @@ items:
   syntax: {}
   inheritance:
   - "java.lang.Object"
+  status: "beta"
 - uid: "com.microsoft.samples.google.v1.SpeechClient.SpeechClient(com.google.cloud.speech.v1p1beta1.stub.SpeechStub)"
   id: "SpeechClient(com.google.cloud.speech.v1p1beta1.stub.SpeechStub)"
   parent: "com.microsoft.samples.google.v1.SpeechClient"
@@ -48,11 +49,13 @@ items:
   overload: "com.microsoft.samples.google.v1.SpeechClient.SpeechClient*"
   type: "Constructor"
   package: "com.microsoft.samples.google.v1"
+  summary: "<aside class=\"beta\">\n<p><strong>Beta</strong></p>\n<p><em>A restructuring of stub classes is planned, so this may break in the future</em></p>\n<p>This feature is covered by the <a href=\"/terms/service-terms#1\">Pre-GA Offerings Terms</a> of the Terms of Service. Pre-GA libraries might have limited support, and changes to pre-GA libraries might not be compatible with other pre-GA versions. For more information, see the launch stage descriptions.</p>\n</aside>\n"
   syntax:
     content: "protected SpeechClient(SpeechStub stub)"
     parameters:
     - id: "stub"
       type: "com.google.cloud.speech.v1p1beta1.stub.SpeechStub"
+  status: "beta"
 - uid: "com.microsoft.samples.google.v1.SpeechClient.SpeechClient(com.microsoft.samples.google.SpeechSettings)"
   id: "SpeechClient(com.microsoft.samples.google.SpeechSettings)"
   parent: "com.microsoft.samples.google.v1.SpeechClient"
@@ -135,7 +138,7 @@ items:
   overload: "com.microsoft.samples.google.v1.SpeechClient.create*"
   type: "Method"
   package: "com.microsoft.samples.google.v1"
-  summary: "Constructs an instance of SpeechClient, using the given stub for making calls. This is for\n advanced usage - prefer using create(SpeechSettings)."
+  summary: "<aside class=\"beta\">\n<p><strong>Beta</strong></p>\n<p><em>A restructuring of stub classes is planned, so this may break in the future</em></p>\n<p>This feature is covered by the <a href=\"/terms/service-terms#1\">Pre-GA Offerings Terms</a> of the Terms of Service. Pre-GA libraries might have limited support, and changes to pre-GA libraries might not be compatible with other pre-GA versions. For more information, see the launch stage descriptions.</p>\n</aside>\n\n\nConstructs an instance of SpeechClient, using the given stub for making calls. This is for\n advanced usage - prefer using create(SpeechSettings)."
   syntax:
     content: "public static final SpeechClient create(SpeechStub stub)"
     parameters:
@@ -143,6 +146,7 @@ items:
       type: "com.google.cloud.speech.v1p1beta1.stub.SpeechStub"
     return:
       type: "com.microsoft.samples.google.v1.SpeechClient"
+  status: "beta"
   javaType: "static method"
 - uid: "com.microsoft.samples.google.v1.SpeechClient.create(com.microsoft.samples.google.SpeechSettings)"
   id: "create(com.microsoft.samples.google.SpeechSettings)"
@@ -208,10 +212,12 @@ items:
   overload: "com.microsoft.samples.google.v1.SpeechClient.getStub*"
   type: "Method"
   package: "com.microsoft.samples.google.v1"
+  summary: "<aside class=\"beta\">\n<p><strong>Beta</strong></p>\n<p><em>A restructuring of stub classes is planned, so this may break in the future</em></p>\n<p>This feature is covered by the <a href=\"/terms/service-terms#1\">Pre-GA Offerings Terms</a> of the Terms of Service. Pre-GA libraries might have limited support, and changes to pre-GA libraries might not be compatible with other pre-GA versions. For more information, see the launch stage descriptions.</p>\n</aside>\n"
   syntax:
     content: "public SpeechStub getStub()"
     return:
       type: "com.google.cloud.speech.v1p1beta1.stub.SpeechStub"
+  status: "beta"
 - uid: "com.microsoft.samples.google.v1.SpeechClient.isShutdown()"
   id: "isShutdown()"
   parent: "com.microsoft.samples.google.v1.SpeechClient"

@@ -193,9 +193,9 @@ public class ClassItemsLookup extends BaseLookup<Element> {
     String inheritedInlineComment = getInheritedInlineCommentString(methodElement);
     Optional<DocCommentTree> docCommentTree = getDocCommentTree(methodElement);
     if (docCommentTree.isPresent()) {
-      return replaceBlockTags(docCommentTree.get(), inheritedInlineComment);
+      inheritedInlineComment = replaceBlockTags(docCommentTree.get(), inheritedInlineComment);
     }
-    return inheritedInlineComment;
+    return joinNullable(getStatusComment(methodElement), inheritedInlineComment);
   }
 
   /**

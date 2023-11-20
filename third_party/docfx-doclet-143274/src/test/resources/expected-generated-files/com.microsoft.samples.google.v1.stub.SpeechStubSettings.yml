@@ -45,6 +45,7 @@ items:
   - "com.google.api.gax.rpc.StubSettings.getCredentialsProvider()"
   - "com.google.api.gax.rpc.StubSettings.getEndpoint()"
   - "com.google.api.gax.rpc.StubSettings.getExecutorProvider()"
+  - "com.google.api.gax.rpc.StubSettings.getGdchApiAudience()"
   - "com.google.api.gax.rpc.StubSettings.getHeaderProvider()"
   - "com.google.api.gax.rpc.StubSettings.getInternalHeaderProvider()"
   - "com.google.api.gax.rpc.StubSettings.getMtlsEndpoint()"
@@ -65,6 +66,7 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
+  status: "beta"
 - uid: "com.microsoft.samples.google.v1.stub.SpeechStubSettings.SpeechStubSettings(com.microsoft.samples.google.v1.stub.SpeechStubSettings.Builder)"
   id: "SpeechStubSettings(com.microsoft.samples.google.v1.stub.SpeechStubSettings.Builder)"
   parent: "com.microsoft.samples.google.v1.stub.SpeechStubSettings"
@@ -159,10 +161,12 @@ items:
   overload: "com.microsoft.samples.google.v1.stub.SpeechStubSettings.defaultGrpcApiClientHeaderProviderBuilder*"
   type: "Method"
   package: "com.microsoft.samples.google.v1.stub"
+  summary: "<aside class=\"beta\">\n<p><strong>Beta</strong></p>\n<p><em>The surface for customizing headers is not stable yet and may change in the future.</em></p>\n<p>This feature is covered by the <a href=\"/terms/service-terms#1\">Pre-GA Offerings Terms</a> of the Terms of Service. Pre-GA libraries might have limited support, and changes to pre-GA libraries might not be compatible with other pre-GA versions. For more information, see the launch stage descriptions.</p>\n</aside>\n"
   syntax:
     content: "public static ApiClientHeaderProvider.Builder defaultGrpcApiClientHeaderProviderBuilder()"
     return:
       type: "com.google.api.gax.rpc.ApiClientHeaderProvider.Builder"
+  status: "beta"
   javaType: "static method"
 - uid: "com.microsoft.samples.google.v1.stub.SpeechStubSettings.defaultGrpcTransportProviderBuilder()"
   id: "defaultGrpcTransportProviderBuilder()"
@@ -192,10 +196,12 @@ items:
   overload: "com.microsoft.samples.google.v1.stub.SpeechStubSettings.defaultHttpJsonApiClientHeaderProviderBuilder*"
   type: "Method"
   package: "com.microsoft.samples.google.v1.stub"
+  summary: "<aside class=\"beta\">\n<p><strong>Beta</strong></p>\n<p><em>The surface for customizing headers is not stable yet and may change in the future.</em></p>\n<p>This feature is covered by the <a href=\"/terms/service-terms#1\">Pre-GA Offerings Terms</a> of the Terms of Service. Pre-GA libraries might have limited support, and changes to pre-GA libraries might not be compatible with other pre-GA versions. For more information, see the launch stage descriptions.</p>\n</aside>\n"
   syntax:
     content: "public static ApiClientHeaderProvider.Builder defaultHttpJsonApiClientHeaderProviderBuilder()"
     return:
       type: "com.google.api.gax.rpc.ApiClientHeaderProvider.Builder"
+  status: "beta"
   javaType: "static method"
 - uid: "com.microsoft.samples.google.v1.stub.SpeechStubSettings.defaultHttpJsonTransportProviderBuilder()"
   id: "defaultHttpJsonTransportProviderBuilder()"
@@ -208,11 +214,12 @@ items:
   overload: "com.microsoft.samples.google.v1.stub.SpeechStubSettings.defaultHttpJsonTransportProviderBuilder*"
   type: "Method"
   package: "com.microsoft.samples.google.v1.stub"
-  summary: "Returns a builder for the default REST ChannelProvider for this service."
+  summary: "<aside class=\"beta\">\n<p><strong>Beta</strong></p>\n<p>This feature is covered by the <a href=\"/terms/service-terms#1\">Pre-GA Offerings Terms</a> of the Terms of Service. Pre-GA libraries might have limited support, and changes to pre-GA libraries might not be compatible with other pre-GA versions. For more information, see the launch stage descriptions.</p>\n</aside>\n\n\nReturns a builder for the default REST ChannelProvider for this service."
   syntax:
     content: "public static InstantiatingHttpJsonChannelProvider.Builder defaultHttpJsonTransportProviderBuilder()"
     return:
       type: "com.google.api.gax.httpjson.InstantiatingHttpJsonChannelProvider.Builder"
+  status: "beta"
   javaType: "static method"
 - uid: "com.microsoft.samples.google.v1.stub.SpeechStubSettings.defaultTransportChannelProvider()"
   id: "defaultTransportChannelProvider()"
@@ -737,6 +744,11 @@ references:
   name: "Object.finalize()"
   nameWithType: "Object.finalize()"
   fullName: "java.lang.Object.finalize()"
+- uid: "com.google.api.gax.rpc.StubSettings.getGdchApiAudience()"
+  isExternal: true
+  name: "StubSettings.getGdchApiAudience()"
+  nameWithType: "StubSettings.getGdchApiAudience()"
+  fullName: "com.google.api.gax.rpc.StubSettings.getGdchApiAudience()"
 - uid: "com.google.api.gax.rpc.StubSettings.getTransportChannelProvider()"
   isExternal: true
   name: "StubSettings.getTransportChannelProvider()"

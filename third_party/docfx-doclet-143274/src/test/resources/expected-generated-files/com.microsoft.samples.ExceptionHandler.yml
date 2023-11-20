@@ -39,6 +39,7 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
+  status: "beta"
 - uid: "com.microsoft.samples.ExceptionHandler.ExceptionHandler(com.microsoft.samples.ExceptionHandler.Builder)"
   id: "ExceptionHandler(com.microsoft.samples.ExceptionHandler.Builder)"
   parent: "com.microsoft.samples.ExceptionHandler"

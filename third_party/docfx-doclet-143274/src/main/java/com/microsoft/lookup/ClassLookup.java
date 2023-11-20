@@ -221,6 +221,12 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     return new ArrayList<>();
   }
 
+  @Override
+  public String getStatusComment(TypeElement element) {
+    // Don't provide status comments for classes.
+    return null;
+  }
+
   public String extractJavaType(TypeElement element) {
     String superClass = determineSuperclass(element);
     if (superClass != null && superClass.contains("Exception")) {

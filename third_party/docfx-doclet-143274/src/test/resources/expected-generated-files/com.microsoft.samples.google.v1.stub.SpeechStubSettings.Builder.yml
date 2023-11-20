@@ -35,6 +35,7 @@ items:
   - "com.google.api.gax.rpc.StubSettings.Builder.getCredentialsProvider()"
   - "com.google.api.gax.rpc.StubSettings.Builder.getEndpoint()"
   - "com.google.api.gax.rpc.StubSettings.Builder.getExecutorProvider()"
+  - "com.google.api.gax.rpc.StubSettings.Builder.getGdchApiAudience()"
   - "com.google.api.gax.rpc.StubSettings.Builder.getHeaderProvider()"
   - "com.google.api.gax.rpc.StubSettings.Builder.getInternalHeaderProvider()"
   - "com.google.api.gax.rpc.StubSettings.Builder.getMtlsEndpoint()"
@@ -49,6 +50,7 @@ items:
   - "com.google.api.gax.rpc.StubSettings.Builder.setCredentialsProvider(com.google.api.gax.core.CredentialsProvider)"
   - "com.google.api.gax.rpc.StubSettings.Builder.setEndpoint(java.lang.String)"
   - "com.google.api.gax.rpc.StubSettings.Builder.setExecutorProvider(com.google.api.gax.core.ExecutorProvider)"
+  - "com.google.api.gax.rpc.StubSettings.Builder.setGdchApiAudience(java.lang.String)"
   - "com.google.api.gax.rpc.StubSettings.Builder.setHeaderProvider(com.google.api.gax.rpc.HeaderProvider)"
   - "com.google.api.gax.rpc.StubSettings.Builder.setInternalHeaderProvider(com.google.api.gax.rpc.HeaderProvider)"
   - "com.google.api.gax.rpc.StubSettings.Builder.setMtlsEndpoint(java.lang.String)"
@@ -162,11 +164,12 @@ items:
   overload: "com.microsoft.samples.google.v1.stub.SpeechStubSettings.Builder.longRunningRecognizeOperationSettings*"
   type: "Method"
   package: "com.microsoft.samples.google.v1.stub"
-  summary: "Returns the builder for the settings used for calls to longRunningRecognize."
+  summary: "<aside class=\"beta\">\n<p><strong>Beta</strong></p>\n<p><em>The surface for use by generated code is not stable yet and may change in the future.</em></p>\n<p>This feature is covered by the <a href=\"/terms/service-terms#1\">Pre-GA Offerings Terms</a> of the Terms of Service. Pre-GA libraries might have limited support, and changes to pre-GA libraries might not be compatible with other pre-GA versions. For more information, see the launch stage descriptions.</p>\n</aside>\n\n\nReturns the builder for the settings used for calls to longRunningRecognize."
   syntax:
     content: "public OperationCallSettings.Builder<LongRunningRecognizeRequest,LongRunningRecognizeResponse,LongRunningRecognizeMetadata> longRunningRecognizeOperationSettings()"
     return:
       type: "com.google.api.gax.rpc.OperationCallSettings.Builder<com.google.cloud.speech.v1p1beta1.LongRunningRecognizeRequest,com.google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse,com.google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata>"
+  status: "beta"
 - uid: "com.microsoft.samples.google.v1.stub.SpeechStubSettings.Builder.longRunningRecognizeSettings()"
   id: "longRunningRecognizeSettings()"
   parent: "com.microsoft.samples.google.v1.stub.SpeechStubSettings.Builder"
@@ -508,11 +511,21 @@ references:
   name: "StubSettings.Builder.getBackgroundExecutorProvider()"
   nameWithType: "StubSettings.Builder.getBackgroundExecutorProvider()"
   fullName: "com.google.api.gax.rpc.StubSettings.Builder.getBackgroundExecutorProvider()"
+- uid: "com.google.api.gax.rpc.StubSettings.Builder.getGdchApiAudience()"
+  isExternal: true
+  name: "StubSettings.Builder.getGdchApiAudience()"
+  nameWithType: "StubSettings.Builder.getGdchApiAudience()"
+  fullName: "com.google.api.gax.rpc.StubSettings.Builder.getGdchApiAudience()"
 - uid: "com.google.api.gax.rpc.StubSettings.Builder.setClock(com.google.api.core.ApiClock)"
   isExternal: true
   name: "StubSettings.Builder.setClock(ApiClock)"
   nameWithType: "StubSettings.Builder.setClock(ApiClock)"
   fullName: "com.google.api.gax.rpc.StubSettings.Builder.setClock(com.google.api.core.ApiClock)"
+- uid: "com.google.api.gax.rpc.StubSettings.Builder.setGdchApiAudience(java.lang.String)"
+  isExternal: true
+  name: "StubSettings.Builder.setGdchApiAudience(String)"
+  nameWithType: "StubSettings.Builder.setGdchApiAudience(String)"
+  fullName: "com.google.api.gax.rpc.StubSettings.Builder.setGdchApiAudience(java.lang.String)"
 - uid: "com.google.api.gax.rpc.StubSettings.Builder.setTransportChannelProvider(com.google.api.gax.rpc.TransportChannelProvider)"
   isExternal: true
   name: "StubSettings.Builder.setTransportChannelProvider(TransportChannelProvider)"
