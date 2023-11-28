@@ -35,6 +35,7 @@
     - heading: "Exceptions"
     - uid: "com.microsoft.samples.ExceptionHandler"
       name: "ExceptionHandler"
+      status: "beta"
     - uid: "com.microsoft.samples.ExceptionHandler.Builder"
       name: "ExceptionHandler.Builder"
   - uid: "com.microsoft.samples.agreements"
@@ -99,8 +100,10 @@
       name: "RecognitionAudio"
     - uid: "com.microsoft.samples.google.SpeechClient"
       name: "SpeechClient"
+      status: "beta"
     - uid: "com.microsoft.samples.google.SpeechSettings"
       name: "SpeechSettings"
+      status: "beta"
     - uid: "com.microsoft.samples.google.SpeechSettings.Builder"
       name: "SpeechSettings.Builder"
     - heading: "Enums"
@@ -109,6 +112,7 @@
     - heading: "Annotation Types"
     - uid: "com.microsoft.samples.google.BetaApi"
       name: "BetaApi"
+      status: "beta"
     - heading: "Exceptions"
     - uid: "com.microsoft.samples.google.ValidationException"
       name: "ValidationException"
@@ -123,6 +127,7 @@
       items:
       - uid: "com.microsoft.samples.google.v1.SpeechClient"
         name: "SpeechClient"
+        status: "beta"
     - uid: "Stub packages"
       name: "Stub packages"
       items:
@@ -137,15 +142,19 @@
           items:
           - uid: "com.microsoft.samples.google.v1.stub.GrpcSpeechStub"
             name: "GrpcSpeechStub"
+            status: "beta"
           - uid: "com.microsoft.samples.google.v1.stub.HttpJsonSpeechStub"
             name: "HttpJsonSpeechStub"
+            status: "beta"
           - uid: "com.microsoft.samples.google.v1.stub.SpeechStub"
             name: "SpeechStub"
+            status: "beta"
         - uid: "Settings"
           name: "Settings"
           items:
           - uid: "com.microsoft.samples.google.v1.stub.SpeechStubSettings"
             name: "SpeechStubSettings"
+            status: "beta"
           - uid: "com.microsoft.samples.google.v1.stub.SpeechStubSettings.Builder"
             name: "SpeechStubSettings.Builder"
   - uid: "com.microsoft.samples.offers"
@@ -194,6 +203,7 @@
         items:
         - uid: "com.microsoft.samples.google.v1beta.SpeechClient"
           name: "SpeechClient"
+          status: "beta"
     - uid: "com.microsoft.samples.google.v1p1alpha"
       name: "com.microsoft.samples.google.v1p1alpha"
       status: "alpha"
@@ -206,3 +216,4 @@
         items:
         - uid: "com.microsoft.samples.google.v1p1alpha.SpeechClient"
           name: "SpeechClient"
+          status: "beta"

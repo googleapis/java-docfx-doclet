@@ -6,7 +6,7 @@
 
   <groupId>com.microsoft</groupId>
   <artifactId>docfx-doclet</artifactId>
-  <version>1.11.1-SNAPSHOT</version>
+  <version>1.12.0-SNAPSHOT</version>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,8 +16,8 @@
     <jackson.version>2.16.0</jackson.version>
     <apache.commons-lang.version>3.13.0</apache.commons-lang.version>
     <apache.commons-collections.version>4.4</apache.commons-collections.version>
-    <apache.commons-io.version>2.14.0</apache.commons-io.version>
-    <apache.commons-text.version>1.10.0</apache.commons-text.version>
+    <apache.commons-io.version>2.15.0</apache.commons-io.version>
+    <apache.commons-text.version>1.11.0</apache.commons-text.version>
     <remark.version>1.1.0</remark.version>
   </properties>
 
@@ -113,6 +113,18 @@
     </plugins>
   </build>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.google.cloud</groupId>
+        <artifactId>libraries-bom</artifactId>
+        <version>26.27.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -147,7 +159,7 @@
     <dependency>
       <groupId>org.jsoup</groupId>
       <artifactId>jsoup</artifactId>
-      <version>1.16.1</version>
+      <version>1.17.1</version>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
@@ -182,13 +194,11 @@
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>google-cloud-vision</artifactId>
-      <version>2.0.13</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>google-cloud-speech</artifactId>
-      <version>4.23.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

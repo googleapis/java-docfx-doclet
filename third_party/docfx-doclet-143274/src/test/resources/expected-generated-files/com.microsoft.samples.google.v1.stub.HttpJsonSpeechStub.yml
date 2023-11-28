@@ -53,6 +53,7 @@ items:
   - "java.lang.Object.wait()"
   - "java.lang.Object.wait(long)"
   - "java.lang.Object.wait(long,int)"
+  status: "beta"
 - uid: "com.microsoft.samples.google.v1.stub.HttpJsonSpeechStub.HttpJsonSpeechStub(com.microsoft.samples.google.v1.stub.SpeechStubSettings,com.google.api.gax.rpc.ClientContext)"
   id: "HttpJsonSpeechStub(com.microsoft.samples.google.v1.stub.SpeechStubSettings,com.google.api.gax.rpc.ClientContext)"
   parent: "com.microsoft.samples.google.v1.stub.HttpJsonSpeechStub"
@@ -221,6 +222,7 @@ items:
   overload: "com.microsoft.samples.google.v1.stub.HttpJsonSpeechStub.getMethodDescriptors*"
   type: "Method"
   package: "com.microsoft.samples.google.v1.stub"
+  summary: "<aside class=\"warning\">\n<p><strong>Internal Only</strong>: This feature is not stable for application use.</p>\n</aside>\n"
   syntax:
     content: "public static List<ApiMethodDescriptor> getMethodDescriptors()"
     return:

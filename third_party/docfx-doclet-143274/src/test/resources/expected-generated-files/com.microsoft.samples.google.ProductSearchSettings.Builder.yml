@@ -53,6 +53,7 @@ items:
   - "com.google.api.gax.rpc.ClientSettings.Builder.getCredentialsProvider()"
   - "com.google.api.gax.rpc.ClientSettings.Builder.getEndpoint()"
   - "com.google.api.gax.rpc.ClientSettings.Builder.getExecutorProvider()"
+  - "com.google.api.gax.rpc.ClientSettings.Builder.getGdchApiAudience()"
   - "com.google.api.gax.rpc.ClientSettings.Builder.getHeaderProvider()"
   - "com.google.api.gax.rpc.ClientSettings.Builder.getInternalHeaderProvider()"
   - "com.google.api.gax.rpc.ClientSettings.Builder.getQuotaProjectId()"
@@ -66,6 +67,7 @@ items:
   - "com.google.api.gax.rpc.ClientSettings.Builder.setCredentialsProvider(com.google.api.gax.core.CredentialsProvider)"
   - "com.google.api.gax.rpc.ClientSettings.Builder.setEndpoint(java.lang.String)"
   - "com.google.api.gax.rpc.ClientSettings.Builder.setExecutorProvider(com.google.api.gax.core.ExecutorProvider)"
+  - "com.google.api.gax.rpc.ClientSettings.Builder.setGdchApiAudience(java.lang.String)"
   - "com.google.api.gax.rpc.ClientSettings.Builder.setHeaderProvider(com.google.api.gax.rpc.HeaderProvider)"
   - "com.google.api.gax.rpc.ClientSettings.Builder.setInternalHeaderProvider(com.google.api.gax.rpc.HeaderProvider)"
   - "com.google.api.gax.rpc.ClientSettings.Builder.setQuotaProjectId(java.lang.String)"
@@ -1331,6 +1333,11 @@ references:
   name: "Object.wait(long,int)"
   nameWithType: "Object.wait(long,int)"
   fullName: "java.lang.Object.wait(long,int)"
+- uid: "com.google.api.gax.rpc.ClientSettings.Builder.setGdchApiAudience(java.lang.String)"
+  isExternal: true
+  name: "ClientSettings.Builder.setGdchApiAudience(String)"
+  nameWithType: "ClientSettings.Builder.setGdchApiAudience(String)"
+  fullName: "com.google.api.gax.rpc.ClientSettings.Builder.setGdchApiAudience(java.lang.String)"
 - uid: "com.google.api.gax.rpc.ClientSettings.Builder.toString()"
   isExternal: true
   name: "ClientSettings.Builder.toString()"
@@ -1431,6 +1438,11 @@ references:
   name: "ClientSettings.Builder.getTransportChannelProvider()"
   nameWithType: "ClientSettings.Builder.getTransportChannelProvider()"
   fullName: "com.google.api.gax.rpc.ClientSettings.Builder.getTransportChannelProvider()"
+- uid: "com.google.api.gax.rpc.ClientSettings.Builder.getGdchApiAudience()"
+  isExternal: true
+  name: "ClientSettings.Builder.getGdchApiAudience()"
+  nameWithType: "ClientSettings.Builder.getGdchApiAudience()"
+  fullName: "com.google.api.gax.rpc.ClientSettings.Builder.getGdchApiAudience()"
 - uid: "com.google.api.gax.rpc.ClientSettings.Builder.getEndpoint()"
   isExternal: true
   name: "ClientSettings.Builder.getEndpoint()"

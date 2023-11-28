@@ -55,7 +55,12 @@ public class LibraryOverviewFile {
         "# " + repoMetadata.getArtifactId() + " overview (" + artifactVersion + ")\n\n";
 
     this.LIBRARY_OVERVIEW_KEY_REFERENCE_HEADER =
-        "## Key Reference Links\n" + repoMetadata.getApiDescription() + "\n\n";
+        "## Key Reference Links\n"
+            + "**"
+            + repoMetadata.getNamePretty()
+            + " Description:** "
+            + capitalizeFirstLetter(repoMetadata.getApiDescription())
+            + "\n\n";
 
     this.LIBRARY_OVERVIEW_KEY_REFERENCE_TABLE =
         "<table>\n"
@@ -108,17 +113,17 @@ public class LibraryOverviewFile {
             + "set previously. For more information about\n"
             + "BOMs, see [Google Cloud Platform Libraries BOM](https://cloud.google.com/java/docs/bom).\n\n";
 
+    // When b/312765900 is implemented, then refactor this section to use the devsite-selector
+    // format. Current format is a workaround so the sanitizer doesn't remove the content.
     this.LIBRARY_OVERVIEW_CLIENT_INSTALLATION_SECTION =
-        "<div>\n"
-            + "<devsite-selector>\n"
-            + "<section>\n"
-            + "<h3>Maven</h3>\n"
-            + "<p>Import the BOM in the <code>dependencyManagement</code> section of your <code>pom.xml</code> file.\n"
+        "### Maven\n"
+            + "Import the BOM in the <code>dependencyManagement</code> section of your <code>pom.xml</code> file.\n"
             + "Include specific artifacts you depend on in the <code>dependencies</code> section, but don't\n"
-            + "specify the artifacts' versions in the <code>dependencies</code> section.</p>\n"
+            + "specify the artifacts' versions in the <code>dependencies</code> section.\n"
             + "\n"
-            + "<p>The example below demonstrates how you would import the BOM and include the <code>google-cloud-apikeys</code>\n"
-            + "artifact.</p>\n"
+            + "The example below demonstrates how you would import the BOM and include the <code>"
+            + repoMetadata.getArtifactId()
+            + "</code> artifact.\n"
             + "<pre class=\"prettyprint lang-xml devsite-click-to-copy\">\n"
             + "&lt;dependencyManagement&gt;\n"
             + " &lt;dependencies&gt;\n"
@@ -141,16 +146,15 @@ public class LibraryOverviewFile {
             + "&lt;/artifactId&gt;\n"
             + " &lt;/dependency&gt;\n"
             + "&lt;/dependencies&gt;\n"
-            + "</pre>\n"
-            + "</section>\n"
-            + "<section>\n"
-            + "<h3>Gradle</h3>\n"
-            + "<p>BOMs are supported by default in Gradle 5.x or later. Add a <code>platform</code>\n"
+            + "</pre>\n\n"
+            + "### Gradle\n"
+            + "BOMs are supported by default in Gradle 5.x or later. Add a <code>platform</code>\n"
             + "dependency on <code>com.google.cloud:libraries-bom</code> and remove the version from the\n"
-            + "dependency declarations in the artifact's <code>build.gradle</code> file.</p>\n"
+            + "dependency declarations in the artifact's <code>build.gradle</code> file.\n"
             + "\n"
-            + "<p>The example below demonstrates how you would import the BOM and include the <code>google-cloud-apikeys</code>\n"
-            + "artifact.</p>\n"
+            + "The example below demonstrates how you would import the BOM and include the <code>"
+            + repoMetadata.getArtifactId()
+            + "</code> artifact.\n"
             + "<pre class=\"prettyprint lang-Groovy devsite-click-to-copy\">\n"
             + "implementation platform(&#39;com.google.cloud:libraries-bom:"
             + librariesBomVersion
@@ -158,36 +162,30 @@ public class LibraryOverviewFile {
             + "implementation &#39;"
             + repoMetadata.getDistributionName()
             + "&#39;\n"
-            + "</pre>\n"
-            + "<p>The <code>platform</code> and <code>enforcedPlatform</code> keywords supply dependency versions\n"
+            + "</pre>\n\n"
+            + "The <code>platform</code> and <code>enforcedPlatform</code> keywords supply dependency versions\n"
             + "declared in a BOM. The <code>enforcedPlatform</code> keyword enforces the dependency\n"
-            + "versions declared in the BOM and thus overrides what you specified.</p>\n"
+            + "versions declared in the BOM and thus overrides what you specified.\n\n"
+            + "For more details of the <code>platform</code> and <code>enforcedPlatform</code> keywords Gradle 5.x or higher, see\n"
+            + "[Gradle: Importing Maven BOMs](https://docs.gradle.org/current/userguide/platforms.html#sub:bom_import).\n"
             + "\n"
-            + "<p>For more details of the <code>platform</code> and <code>enforcedPlatform</code> keywords Gradle 5.x or higher, see\n"
-            + "<a href=\"https://docs.gradle.org/current/userguide/platforms.html#sub:bom_import\">Gradle: Importing Maven BOMs</a>.</p>\n"
-            + "\n"
-            + "<p>If you're using Gradle 4.6 or later, add\n"
+            + "If you're using Gradle 4.6 or later, add\n"
             + "<code>enableFeaturePreview('IMPROVED_POM_SUPPORT')</code> to your <code>settings.gradle</code> file. For details, see\n"
-            + "<a href=\"https://docs.gradle.org/4.6/release-notes.html#bom-import\">Gradle 4.6 Release Notes: BOM import</a>.\n"
-            + "Versions of Gradle earlier than 4.6 don't support BOMs.</p>\n"
-            + "</section>\n"
-            + "<section>\n"
-            + "<h3>SBT</h3>\n"
-            + "<p>SBT <a href=\"https://github.com/sbt/sbt/issues/4531\">doesn't support BOMs</a>. You can find\n"
+            + "[Gradle 4.6 Release Notes: BOM import](https://docs.gradle.org/4.6/release-notes.html#bom-import).\n"
+            + "Versions of Gradle earlier than 4.6 don't support BOMs.</p>\n\n"
+            + "### SBT\n"
+            + "SBT [doesn't support BOMs](https://github.com/sbt/sbt/issues/4531). You can find\n"
             + "recommended versions of libraries from a particular BOM version on the\n"
-            + "<a href=\"https://storage.googleapis.com/cloud-opensource-java-dashboard/com.google.cloud/libraries-bom/index.html\">dashboard</a>\n"
-            + "and set the versions manually.</p>\n"
-            + "<p>To use the latest version of this library, add this to your dependencies:</p>\n"
+            + "[dashboard](https://storage.googleapis.com/cloud-opensource-java-dashboard/com.google.cloud/libraries-bom/index.html)\n"
+            + "and set the versions manually.\n"
+            + "To use the latest version of this library, add this to your dependencies:\n"
             + "<pre class=\"prettyprint lang-Scala devsite-click-to-copy\">\n"
             + "libraryDependencies += &quot;com.google.cloud&quot; % &quot;"
             + repoMetadata.getArtifactId()
             + "&quot; % &quot;"
             + artifactVersion
             + "&quot;\n"
-            + "</pre>\n"
-            + "</section>\n"
-            + "</devsite-selector>\n"
-            + "</div>\n\n";
+            + "</pre>\n\n";
 
     // Some client libraries do not have an underlying API service (e.g.
     // google-cloud-logging-logback, google-cloud-storage-nio, google-cloud-spanner-jdbc), hence
@@ -218,6 +216,16 @@ public class LibraryOverviewFile {
         + LIBRARY_OVERVIEW_CLIENT_INSTALLATION_HEADER
         + LIBRARY_OVERVIEW_CLIENT_INSTALLATION_SECTION
         + LIBRARY_OVERVIEW_PACKAGE_SELECTION_SECTION;
+  }
+
+  @JsonIgnore
+  private static String capitalizeFirstLetter(String string) {
+    if (string == null || string.isEmpty()) {
+      return string; // Return unchanged if input is null or empty
+    }
+
+    // Capitalize the first character and append the rest of the string
+    return string.substring(0, 1).toUpperCase() + string.substring(1);
   }
 
   @JsonIgnore

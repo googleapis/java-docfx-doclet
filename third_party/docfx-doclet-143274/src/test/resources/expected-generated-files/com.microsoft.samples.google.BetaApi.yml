@@ -17,6 +17,7 @@ items:
     content: "public interface BetaApi implements Annotation"
   implements:
   - "java.lang.annotation.Annotation"
+  status: "beta"
   javaType: "annotationtype"
 - uid: "com.microsoft.samples.google.BetaApi.value()"
   id: "value()"
