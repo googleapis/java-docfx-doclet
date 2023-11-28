@@ -15,11 +15,6 @@ Class</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.subpackage.CustomException">com.microsoft.samples.subpackage.CustomException</a></td>
-<td>
-</td>
-   </tr>
-<tr>
 <td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.subpackage.Person">com.microsoft.samples.subpackage.Person</a></td>
 <td>
 Class that describes some person
@@ -66,6 +61,20 @@ Description</th>
 <td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender">com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender</a></td>
 <td>
 Enum describes person's gender</td>
+   </tr>
+ </table>
+
+## Exceptions
+<table>
+   <tr>
+     <th>
+Exception</th>
+     <th>
+Description</th>
+<tr>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.subpackage.CustomException">com.microsoft.samples.subpackage.CustomException</a></td>
+<td>
+</td>
    </tr>
  </table>
 

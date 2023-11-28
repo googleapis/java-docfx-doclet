@@ -77,15 +77,6 @@ Builder for ProductSearchSettings.</td>
 <td>
 Builder for SpeechSettings.</td>
    </tr>
-<tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.ValidationException">com.microsoft.samples.google.ValidationException</a></td>
-<td>
-Exception thrown if there is a validation problem with a path template, http config, or related
- framework methods. Comes as an illegal argument exception subclass. Allows to globally set a
- thread-local validation context description which each exception inherits.
-See Also: <a href="https://cloud.google.com/storage/docs/json_api/v1/status-codes">Google Cloud  Storage error codes</a>
-</td>
-   </tr>
  </table>
 
 ## Interfaces
@@ -120,6 +111,24 @@ Description</th>
 <tr>
 <td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.RecognitionAudio.AudioSourceCase">com.microsoft.samples.google.RecognitionAudio.AudioSourceCase</a></td>
 <td>
+</td>
+   </tr>
+ </table>
+
+## Exceptions
+<table>
+   <tr>
+     <th>
+Exception</th>
+     <th>
+Description</th>
+<tr>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.ValidationException">com.microsoft.samples.google.ValidationException</a></td>
+<td>
+Exception thrown if there is a validation problem with a path template, http config, or related
+ framework methods. Comes as an illegal argument exception subclass. Allows to globally set a
+ thread-local validation context description which each exception inherits.
+See Also: <a href="https://cloud.google.com/storage/docs/json_api/v1/status-codes">Google Cloud  Storage error codes</a>
 </td>
    </tr>
  </table>

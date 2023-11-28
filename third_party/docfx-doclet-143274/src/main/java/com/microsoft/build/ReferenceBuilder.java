@@ -119,6 +119,11 @@ class ReferenceBuilder {
       if (uid.endsWith("CallableFactory")) {
         type = "CallableFactory";
       }
+      // If a Class is an Exception, call it out separately in
+      // the Package Overview
+      if (uid.endsWith("Exception")) {
+        type = "Exception";
+      }
       packageChildrenSummaries.add(new PackageChildSummary(uid, type, summary));
       addPackageChildrenSummaries(classElement, packageChildrenSummaries);
     }

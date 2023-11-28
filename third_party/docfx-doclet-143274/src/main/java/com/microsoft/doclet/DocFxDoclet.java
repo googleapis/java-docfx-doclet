@@ -21,6 +21,16 @@ public class DocFxDoclet implements Doclet {
 
   @Override
   public boolean run(DocletEnvironment environment) {
+    if (repoMetadataFilePath == null) {
+      repoMetadataFilePath = System.getenv("repoMetadataFilePath");
+    }
+    if (artifactVersion == null) {
+      artifactVersion = System.getenv("artifactVersion");
+    }
+    if (librariesBomVersion == null) {
+      librariesBomVersion = System.getenv("librariesBomVersion");
+    }
+
     Objects.requireNonNull(repoMetadataFilePath, "repoMetadataFilePath must not be null.");
 
     reporter.print(Kind.NOTE, "artifactVersion: " + artifactVersion);
