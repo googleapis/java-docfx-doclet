@@ -55,7 +55,12 @@ public class LibraryOverviewFile {
         "# " + repoMetadata.getArtifactId() + " overview (" + artifactVersion + ")\n\n";
 
     this.LIBRARY_OVERVIEW_KEY_REFERENCE_HEADER =
-        "## Key Reference Links\n" + "**" + repoMetadata.getNamePretty() + " Description:** " + capitalizeFirstLetter(repoMetadata.getApiDescription()) + "\n\n";
+        "## Key Reference Links\n"
+            + "**"
+            + repoMetadata.getNamePretty()
+            + " Description:** "
+            + capitalizeFirstLetter(repoMetadata.getApiDescription())
+            + "\n\n";
 
     this.LIBRARY_OVERVIEW_KEY_REFERENCE_TABLE =
         "<table>\n"
