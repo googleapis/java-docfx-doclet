@@ -18,6 +18,7 @@ public class StubPackageToc {
     visibleCategories.put(STUBS, new ArrayList<>());
     visibleCategories.put(SETTINGS, new ArrayList<>());
     visibleCategories.put(CALLABLE_FACTORIES, new ArrayList<>());
+    visibleCategories.put(UNCATEGORIZED, new ArrayList<>());
   }
 
   public void addStub(TocItem tocItem) {
