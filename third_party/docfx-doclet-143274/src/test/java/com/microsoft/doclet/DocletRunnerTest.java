@@ -93,8 +93,8 @@ public class DocletRunnerTest {
 
       assertEquals(
           "Unexpected amount of lines in file " + generatedFilePath,
-          generatedFileLines.length,
-          expectedFileLines.length);
+          expectedFileLines.length,
+          generatedFileLines.length);
 
       for (int i = 0; i < generatedFileLines.length; i++) {
         assertEquals(
