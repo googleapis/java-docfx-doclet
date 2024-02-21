@@ -72,6 +72,7 @@ items:
   - "com.google.api.gax.rpc.ClientSettings.Builder.setInternalHeaderProvider(com.google.api.gax.rpc.HeaderProvider)"
   - "com.google.api.gax.rpc.ClientSettings.Builder.setQuotaProjectId(java.lang.String)"
   - "com.google.api.gax.rpc.ClientSettings.Builder.setTransportChannelProvider(com.google.api.gax.rpc.TransportChannelProvider)"
+  - "com.google.api.gax.rpc.ClientSettings.Builder.setUniverseDomain(java.lang.String)"
   - "com.google.api.gax.rpc.ClientSettings.Builder.setWatchdogCheckInterval(org.threeten.bp.Duration)"
   - "com.google.api.gax.rpc.ClientSettings.Builder.setWatchdogProvider(com.google.api.gax.rpc.WatchdogProvider)"
   - "com.google.api.gax.rpc.ClientSettings.Builder.toString()"
@@ -1408,6 +1409,11 @@ references:
   name: "ClientSettings.Builder.setQuotaProjectId(String)"
   nameWithType: "ClientSettings.Builder.setQuotaProjectId(String)"
   fullName: "com.google.api.gax.rpc.ClientSettings.Builder.setQuotaProjectId(java.lang.String)"
+- uid: "com.google.api.gax.rpc.ClientSettings.Builder.setUniverseDomain(java.lang.String)"
+  isExternal: true
+  name: "ClientSettings.Builder.setUniverseDomain(String)"
+  nameWithType: "ClientSettings.Builder.setUniverseDomain(String)"
+  fullName: "com.google.api.gax.rpc.ClientSettings.Builder.setUniverseDomain(java.lang.String)"
 - uid: "com.google.api.gax.rpc.ClientSettings.Builder.getCredentialsProvider()"
   isExternal: true
   name: "ClientSettings.Builder.getCredentialsProvider()"

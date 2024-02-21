@@ -60,6 +60,7 @@ items:
   - "com.google.api.gax.rpc.StubSettings.Builder.setSwitchToMtlsEndpointAllowed(boolean)"
   - "com.google.api.gax.rpc.StubSettings.Builder.setTracerFactory(com.google.api.gax.tracing.ApiTracerFactory)"
   - "com.google.api.gax.rpc.StubSettings.Builder.setTransportChannelProvider(com.google.api.gax.rpc.TransportChannelProvider)"
+  - "com.google.api.gax.rpc.StubSettings.Builder.setUniverseDomain(java.lang.String)"
   - "com.google.api.gax.rpc.StubSettings.Builder.toString()"
   - "java.lang.Object.clone()"
   - "java.lang.Object.equals(java.lang.Object)"
@@ -541,6 +542,11 @@ references:
   name: "StubSettings.Builder.setTracerFactory(ApiTracerFactory)"
   nameWithType: "StubSettings.Builder.setTracerFactory(ApiTracerFactory)"
   fullName: "com.google.api.gax.rpc.StubSettings.Builder.setTracerFactory(com.google.api.gax.tracing.ApiTracerFactory)"
+- uid: "com.google.api.gax.rpc.StubSettings.Builder.setUniverseDomain(java.lang.String)"
+  isExternal: true
+  name: "StubSettings.Builder.setUniverseDomain(String)"
+  nameWithType: "StubSettings.Builder.setUniverseDomain(String)"
+  fullName: "com.google.api.gax.rpc.StubSettings.Builder.setUniverseDomain(java.lang.String)"
 - uid: "com.google.api.gax.rpc.StubSettings.Builder.setSwitchToMtlsEndpointAllowed(boolean)"
   isExternal: true
   name: "StubSettings.Builder.setSwitchToMtlsEndpointAllowed(boolean)"

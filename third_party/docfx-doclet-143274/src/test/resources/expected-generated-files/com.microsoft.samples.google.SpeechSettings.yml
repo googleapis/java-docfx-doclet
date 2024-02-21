@@ -47,6 +47,7 @@ items:
   - "com.google.api.gax.rpc.ClientSettings.getQuotaProjectId()"
   - "com.google.api.gax.rpc.ClientSettings.getStubSettings()"
   - "com.google.api.gax.rpc.ClientSettings.getTransportChannelProvider()"
+  - "com.google.api.gax.rpc.ClientSettings.getUniverseDomain()"
   - "com.google.api.gax.rpc.ClientSettings.getWatchdogCheckInterval()"
   - "com.google.api.gax.rpc.ClientSettings.getWatchdogProvider()"
   - "com.google.api.gax.rpc.ClientSettings.toString()"
@@ -676,6 +677,11 @@ references:
   name: "Object.wait(long,int)"
   nameWithType: "Object.wait(long,int)"
   fullName: "java.lang.Object.wait(long,int)"
+- uid: "com.google.api.gax.rpc.ClientSettings.getUniverseDomain()"
+  isExternal: true
+  name: "ClientSettings.getUniverseDomain()"
+  nameWithType: "ClientSettings.getUniverseDomain()"
+  fullName: "com.google.api.gax.rpc.ClientSettings.getUniverseDomain()"
 - uid: "com.google.api.gax.rpc.ClientSettings.getHeaderProvider()"
   isExternal: true
   name: "ClientSettings.getHeaderProvider()"

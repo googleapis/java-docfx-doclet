@@ -10,9 +10,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>11</java.version>
-    <maven.compiler.source>${java.version}</maven.compiler.source>
-    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
     <jackson.version>2.16.1</jackson.version>
     <apache.commons-lang.version>3.14.0</apache.commons-lang.version>
     <apache.commons-collections.version>4.4</apache.commons-collections.version>
@@ -118,7 +117,7 @@
       <dependency>
         <groupId>com.google.cloud</groupId>
         <artifactId>libraries-bom</artifactId>
-        <version>26.27.0</version>
+        <version>26.32.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
