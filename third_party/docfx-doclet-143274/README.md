@@ -1,15 +1,15 @@
 
 ## JavaDoc Doclet for DocFX
 
-[![Build status](https://apidrop.visualstudio.com/Toolshed/_apis/build/status/Toolshed-Maven-CI)](https://apidrop.visualstudio.com/Toolshed/_build/latest?definitionId=1633)
-
 This doclet is designed to produce a YAML representation of the Javadoc-generated documentation, that can be integrated into [DocFX](https://dotnet.github.io/docfx/).
+It contains some Google-specific configurations to render pages on cloud.google.com.
+The latest version of this doclet has been updated to be run with Java 17. It should work with Java 11 to generate Yaml files; however, the unit tests within this repo will fail.
 
 ## Getting started
 
-The easiest way is to just get the JAR files directly from our [releases](https://github.com/dendeli-msft/docfx-doclet/releases).
+This repo is a fork off of: [https://github.com/docascode/docfx-doclet](https://github.com/dendeli-msft/docfx-doclet/releases).
 
-Alternatively, you can clone the repository and build it with the help of Maven. You can do so by calling: 
+You can clone this repository and build it with the help of Maven. You can do so by calling: 
 
 ```bash
 mvn compile
@@ -38,7 +38,7 @@ To cut a new release of the doclet for updated Cloud RAD content, do the followi
 
 `git push origin v1.<minor>.<patch>`
 
-3) Update the `publish_javadoc11.sh` script within g3 to use the latest version of the doclet.
+3) Update the `publish_javadoc17.sh` script within g3 to use the latest version of the doclet.
 
 ## Usage 
 
@@ -50,7 +50,7 @@ When there is an existing java project where Maven is used as a build tool, one 
 <plugin>
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-javadoc-plugin</artifactId>
-  <version>3.0.1</version>
+  <version>3.5.0</version>
   <configuration>
     <doclet>com.microsoft.doclet.DocFxDoclet</doclet>
     <docletArtifact>
@@ -97,7 +97,7 @@ One can execute the `javadoc` command with the command line parameters:
 ```bash
 javadoc \
 -encoding UTF-8 \
--docletpath ./target/docfx-doclet-1.0-SNAPSHOT-jar-with-dependencies.jar \
+-docletpath ./target/docfx-doclet-1.0-SNAPSHOT-jar-with-dependencies.jar \ # Update the version here to the doclet version you want to use
 -doclet com.microsoft.doclet.DocFxDoclet \
 -classpath <list of jar with dependencies> \
 -sourcepath ./src/test/java \
