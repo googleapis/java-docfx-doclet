@@ -7,6 +7,10 @@
    </tr>
  </table>
 
+## This package is not the recommended entry point to using this client library!
+
+ For this library, we recommend using [com.microsoft.samples.google.v1](https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.google.v1) for new applications.
+
 ## Client Classes
 Client classes are the main entry point to using a package.
 They contain several variations of Java methods for each of the API's methods.
@@ -17,7 +21,7 @@ Client</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.SpeechClient">com.microsoft.samples.google.SpeechClient</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.google.SpeechClient">com.microsoft.samples.google.SpeechClient</a></td>
 <td>
 Service Description: Service that implements Google Cloud Speech API.
 
@@ -35,7 +39,7 @@ Settings</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.ProductSearchSettings">com.microsoft.samples.google.ProductSearchSettings</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.google.ProductSearchSettings">com.microsoft.samples.google.ProductSearchSettings</a></td>
 <td>
 Settings class to configure an instance of <xref uid="ProductSearchClient" data-throw-if-not-resolved="false">ProductSearchClient</xref>.
 
@@ -43,7 +47,7 @@ Settings class to configure an instance of <xref uid="ProductSearchClient" data-
 </td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.SpeechSettings">com.microsoft.samples.google.SpeechSettings</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.google.SpeechSettings">com.microsoft.samples.google.SpeechSettings</a></td>
 <td>
 Settings class to configure an instance of <xref uid="SpeechClient" data-throw-if-not-resolved="false">SpeechClient</xref>.
 
@@ -60,12 +64,12 @@ Class</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.ProductSearchSettings.Builder">com.microsoft.samples.google.ProductSearchSettings.Builder</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.google.ProductSearchSettings.Builder">com.microsoft.samples.google.ProductSearchSettings.Builder</a></td>
 <td>
 Builder for ProductSearchSettings.</td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.RecognitionAudio">com.microsoft.samples.google.RecognitionAudio</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.google.RecognitionAudio">com.microsoft.samples.google.RecognitionAudio</a></td>
 <td>
 
  Contains audio data in the encoding specified in the <code>RecognitionConfig</code>.
@@ -73,7 +77,7 @@ Builder for ProductSearchSettings.</td>
  returns <xref uid="google.rpc.Code.INVALID_ARGUMENT" data-throw-if-not-resolved="false">google.rpc.Code.INVALID_ARGUMENT</xref>. See</td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.SpeechSettings.Builder">com.microsoft.samples.google.SpeechSettings.Builder</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.google.SpeechSettings.Builder">com.microsoft.samples.google.SpeechSettings.Builder</a></td>
 <td>
 Builder for SpeechSettings.</td>
    </tr>
@@ -87,7 +91,7 @@ Interface</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.BetaApi">com.microsoft.samples.google.BetaApi</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.google.BetaApi">com.microsoft.samples.google.BetaApi</a></td>
 <td>
 Indicates a public API that can change at any time, and has no guarantee of API stability and
  backward-compatibility.
@@ -95,7 +99,7 @@ Indicates a public API that can change at any time, and has no guarantee of API 
  <p>Usage guidelines:</td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.ValidationException.Supplier">com.microsoft.samples.google.ValidationException.Supplier</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.google.ValidationException.Supplier">com.microsoft.samples.google.ValidationException.Supplier</a></td>
 <td>
 </td>
    </tr>
@@ -109,7 +113,7 @@ Enum</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.RecognitionAudio.AudioSourceCase">com.microsoft.samples.google.RecognitionAudio.AudioSourceCase</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.google.RecognitionAudio.AudioSourceCase">com.microsoft.samples.google.RecognitionAudio.AudioSourceCase</a></td>
 <td>
 </td>
    </tr>
@@ -123,7 +127,7 @@ Exception</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.ValidationException">com.microsoft.samples.google.ValidationException</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.google.ValidationException">com.microsoft.samples.google.ValidationException</a></td>
 <td>
 Exception thrown if there is a validation problem with a path template, http config, or related
  framework methods. Comes as an illegal argument exception subclass. Allows to globally set a

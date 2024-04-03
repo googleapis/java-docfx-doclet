@@ -87,12 +87,26 @@ To use the latest version of this library, add this to your dependencies:
 libraryDependencies += &quot;com.google.cloud&quot; % &quot;google-cloud-apikeys&quot; % &quot;0.18.0&quot;
 </pre>
 
-## Which version should I use?
-For this library, we recommend using API version v1 for new applications.
+## Which version ID should I get started with?
+For this library, we recommend using [com.microsoft.samples.google.v1](https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.google.v1) for new applications.
 
-Each Cloud Java client library may contain multiple packages. Each package containing a version number in its name corresponds to a published version of the service.
-We recommend using the latest stable version for new production applications, which can be identified by the largest numeric version that does not contain a suffix.
-For example, if a client library has two packages: `v1` and `v2alpha`, then the latest stable version is `v1`.
-If you use an unstable release, breaking changes may be introduced when upgrading.
-You can read more about [Cloud API versioning strategy here](https://cloud.google.com/apis/design/versioning).
+### Understanding Version ID and Library Versions
+When using a Cloud client library, it's important to distinguish between two types of versions:
+- **Library Version**: The version of the software package (the client library) that helps you interact with the Cloud service. These libraries are
+released and updated frequently with bug fixes, improvements, and support for new service features and versions. The version selector at
+the top of this page represents the client library version.
+- **Version ID**: The version of the Cloud service itself (e.g. API Keys API). New Version IDs are introduced infrequently, and often involve
+changes to the core functionality and structure of the Cloud service itself. The packages in the lefthand navigation represent packages tied
+to a specific Version ID of the Cloud service.
+
+### Managing Library Versions
+We recommend using the <code>com.google.cloud:libraries-bom</code> installation method detailed above to streamline dependency management
+across multiple Cloud Java client libraries. This ensures compatibility and simplifies updates.
+
+### Choosing the Right Version ID
+Each Cloud Java client library may contain packages tied to specific Version IDs (e.g., <code>v1</code>, <code>v2alpha</code>). For new production applications, use
+the latest stable Version ID. This is identified by the highest version number **without** a suffix (like "alpha" or "beta"). You can read more about
+[Cloud API versioning strategy here](https://cloud.google.com/apis/design/versioning).
+
+**Important**: Unstable Version ID releases (those _with_ suffixes) are subject to breaking changes when upgrading. Use them only for testing or if you specifically need their experimental features.
 
