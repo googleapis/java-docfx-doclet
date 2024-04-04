@@ -12,10 +12,10 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
-    <jackson.version>2.16.1</jackson.version>
+    <jackson.version>2.17.0</jackson.version>
     <apache.commons-lang.version>3.14.0</apache.commons-lang.version>
     <apache.commons-collections.version>4.4</apache.commons-collections.version>
-    <apache.commons-io.version>2.15.1</apache.commons-io.version>
+    <apache.commons-io.version>2.16.0</apache.commons-io.version>
     <apache.commons-text.version>1.11.0</apache.commons-text.version>
     <remark.version>1.1.0</remark.version>
   </properties>
@@ -25,7 +25,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.12.1</version>
+        <version>3.13.0</version>
         <configuration>
           <!-- Show build warnings in detail -->
           <compilerArgument>-Xlint:unchecked</compilerArgument>
@@ -36,7 +36,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
-        <version>3.6.0</version>
+        <version>3.7.1</version>
         <configuration>
           <!-- get all project dependencies -->
           <descriptorRefs>
@@ -105,7 +105,7 @@
           <dependency>
             <groupId>com.google.googlejavaformat</groupId>
             <artifactId>google-java-format</artifactId>
-            <version>1.20.0</version>
+            <version>1.22.0</version>
           </dependency>
         </dependencies>
       </plugin>
@@ -117,7 +117,7 @@
       <dependency>
         <groupId>com.google.cloud</groupId>
         <artifactId>libraries-bom</artifactId>
-        <version>26.32.0</version>
+        <version>26.36.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -163,7 +163,7 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>33.0.0-jre</version>
+      <version>33.1.0-jre</version>
     </dependency>
     <dependency>
       <groupId>com.google.code.gson</groupId>
