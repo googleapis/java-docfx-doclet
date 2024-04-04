@@ -147,23 +147,25 @@ public class YmlFilesBuilder {
                   .filter(pkg -> !packageLookup.isApiVersionStubPackage(pkg))
                   .collect(Collectors.toList()));
 
-      // Calculate the recommended package based on the latest stable Version ID. This will be
-      // overridden by the recommended_package in the RepoMetadata, if set
-      HashMap<ApiVersion, String> packageVersions = new HashMap<>();
-      for (PackageElement pkg : allPackages) {
-        Optional<ApiVersion> apiVersion = packageLookup.extractApiVersion(pkg);
-        apiVersion.ifPresent(
-            version -> packageVersions.put(version, String.valueOf(pkg.getQualifiedName())));
-      }
+      // Use the provided recommended package in the .repo-metadata.json file, if set
+      recommendedPackage =
+          repoMetadata
+              .getRecommendedPackage()
+              .orElseGet(
+                  () -> {
+                    // Calculate the recommended package based on the latest stable Version ID.
+                    HashMap<ApiVersion, String> packageVersions = new HashMap<>();
+                    for (PackageElement pkg : allPackages) {
+                      Optional<ApiVersion> apiVersion = packageLookup.extractApiVersion(pkg);
+                      apiVersion.ifPresent(
+                          version ->
+                              packageVersions.put(version, String.valueOf(pkg.getQualifiedName())));
+                    }
+                    if (packageVersions.isEmpty()) return "";
 
-      // If repoMetadata contains a recommended package, use that instead of the calculated package
-      Optional<String> inputRecommendedPackage = repoMetadata.getRecommendedPackage();
-      if (inputRecommendedPackage.isPresent()) {
-        recommendedPackage = repoMetadata.getRecommendedPackage().get();
-      } else if (!packageVersions.keySet().isEmpty()) {
-        recommendedApiVersion = ApiVersion.getRecommended(packageVersions.keySet());
-        recommendedPackage = packageVersions.get(recommendedApiVersion).toString();
-      }
+                    ApiVersion recommended = ApiVersion.getRecommended(packageVersions.keySet());
+                    return packageVersions.get(recommended).toString();
+                  });
 
       for (PackageElement element : organizedPackagesWithoutStubs.get(PackageGroup.VISIBLE)) {
         tocFile.addTocItem(buildPackage(element));
