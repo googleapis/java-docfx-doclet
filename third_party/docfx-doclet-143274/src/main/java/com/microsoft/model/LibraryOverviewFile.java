@@ -55,9 +55,15 @@ public class LibraryOverviewFile {
 
     this.recommendedPackageLink = "";
     // Compute the link to the recommended package if it exists
-    if(!this.recommendedPackage.isEmpty()){
+    if (!this.recommendedPackage.isEmpty()) {
       String cgcRootUri = "https://cloud.google.com/java/docs/reference/";
-      this.recommendedPackageLink = cgcRootUri + repoMetadata.getArtifactId() + "/" + artifactVersion + "/" + this.recommendedPackage;
+      this.recommendedPackageLink =
+          cgcRootUri
+              + repoMetadata.getArtifactId()
+              + "/"
+              + artifactVersion
+              + "/"
+              + this.recommendedPackage;
     }
 
     this.LIBRARY_OVERVIEW_FILE_HEADER =
@@ -90,7 +96,8 @@ public class LibraryOverviewFile {
             + "\n\n";
 
     // For non-service libraries, these steps are not necessary
-    // TODO: https://github.com/googleapis/java-docfx-doclet/issues/253 : Ideally we can refactor for custom modules to copy from their README sections
+    // TODO: https://github.com/googleapis/java-docfx-doclet/issues/253 : Ideally we can refactor
+    // for custom modules to copy from their README sections
     String[] runtimeLibraries = {"gax", "api-common", "common-protos", "google-cloud-core"};
 
     if (Arrays.asList(runtimeLibraries).contains(repoMetadata.getApiShortName())) {
@@ -195,7 +202,6 @@ public class LibraryOverviewFile {
               + artifactVersion
               + "&quot;\n"
               + "</pre>\n\n";
-
     }
     // It should be very rare that a client library does not have a recommended package
     if (this.recommendedPackage.isEmpty()) {

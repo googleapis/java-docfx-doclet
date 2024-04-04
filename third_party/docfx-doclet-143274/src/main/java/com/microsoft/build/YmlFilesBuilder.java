@@ -20,7 +20,6 @@ import com.microsoft.util.ElementUtil;
 import com.microsoft.util.FileUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -148,19 +147,20 @@ public class YmlFilesBuilder {
                   .filter(pkg -> !packageLookup.isApiVersionStubPackage(pkg))
                   .collect(Collectors.toList()));
 
-      // Calculate the recommended package based on the latest stable Version ID. This will be overridden by the recommended_package in the RepoMetadata, if set
+      // Calculate the recommended package based on the latest stable Version ID. This will be
+      // overridden by the recommended_package in the RepoMetadata, if set
       HashMap<ApiVersion, String> packageVersions = new HashMap<>();
       for (PackageElement pkg : allPackages) {
         Optional<ApiVersion> apiVersion = packageLookup.extractApiVersion(pkg);
-        apiVersion.ifPresent(version -> packageVersions.put(version, String.valueOf(pkg.getQualifiedName())));
+        apiVersion.ifPresent(
+            version -> packageVersions.put(version, String.valueOf(pkg.getQualifiedName())));
       }
 
       // If repoMetadata contains a recommended package, use that instead of the calculated package
       Optional<String> inputRecommendedPackage = repoMetadata.getRecommendedPackage();
-      if(inputRecommendedPackage.isPresent()){
+      if (inputRecommendedPackage.isPresent()) {
         recommendedPackage = repoMetadata.getRecommendedPackage().get();
-      }
-      else if(!packageVersions.keySet().isEmpty()){
+      } else if (!packageVersions.keySet().isEmpty()) {
         recommendedApiVersion = ApiVersion.getRecommended(packageVersions.keySet());
         recommendedPackage = packageVersions.get(recommendedApiVersion).toString();
       }

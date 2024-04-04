@@ -55,7 +55,8 @@ public class PackageOverviewFile {
   // This is only set if the package is not a GA package
   private String PRERELEASE_IMPLICATIONS = "";
 
-  // Uses the `recommended_package` field set in the RepoMetadata file if set; otherwise computes it.
+  // Uses the `recommended_package` field set in the RepoMetadata file if set; otherwise computes
+  // it.
   private String recommendedPackage;
 
   private String recommendedPackageLink;
@@ -95,7 +96,11 @@ public class PackageOverviewFile {
     this.PACKAGE_HEADER = "# Package " + packageURIPath + " (" + artifactVersion + ")\n";
 
     String cloudRADChildElementLinkPrefix =
-        "https://cloud.google.com/java/docs/reference/" + repoMetadata.getArtifactId() + "/" + artifactVersion + "/";
+        "https://cloud.google.com/java/docs/reference/"
+            + repoMetadata.getArtifactId()
+            + "/"
+            + artifactVersion
+            + "/";
 
     String packageURIPathGithub = packageURIPath.replace('.', '/');
     String githubSourcePackageLink =
@@ -106,7 +111,13 @@ public class PackageOverviewFile {
             + packageURIPathGithub;
 
     String cgcRootUri = "https://cloud.google.com/java/docs/reference/";
-    this.recommendedPackageLink = cgcRootUri + repoMetadata.getArtifactId() + "/" + artifactVersion + "/" + this.recommendedPackage;
+    this.recommendedPackageLink =
+        cgcRootUri
+            + repoMetadata.getArtifactId()
+            + "/"
+            + artifactVersion
+            + "/"
+            + this.recommendedPackage;
     // If the package status is not a GA version, then add a disclaimer around prerelease
     // implications
     if (status != null) {
@@ -117,21 +128,24 @@ public class PackageOverviewFile {
               + "Use them only for testing or if you specifically need their experimental features.\n\n";
     }
 
-    // If a package is not the same as the recommended package, add a disclaimer. If the recommended package does not exist, then do not set the disclaimer.
-    if (!this.recommendedPackage.isEmpty() && !packageElement.getQualifiedName().toString().equals(this.recommendedPackage)) {
-        this.RECOMMENDED_VERSION =
-            "## This package is not the recommended entry point to using this client library!\n\n"
-                + " For this library, we recommend using ["
-                + recommendedPackage
-                + "]("
-                + recommendedPackageLink
-                + ")"
-                + " for new applications.\n"
-                + "\n";
+    // If a package is not the same as the recommended package, add a disclaimer. If the recommended
+    // package does not exist, then do not set the disclaimer.
+    if (!this.recommendedPackage.isEmpty()
+        && !packageElement.getQualifiedName().toString().equals(this.recommendedPackage)) {
+      this.RECOMMENDED_VERSION =
+          "## This package is not the recommended entry point to using this client library!\n\n"
+              + " For this library, we recommend using ["
+              + recommendedPackage
+              + "]("
+              + recommendedPackageLink
+              + ")"
+              + " for new applications.\n"
+              + "\n";
     }
 
     // Link to recommended package (if it exists) for the Stub class as well
-    if (!this.recommendedPackage.isEmpty() && String.valueOf(this.packageElement.getQualifiedName()).contains("stub")) {
+    if (!this.recommendedPackage.isEmpty()
+        && String.valueOf(this.packageElement.getQualifiedName()).contains("stub")) {
       this.STUB_IMPLICATIONS =
           "## Stub Package Implications\n\n"
               + "This package is a a base stub class. It is for advanced usage and reflects the underlying API directly.\n"
