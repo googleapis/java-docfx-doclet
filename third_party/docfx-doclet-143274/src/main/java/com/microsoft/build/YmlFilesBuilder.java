@@ -19,8 +19,9 @@ import com.microsoft.model.TocItem;
 import com.microsoft.util.ElementUtil;
 import com.microsoft.util.FileUtil;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.lang.model.element.PackageElement;
 import jdk.javadoc.doclet.DocletEnvironment;
@@ -105,7 +106,7 @@ public class YmlFilesBuilder {
               artifactVersion,
               librariesBomVersion,
               repoMetadataFilePath,
-              processor.recommendedApiVersion);
+              processor.recommendedPackage);
       FileUtil.dumpToFile(libraryOverviewFile);
     }
     return true;
@@ -131,7 +132,10 @@ public class YmlFilesBuilder {
     private final List<PackageElement> allPackages =
         elementUtil.extractPackageElements(environment.getIncludedElements());
 
-    private String recommendedApiVersion = "";
+    private ApiVersion recommendedApiVersion;
+
+    // If set in RepoMetadata, use that value. Otherwise, calculate based on recommendedApiVersion
+    private String recommendedPackage = "";
 
     private RepoMetadata repoMetadata = new RepoMetadata();
 
@@ -143,15 +147,25 @@ public class YmlFilesBuilder {
                   .filter(pkg -> !packageLookup.isApiVersionStubPackage(pkg))
                   .collect(Collectors.toList()));
 
-      // Get recommended ApiVersion for new Library Overview
-      HashSet<ApiVersion> versions = new HashSet<>();
-      for (PackageElement pkg : allPackages) {
-        packageLookup.extractApiVersion(pkg).ifPresent(versions::add);
-      }
+      // Use the provided recommended package in the .repo-metadata.json file, if set
+      recommendedPackage =
+          repoMetadata
+              .getRecommendedPackage()
+              .orElseGet(
+                  () -> {
+                    // Calculate the recommended package based on the latest stable Version ID.
+                    HashMap<ApiVersion, String> packageVersions = new HashMap<>();
+                    for (PackageElement pkg : allPackages) {
+                      Optional<ApiVersion> apiVersion = packageLookup.extractApiVersion(pkg);
+                      apiVersion.ifPresent(
+                          version ->
+                              packageVersions.put(version, String.valueOf(pkg.getQualifiedName())));
+                    }
+                    if (packageVersions.isEmpty()) return "";
 
-      if (!versions.isEmpty()) {
-        recommendedApiVersion = ApiVersion.getRecommended(versions).toString();
-      }
+                    ApiVersion recommended = ApiVersion.getRecommended(packageVersions.keySet());
+                    return packageVersions.get(recommended).toString();
+                  });
 
       for (PackageElement element : organizedPackagesWithoutStubs.get(PackageGroup.VISIBLE)) {
         tocFile.addTocItem(buildPackage(element));
@@ -200,7 +214,7 @@ public class YmlFilesBuilder {
       packageTocItem.getItems().add(packageSummary);
       packageOverviewFiles.add(
           packageBuilder.buildPackageOverviewFile(
-              element, repoMetadata, artifactVersion, recommendedApiVersion));
+              element, repoMetadata, artifactVersion, recommendedPackage));
 
       // build classes/interfaces/enums/exceptions/annotations
       packageTocItem

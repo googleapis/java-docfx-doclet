@@ -55,9 +55,13 @@ public class PackageOverviewFile {
   // This is only set if the package is not a GA package
   private String PRERELEASE_IMPLICATIONS = "";
 
-  private String recommendedApiVersion;
+  // Uses the `recommended_package` field set in the RepoMetadata file if set; otherwise computes
+  // it.
+  private String recommendedPackage;
 
-  // This is only set if the package is not the latest GA package
+  private String recommendedPackageLink;
+
+  // This is only set if the package is not the recommended package
   private String RECOMMENDED_VERSION = "";
 
   // This is only set if the package is a stub package
@@ -81,19 +85,22 @@ public class PackageOverviewFile {
       PackageLookup packageLookup,
       ReferenceBuilder referenceBuilder,
       String artifactVersion,
-      String recommendedApiVersion) {
+      String recommendedPackage) {
     this.outputPath = outputPath;
     this.fileName = fileName;
     this.packageElement = packageElement;
-    this.recommendedApiVersion = recommendedApiVersion;
+    this.recommendedPackage = recommendedPackage;
 
     String packageURIPath = fileName.replace(".md", "");
 
     this.PACKAGE_HEADER = "# Package " + packageURIPath + " (" + artifactVersion + ")\n";
 
-    // This will always link to the latest version of the package classes
     String cloudRADChildElementLinkPrefix =
-        "https://cloud.google.com/java/docs/reference/" + repoMetadata.getArtifactId() + "/latest/";
+        "https://cloud.google.com/java/docs/reference/"
+            + repoMetadata.getArtifactId()
+            + "/"
+            + artifactVersion
+            + "/";
 
     String packageURIPathGithub = packageURIPath.replace('.', '/');
     String githubSourcePackageLink =
@@ -103,56 +110,49 @@ public class PackageOverviewFile {
             + "/src/main/java/"
             + packageURIPathGithub;
 
+    String cgcRootUri = "https://cloud.google.com/java/docs/reference/";
+    this.recommendedPackageLink =
+        cgcRootUri
+            + repoMetadata.getArtifactId()
+            + "/"
+            + artifactVersion
+            + "/"
+            + this.recommendedPackage;
     // If the package status is not a GA version, then add a disclaimer around prerelease
     // implications
     if (status != null) {
       this.PRERELEASE_IMPLICATIONS =
           "## Prerelease Implications\n\n"
-              + "This package is a prerelease version! Use with caution.\n"
-              + "Prerelease versions are considered unstable as they may be shut down. You can read more about [Cloud API versioning strategy here](https://cloud.google.com/apis/design/versioning).\n"
-              + "Each Cloud Java client library may contain multiple packages. Each package containing a version number in its name corresponds to a published version of the service.\n"
-              + "We recommend using the latest stable version for new production applications, which can be identified by the largest numeric version that does not contain a suffix.\n"
-              + "For example, if a client library has two packages: `v1` and `v2alpha`, then the latest stable version is `v1`.\n"
-              + "If you use an unstable release, breaking changes may be introduced when upgrading.\n\n";
+              + "This package is a prerelease version! Use with caution.\n\n"
+              + "Prerelease versions are considered unstable as they may be shut down and/or subject to breaking changes when upgrading.\n"
+              + "Use them only for testing or if you specifically need their experimental features.\n\n";
     }
 
-    // This regex captures the package path before the version (if it exists) and the version
-    Pattern pattern = Pattern.compile("(.*?)(v\\d+.*?)(?:\\.|$)");
-    ImmutableList<Object> packageVersionURIInfo =
-        extractPackageBaseURIBeforeVersion(packageURIPath, pattern);
-    String basePackageURI = packageVersionURIInfo.get(0).toString();
-    String packageVersion = packageVersionURIInfo.get(1).toString();
-    // Build link to the Cloud RAD link for the recommended package
-    String recommendedPackageVersionLink =
-        cloudRADChildElementLinkPrefix + basePackageURI + recommendedApiVersion;
-
-    // A package is not the latest GA version if it is a prerelease version, or if it is a GA
-    // version that is not the same as the recommended Api version
-    if (basePackageURI != "N/A") {
-      if (status != null || (!packageVersion.equals(this.recommendedApiVersion))) {
-        this.RECOMMENDED_VERSION =
-            "## This package is not the latest GA version! \n\n"
-                + " For this library, we recommend using the [package]("
-                + recommendedPackageVersionLink
-                + ")"
-                + " associated with API version "
-                + this.recommendedApiVersion
-                + " for new applications.\n"
-                + "\n";
-      }
+    // If a package is not the same as the recommended package, add a disclaimer. If the recommended
+    // package does not exist, then do not set the disclaimer.
+    if (!this.recommendedPackage.isEmpty()
+        && !packageElement.getQualifiedName().toString().equals(this.recommendedPackage)) {
+      this.RECOMMENDED_VERSION =
+          "## This package is not the recommended entry point to using this client library!\n\n"
+              + " For this library, we recommend using ["
+              + recommendedPackage
+              + "]("
+              + recommendedPackageLink
+              + ")"
+              + " for new applications.\n"
+              + "\n";
     }
 
-    // If recommended version package URI exists, link to it for the Stub class as well
-    if (basePackageURI != "N/A"
+    // Link to recommended package (if it exists) for the Stub class as well
+    if (!this.recommendedPackage.isEmpty()
         && String.valueOf(this.packageElement.getQualifiedName()).contains("stub")) {
       this.STUB_IMPLICATIONS =
           "## Stub Package Implications\n\n"
               + "This package is a a base stub class. It is for advanced usage and reflects the underlying API directly.\n"
-              + "We generally recommend using non-stub, latest GA package, such as ["
-              + basePackageURI
-              + recommendedApiVersion
+              + "We generally recommend using the non-stub, latest GA package, such as ["
+              + recommendedPackage
               + "]("
-              + recommendedPackageVersionLink
+              + recommendedPackageLink
               + ")"
               + ". Use with caution.\n";
     } else if (String.valueOf(this.packageElement.getQualifiedName()).contains("stub")) {
