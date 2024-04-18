@@ -7,18 +7,16 @@
    </tr>
  </table>
 
-## This package is not the latest GA version! 
+## This package is not the recommended entry point to using this client library!
 
- For this library, we recommend using the [package](https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1) associated with API version v1 for new applications.
+ For this library, we recommend using [com.microsoft.samples.google.v1](https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.google.v1) for new applications.
 
 ## Prerelease Implications
 
 This package is a prerelease version! Use with caution.
-Prerelease versions are considered unstable as they may be shut down. You can read more about [Cloud API versioning strategy here](https://cloud.google.com/apis/design/versioning).
-Each Cloud Java client library may contain multiple packages. Each package containing a version number in its name corresponds to a published version of the service.
-We recommend using the latest stable version for new production applications, which can be identified by the largest numeric version that does not contain a suffix.
-For example, if a client library has two packages: `v1` and `v2alpha`, then the latest stable version is `v1`.
-If you use an unstable release, breaking changes may be introduced when upgrading.
+
+Prerelease versions are considered unstable as they may be shut down and/or subject to breaking changes when upgrading.
+Use them only for testing or if you specifically need their experimental features.
 
 ## Client Classes
 Client classes are the main entry point to using a package.
@@ -30,7 +28,7 @@ Client</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1beta.SpeechClient">com.microsoft.samples.google.v1beta.SpeechClient</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.google.v1beta.SpeechClient">com.microsoft.samples.google.v1beta.SpeechClient</a></td>
 <td>
 Service Description: Service that implements Google Cloud Speech API.
 

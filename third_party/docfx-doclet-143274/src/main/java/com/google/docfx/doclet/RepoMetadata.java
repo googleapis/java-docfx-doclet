@@ -46,6 +46,9 @@ public class RepoMetadata {
   @SerializedName("api_id")
   private String apiId;
 
+  @SerializedName("recommended_package")
+  private String recommendedPackage;
+
   private String artifactId;
 
   public String getNamePretty() {
@@ -78,6 +81,10 @@ public class RepoMetadata {
 
   public void setProductDocumentationUri(String productDocumentationUri) {
     this.productDocumentationUri = productDocumentationUri;
+  }
+
+  public Optional<String> getRecommendedPackage() {
+    return Optional.ofNullable(this.recommendedPackage);
   }
 
   public String getApiDescription() {
