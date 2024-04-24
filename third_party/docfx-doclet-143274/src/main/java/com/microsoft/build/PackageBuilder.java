@@ -35,7 +35,7 @@ class PackageBuilder {
       PackageElement packageElement,
       RepoMetadata repoMetadata,
       String artifactVersion,
-      String recommendedApiVersion) {
+      String recommendedPackage) {
     String status = packageLookup.extractStatus(packageElement);
     String fileName = packageElement.getQualifiedName() + ".md";
     PackageOverviewFile packageOverviewFile =
@@ -48,7 +48,7 @@ class PackageBuilder {
             packageLookup,
             referenceBuilder,
             artifactVersion,
-            recommendedApiVersion);
+            recommendedPackage);
     return packageOverviewFile;
   }
 }

@@ -7,6 +7,10 @@
    </tr>
  </table>
 
+## This package is not the recommended entry point to using this client library!
+
+ For this library, we recommend using [com.microsoft.samples.google.v1](https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.google.v1) for new applications.
+
 ## Classes
 <table>
    <tr>
@@ -15,43 +19,43 @@ Class</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.BasePartnerComponent">com.microsoft.samples.BasePartnerComponent</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.BasePartnerComponent">com.microsoft.samples.BasePartnerComponent</a></td>
 <td>
 Holds common partner component properties and behavior. All components should inherit from this
  class. The context object type.</td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.BasePartnerComponentString">com.microsoft.samples.BasePartnerComponentString</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.BasePartnerComponentString">com.microsoft.samples.BasePartnerComponentString</a></td>
 <td>
 Holds common partner component properties and behavior. The context is string type by default.</td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.ExceptionHandler">com.microsoft.samples.ExceptionHandler</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.ExceptionHandler">com.microsoft.samples.ExceptionHandler</a></td>
 <td>
 Exception retry algorithm implementation used by <xref uid="RetryHelper" data-throw-if-not-resolved="false">RetryHelper</xref>.</td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.ExceptionHandler.Builder">com.microsoft.samples.ExceptionHandler.Builder</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.ExceptionHandler.Builder">com.microsoft.samples.ExceptionHandler.Builder</a></td>
 <td>
 ExceptionHandler builder.</td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.KeyValuePair">com.microsoft.samples.KeyValuePair</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.KeyValuePair">com.microsoft.samples.KeyValuePair</a></td>
 <td>
 </td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.Link">com.microsoft.samples.Link</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.Link">com.microsoft.samples.Link</a></td>
 <td>
 </td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.Subpackage">com.microsoft.samples.Subpackage</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.Subpackage">com.microsoft.samples.Subpackage</a></td>
 <td>
 </td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.SuperHero">com.microsoft.samples.SuperHero</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.SuperHero">com.microsoft.samples.SuperHero</a></td>
 <td>
 Hero is the main entity we will be using to something</td>
    </tr>
@@ -65,12 +69,12 @@ Interface</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.ExceptionHandler.Interceptor">com.microsoft.samples.ExceptionHandler.Interceptor</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.ExceptionHandler.Interceptor">com.microsoft.samples.ExceptionHandler.Interceptor</a></td>
 <td>
 </td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.IPartner">com.microsoft.samples.IPartner</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.IPartner">com.microsoft.samples.IPartner</a></td>
 <td>
 The main entry point into using the partner SDK functionality. Represents a partner and
  encapsulates all the behavior attached to partners. Use this interface to get to the partner's
@@ -86,7 +90,7 @@ Enum</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult">com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult">com.microsoft.samples.ExceptionHandler.Interceptor.RetryResult</a></td>
 <td>
 </td>
    </tr>
