@@ -149,6 +149,10 @@ public class RepoMetadata {
         || Objects.equals(this.repo, "googleapis/sdk-platform-java")) {
       githubLink = githubLink + "/tree/main/" + this.repoShort;
     }
+    // Handwritten libraries have a different base URI
+    else {
+      githubLink = githubLink + "/tree/main/";
+    }
     return githubLink;
   }
 
