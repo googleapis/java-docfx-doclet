@@ -9,7 +9,7 @@
 
 ## This package is not the recommended entry point to using this client library!
 
- For this library, we recommend using [com.microsoft.samples.google.v1](https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.google.v1) for new applications.
+ For this library, we recommend using [com.microsoft.samples.google.v1](https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1) for new applications.
 
 ## Classes
 <table>
@@ -19,7 +19,7 @@ Class</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.offers.Offer">com.microsoft.samples.offers.Offer</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.offers.Offer">com.microsoft.samples.offers.Offer</a></td>
 <td>
 Represents a form of product availability to customer</td>
    </tr>

@@ -96,11 +96,7 @@ public class PackageOverviewFile {
     this.PACKAGE_HEADER = "# Package " + packageURIPath + " (" + artifactVersion + ")\n";
 
     String cloudRADChildElementLinkPrefix =
-        "https://cloud.google.com/java/docs/reference/"
-            + repoMetadata.getArtifactId()
-            + "/"
-            + artifactVersion
-            + "/";
+        "https://cloud.google.com/java/docs/reference/" + repoMetadata.getArtifactId() + "/latest/";
 
     String packageURIPathGithub = packageURIPath.replace('.', '/');
     String githubSourcePackageLink =
@@ -110,14 +106,7 @@ public class PackageOverviewFile {
             + "/src/main/java/"
             + packageURIPathGithub;
 
-    String cgcRootUri = "https://cloud.google.com/java/docs/reference/";
-    this.recommendedPackageLink =
-        cgcRootUri
-            + repoMetadata.getArtifactId()
-            + "/"
-            + artifactVersion
-            + "/"
-            + this.recommendedPackage;
+    this.recommendedPackageLink = cloudRADChildElementLinkPrefix + this.recommendedPackage;
     // If the package status is not a GA version, then add a disclaimer around prerelease
     // implications
     if (status != null) {
@@ -366,7 +355,7 @@ public class PackageOverviewFile {
   private static String createHtmlTable(
       String type, String linkPrefix, List<PackageChildSummary> listOfPackageChildrenSummaries) {
     String tableHeader = type;
-    if (type == "Client/Settings") {
+    if (type.equals("Client/Settings")) {
       tableHeader = "Clients or Settings Class";
     }
     StringBuilder tableBuilder = new StringBuilder();
@@ -381,7 +370,7 @@ public class PackageOverviewFile {
         .append("</th>\n");
 
     for (PackageChildSummary packageChildSummary : listOfPackageChildrenSummaries) {
-      if (packageChildSummary.type == type) {
+      if (packageChildSummary.type.equals(type)) {
         tableBuilder
             .append("<tr>\n")
             .append("<td><a href=\"")

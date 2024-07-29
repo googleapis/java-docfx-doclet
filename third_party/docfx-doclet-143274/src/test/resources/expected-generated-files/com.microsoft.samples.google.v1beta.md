@@ -9,7 +9,7 @@
 
 ## This package is not the recommended entry point to using this client library!
 
- For this library, we recommend using [com.microsoft.samples.google.v1](https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.google.v1) for new applications.
+ For this library, we recommend using [com.microsoft.samples.google.v1](https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1) for new applications.
 
 ## Prerelease Implications
 
@@ -28,7 +28,7 @@ Client</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.google.v1beta.SpeechClient">com.microsoft.samples.google.v1beta.SpeechClient</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1beta.SpeechClient">com.microsoft.samples.google.v1beta.SpeechClient</a></td>
 <td>
 Service Description: Service that implements Google Cloud Speech API.
 
