@@ -357,7 +357,7 @@ public class PackageOverviewFile {
   private static String createHtmlTable(
       String type, String linkPrefix, List<PackageChildSummary> listOfPackageChildrenSummaries) {
     String tableHeader = type;
-    if (type == "Client/Settings") {
+    if (type.equals("Client/Settings")) {
       tableHeader = "Clients or Settings Class";
     }
     StringBuilder tableBuilder = new StringBuilder();
@@ -372,7 +372,7 @@ public class PackageOverviewFile {
         .append("</th>\n");
 
     for (PackageChildSummary packageChildSummary : listOfPackageChildrenSummaries) {
-      if (packageChildSummary.type == type) {
+      if (packageChildSummary.type.equals(type)) {
         tableBuilder
             .append("<tr>\n")
             .append("<td><a href=\"")
