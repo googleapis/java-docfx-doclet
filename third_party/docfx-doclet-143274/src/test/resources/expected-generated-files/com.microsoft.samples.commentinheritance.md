@@ -9,7 +9,7 @@
 
 ## This package is not the recommended entry point to using this client library!
 
- For this library, we recommend using [com.microsoft.samples.google.v1](https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.google.v1) for new applications.
+ For this library, we recommend using [com.microsoft.samples.google.v1](https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1) for new applications.
 
 ## Classes
 <table>
@@ -19,22 +19,22 @@ Class</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.commentinheritance.Animal">com.microsoft.samples.commentinheritance.Animal</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.commentinheritance.Animal">com.microsoft.samples.commentinheritance.Animal</a></td>
 <td>
 Animal.</td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.commentinheritance.Dog">com.microsoft.samples.commentinheritance.Dog</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.commentinheritance.Dog">com.microsoft.samples.commentinheritance.Dog</a></td>
 <td>
 Canine and man's best friend.</td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.commentinheritance.Herbivorous.Plant">com.microsoft.samples.commentinheritance.Herbivorous.Plant</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.commentinheritance.Herbivorous.Plant">com.microsoft.samples.commentinheritance.Herbivorous.Plant</a></td>
 <td>
 </td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.commentinheritance.Mammal">com.microsoft.samples.commentinheritance.Mammal</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.commentinheritance.Mammal">com.microsoft.samples.commentinheritance.Mammal</a></td>
 <td>
 Mammal.</td>
    </tr>
@@ -48,27 +48,27 @@ Interface</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.commentinheritance.Carnivorous">com.microsoft.samples.commentinheritance.Carnivorous</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.commentinheritance.Carnivorous">com.microsoft.samples.commentinheritance.Carnivorous</a></td>
 <td>
 Marks an Animal that eats other animals.</td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.commentinheritance.Herbivorous">com.microsoft.samples.commentinheritance.Herbivorous</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.commentinheritance.Herbivorous">com.microsoft.samples.commentinheritance.Herbivorous</a></td>
 <td>
 Marks animals that eat plants.</td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.commentinheritance.Omnivorous">com.microsoft.samples.commentinheritance.Omnivorous</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.commentinheritance.Omnivorous">com.microsoft.samples.commentinheritance.Omnivorous</a></td>
 <td>
 Eats plants and animals.</td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.commentinheritance.Organism">com.microsoft.samples.commentinheritance.Organism</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.commentinheritance.Organism">com.microsoft.samples.commentinheritance.Organism</a></td>
 <td>
 </td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/0.18.0/com.microsoft.samples.commentinheritance.Viviparous">com.microsoft.samples.commentinheritance.Viviparous</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.commentinheritance.Viviparous">com.microsoft.samples.commentinheritance.Viviparous</a></td>
 <td>
 Mammals that give birth to young that develop within the mother's body.</td>
    </tr>
