@@ -96,9 +96,7 @@ public class PackageOverviewFile {
     this.PACKAGE_HEADER = "# Package " + packageURIPath + " (" + artifactVersion + ")\n";
 
     String cloudRADChildElementLinkPrefix =
-        "https://cloud.google.com/java/docs/reference/"
-            + repoMetadata.getArtifactId()
-            + "/latest/";
+        "https://cloud.google.com/java/docs/reference/" + repoMetadata.getArtifactId() + "/latest/";
 
     String packageURIPathGithub = packageURIPath.replace('.', '/');
     String githubSourcePackageLink =
