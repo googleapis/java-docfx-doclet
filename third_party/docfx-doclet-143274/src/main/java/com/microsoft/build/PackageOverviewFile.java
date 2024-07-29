@@ -98,9 +98,7 @@ public class PackageOverviewFile {
     String cloudRADChildElementLinkPrefix =
         "https://cloud.google.com/java/docs/reference/"
             + repoMetadata.getArtifactId()
-            + "/"
-            + artifactVersion
-            + "/";
+            + "/latest/";
 
     String packageURIPathGithub = packageURIPath.replace('.', '/');
     String githubSourcePackageLink =
@@ -110,14 +108,7 @@ public class PackageOverviewFile {
             + "/src/main/java/"
             + packageURIPathGithub;
 
-    String cgcRootUri = "https://cloud.google.com/java/docs/reference/";
-    this.recommendedPackageLink =
-        cgcRootUri
-            + repoMetadata.getArtifactId()
-            + "/"
-            + artifactVersion
-            + "/"
-            + this.recommendedPackage;
+    this.recommendedPackageLink = cloudRADChildElementLinkPrefix + this.recommendedPackage;
     // If the package status is not a GA version, then add a disclaimer around prerelease
     // implications
     if (status != null) {
