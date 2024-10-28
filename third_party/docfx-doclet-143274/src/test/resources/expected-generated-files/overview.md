@@ -61,8 +61,8 @@ dependency declarations in the artifact's <code>build.gradle</code> file.
 
 The example below demonstrates how you would import the BOM and include the <code>google-cloud-apikeys</code> artifact.
 <pre class="prettyprint lang-Groovy devsite-click-to-copy">
-implementation platform(&#39;com.google.cloud:libraries-bom:26.19.0&#39;)
-implementation &#39;com.google.cloud:google-cloud-apikeys&#39;
+implementation(platform(&quot;com.google.cloud:libraries-bom:26.19.0&quot;))
+implementation(&quot;com.google.cloud:google-cloud-apikeys&quot;)
 </pre>
 
 The <code>platform</code> and <code>enforcedPlatform</code> keywords supply dependency versions
