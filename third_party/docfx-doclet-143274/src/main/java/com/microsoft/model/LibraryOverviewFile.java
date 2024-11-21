@@ -172,12 +172,12 @@ public class LibraryOverviewFile {
               + repoMetadata.getArtifactId()
               + "</code> artifact.\n"
               + "<pre class=\"prettyprint lang-Groovy devsite-click-to-copy\">\n"
-              + "implementation platform(&#39;com.google.cloud:libraries-bom:"
+              + "implementation(platform(&quot;com.google.cloud:libraries-bom:"
               + librariesBomVersion
-              + "&#39;)\n"
-              + "implementation &#39;"
+              + "&quot;))\n"
+              + "implementation(&quot;"
               + repoMetadata.getDistributionName()
-              + "&#39;\n"
+              + "&quot;)\n"
               + "</pre>\n\n"
               + "The <code>platform</code> and <code>enforcedPlatform</code> keywords supply dependency versions\n"
               + "declared in a BOM. The <code>enforcedPlatform</code> keyword enforces the dependency\n"
