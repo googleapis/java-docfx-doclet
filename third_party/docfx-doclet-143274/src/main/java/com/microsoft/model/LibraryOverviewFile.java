@@ -46,7 +46,7 @@ public class LibraryOverviewFile {
     this.outputPath = outputPath;
     this.fileName = fileName;
     this.artifactVersion = artifactVersion;
-    this.librariesBomVersion = librariesBomVersion;
+    this.librariesBomVersion = librariesBomVersion.trim();
     this.repoMetadataFilePath = repoMetadataFilePath;
     this.recommendedPackage = recommendedPackage;
 
@@ -173,7 +173,7 @@ public class LibraryOverviewFile {
               + "</code> artifact.\n"
               + "<pre class=\"prettyprint lang-Groovy devsite-click-to-copy\">\n"
               + "implementation(platform(&quot;com.google.cloud:libraries-bom:"
-              + librariesBomVersion
+              + this.librariesBomVersion
               + "&quot;))\n"
               + "implementation(&quot;"
               + repoMetadata.getDistributionName()
