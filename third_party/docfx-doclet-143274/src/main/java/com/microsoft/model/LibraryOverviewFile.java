@@ -87,7 +87,7 @@ public class LibraryOverviewFile {
             + " Product Reference</a></td>\n"
             + "     <td><a href=\""
             + repoMetadata.getGithubLink()
-            + "\">GitHub Repository (includes samples)</a></td>\n"
+            + "\">GitHub Repository</a></td>\n"
             + "     <td><a href=\""
             + repoMetadata.getMavenLink()
             + "\">Maven artifact</a></td>\n"
