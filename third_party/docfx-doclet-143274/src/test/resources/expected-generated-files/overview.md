@@ -6,7 +6,7 @@
 <table>
    <tr>
      <td><a href="https://cloud.google.com/api-keys/">API Keys API Product Reference</a></td>
-     <td><a href="https://github.com/googleapis/google-cloud-java/tree/main/java-apikeys">GitHub Repository (includes samples)</a></td>
+     <td><a href="https://github.com/googleapis/google-cloud-java/tree/main/java-apikeys">GitHub Repository</a></td>
      <td><a href="https://central.sonatype.com/artifact/com.google.cloud/google-cloud-apikeys">Maven artifact</a></td>
    </tr>
  </table>
