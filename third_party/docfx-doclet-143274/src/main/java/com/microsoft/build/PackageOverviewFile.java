@@ -8,6 +8,7 @@ import com.google.docfx.doclet.RepoMetadata;
 import com.microsoft.lookup.PackageLookup;
 import com.microsoft.model.MetadataFileItem;
 import java.io.File;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -376,7 +377,7 @@ public class PackageOverviewFile {
             .append("<td><a href=\"")
             .append(linkPrefix + packageChildSummary.uid)
             .append("\">")
-            .append(packageChildSummary.uid)
+            .append(withLineBreaks(packageChildSummary.uid))
             .append("</a></td>\n")
             .append("<td>\n")
             .append(packageChildSummary.summary != null ? packageChildSummary.summary : "")
@@ -416,5 +417,14 @@ public class PackageOverviewFile {
 
   public void setFileName(String fileName) {
     this.fileName = fileName;
+  }
+
+  private static String withLineBreaks(String uid) {
+    return String.join(
+            "",
+            Arrays.stream(uid.split("([a-zA-Z\\d][a-z\\d]+\\.|[A-Z][a-z]+)"))
+                .map(p -> "<wbr>" + p)
+                .toList())
+        .substring(5); // start from 5 to ignore the first <wbr>
   }
 }
