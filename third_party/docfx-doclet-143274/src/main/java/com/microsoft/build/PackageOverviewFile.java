@@ -3,12 +3,12 @@ package com.microsoft.build;
 import static com.microsoft.build.BuilderUtil.LANGS;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableList;
 import com.google.docfx.doclet.RepoMetadata;
 import com.microsoft.lookup.PackageLookup;
 import com.microsoft.model.MetadataFileItem;
 import java.io.File;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -419,12 +419,16 @@ public class PackageOverviewFile {
     this.fileName = fileName;
   }
 
-  private static String withLineBreaks(String uid) {
-    return String.join(
-            "",
-            Arrays.stream(uid.split("([a-zA-Z\\d][a-z\\d]+\\.|[A-Z][a-z]+)"))
-                .map(p -> "<wbr>" + p)
-                .toList())
-        .substring(5); // start from 5 to ignore the first <wbr>
+  @VisibleForTesting
+  static String withLineBreaks(String uid) {
+    Pattern p = Pattern.compile("[a-zA-Z\\d][a-z\\d]+\\.|[A-Z][a-z]+");
+    Matcher m = p.matcher(uid);
+    StringBuilder s = new StringBuilder();
+    String replacement = "";
+    while (m.find()) {
+      m.appendReplacement(s, replacement + m.group());
+      replacement = "<wbr>"; // only use break from second match onwards
+    }
+    return s.toString();
   }
 }

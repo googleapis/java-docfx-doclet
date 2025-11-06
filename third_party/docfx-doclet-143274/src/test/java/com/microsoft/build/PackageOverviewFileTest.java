@@ -45,4 +45,14 @@ public class PackageOverviewFileTest {
     assertEquals("N/A", packageInfo_4.get(0));
     assertEquals("N/A", packageInfo_4.get(1));
   }
+
+  @Test
+  public void testWithLineBreaks() {
+    String uid =
+        "com.google.cloud.securitycenter.v2.AttackPathName.OrganizationLocationSimulationValuedResourceAttackPathBuilder";
+    String converted = PackageOverviewFile.withLineBreaks(uid);
+    assertEquals(
+        "com.<wbr>google.<wbr>cloud.<wbr>securitycenter.<wbr>v2.<wbr>Attack<wbr>Path<wbr>Name.<wbr>Organization<wbr>Location<wbr>Simulation<wbr>Valued<wbr>Resource<wbr>Attack<wbr>Path<wbr>Builder",
+        converted);
+  }
 }
