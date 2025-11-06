@@ -423,14 +423,12 @@ public class PackageOverviewFile {
   static String withLineBreaks(String uid) {
     Pattern p = Pattern.compile("[a-zA-Z\\d][a-z\\d]+\\.|[A-Z][a-z]+");
     Matcher m = p.matcher(uid);
-    if (!m.matches()) {
+    if (!m.find()) {
       return uid;
     }
     StringBuilder s = new StringBuilder();
-    String replacement = "";
     while (m.find()) {
-      m.appendReplacement(s, replacement + m.group());
-      replacement = "<wbr>"; // only use break from second match onwards
+      m.appendReplacement(s, "<wbr>" + m.group());
     }
     return s.toString();
   }

@@ -54,5 +54,8 @@ public class PackageOverviewFileTest {
     assertEquals(
         "com.<wbr>google.<wbr>cloud.<wbr>securitycenter.<wbr>v2.<wbr>Attack<wbr>Path<wbr>Name.<wbr>Organization<wbr>Location<wbr>Simulation<wbr>Valued<wbr>Resource<wbr>Attack<wbr>Path<wbr>Builder",
         converted);
+
+    String nonMatchable = "123non-matchable";
+    assertEquals(nonMatchable, PackageOverviewFile.withLineBreaks(nonMatchable));
   }
 }
