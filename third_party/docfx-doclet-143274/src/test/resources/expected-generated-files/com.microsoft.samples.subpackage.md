@@ -19,7 +19,7 @@ Class</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.subpackage.Person">com.microsoft.samples.subpackage.Person</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.subpackage.Person">com.<wbr>microsoft.<wbr>samples.<wbr>subpackage.<wbr>Person</a></td>
 <td>
 Class that describes some person
 
@@ -27,12 +27,12 @@ Class that describes some person
 </td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.subpackage.Person.IdentificationInfo">com.microsoft.samples.subpackage.Person.IdentificationInfo</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.subpackage.Person.IdentificationInfo">com.<wbr>microsoft.<wbr>samples.<wbr>subpackage.<wbr>Person.<wbr>Identification<wbr>Info</a></td>
 <td>
 Class that describes person's identification</td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.subpackage.Tuple">com.microsoft.samples.subpackage.Tuple</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.subpackage.Tuple">com.<wbr>microsoft.<wbr>samples.<wbr>subpackage.<wbr>Tuple</a></td>
 <td>
 </td>
    </tr>
@@ -46,7 +46,7 @@ Interface</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.subpackage.Display">com.microsoft.samples.subpackage.Display</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.subpackage.Display">com.<wbr>microsoft.<wbr>samples.<wbr>subpackage.<wbr>Display</a></td>
 <td>
 Do you see some <code>First</code> code block?
 
@@ -62,7 +62,7 @@ Enum</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender">com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender">com.<wbr>microsoft.<wbr>samples.<wbr>subpackage.<wbr>Person.<wbr>Identification<wbr>Info.<wbr>Gender</a></td>
 <td>
 Enum describes person's gender</td>
    </tr>
@@ -76,7 +76,7 @@ Exception</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.subpackage.CustomException">com.microsoft.samples.subpackage.CustomException</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.subpackage.CustomException">com.<wbr>microsoft.<wbr>samples.<wbr>subpackage.<wbr>Custom<wbr>Exception</a></td>
 <td>
 </td>
    </tr>

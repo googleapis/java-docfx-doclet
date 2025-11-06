@@ -19,7 +19,7 @@ Class</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.agreements.AgreementDetailsCollectionOperations">com.microsoft.samples.agreements.AgreementDetailsCollectionOperations</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.agreements.AgreementDetailsCollectionOperations">com.<wbr>microsoft.<wbr>samples.<wbr>agreements.<wbr>Agreement<wbr>Details<wbr>Collection<wbr>Operations</a></td>
 <td>
 
 <strong>Deprecated.</strong> <em>Use <xref uid="AgreementMetaData" data-throw-if-not-resolved="false">AgreementMetaData</xref> instead.</em>
@@ -27,13 +27,13 @@ Description</th>
 Agreement details collection operations implementation class.</td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.agreements.AgreementMetaData">com.microsoft.samples.agreements.AgreementMetaData</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.agreements.AgreementMetaData">com.<wbr>microsoft.<wbr>samples.<wbr>agreements.<wbr>Agreement<wbr>Meta<wbr>Data</a></td>
 <td>
 The AgreementMetaData provides metadata about the agreement type that partner can provide
  confirmation of customer acceptance.</td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.agreements.ResourceCollection">com.microsoft.samples.agreements.ResourceCollection</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.agreements.ResourceCollection">com.<wbr>microsoft.<wbr>samples.<wbr>agreements.<wbr>Resource<wbr>Collection</a></td>
 <td>
 Contains a collection of resources with JSON properties to represent the output Type of objects
  in collection</td>
@@ -48,7 +48,7 @@ Interface</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.agreements.IAgreementDetailsCollection">com.microsoft.samples.agreements.IAgreementDetailsCollection</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.agreements.IAgreementDetailsCollection">com.<wbr>microsoft.<wbr>samples.<wbr>agreements.I<wbr>Agreement<wbr>Details<wbr>Collection</a></td>
 <td>
 
 <strong>Deprecated.</strong> <em>This one is deprecated :(</em>

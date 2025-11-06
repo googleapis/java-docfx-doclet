@@ -23,21 +23,21 @@ Stub</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1.stub.GrpcSpeechStub">com.microsoft.samples.google.v1.stub.GrpcSpeechStub</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1.stub.GrpcSpeechStub">com.<wbr>microsoft.<wbr>samples.<wbr>google.<wbr>v1.<wbr>stub.<wbr>Grpc<wbr>Speech<wbr>Stub</a></td>
 <td>
 gRPC stub implementation for the Speech service API.
 
  <p>This class is for advanced usage and reflects the underlying API directly.</td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1.stub.HttpJsonSpeechStub">com.microsoft.samples.google.v1.stub.HttpJsonSpeechStub</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1.stub.HttpJsonSpeechStub">com.<wbr>microsoft.<wbr>samples.<wbr>google.<wbr>v1.<wbr>stub.<wbr>Http<wbr>Json<wbr>Speech<wbr>Stub</a></td>
 <td>
 REST stub implementation for the Speech service API.
 
  <p>This class is for advanced usage and reflects the underlying API directly.</td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1.stub.SpeechStub">com.microsoft.samples.google.v1.stub.SpeechStub</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1.stub.SpeechStub">com.<wbr>microsoft.<wbr>samples.<wbr>google.<wbr>v1.<wbr>stub.<wbr>Speech<wbr>Stub</a></td>
 <td>
 Base stub class for the Speech service API.
 
@@ -54,7 +54,7 @@ Settings</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1.stub.SpeechStubSettings">com.microsoft.samples.google.v1.stub.SpeechStubSettings</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1.stub.SpeechStubSettings">com.<wbr>microsoft.<wbr>samples.<wbr>google.<wbr>v1.<wbr>stub.<wbr>Speech<wbr>Stub<wbr>Settings</a></td>
 <td>
 Settings class to configure an instance of <xref uid="com.google.cloud.speech.v1p1beta1.stub.SpeechStub" data-throw-if-not-resolved="false">com.google.cloud.speech.v1p1beta1.stub.SpeechStub</xref>.
 
@@ -71,7 +71,7 @@ Class</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1.stub.SpeechStubSettings.Builder">com.microsoft.samples.google.v1.stub.SpeechStubSettings.Builder</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1.stub.SpeechStubSettings.Builder">com.<wbr>microsoft.<wbr>samples.<wbr>google.<wbr>v1.<wbr>stub.<wbr>Speech<wbr>Stub<wbr>Settings.<wbr>Builder</a></td>
 <td>
 Builder for SpeechStubSettings.</td>
    </tr>

@@ -21,7 +21,7 @@ Client</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.SpeechClient">com.microsoft.samples.google.SpeechClient</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.SpeechClient">com.<wbr>microsoft.<wbr>samples.<wbr>google.<wbr>Speech<wbr>Client</a></td>
 <td>
 Service Description: Service that implements Google Cloud Speech API.
 
@@ -39,7 +39,7 @@ Settings</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.ProductSearchSettings">com.microsoft.samples.google.ProductSearchSettings</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.ProductSearchSettings">com.<wbr>microsoft.<wbr>samples.<wbr>google.<wbr>Product<wbr>Search<wbr>Settings</a></td>
 <td>
 Settings class to configure an instance of <xref uid="ProductSearchClient" data-throw-if-not-resolved="false">ProductSearchClient</xref>.
 
@@ -47,7 +47,7 @@ Settings class to configure an instance of <xref uid="ProductSearchClient" data-
 </td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.SpeechSettings">com.microsoft.samples.google.SpeechSettings</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.SpeechSettings">com.<wbr>microsoft.<wbr>samples.<wbr>google.<wbr>Speech<wbr>Settings</a></td>
 <td>
 Settings class to configure an instance of <xref uid="SpeechClient" data-throw-if-not-resolved="false">SpeechClient</xref>.
 
@@ -64,12 +64,12 @@ Class</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.ProductSearchSettings.Builder">com.microsoft.samples.google.ProductSearchSettings.Builder</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.ProductSearchSettings.Builder">com.<wbr>microsoft.<wbr>samples.<wbr>google.<wbr>Product<wbr>Search<wbr>Settings.<wbr>Builder</a></td>
 <td>
 Builder for ProductSearchSettings.</td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.RecognitionAudio">com.microsoft.samples.google.RecognitionAudio</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.RecognitionAudio">com.<wbr>microsoft.<wbr>samples.<wbr>google.<wbr>Recognition<wbr>Audio</a></td>
 <td>
 
  Contains audio data in the encoding specified in the <code>RecognitionConfig</code>.
@@ -77,7 +77,7 @@ Builder for ProductSearchSettings.</td>
  returns <xref uid="google.rpc.Code.INVALID_ARGUMENT" data-throw-if-not-resolved="false">google.rpc.Code.INVALID_ARGUMENT</xref>. See</td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.SpeechSettings.Builder">com.microsoft.samples.google.SpeechSettings.Builder</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.SpeechSettings.Builder">com.<wbr>microsoft.<wbr>samples.<wbr>google.<wbr>Speech<wbr>Settings.<wbr>Builder</a></td>
 <td>
 Builder for SpeechSettings.</td>
    </tr>
@@ -91,7 +91,7 @@ Interface</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.BetaApi">com.microsoft.samples.google.BetaApi</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.BetaApi">com.<wbr>microsoft.<wbr>samples.<wbr>google.<wbr>Beta<wbr>Api</a></td>
 <td>
 Indicates a public API that can change at any time, and has no guarantee of API stability and
  backward-compatibility.
@@ -99,7 +99,7 @@ Indicates a public API that can change at any time, and has no guarantee of API 
  <p>Usage guidelines:</td>
    </tr>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.ValidationException.Supplier">com.microsoft.samples.google.ValidationException.Supplier</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.ValidationException.Supplier">com.<wbr>microsoft.<wbr>samples.<wbr>google.<wbr>Validation<wbr>Exception.<wbr>Supplier</a></td>
 <td>
 </td>
    </tr>
@@ -113,7 +113,7 @@ Enum</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.RecognitionAudio.AudioSourceCase">com.microsoft.samples.google.RecognitionAudio.AudioSourceCase</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.RecognitionAudio.AudioSourceCase">com.<wbr>microsoft.<wbr>samples.<wbr>google.<wbr>Recognition<wbr>Audio.<wbr>Audio<wbr>Source<wbr>Case</a></td>
 <td>
 </td>
    </tr>
@@ -127,7 +127,7 @@ Exception</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.ValidationException">com.microsoft.samples.google.ValidationException</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.ValidationException">com.<wbr>microsoft.<wbr>samples.<wbr>google.<wbr>Validation<wbr>Exception</a></td>
 <td>
 Exception thrown if there is a validation problem with a path template, http config, or related
  framework methods. Comes as an illegal argument exception subclass. Allows to globally set a

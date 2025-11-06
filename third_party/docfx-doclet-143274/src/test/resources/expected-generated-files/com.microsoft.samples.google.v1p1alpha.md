@@ -28,7 +28,7 @@ Client</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1p1alpha.SpeechClient">com.microsoft.samples.google.v1p1alpha.SpeechClient</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.google.v1p1alpha.SpeechClient">com.<wbr>microsoft.<wbr>samples.<wbr>google.<wbr>v1p1alpha.<wbr>Speech<wbr>Client</a></td>
 <td>
 Service Description: Service that implements Google Cloud Speech API.
 

@@ -19,7 +19,7 @@ Class</th>
      <th>
 Description</th>
 <tr>
-<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.offers.Offer">com.microsoft.samples.offers.Offer</a></td>
+<td><a href="https://cloud.google.com/java/docs/reference/google-cloud-apikeys/latest/com.microsoft.samples.offers.Offer">com.<wbr>microsoft.<wbr>samples.<wbr>offers.<wbr>Offer</a></td>
 <td>
 Represents a form of product availability to customer</td>
    </tr>
