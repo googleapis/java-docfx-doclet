@@ -8,6 +8,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -48,6 +50,9 @@ public class RepoMetadata {
 
   @SerializedName("recommended_package")
   private String recommendedPackage;
+
+  @SerializedName("library_path_overrides")
+  private Map<String, String> libraryPathOverrides;
 
   private String artifactId;
 
@@ -133,6 +138,14 @@ public class RepoMetadata {
 
   public void setApiId(String apiId) {
     this.apiId = apiId;
+  }
+
+  public Map<String, String> getLibraryPathOverrides() {
+    return this.libraryPathOverrides != null ? this.libraryPathOverrides : Collections.emptyMap();
+  }
+
+  public void setLibraryPathOverrides(Map<String, String> libraryPathOverrides) {
+    this.libraryPathOverrides = libraryPathOverrides;
   }
 
   // artifactId is parsed from distributionName

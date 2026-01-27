@@ -16,8 +16,10 @@
 package com.microsoft.build;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
+import com.google.docfx.doclet.RepoMetadata;
 import com.google.testing.compile.CompilationRule;
 import com.microsoft.lookup.ClassItemsLookup;
 import com.microsoft.lookup.ClassLookup;
@@ -28,6 +30,9 @@ import com.microsoft.util.ElementUtil;
 import com.sun.source.util.DocTrees;
 import java.io.File;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import javax.lang.model.element.Name; // Required for mocking getSimpleName()
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import jdk.javadoc.doclet.DocletEnvironment;
@@ -88,5 +93,48 @@ public class ClassBuilderTest {
         "Wrong file name", container.getFileNameWithPath(), "output" + File.separator + "name");
     Collection<MetadataFileItem> constructorItems = container.getItems();
     assertEquals("Container should contain 2 constructor items", constructorItems.size(), 2);
+  }
+
+  @Test
+  public void createClientOverviewTable_usesLibraryPathOverride() {
+    // 1. Setup Mock RepoMetadata
+    RepoMetadata repoMetadata = new RepoMetadata();
+    repoMetadata.setRepo("googleapis/java-firestore");
+    repoMetadata.setDistributionName("com.google.cloud:google-cloud-firestore:1.0.0");
+
+    Map<String, String> overrides = new HashMap<>();
+    overrides.put("FirestoreAdminClient", "google-cloud-firestore-admin");
+    repoMetadata.setLibraryPathOverrides(overrides);
+
+    // 2. Mock ClassLookup and Element
+    ClassLookup classLookup = Mockito.mock(ClassLookup.class);
+    TypeElement classElement = Mockito.mock(TypeElement.class);
+
+    Name simpleName = Mockito.mock(Name.class);
+    when(simpleName.toString()).thenReturn("FirestoreAdminClient");
+    when(classElement.getSimpleName()).thenReturn(simpleName);
+
+    when(classLookup.extractUid(classElement))
+        .thenReturn("com.google.cloud.firestore.v1.FirestoreAdminClient");
+
+    // 3. Test
+    ClassBuilder builder = new ClassBuilder(null, classLookup, null, null, null, null);
+
+    try {
+      java.lang.reflect.Method method =
+          ClassBuilder.class.getDeclaredMethod(
+              "createClientOverviewTable", TypeElement.class, RepoMetadata.class);
+      method.setAccessible(true);
+      String html = (String) method.invoke(builder, classElement, repoMetadata);
+
+      // 4. Verify link contains "google-cloud-firestore-admin" and the double slash "//"
+      assertTrue(
+          "Link should use the override directory",
+          html.contains(
+              "googleapis/java-firestore/tree/main//google-cloud-firestore-admin/src/main/java"));
+
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 }

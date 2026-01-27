@@ -248,13 +248,16 @@ class ClassBuilder {
 
   private String createClientOverviewTable(TypeElement classElement, RepoMetadata repoMetadata) {
     String clientURI = classLookup.extractUid(classElement).replaceAll("\\.", "/");
+    String className = classElement.getSimpleName().toString();
+
+    // Check overrides map first, otherwise default to artifactId
+    String directory =
+        repoMetadata
+            .getLibraryPathOverrides()
+            .getOrDefault(className, repoMetadata.getArtifactId());
+
     String githubSourceLink =
-        repoMetadata.getGithubLink()
-            + "/"
-            + repoMetadata.getArtifactId()
-            + "/src/main/java/"
-            + clientURI
-            + ".java";
+        repoMetadata.getGithubLink() + "/" + directory + "/src/main/java/" + clientURI + ".java";
     StringBuilder tableBuilder = new StringBuilder();
     tableBuilder
         .append("<table>")
